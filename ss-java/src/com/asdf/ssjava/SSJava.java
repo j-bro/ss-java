@@ -24,10 +24,10 @@ public class SSJava implements ApplicationListener {
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
 		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
+		texture = new Texture(Gdx.files.internal("data/SplashScreen.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
+		TextureRegion region = new TextureRegion(texture, 0, 0, 1024, 512);
 		
 		sprite = new Sprite(region);
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
