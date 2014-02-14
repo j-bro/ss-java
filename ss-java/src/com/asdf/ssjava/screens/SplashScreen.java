@@ -1,6 +1,8 @@
 package com.asdf.ssjava.screens;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import aurelienribon.tweenengine.TweenManager;
 
@@ -26,6 +28,8 @@ public class SplashScreen implements Screen {
 		this.game = game;
 	}
 	
+	
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -45,7 +49,9 @@ public class SplashScreen implements Screen {
 
 	@Override
 	public void show() {
-		splashTexture = new Texture("data/SplashScreen.png");
+		Gdx.app.log(SSJava.LOG, "Show splash screen"); // LOG
+		
+		splashTexture = new Texture("data/SplashScreen_black.png");
 		splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		splashSprite = new Sprite(splashTexture);
@@ -58,9 +64,22 @@ public class SplashScreen implements Screen {
 		
 		manager = new TweenManager();
 		
-		Tween.to(splashSprite, SpriteTween.ALPHA, 3f).target(1).ease(TweenEquations.easeInQuad).start(manager);
+		TweenCallback cb = new TweenCallback() {
+			@Override
+			public void onEvent(int type, BaseTween<?> source) {
+				tweenCompleted(); 
+			}
+		};
+		
+		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1.5f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(manager);
+		
 	}
 
+	private void tweenCompleted() {
+		Gdx.app.log(SSJava.LOG, "Splash screen tween complete");
+		game.setScreen(new MainMenu(game));
+	}
+	
 	@Override
 	public void hide() {
 		
