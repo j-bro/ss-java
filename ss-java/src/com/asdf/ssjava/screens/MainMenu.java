@@ -1,8 +1,17 @@
- package com.asdf.ssjava.screens;
+/**
+ * 
+ */
+package com.asdf.ssjava.screens;
+
+/**
+ * @author jeremybrown
+ *
+ */
 
 import com.asdf.ssjava.SSJava;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,23 +19,28 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class MainMenu implements Screen {
 	
 	SSJava game;
 	Stage stage;
-	BitmapFont font;
 	TextureAtlas atlas;
 	Skin skin; 
 	SpriteBatch batch;
 	BitmapFont black;
 	BitmapFont white;
 	TextButton button; 
+	Label label;
 	
-	
+	/**
+	 * 
+	 */
 	public MainMenu(SSJava game) {
 		this.game = game;
 	}
@@ -39,8 +53,7 @@ public class MainMenu implements Screen {
 		stage.act(delta);
 		
 		batch.begin();
-			stage.draw();
-			white.draw(batch, "ss-java", Gdx.graphics.getWidth() / 2 - 15, Gdx.graphics.getHeight() / 2 + 100); 
+			stage.draw(); 
 		batch.end();
 
 	}
@@ -78,8 +91,15 @@ public class MainMenu implements Screen {
 			}
 		});
 		
-		stage.addActor(button);
+		LabelStyle ls = new LabelStyle(white, Color.WHITE);
+		label = new Label("SS-Java", ls);
+		label.setX(0);
+		label.setY(Gdx.graphics.getHeight() / 2 + 100);
+		label.setWidth(width);
+		label.setAlignment(Align.center);
 		
+		stage.addActor(button);
+		stage.addActor(label);		
 	}
  
 	@Override

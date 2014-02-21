@@ -14,7 +14,7 @@ public class SSJava extends Game {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() { 
 		super.dispose();
 	}
 
