@@ -1,4 +1,12 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.screens;
+
+/**
+ * @author jeremybrown
+ *
+ */
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -24,6 +32,9 @@ public class SplashScreen implements Screen {
 	SSJava game;
 	TweenManager manager;
 	
+	/**
+	 * 
+	 */
 	public SplashScreen(SSJava game) {
 		this.game = game;
 	}

@@ -1,16 +1,28 @@
+/**
+ * 
+ */
 package com.asdf.ssjava;
+
+/**
+ * @author jeremybrown
+ *
+ */
 
 import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 
 public class SSJava extends Game {
 
 	public static final String VERSION = "0.0.1";
 	public static final String LOG = "SS-Java";
+	public Preferences prefs;
 	
 	@Override
-	public void create() {		
+	public void create() {	
 		setScreen(new SplashScreen(this));
+		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 	}
 
 	@Override

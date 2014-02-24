@@ -9,24 +9,31 @@ package com.asdf.ssjava.screens;
  */
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 public class Game implements Screen {
 
 	SSJava game;
+	World world;
+	WorldRenderer renderer;
 	
 	/**
 	 * 
 	 */
+	
 	public Game(SSJava game) {
 		this.game = game;
+		world = new World(game);
+		renderer = new WorldRenderer(world);
 	}
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
-
+		world.update();
+		renderer.render();
 	}
 
 	@Override
@@ -61,8 +68,7 @@ public class Game implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		world.dispose();
 	}
 
 }
