@@ -1,0 +1,58 @@
+/**
+* 
+*/
+package com.asdf.ssjava.entities;
+
+/**
+ * @author jeremybrown
+ *
+ */
+
+import com.badlogic.gdx.math.Vector2;
+
+public abstract class MoveableEntity extends AbstractEntity {
+	protected Vector2 velocity;
+	protected float SPEED;
+	protected float rotation;
+	
+	/**
+	 * 
+	 */
+	public MoveableEntity(Vector2 position, float width, float height, float SPEED, float rotation) {
+		super(position, width, height);
+		this.SPEED = SPEED;
+		this.rotation = rotation;
+	}
+	
+	public abstract void advance(float  delta);
+	
+	/**
+	 * @return the velocity
+	 */
+	public Vector2 getVelocity() {
+		return velocity;
+	}
+	
+	/**
+	 * @param velocity the velocity to set
+	 */
+	public void setVelocity(Vector2 velocity) {
+		this.velocity = velocity;
+	}
+
+	/**
+	 * @return the rotation
+	 */
+	public float getRotation() {
+		return rotation;
+	}
+
+	/**
+	 * @param rotation the rotation to set
+	 */
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
+	
+	public abstract void update();
+}
