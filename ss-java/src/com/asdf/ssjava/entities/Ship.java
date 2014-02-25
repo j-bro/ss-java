@@ -30,6 +30,7 @@ public class Ship extends MoveableEntity {
 
 	@Override
 	public void update() { 
+		super.update();
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * SPEED)); 
 		rotation = velocity.angle() - 90;
 	}

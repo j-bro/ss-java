@@ -56,5 +56,8 @@ public abstract class MoveableEntity extends AbstractEntity {
 		this.rotation = rotation;
 	}
 	
-	public abstract void update();
+	public void update() {
+		hitbox.x = position.x;
+		hitbox.y = position.y;
+	}
 }
