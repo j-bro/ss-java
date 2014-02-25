@@ -14,7 +14,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * @author jeremybrown
+ * @author Jeremy Brown
+ * @author Simon Thompson
  *
  */
 

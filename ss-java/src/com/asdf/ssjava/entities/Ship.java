@@ -7,7 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * @author jeremybrown
+ * @author Jeremy Brown
+ * @author Simon Thompson
  *
  */
 
@@ -23,14 +24,14 @@ public class Ship extends MoveableEntity {
 
 	@Override
 	public void advance(float delta) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub`
+		 
 	}
 
 	@Override
 	public void update() { 
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * SPEED)); 
-		
+		rotation = velocity.angle() - 90;
 	}
 	
 }

@@ -4,7 +4,8 @@
 package com.asdf.ssjava.entities;
 
 /**
- * @author jeremybrown
+ * @author Jeremy Brown
+ * @author Simon Thompson
  *
  */
 
