@@ -3,7 +3,12 @@
  */
 package com.asdf.ssjava.world;
 
+import java.util.ArrayList;
+
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.Enemy;
+import com.asdf.ssjava.entities.Obstacle;
+import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -15,15 +20,38 @@ import com.badlogic.gdx.math.Vector2;
 
 public class World {
 
+	/**
+	 * 
+	 */
 	SSJava game;
+	
+	/**
+	 * 
+	 */
 	Ship ship;
+	
+	/**
+	 * 
+	 */
+	ArrayList<Obstacle> obstacles;
+	
+	/**
+	 * 
+	 */
+	ArrayList<Enemy> enemies;
+	
+	/**
+	 * 
+	 */
+	ArrayList<Powerup> powerups;
 	
 	/**
 	 * 
 	 */
 	public World(SSJava game) {
 		this.game = game;
-		ship = new Ship(new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2), 1, 1, 5, 90);
+		ship = new Ship(new Vector2(5, 5), 1, 1, 5, 270);
+		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
 
 	/**

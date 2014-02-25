@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -27,8 +28,8 @@ public class Ship extends MoveableEntity {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void update() { 
+		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * SPEED)); 
 		
 	}
 	

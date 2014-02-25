@@ -14,17 +14,27 @@ import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
-public class Game implements Screen {
+public class GameScreen implements Screen {
 
+	/**
+	 * 
+	 */
 	SSJava game;
+	
+	/**
+	 * 
+	 */
 	World world;
+	
+	/**
+	 * 
+	 */
 	WorldRenderer renderer;
 	
 	/**
 	 * 
 	 */
-	
-	public Game(SSJava game) {
+	public GameScreen(SSJava game) {
 		this.game = game;
 		world = new World(game);
 		renderer = new WorldRenderer(world);

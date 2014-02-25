@@ -12,9 +12,25 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
    
 public abstract class AbstractEntity {
+	
+	/**
+	 * 
+	 */
 	protected Vector2 position;
+	
+	/**
+	 * 
+	 */
 	protected float width;
+	
+	/**
+	 * 
+	 */
 	protected float height;
+	
+	/**
+	 * 
+	 */
 	protected Rectangle hitbox;
 	
 	/**
@@ -81,8 +97,5 @@ public abstract class AbstractEntity {
 	public void setHitbox(Rectangle hitbox) {
 		this.hitbox = hitbox;
 	}
-	
-//	public abstract void draw();
-//	public abstract void update(int delta);
 }
     

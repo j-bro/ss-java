@@ -22,6 +22,7 @@ public abstract class MoveableEntity extends AbstractEntity {
 		super(position, width, height);
 		this.SPEED = SPEED;
 		this.rotation = rotation;
+		velocity = new Vector2(0, 0);
 	}
 	
 	public abstract void advance(float  delta);

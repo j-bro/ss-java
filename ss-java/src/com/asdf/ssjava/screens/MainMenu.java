@@ -81,13 +81,13 @@ public class MainMenu implements Screen {
 		
 		button.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "down");
+				Gdx.app.log(SSJava.LOG, "Play button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "up");
-				game.setScreen(new Game(game));
+				Gdx.app.log(SSJava.LOG, "Play button up");
+				game.setScreen(new GameScreen(game));
 			}
 		});
 		

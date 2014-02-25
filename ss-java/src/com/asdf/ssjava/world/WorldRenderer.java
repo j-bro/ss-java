@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldRenderer {
@@ -14,15 +15,30 @@ public class WorldRenderer {
 	Ship ship;
 	OrthographicCamera cam;
 	Texture shipTexture;
+	float width, height;
 	
 	/**
 	 * 
 	 */
 	public WorldRenderer(World world) {
 		this.world = world;
-		batch = new SpriteBatch();
+		
+		// TODO potentially fix this square/rectangle
+		width = Gdx.graphics.getWidth() / 40;
+		height = Gdx.graphics.getHeight() / 40;
+		
 		cam = new OrthographicCamera();
+		cam.setToOrtho(false, width, height);
+
+		cam.update();
+		
+		batch = new SpriteBatch();
+		batch.setProjectionMatrix(cam.combined);
+		
 		shipTexture = new Texture("data/ship.png");
+		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
+		
+		ship = world.getShip();
 	}
 	
 	/**
@@ -30,12 +46,12 @@ public class WorldRenderer {
 	 */
 	public void render() {  
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
-		ship = world.getShip();
 		batch.begin();
-			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y);
-		batch.end();
+			// TODO rotate around origin
+			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, 0, 0, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
+		batch.end();  
 	}
 
 	/**
