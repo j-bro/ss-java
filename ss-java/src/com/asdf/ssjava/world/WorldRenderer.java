@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.entities.Ship;
@@ -7,6 +10,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+/**
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ *
+ */
 
 public class WorldRenderer {
 
@@ -29,7 +38,6 @@ public class WorldRenderer {
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, width, height);
-
 		cam.update();
 		
 		batch = new SpriteBatch();
@@ -48,10 +56,16 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
+		cam.position.set(ship.getPosition().x, ship.getPosition().y, 0);
+		cam.update();
+		batch.setProjectionMatrix(cam.combined);
+		
 		batch.begin();
 			// TODO rotate around origin
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, 0, 0, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
 		batch.end();  
+		
+		Gdx.app.log("Ship", "x: " + ship.getPosition().x + " y: " + ship.getPosition().y);
 	}
 
 	/**
