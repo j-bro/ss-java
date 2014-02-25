@@ -52,7 +52,7 @@ public class World {
 	public World(SSJava game) {
 		this.game = game;
 		ship = new Ship(new Vector2(5, 5), 1, 1, 5, 270);
-		ship.setVelocity(new Vector2(1, 0)); // default horizontal ship speed
+		ship.setVelocity(new Vector2(5, 0)); // default horizontal ship speed
 		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
 
