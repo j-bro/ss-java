@@ -17,7 +17,11 @@ public abstract class MoveableEntity extends AbstractEntity {
 	protected float rotation;
 	
 	/**
-	 * 
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param SPEED
+	 * @param rotation
 	 */
 	public MoveableEntity(Vector2 position, float width, float height, float SPEED, float rotation) {
 		super(position, width, height);

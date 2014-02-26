@@ -47,7 +47,7 @@ public class World {
 	ArrayList<Powerup> powerups;
 	
 	/**
-	 * 
+	 * @param game
 	 */
 	public World(SSJava game) {
 		this.game = game;
@@ -67,7 +67,16 @@ public class World {
 	 *
 	 */
 	public void update() {
+		// Entity position update
 		ship.update();
+		/*
+		for (all entities:e) {
+			e.update();
+		}
+		*/ 
+		
+		// Collision detection
+		// if (ship.getHitbox().overlaps(r))
 	}
 	
 	/**

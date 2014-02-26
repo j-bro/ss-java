@@ -31,7 +31,8 @@ public class InputManager implements InputProcessor {
 	Ship ship;
 	
 	/**
-	 * 
+	 * @param game
+	 * @param world
 	 */
 	public InputManager(SSJava game, World world) {
 		this.world = world;

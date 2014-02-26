@@ -15,13 +15,18 @@ import com.badlogic.gdx.math.Vector2;
 public class Ship extends MoveableEntity {
 	
 	/**
-	 * 
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param SPEED
+	 * @param rotation
 	 */
-	public Ship(Vector2 position, float width, float height, float SPEED, float rotation) {
+	public Ship(Vector2 position, float width, float height, float SPEED,
+			float rotation) {
 		super(position, width, height, SPEED, rotation);
-		
+		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public void advance(float delta) {
 		// TODO Auto-generated method stub`
