@@ -31,14 +31,14 @@ public class WorldRenderer {
 	ShapeRenderer sr;
 	
 	/**
-	 * 
+	 * @param world
 	 */
 	public WorldRenderer(World world) {
 		this.world = world;
 		
 		// TODO potentially fix this square/rectangle
-		width = Gdx.graphics.getWidth() / 40;
-		height = Gdx.graphics.getHeight() / 40;
+		width = Gdx.graphics.getWidth() / 30;
+		height = Gdx.graphics.getHeight() / 30;
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, width, height);
@@ -47,13 +47,12 @@ public class WorldRenderer {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 		
-		shipTexture = new Texture("data/ship.png");
+		shipTexture = new Texture("data/textures/ship.png");
 		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		
 		ship = world.getShip();
 		
 		sr = new ShapeRenderer();
-		sr.setColor(Color.CYAN);
 	}
 	
 	/**
@@ -72,12 +71,13 @@ public class WorldRenderer {
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2 , ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
 		batch.end();  
 		
-		/*
+		
 		sr.setProjectionMatrix(cam.combined);
 		sr.begin(ShapeType.Line);
+		sr.setColor(Color.CYAN);
 		sr.rect(ship.getPosition().x, ship.getPosition().y, ship.getWidth(), ship.getHeight());
 		sr.end();
-		*/
+		
 		
 		Gdx.app.log("Ship", "x: " + ship.getPosition().x + " y: " + ship.getPosition().y);
 	}
@@ -88,5 +88,6 @@ public class WorldRenderer {
 	public void dispose() {
 		batch.dispose();
 		shipTexture.dispose();
+		sr.dispose();
 	}
 }
