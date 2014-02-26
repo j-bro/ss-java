@@ -4,24 +4,37 @@
 package com.asdf.ssjava;
 
 /**
- * @author jeremybrown
- *
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ * 
  */
 
-import com.asdf.ssjava.screens.SplashScreen;
+import com.asdf.ssjava.screens.GameScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class SSJava extends Game {
 
-	public static final String VERSION = "0.0.1";
+	/**
+	 * 
+	 */
+	public static final String VERSION = "0.0.2";
+	
+	/**
+	 * 
+	 */
 	public static final String LOG = "SS-Java";
+	
+	/**
+	 * 
+	 */
 	public Preferences prefs;
 	
 	@Override
-	public void create() {	
-		setScreen(new SplashScreen(this));
+	public void create() {
+		setScreen(new GameScreen(this));
+		// setScreen(new SplashScreen(this)); TEMP FOR DEVELOPMENT
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 	}
 
