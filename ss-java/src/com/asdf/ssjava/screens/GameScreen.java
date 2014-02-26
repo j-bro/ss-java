@@ -3,16 +3,18 @@
  */
 package com.asdf.ssjava.screens;
 
-/**
- * @author jeremybrown
- *
- */
-
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+
+/**
+ * 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ *
+ */
 
 public class GameScreen implements Screen {
 

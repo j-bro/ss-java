@@ -3,13 +3,13 @@
 */
 package com.asdf.ssjava.entities;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * @author Jeremy Brown
  * @author Simon Thompson
  *
  */
-
-import com.badlogic.gdx.math.Vector2;
 
 public abstract class MoveableEntity extends AbstractEntity {
 	protected Vector2 velocity;

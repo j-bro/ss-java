@@ -3,11 +3,6 @@
  */
 package com.asdf.ssjava.screens;
 
-/**
- * @author jeremybrown
- *
- */
-
 import com.asdf.ssjava.SSJava;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -25,6 +20,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+
+/**
+ * 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ *
+ */
 
 public class MainMenu implements Screen {
 	

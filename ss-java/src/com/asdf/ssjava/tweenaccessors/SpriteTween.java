@@ -1,4 +1,12 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.tweenaccessors;
+
+/**
+ * @author Jeremy Brown
+ * 
+ */
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -6,7 +14,11 @@ import aurelienribon.tweenengine.TweenAccessor;
 
 public class SpriteTween implements TweenAccessor<Sprite> {
 	
+	/**
+	 * 
+	 */
 	public static final int ALPHA = 1;
+	
 	
 	@Override
 	public int getValues(Sprite target, int tweenType, float[] returnValues) {
@@ -15,7 +27,8 @@ public class SpriteTween implements TweenAccessor<Sprite> {
 		default: return 0;
 		}
 	}
-
+	
+	
 	@Override
 	public void setValues(Sprite target, int tweenType, float[] newValues) {
 		switch(tweenType) {

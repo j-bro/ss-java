@@ -3,11 +3,6 @@
  */
 package com.asdf.ssjava.screens;
 
-/**
- * @author jeremybrown
- *
- */
-
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
@@ -23,6 +18,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+/**
+ * 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ *
+ */
 
 public class SplashScreen implements Screen {
 

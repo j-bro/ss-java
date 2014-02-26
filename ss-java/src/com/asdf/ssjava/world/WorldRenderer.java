@@ -5,11 +5,14 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
  * @author Jeremy Brown
@@ -25,6 +28,7 @@ public class WorldRenderer {
 	OrthographicCamera cam;
 	Texture shipTexture;
 	float width, height;
+	ShapeRenderer sr;
 	
 	/**
 	 * 
@@ -47,6 +51,9 @@ public class WorldRenderer {
 		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		
 		ship = world.getShip();
+		
+		sr = new ShapeRenderer();
+		sr.setColor(Color.CYAN);
 	}
 	
 	/**
@@ -62,8 +69,15 @@ public class WorldRenderer {
 		
 		batch.begin();
 			// TODO rotate around origin
-			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, 0, 0, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
+			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2 , ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
 		batch.end();  
+		
+		/*
+		sr.setProjectionMatrix(cam.combined);
+		sr.begin(ShapeType.Line);
+		sr.rect(ship.getPosition().x, ship.getPosition().y, ship.getWidth(), ship.getHeight());
+		sr.end();
+		*/
 		
 		Gdx.app.log("Ship", "x: " + ship.getPosition().x + " y: " + ship.getPosition().y);
 	}

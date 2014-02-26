@@ -1,8 +1,18 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+
+/**
+ * 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ *
+ */
 
 public class OptionsMenu implements Screen {
 
