@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -29,9 +30,13 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void update() {
 		super.update();
+		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * SPEED)); 
 		
-		// position.lerp(ship, delta) to follow ship
 	}
 	
+	public void advance(Ship ship) {
+		super.update();
+//		position.lerp(ship.getPosition(), Gdx.graphics.getDeltaTime());
+	}
 	
 }
