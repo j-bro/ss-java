@@ -55,11 +55,16 @@ public class World {
 		
 		enemies = new ArrayList<Enemy>();
 		
-		ship = new Ship(new Vector2(5, 5), 1, 1, 1, 270);
+		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 1, 1, 270);
 		ship.setVelocity(new Vector2(5, 0)); // default horizontal ship speed
 		
-		enemies.add(new EnemyType1(new Vector2(25, 5), 1, 1, (float)0.1, 0));
-		enemies.get(0).setVelocity(new Vector2(1, 0));
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 7; j++) {
+				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0));
+//				enemies.get(i).setVelocity(new Vector2(1, 0));
+			}
+			
+		}
 		
 		// Set game input processor
 		Gdx.input.setInputProcessor(new InputManager(game, this));
@@ -79,16 +84,26 @@ public class World {
 		// Entity position update
 		ship.update();
 		
-		((EnemyType1) enemies.get(0)).update();
-		//((EnemyType1) enemies.get(0)).advance(ship);
-		/*
-		for (all entities:e) {
+		for (Enemy e: enemies) {
 			e.update();
 		}
-		*/ 
+		
+		/*
+		for (Obstacle o: obstacles) {
+			o.update();
+		}
+		
+		for (Powerup p: powerups) {
+			p.update();
+		}
+		*/
 		
 		// Collision detection
-		// if (ship.getHitbox().overlaps(r))
+		for (Enemy e: enemies) {
+			if (ship.getHitbox().overlaps(e.getHitbox())) {
+				Gdx.app.log("Collision", "Ship hit");
+			}
+		}		
 	}
 	
 	/**

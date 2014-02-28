@@ -34,7 +34,8 @@ public class GameScreen implements Screen {
 	WorldRenderer renderer;
 	
 	/**
-	 * 
+	 * Constructor of the Game Screen which takes 
+	 * @param game The game instance of type SSJava
 	 */
 	public GameScreen(SSJava game) {
 		this.game = game;

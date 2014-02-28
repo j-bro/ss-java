@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.world;
 
+import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Gdx;
@@ -44,8 +45,8 @@ public class WorldRenderer {
 		this.world = world;
 		
 		// TODO potentially fix this square/rectangle
-		width = Gdx.graphics.getWidth() / 30;
-		height = Gdx.graphics.getHeight() / 30;
+		width = Gdx.graphics.getWidth() / 20;
+		height = Gdx.graphics.getHeight() / 20;
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, width, height);
@@ -73,24 +74,28 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
-		cam.position.set(ship.getPosition().x, ship.getPosition().y, 0);
+		cam.position.set(ship.getPosition().x, cam.position.y, 0);
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		
 		batch.begin();
 			// TODO fix rotate ship around origin
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2 , ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
-			
-			batch.draw(enemy1Texture, enemy1.getPosition().x, enemy1.getPosition().y, enemy1.getWidth() / 2, enemy1.getHeight() / 2 , enemy1.getWidth(), enemy1.getHeight(), 1, 1, enemy1.getRotation(), 0, 0, enemy1Texture.getWidth(), enemy1Texture.getHeight(), false, false);
+			for (Enemy e: world.enemies) {
+				batch.draw(enemy1Texture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemy1Texture.getWidth(), enemy1Texture.getHeight(), false, false);
+			}
 		batch.end();  
 		
-		
+		// Shape renderer for hitboxes
 		sr.setProjectionMatrix(cam.combined);
 		sr.begin(ShapeType.Line);
-		sr.setColor(Color.CYAN);
-		sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
-		sr.setColor(Color.PINK);
-		sr.rect(enemy1.getHitbox().x, enemy1.getHitbox().y, enemy1.getHitbox().width, enemy1.getHitbox().height);
+			sr.setColor(Color.CYAN);
+			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
+			
+			sr.setColor(Color.ORANGE);
+			for (Enemy e: world.enemies) {
+				sr.rect(e.getHitbox().x, e.getHitbox().y, e.getHitbox().width, e.getHitbox().height);
+			}
 		sr.end();
 		
 		

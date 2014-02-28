@@ -16,23 +16,23 @@ import com.badlogic.gdx.InputProcessor;
 public class InputManager implements InputProcessor {
 
 	/**
-	 * 
+	 * The game's instance
 	 */
 	SSJava game;
 	
 	/**
-	 * 
+	 * The world's instance
 	 */
 	World world;
 	
 	/**
-	 * 
+	 * The ship's instance
 	 */
 	Ship ship;
 	
 	/**
 	 * @param game
-	 * @param world
+	 * @param world 
 	 */
 	public InputManager(SSJava game, World world) {
 		this.world = world;
@@ -47,13 +47,19 @@ public class InputManager implements InputProcessor {
 		// TODO add keyconfigs 
 		switch (keycode) {
 			case Keys.UP: 
-				ship.getVelocity().y = 1;
+				ship.getAcceleration().y = 3;
 				break;
 			case Keys.DOWN: 
-				ship.getVelocity().y = -1;
+				ship.getAcceleration().y = -3;
+				break;
+			case Keys.W:
+				ship.getAcceleration().y = 3;
+				break;
+			case Keys.S:
+				ship.getAcceleration().y = -3;
 				break;
 			case Keys.SPACE: 
-				
+				ship.fire();
 				break;
 			default: break;
 		}
@@ -68,12 +74,21 @@ public class InputManager implements InputProcessor {
 		// TODO fix this badly implemented
 		switch (keycode) {
 		case Keys.UP: 
-			ship.getVelocity().y = 0;
+			ship.getAcceleration().y = 0;
 			break;
-		case Keys.DOWN: 
-			ship.getVelocity().y = 0;
+		case Keys.DOWN:
+			ship.getAcceleration().y = 0;
+			break;
+		case Keys.W:
+			ship.getAcceleration().y = 0;
+			break;
+		case Keys.S:
+			ship.getAcceleration().y = 0;
 			break;
 		case Keys.SPACE: 
+			
+			break;
+		case Keys.ENTER: // temp
 			
 			break;
 		default: break;

@@ -31,11 +31,18 @@ public class SSJava extends Game {
 	 */
 	public Preferences prefs;
 	
+	public int width;
+	
+	public int height;
+	
 	@Override
 	public void create() {
 		setScreen(new GameScreen(this));
 		// setScreen(new SplashScreen(this)); TEMP FOR DEVELOPMENT
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
+		
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 	}
 
 	@Override
