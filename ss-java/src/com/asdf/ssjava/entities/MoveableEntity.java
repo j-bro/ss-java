@@ -50,8 +50,6 @@ public abstract class MoveableEntity extends AbstractEntity {
 		acceleration = new Vector2(0, 0);
 	}
 	
-	public abstract void advance(float  delta);
-	
 	/**
 	 * Returns the entity's velocity
 	 * @return the velocity of the entity

@@ -14,14 +14,18 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemyType1 extends Enemy {
 
 	/**
+	 * Default velocity for the Type 1 Enemy
+	 */
+	public final float DEFAULT_VELOCITY = 0;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
-	 * @param SPEED
 	 * @param rotation
 	 */
-	public EnemyType1(Vector2 position, float width, float height, float SPEED, float rotation) {
-		super(position, width, height, SPEED, rotation);
+	public EnemyType1(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation);
 	}
 
 	/* (non-Javadoc)
@@ -30,7 +34,7 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void update() {
 		super.update();
-		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * SPEED)); 
+		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		
 	}
 	

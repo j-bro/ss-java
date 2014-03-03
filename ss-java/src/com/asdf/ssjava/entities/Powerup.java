@@ -16,21 +16,11 @@ public class Powerup extends MoveableEntity {
 	 * @param position
 	 * @param width
 	 * @param height
-	 * @param SPEED
 	 * @param rotation
 	 */
-	public Powerup(Vector2 position, float width, float height, float SPEED, float rotation) {
-		super(position, width, height, SPEED, rotation);
+	public Powerup(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation);
 		// TODO Auto-generated constructor stub
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#advance(float)
-	 */
-	@Override
-	public void advance(float delta) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/* (non-Javadoc)
