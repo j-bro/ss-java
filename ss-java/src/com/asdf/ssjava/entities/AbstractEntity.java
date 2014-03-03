@@ -1,5 +1,7 @@
 /**
- * 
+ * Base class for an entity.
+ * Includes fields for position, dimensions, and hitbox.
+ * Includes abstract update method.
  */
 package com.asdf.ssjava.entities;
 
@@ -15,29 +17,29 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class AbstractEntity {
 	
 	/**
-	 * 
+	 * The entity's position
 	 */
 	protected Vector2 position;
 	
 	/**
-	 * 
+	 * The entity's width in pixels
 	 */
 	protected float width;
 	
 	/**
-	 * 
+	 * The entity's height in pixels
 	 */
 	protected float height;
 	
 	/**
-	 * 
+	 * The entity's hitbox
 	 */
 	protected Rectangle hitbox;
 	
 	/**
-	 * 
+	 * Creates an entity
 	 */
-	public AbstractEntity(Vector2 position, float width, float height) {
+	protected AbstractEntity(Vector2 position, float width, float height) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
@@ -45,13 +47,16 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return the position
+	 * Returns the entity's position
+	 * @return the position of the entity
 	 */
 	public Vector2 getPosition() {
 		return position;
 	}
 	
 	/**
+	 * Sets the entity's position
+	 * @deprecated use the getPosition method to obtain the instance of position and set the x, y variables
 	 * @param position the position to set
 	 */
 	public void setPosition(Vector2 position) {
@@ -59,13 +64,15 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return the width
+	 * Returns the entity's width
+	 * @return the width of the entity
 	 */
 	public float getWidth() {
 		return width;
 	}
 	
 	/**
+	 * Sets the entity's width
 	 * @param width the width to set
 	 */
 	public void setWidth(float width) {
@@ -73,13 +80,15 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return the height
+	 * Returns the entity's height
+	 * @return the height of the entity
 	 */
 	public float getHeight() {
 		return height;
 	}
 	
 	/**
+	 * Sets the entity's height
 	 * @param height the height to set
 	 */
 	public void setHeight(float height) {
@@ -87,12 +96,15 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return the hitbox
+	 * Returns the entity's hitbox
+	 * @return the hitbox of the entity
 	 */
 	public Rectangle getHitbox() {
 		return hitbox;
 	}
 	/**
+	 * Sets the entity's hitbox
+	 * @deprecated use the getHitbox() method to obtain the instance of hitbox and set the x, y variables
 	 * @param hitbox the hitbox to set
 	 */
 	public void setHitbox(Rectangle hitbox) {

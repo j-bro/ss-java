@@ -24,7 +24,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class WorldRenderer {
 
+	/**
+	 * The World's instance
+	 */
 	World world;
+	
 	SpriteBatch batch;
 	
 	OrthographicCamera cam;
@@ -39,6 +43,7 @@ public class WorldRenderer {
 	ShapeRenderer sr;
 	
 	/**
+	 * Creates the world instance
 	 * @param world
 	 */
 	public WorldRenderer(World world) {

@@ -23,27 +23,27 @@ import com.badlogic.gdx.math.Vector2;
 public class World {
 
 	/**
-	 * 
+	 * The game's instance
 	 */
 	SSJava game;
 	
 	/**
-	 * 
+	 * The ship's instance
 	 */
 	Ship ship;
 	
 	/**
-	 * 
+	 * ArrayList containing all the obstacles in the current level
 	 */
 	ArrayList<Obstacle> obstacles;
 	
 	/**
-	 * 
+	 * ArrayList containing all the enemies in the current level
 	 */
 	ArrayList<Enemy> enemies;
 	
 	/**
-	 * 
+	 * ArrayList containing all the powerups in the current level
 	 */
 	ArrayList<Powerup> powerups;
 	
@@ -53,20 +53,20 @@ public class World {
 	public World(SSJava game) {
 		this.game = game;
 		
+		// Set game input processor
+		
 		enemies = new ArrayList<Enemy>();
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 1, 1, 270);
-		ship.setVelocity(new Vector2(5, 0)); // default horizontal ship speed
+		ship.getVelocity().x = 5; // default horizontal ship speed
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 7; j++) {
 				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0));
 //				enemies.get(i).setVelocity(new Vector2(1, 0));
 			}
-			
 		}
 		
-		// Set game input processor
 		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
 
