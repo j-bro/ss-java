@@ -3,9 +3,8 @@
  */
 package com.asdf.ssjava.world;
 
-import java.util.ArrayList;
-
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
@@ -13,6 +12,7 @@ import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * @author Jeremy Brown
@@ -35,17 +35,22 @@ public class World {
 	/**
 	 * ArrayList containing all the obstacles in the current level
 	 */
-	ArrayList<Obstacle> obstacles;
+	Array<Obstacle> obstacles;
 	
 	/**
 	 * ArrayList containing all the enemies in the current level
 	 */
-	ArrayList<Enemy> enemies;
+	Array<Enemy> enemies;
+	
+	/**
+	 * Array containing all the bullets present in the level
+	 */
+	Array<Bullet> bullets;
 	
 	/**
 	 * ArrayList containing all the powerups in the current level
 	 */
-	ArrayList<Powerup> powerups;
+	Array<Powerup> powerups;
 	
 	/**
 	 * @param game
@@ -53,9 +58,11 @@ public class World {
 	public World(SSJava game) {
 		this.game = game;
 		
-		// Set game input processor
 		
-		enemies = new ArrayList<Enemy>();
+		obstacles = new Array<Obstacle>();
+		enemies = new Array<Enemy>();
+		bullets = new Array<Bullet>();
+		powerups = new Array<Powerup>();
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 1, 1, 270);
 		ship.getVelocity().x = 5; // default horizontal ship speed
@@ -67,6 +74,7 @@ public class World {
 			}
 		}
 		
+		// Set game input processor
 		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
 
@@ -78,33 +86,35 @@ public class World {
 	}
 	
 	/**
-	 *
+	 * Update method run in every iteration of the main loop to update entity position and behaviour
 	 */
 	public void update() {
-		// Entity position update
+		// Entity updates
 		ship.update();
 		
-		for (Enemy e: enemies) {
-			e.update();
-		}
-		
-		/*
 		for (Obstacle o: obstacles) {
 			o.update();
 		}
-		
+		for (Enemy e: enemies) {
+			e.update();
+		}
+		for (Bullet b: bullets) {
+			b.update();
+		}
 		for (Powerup p: powerups) {
 			p.update();
 		}
-		*/
 		
 		// Collision detection
-		for (Enemy e: enemies) {
+		for (Enemy e: enemies) { 
 			if (ship.getHitbox().overlaps(e.getHitbox())) {
 				Gdx.app.log("Collision", "Ship hit");
 			}
 		}		
 	}
+	
+	
+	// TODO bullets cleanup
 	
 	/**
 	 *

@@ -84,11 +84,11 @@ public class WorldRenderer {
 		batch.setProjectionMatrix(cam.combined);
 		
 		batch.begin();
-			// TODO fix rotate ship around origin
-			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2 , ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
 			for (Enemy e: world.enemies) {
 				batch.draw(enemy1Texture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemy1Texture.getWidth(), enemy1Texture.getHeight(), false, false);
 			}
+			// TODO fix rotate ship around origin
+			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2 , ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
 		batch.end();  
 		
 		// Shape renderer for hitboxes
