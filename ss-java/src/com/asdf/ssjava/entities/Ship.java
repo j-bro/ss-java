@@ -19,14 +19,14 @@ public class Ship extends MoveableEntity {
 	 * The ship will slowly return to the x velocity after it has hit another entity
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(5, 5); 
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
 	
 	/**
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 15);
+	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 100);
 	
 	/**
 	 * The World's instance

@@ -65,7 +65,7 @@ public class World {
 		powerups = new Array<Powerup>();
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
-		ship.getVelocity().x = 5; // default horizontal ship speed
+		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 7; j++) {
