@@ -16,8 +16,9 @@ public class Ship extends MoveableEntity {
 	
 	/**
 	 * The ship's default velocity
-	 * The ship will slowly return to the x velocity after it has hit another entity
-	 * The y velocity also limits the ship's vertical motion, which is controlled by the player
+	 * The ship will slowly return to the x velocity after it has hit another entity.
+	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
+	 * This is not automatically set by the constructor!
 	 */
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(5, 5); 
 	
@@ -25,13 +26,19 @@ public class Ship extends MoveableEntity {
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
+	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 15);
+	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 10);
 	
 	/**
 	 * The World's instance
 	 */
 	World world;
+	
+	/**
+	 * The type of bullets the ship will fire
+	 */
+	int bulletType = 1;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.
@@ -51,7 +58,7 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		Bullet b = new Bullet(new Vector2(position.x + width, position.y + height / 2), 3, 2, 0);
+		Bullet b = new Bullet(new Vector2(position.x + width, position.y + height / 2), 3, 2, 0, bulletType);
 		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
 		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);

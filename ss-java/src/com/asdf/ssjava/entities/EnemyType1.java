@@ -13,6 +13,11 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemyType1 extends Enemy {
 
 	/**
+	 * 
+	 */
+	int type = 1;
+	
+	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
 	public final float DEFAULT_VELOCITY = 0;
@@ -37,9 +42,17 @@ public class EnemyType1 extends Enemy {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Enemy#fire()
+	 */
+	@Override
+	public void fire() {
+		// TODO
+		
+	}
+
 	public void advance(Ship ship) {
 		super.update();
 //		position.lerp(ship.getPosition(), Gdx.graphics.getDeltaTime());
 	}
-	
 }

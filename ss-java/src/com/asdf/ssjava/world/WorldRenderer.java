@@ -51,14 +51,9 @@ public class WorldRenderer {
 	 * Textures for the various elements 
 	 */
 	Texture shipTexture;
-	
-	Texture enemy1Texture;
-	
-	Texture bulletTexture;
-	Texture enemyBulletTexture;
-	
-	Texture speedOfLightTexture;
-	Texture healthUpTexture;
+	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
+	Texture bulletType1Texture, bulletType2Texture, bulletType3Texture;
+	Texture speedOfLightTexture, healthUpTexture;
 	
 	// TODO ...
 	float width, height;
@@ -87,13 +82,14 @@ public class WorldRenderer {
 		batch.setProjectionMatrix(cam.combined);
 		
 		shipTexture = new Texture("data/textures/player_ship.png");
-		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
+		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+//		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		enemy1Texture = new Texture("data/textures/enemy1.png");
-		enemy1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		enemyType1Texture = new Texture("data/textures/enemy1.png");
+		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bulletTexture = new Texture("data/textures/bullet_strip.png");
-		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		bulletType1Texture = new Texture("data/textures/bullet_strip.png");
+		bulletType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		ship = world.getShip();
 		
@@ -107,7 +103,7 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
-		cam.position.set(ship.getPosition().x, cam.position.y, 0);
+		cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		
@@ -116,9 +112,47 @@ public class WorldRenderer {
 				
 			}
 			for (Enemy e: world.enemies) {
-				batch.draw(enemy1Texture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemy1Texture.getWidth(), enemy1Texture.getHeight(), false, false);
+				Texture enemyTexture = null;
+				switch(e.getType()) {
+					case 1:
+						enemyTexture = enemyType1Texture;
+						break;
+					case 2: 
+						enemyTexture = enemyType2Texture;
+						break;
+					case 3:
+						enemyTexture = enemyType3Texture;
+						break;
+					default:
+						enemyTexture = enemyType1Texture;
+						break;
+				}
+				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 			for (Bullet b: world.bullets) {
+				Texture bulletTexture = null;
+				float srcX;
+				float srcY;
+				float srcWidth;
+				float srcHeight;
+				switch(b.getType()) {
+				case 1:
+					bulletTexture = bulletType1Texture;
+					srcX = 7;
+					srcY = 15;
+					srcWidth = 50;
+					srcHeight = 33;
+					break;
+				case 2: 
+					bulletTexture = bulletType2Texture;
+					break;
+				case 3:
+					bulletTexture = bulletType3Texture;
+					break;
+				default:
+					break;
+				}
+//				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 50, 33, false, false);
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 50, 33, false, false);
 			}
 			for (Powerup p: world.powerups) {
@@ -130,7 +164,7 @@ public class WorldRenderer {
 		// Shape renderer for hitboxes
 		sr.setProjectionMatrix(cam.combined);
 		sr.begin(ShapeType.Line);
-			sr.setColor(Color.CYAN);
+			sr.setColor(Color.RED);
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
 			
 			sr.setColor(Color.ORANGE);
@@ -155,9 +189,13 @@ public class WorldRenderer {
 		
 		shipTexture.dispose();
 		
-		enemy1Texture.dispose();
+		enemyType1Texture.dispose();
+		enemyType2Texture.dispose();
+		enemyType3Texture.dispose();
 		
-		bulletTexture.dispose();
+		bulletType1Texture.dispose();
+		bulletType2Texture.dispose();
+		bulletType3Texture.dispose();
 		
 		sr.dispose();
 	}

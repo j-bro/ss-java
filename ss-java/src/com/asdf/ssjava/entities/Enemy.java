@@ -10,8 +10,13 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 
-public class Enemy extends MoveableEntity {
-
+public abstract class Enemy extends MoveableEntity {
+	
+	/**
+	 * Enemy type
+	 */
+	int type;
+	
 	/**
 	 * @param position
 	 * @param width
@@ -22,6 +27,8 @@ public class Enemy extends MoveableEntity {
 		super(position, width, height, rotation);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public abstract void fire();
 
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
@@ -29,5 +36,9 @@ public class Enemy extends MoveableEntity {
 	@Override
 	public void update() {
 		super.update();
+	}
+	
+	public int getType() {
+		return type;
 	}
 }
