@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  * 
  */
 public class Bullet extends MoveableEntity {

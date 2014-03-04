@@ -8,9 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 /**
- * 
  * @author Jeremy Brown
- * @author Simon Thompson
  *
  */
 

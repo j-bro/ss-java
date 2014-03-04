@@ -1,5 +1,6 @@
 /**
- * 
+ * Manages the rendering and drawing dependencies of all entities present in the World.
+ * Draws the HUD comprising of the score, the player's life points and the level progress.
  */
 package com.asdf.ssjava.world;
 
@@ -21,7 +22,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  *
  */
 
@@ -32,17 +32,40 @@ public class WorldRenderer {
 	 */
 	World world;
 	
+	/**
+	 * The sprite batch responsible for drawing all elements in the world
+	 */
 	SpriteBatch batch;
 	
+	/**
+	 * The camera 
+	 */
 	OrthographicCamera cam;
 	
+	/**
+	 * The ship's instance
+	 */
 	Ship ship;
 	
+	/**
+	 * Textures for the various elements 
+	 */
 	Texture shipTexture;
-	Texture enemy1Texture;
-	Texture bulletTexture;
 	
+	Texture enemy1Texture;
+	
+	Texture bulletTexture;
+	Texture enemyBulletTexture;
+	
+	Texture speedOfLightTexture;
+	Texture healthUpTexture;
+	
+	// TODO ...
 	float width, height;
+	
+	/**
+	 * Shape renderer for debugging ONLY!
+	 */
 	ShapeRenderer sr;
 	
 	/**
@@ -96,12 +119,12 @@ public class WorldRenderer {
 				batch.draw(enemy1Texture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemy1Texture.getWidth(), enemy1Texture.getHeight(), false, false);
 			}
 			for (Bullet b: world.bullets) {
-				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 57, 48, false, false);
+				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 50, 33, false, false);
 			}
 			for (Powerup p: world.powerups) {
 				
 			}
-			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 0, 0, shipTexture.getWidth(), shipTexture.getHeight(), false, false);
+			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 		batch.end();  
 		
 		// Shape renderer for hitboxes
@@ -129,7 +152,13 @@ public class WorldRenderer {
 	 */
 	public void dispose() {
 		batch.dispose();
+		
 		shipTexture.dispose();
+		
+		enemy1Texture.dispose();
+		
+		bulletTexture.dispose();
+		
 		sr.dispose();
 	}
 }

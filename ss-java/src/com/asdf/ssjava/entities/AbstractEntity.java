@@ -7,7 +7,6 @@ package com.asdf.ssjava.entities;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  *
  */
 

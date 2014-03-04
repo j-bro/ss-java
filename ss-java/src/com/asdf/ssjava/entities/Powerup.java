@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  * 
  */
 public class Powerup extends MoveableEntity {

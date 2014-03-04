@@ -1,5 +1,7 @@
 /**
- * 
+ * Implements InputProcessor to 
+ * Currently maps ship's up and down movements to the arrow keys, as well as W and S and mouse clicks/screen touches in the top and bottom of the left half of the screen.
+ * Firing a bullet is done with the spacebar or clicking/touching anywhere in the right half of the screen. 
  */
 package com.asdf.ssjava.world;
 
@@ -11,7 +13,6 @@ import com.badlogic.gdx.InputProcessor;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  * 
  */
 public class InputManager implements InputProcessor {
@@ -129,7 +130,6 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		if (screenY > Gdx.graphics.getHeight() / 2) {
 			ship.getAcceleration().y = 0;
 		}

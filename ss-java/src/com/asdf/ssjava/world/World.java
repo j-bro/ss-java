@@ -1,4 +1,6 @@
 /**
+ * Base world class that contains all entities present in the world at the current time.
+ * Loads the selected level when game screen is set.
  * 
  */
 package com.asdf.ssjava.world;
@@ -16,7 +18,6 @@ import com.badlogic.gdx.utils.Array;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  *
  */
 
@@ -69,7 +70,6 @@ public class World {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 7; j++) {
 				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0));
-//				enemies.get(i).setVelocity(new Vector2(1, 0));
 			}
 		}
 		
@@ -77,15 +77,9 @@ public class World {
 		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
 
-	/**
-	 * @return the ship
-	 */
-	public Ship getShip() {
-		return ship;
-	}
 	
 	/**
-	 * Update method run in every iteration of the main loop to update entity position and behaviour
+	 * Update method run in every iteration of the main loop to update entity position, behaviour and collision
 	 */
 	public void update() {
 		// Entity updates
@@ -106,14 +100,32 @@ public class World {
 		
 		// Collision detection
 		for (Enemy e: enemies) { 
-			if (ship.getHitbox().overlaps(e.getHitbox())) {
-				Gdx.app.log("Collision", "Ship hit");
+			if (e.getHitbox().overlaps(ship.getHitbox())) {
+				Gdx.app.log("Collision", "Ship collided with enemy");
 			}
-		}		
+			
+			for (Bullet b: bullets) {
+				if (e.getHitbox().overlaps(b.getHitbox())) {
+					Gdx.app.log("Collision", "Ship fired on an enemy");
+				}
+			}
+		}
+		
+		// TODO bullets cleanup if they go offscreen
+		/*
+		for (Bullet b: bullets) {
+			if (b.getPosition().x > screen width) {
+			bullets.remove(b, true);
+		}
+		*/
 	}
 	
-	
-	// TODO bullets cleanup
+	/**
+	 * @return the ship
+	 */
+	public Ship getShip() {
+		return ship;
+	}
 	
 	/**
 	 * Returns the bullets array

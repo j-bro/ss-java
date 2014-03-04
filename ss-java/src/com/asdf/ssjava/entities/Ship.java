@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  *
  */
 
@@ -52,7 +51,8 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		Bullet b = new Bullet(new Vector2(position.x + width / 2, position.y + height / 2), 3, 2, 0);
+		Bullet b = new Bullet(new Vector2(position.x + width, position.y + height / 2), 3, 2, 0);
+		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
 		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
 		world.getBullets().add(b);

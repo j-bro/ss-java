@@ -5,11 +5,11 @@ package com.asdf.ssjava;
 
 /**
  * @author Jeremy Brown
- * @author Simon Thompson
  * 
  */
 
 import com.asdf.ssjava.screens.GameScreen;
+import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -38,7 +38,7 @@ public class SSJava extends Game {
 	@Override
 	public void create() {
 		setScreen(new GameScreen(this));
-		// setScreen(new SplashScreen(this)); TEMP FOR DEVELOPMENT
+//		setScreen(new SplashScreen(this)); //TEMP FOR DEVELOPMENT
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		
 		width = Gdx.graphics.getWidth();
