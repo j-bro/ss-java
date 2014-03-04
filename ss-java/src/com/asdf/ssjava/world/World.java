@@ -58,13 +58,12 @@ public class World {
 	public World(SSJava game) {
 		this.game = game;
 		
-		
 		obstacles = new Array<Obstacle>();
 		enemies = new Array<Enemy>();
 		bullets = new Array<Bullet>();
 		powerups = new Array<Powerup>();
 		
-		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 1, 1, 270);
+		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = 5; // default horizontal ship speed
 		
 		for (int i = 0; i < 3; i++) {
@@ -115,6 +114,13 @@ public class World {
 	
 	
 	// TODO bullets cleanup
+	
+	/**
+	 * Returns the bullets array
+	 */
+	public Array<Bullet> getBullets() {
+		return bullets;
+	}
 	
 	/**
 	 *

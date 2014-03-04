@@ -17,7 +17,7 @@ public class Bullet extends MoveableEntity {
 	/**
 	 * The bullet's default velocity
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 15);
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(30, 0);
 
 	/**
 	 * @param position the position of the bullet
@@ -25,9 +25,8 @@ public class Bullet extends MoveableEntity {
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, Vector2 velocity) {
-		super(position, width, height, rotation); 
-		this.velocity = velocity;
+	public Bullet(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation);
 	}
 
 	/* (non-Javadoc)

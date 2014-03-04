@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
@@ -21,7 +22,17 @@ public class Ship extends MoveableEntity {
 	 */
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(5, 5); 
 	
-	public final Vector2 DEFAULT_ACCELERATION = new Vector2(7, 10);
+	/**
+	 * The ship's default acceleration
+	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
+	 * The y acceleration controls how fast the player is able to move the ship up and down.
+	 */
+	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 15);
+	
+	/**
+	 * The World's instance
+	 */
+	World world;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.
@@ -31,8 +42,9 @@ public class Ship extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Ship(Vector2 position, float width, float height, float rotation) {
+	public Ship(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
+		this.world = world;
 	}
 	
 	/**
@@ -40,9 +52,12 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		// TODO add bullet
-//		world.getBullets().add(new Bullet());
-		Gdx.app.log("Ship", "Ship fired!");
+		Bullet b = new Bullet(new Vector2(position.x + width / 2, position.y + height / 2), 3, 2, 0);
+		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
+		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
+		world.getBullets().add(b);
+		
+		Gdx.app.log("Ship", "Ship fired a bullet!");
 	}
 
 	@Override
@@ -64,7 +79,7 @@ public class Ship extends MoveableEntity {
 		velocity.y += acceleration.y * Gdx.graphics.getDeltaTime();
 		
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-		rotation = velocity.angle() - 90;
+		rotation = velocity.angle();
 		
 		super.update();
 	}
