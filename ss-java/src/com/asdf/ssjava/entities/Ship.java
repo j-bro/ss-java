@@ -20,7 +20,7 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(5, 5); 
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
 	
 	/**
 	 * The ship's default acceleration
@@ -28,7 +28,7 @@ public class Ship extends MoveableEntity {
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 10);
+	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 100);
 	
 	/**
 	 * The World's instance
