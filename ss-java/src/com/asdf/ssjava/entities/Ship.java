@@ -15,6 +15,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Ship extends MoveableEntity {
 	
 	/**
+	 * The World's instance
+	 */
+	World world;
+	
+	/**
 	 * The ship's default velocity
 	 * The ship will slowly return to the x velocity after it has hit another entity.
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
@@ -31,14 +36,9 @@ public class Ship extends MoveableEntity {
 	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 100);
 	
 	/**
-	 * The World's instance
-	 */
-	World world;
-	
-	/**
 	 * The type of bullets the ship will fire
 	 */
-	int bulletType = 1;
+	int bulletType = 0;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.
@@ -58,13 +58,13 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		Bullet b = new Bullet(new Vector2(position.x + width, position.y + height / 2), 3, 2, 0, bulletType);
+		Bullet b = new Bullet(new Vector2(position.x + width, position.y), 3, 2, 0, bulletType);
 		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
 		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
 		world.getBullets().add(b);
 		
-		Gdx.app.log("Ship", "Ship fired a bullet!");
+		Gdx.app.log(world.game.LOG, "Ship fired a bullet!"); // TODO path to game iffy
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class WorldRenderer {
 	 */
 	Texture shipTexture;
 	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
-	Texture bulletType1Texture, bulletType2Texture, bulletType3Texture;
+	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
 	Texture speedOfLightTexture, healthUpTexture;
 	
 	// TODO ...
@@ -88,8 +88,12 @@ public class WorldRenderer {
 		enemyType1Texture = new Texture("data/textures/enemy1.png");
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bulletType1Texture = new Texture("data/textures/bullet_strip.png");
-		bulletType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		bulletType0Texture = new Texture("data/textures/bullet_strip.png");
+		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		// TODO extra textures
+		bulletType1Texture = bulletType0Texture;
+		bulletType2Texture = bulletType0Texture;
 		
 		ship = world.getShip();
 		
@@ -97,7 +101,7 @@ public class WorldRenderer {
 	}
 	
 	/**
-	 * 
+	 * Render loop
 	 */
 	public void render() {  
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -112,8 +116,7 @@ public class WorldRenderer {
 				
 			}
 			for (Enemy e: world.enemies) {
-				Texture enemyTexture = enemyType1Texture;
-				/* TODO fix
+				Texture enemyTexture = null;
 				switch(e.getType()) {
 					case 1:
 						enemyTexture = enemyType1Texture;
@@ -125,22 +128,25 @@ public class WorldRenderer {
 						enemyTexture = enemyType3Texture;
 						break;
 					default:
-						
-//						enemyTexture = enemyType1Texture;
+						enemyTexture = enemyType1Texture;
 						break;
 				}
-				*/
 				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 			for (Bullet b: world.bullets) {
 				Texture bulletTexture = null;
-				float srcX;
-				float srcY;
-				float srcWidth;
-				float srcHeight;
+				int srcX = 0, srcY = 0, srcWidth = 0, srcHeight = 0;
 				switch(b.getType()) {
-				case 1:
+				case 0:
+					bulletTexture = bulletType0Texture;
+					srcX = 7;
+					srcY = 15;
+					srcWidth = 50;
+					srcHeight = 33;
+					break;
+				case 1: 
 					bulletTexture = bulletType1Texture;
+					// TODO also temp
 					srcX = 7;
 					srcY = 15;
 					srcWidth = 50;
@@ -155,8 +161,7 @@ public class WorldRenderer {
 				default:
 					break;
 				}
-//				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 50, 33, false, false);
-				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 7, 15, 50, 33, false, false);
+				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
 			for (Powerup p: world.powerups) {
 				
@@ -180,12 +185,10 @@ public class WorldRenderer {
 				sr.rect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
 			}
 		sr.end();
-		
-//		Gdx.app.log("Ship", "x: " + ship.getVelocity().x + " y: " + ship.getVelocity().y);
 	}
 
 	/**
-	 * 
+	 * Dispose method
 	 */
 	public void dispose() {
 		batch.dispose();

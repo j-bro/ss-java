@@ -26,7 +26,7 @@ public class World {
 	/**
 	 * The game's instance
 	 */
-	SSJava game;
+	public SSJava game;
 	
 	/**
 	 * The ship's instance
@@ -69,7 +69,7 @@ public class World {
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 7; j++) {
-				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0));
+				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
 			}
 		}
 		
@@ -101,12 +101,12 @@ public class World {
 		// Collision detection
 		for (Enemy e: enemies) { 
 			if (e.getHitbox().overlaps(ship.getHitbox())) {
-				Gdx.app.log("Collision", "Ship collided with enemy");
+				Gdx.app.log(game.LOG, "Ship collided with enemy");
 			}
 			
 			for (Bullet b: bullets) {
 				if (e.getHitbox().overlaps(b.getHitbox())) {
-					Gdx.app.log("Collision", "Ship fired on an enemy");
+					Gdx.app.log(game.LOG, "Ship fired on an enemy");
 				}
 			}
 		}
