@@ -26,7 +26,7 @@ public class World {
 	/**
 	 * The game's instance
 	 */
-	public SSJava game;
+	SSJava game;
 	
 	/**
 	 * The ship's instance
@@ -101,12 +101,12 @@ public class World {
 		// Collision detection
 		for (Enemy e: enemies) { 
 			if (e.getHitbox().overlaps(ship.getHitbox())) {
-				Gdx.app.log(game.LOG, "Ship collided with enemy");
+				Gdx.app.log(SSJava.LOG, "Ship collided with enemy");
 			}
 			
 			for (Bullet b: bullets) {
 				if (e.getHitbox().overlaps(b.getHitbox())) {
-					Gdx.app.log(game.LOG, "Ship fired on an enemy");
+					Gdx.app.log(SSJava.LOG, "Ship fired on an enemy");
 				}
 			}
 		}

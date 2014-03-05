@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -64,7 +65,7 @@ public class Ship extends MoveableEntity {
 		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
 		world.getBullets().add(b);
 		
-		Gdx.app.log(world.game.LOG, "Ship fired a bullet!"); // TODO path to game iffy
+		Gdx.app.log(SSJava.LOG, "Ship fired a bullet!");
 	}
 
 	@Override
