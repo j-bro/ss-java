@@ -86,7 +86,7 @@ public class Ship extends MoveableEntity {
 		velocity.y += acceleration.y * Gdx.graphics.getDeltaTime();
 		
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-		rotation = velocity.angle();
+		rotation = new Vector2(velocity.x * 2, velocity.y * 0.5f).angle();
 		
 		super.update();
 	}
