@@ -55,4 +55,9 @@ public class EnemyType1 extends Enemy {
 		super.update();
 //		position.lerp(ship.getPosition(), Gdx.graphics.getDeltaTime());
 	}
+	
+	// TODO fix this: put into Enemy  
+	public int getType() {
+		return type;
+	}
 }

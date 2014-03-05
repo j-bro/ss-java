@@ -112,7 +112,8 @@ public class WorldRenderer {
 				
 			}
 			for (Enemy e: world.enemies) {
-				Texture enemyTexture = null;
+				Texture enemyTexture = enemyType1Texture;
+				/* TODO fix
 				switch(e.getType()) {
 					case 1:
 						enemyTexture = enemyType1Texture;
@@ -124,9 +125,11 @@ public class WorldRenderer {
 						enemyTexture = enemyType3Texture;
 						break;
 					default:
-						enemyTexture = enemyType1Texture;
+						
+//						enemyTexture = enemyType1Texture;
 						break;
 				}
+				*/
 				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 			for (Bullet b: world.bullets) {

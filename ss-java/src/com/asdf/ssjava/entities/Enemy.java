@@ -13,11 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Enemy extends MoveableEntity {
 	
 	/**
-	 * Enemy type
-	 */
-	int type;
-	
-	/**
 	 * @param position
 	 * @param width
 	 * @param height
@@ -38,7 +33,5 @@ public abstract class Enemy extends MoveableEntity {
 		super.update();
 	}
 	
-	public int getType() {
-		return type;
-	}
+
 }
