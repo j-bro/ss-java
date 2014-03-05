@@ -7,6 +7,7 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Ship;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -109,20 +110,23 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// Ship movement input
-		if (screenX < Gdx.graphics.getWidth() / 2) {
-			if (screenY > Gdx.graphics.getHeight() / 2) {
-				ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
+		if (Gdx.app.getType() == Application.ApplicationType.Android) {
+			// Ship movement input
+			if (screenX < Gdx.graphics.getWidth() / 2) {
+				if (screenY > Gdx.graphics.getHeight() / 2) {
+					ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
+				}
+				else {
+					ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+				}
 			}
+			// Ship firing input
 			else {
-				ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+				ship.fire();
 			}
+			return true;
 		}
-		// Ship firing input
-		else {
-			ship.fire();
-		}
-		return true;
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -130,13 +134,16 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if (screenY > Gdx.graphics.getHeight() / 2) {
-			ship.getAcceleration().y = 0;
+		if (Gdx.app.getType() == Application.ApplicationType.Android || Gdx.app.getType() == Application.ApplicationType.iOS) {			
+			if (screenY > Gdx.graphics.getHeight() / 2) {
+				ship.getAcceleration().y = 0;
+			}
+			else {
+				ship.getAcceleration().y = 0;
+			}
+			return true;
 		}
-		else {
-			ship.getAcceleration().y = 0;
-		}
-		return true;
+		return false;
 	}
 
 	/* (non-Javadoc)
