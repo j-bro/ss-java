@@ -137,29 +137,29 @@ public class WorldRenderer {
 				Texture bulletTexture = null;
 				int srcX = 0, srcY = 0, srcWidth = 0, srcHeight = 0;
 				switch(b.getType()) {
-				case 0:
-					bulletTexture = bulletType0Texture;
-					srcX = 7;
-					srcY = 15;
-					srcWidth = 50;
-					srcHeight = 33;
-					break;
-				case 1: 
-					bulletTexture = bulletType1Texture;
-					// TODO also temp
-					srcX = 7;
-					srcY = 15;
-					srcWidth = 50;
-					srcHeight = 33;
-					break;
-				case 2: 
-					bulletTexture = bulletType2Texture;
-					break;
-				case 3:
-					bulletTexture = bulletType3Texture;
-					break;
-				default:
-					break;
+					case 0:
+						bulletTexture = bulletType0Texture;
+						srcX = 7;
+						srcY = 15;
+						srcWidth = 50;
+						srcHeight = 33;
+						break;
+					case 1: 
+						bulletTexture = bulletType1Texture;
+						// TODO also temp
+						srcX = 7;
+						srcY = 15;
+						srcWidth = 50;
+						srcHeight = 33;
+						break;
+					case 2: 
+						bulletTexture = bulletType2Texture;
+						break;
+					case 3:
+						bulletTexture = bulletType3Texture;
+						break;
+					default:
+						break;
 				}
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}

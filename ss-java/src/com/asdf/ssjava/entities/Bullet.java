@@ -11,12 +11,12 @@ import com.badlogic.gdx.math.Vector2;
  * @author Jeremy Brown
  * 
  */
-public class Bullet extends MoveableEntity {
+public abstract class Bullet extends MoveableEntity {
 	
 	/**
 	 * The type of bullet
 	 */
-	final int type;
+	int type;
 	
 	/**
 	 * The bullet's default velocity
@@ -29,10 +29,11 @@ public class Bullet extends MoveableEntity {
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, int type) {
+	public Bullet(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		this.type = type;
 	}
+
+	public abstract int getType();	
 
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
@@ -41,10 +42,6 @@ public class Bullet extends MoveableEntity {
 	public void update() {
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		super.update();
-	}
-	
-	public int getType() {
-		return type;
 	}
 	
 }

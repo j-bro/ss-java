@@ -60,7 +60,7 @@ public class EnemyType1 extends Enemy {
 	 */
 	@Override
 	public void fire() { // TODO not tested!
-		Bullet b = new Bullet(new Vector2(position.x, position.y), 3, 2, 0, bulletType);
+		Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0);
 		b.getPosition().x = position.x - b.width;
 		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x =(-1) * b.DEFAULT_VELOCITY.x;

@@ -59,7 +59,7 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		Bullet b = new Bullet(new Vector2(position.x + width, position.y), 3, 2, 0, bulletType);
+		Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0);
 		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
 		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
