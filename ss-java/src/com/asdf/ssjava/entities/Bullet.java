@@ -21,8 +21,8 @@ public abstract class Bullet extends MoveableEntity {
 	/**
 	 * The bullet's default velocity
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(30, 0);
-
+	Vector2 DEFAULT_VELOCITY;
+	
 	/**
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
@@ -34,6 +34,7 @@ public abstract class Bullet extends MoveableEntity {
 	}
 
 	public abstract int getType();	
+	public abstract Vector2 getDEFAULT_VELOCITY();
 
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
@@ -43,5 +44,4 @@ public abstract class Bullet extends MoveableEntity {
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		super.update();
 	}
-	
 }

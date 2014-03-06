@@ -1,6 +1,7 @@
 /**
  * Concrete definition of a bullet to model a certain look and behaviour.
  * Behaviour is defined here and look in the WorldRenderer class.
+ * This bullet will be used by the ship.
  */
 package com.asdf.ssjava.entities;
 
@@ -20,7 +21,7 @@ public class BulletType0 extends Bullet {
 	/**
 	 * The bullet's default velocity
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(30, 0);
+	private Vector2 DEFAULT_VELOCITY = new Vector2(10, 0);
 	
 	/**
 	 * @param position
@@ -32,7 +33,10 @@ public class BulletType0 extends Bullet {
 	public BulletType0(Vector2 position, float width, float height,
 			float rotation) {
 		super(position, width, height, rotation);
-		// TODO Auto-generated constructor stub
+		hitbox.x = position.x + 0.85f;
+		hitbox.y = position.y + 0.8f;
+		hitbox.width = 1.35f;
+		hitbox.height = 0.3f;
 	}
 
 	/* (non-Javadoc)
@@ -41,5 +45,23 @@ public class BulletType0 extends Bullet {
 	@Override
 	public int getType() {
 		return type;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Bullet#update()
+	 */
+	@Override
+	public void update() {
+		super.update();
+		hitbox.x = position.x + 0.85f;
+		hitbox.y = position.y + 0.8f;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Bullet#getDEFAULT_VELOCITY()
+	 */
+	@Override
+	public Vector2 getDEFAULT_VELOCITY() {
+		return DEFAULT_VELOCITY;
 	}
 }
