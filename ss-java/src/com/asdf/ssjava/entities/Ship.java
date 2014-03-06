@@ -7,6 +7,7 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
 
 /**
  * @author Jeremy Brown
@@ -18,7 +19,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The World's instance
 	 */
-	World world;
+	private World world;
 	
 	/**
 	 * The ship's default velocity
@@ -39,7 +40,17 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The type of bullets the ship will fire
 	 */
-	int bulletType = 0;
+	public final int bulletType = 0;
+	
+	/**
+	 * The timestamp at which the last shot was fired from this ship, in milliseconds
+	 */
+	private long lastShotTime = 0;
+	
+	/**
+	 * The time allowed between shots from this ship, in milliseconds
+	 */
+	private int shotCooldown = 500;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.
@@ -59,13 +70,16 @@ public class Ship extends MoveableEntity {
 	 * Bullet leaves in the ... direction
 	 */
 	public void fire() {
-		Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0);
-		b.getPosition().y = position.y + height / 2 - b.height / 2;
-		b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
-		b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
-		world.getBullets().add(b);
-		
-		Gdx.app.log(SSJava.LOG, "Ship fired a bullet!");
+		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
+			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0);
+			b.getPosition().y = position.y + height / 2 - b.height / 2;
+			b.getVelocity().x = (b.DEFAULT_VELOCITY.x);
+			b.getVelocity().y = (b.DEFAULT_VELOCITY.y);
+			world.getBullets().add(b);
+			
+			lastShotTime = TimeUtils.millis();
+			Gdx.app.log(SSJava.LOG, "Ship fired a bullet!");			
+		}
 	}
 
 	@Override
@@ -91,5 +105,21 @@ public class Ship extends MoveableEntity {
 		
 		super.update();
 	}
+
+	/**
+	 * @return the shot cooldown time for the ship, in milliseconds
+	 */
+	public int getShotCooldown() {
+		return shotCooldown;
+	}
+
+	/**
+	 * @param shotCooldown the shot cooldown time to set, in milliseconds
+	 */
+	public void setShotCooldown(int shotCooldown) {
+		this.shotCooldown = shotCooldown;
+	}
+	
+	
 	
 }
