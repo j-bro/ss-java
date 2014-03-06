@@ -6,10 +6,11 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -63,6 +64,14 @@ public class InputManager implements InputProcessor {
 				break;
 			case Keys.SPACE: 
 				ship.fire();
+				break;
+				
+			case Keys.ENTER: // for testing enemy firing
+				if (SSJava.DEBUG) {					
+					for (Enemy e: world.enemies) {
+						e.fire();
+					}
+				}
 				break;
 			default: break;
 		}

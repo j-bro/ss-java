@@ -4,6 +4,7 @@
  */
 package com.asdf.ssjava.world;
 
+import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
@@ -169,9 +170,10 @@ public class WorldRenderer {
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 		batch.end();  
 		
-		// Shape renderer for hitboxes
-		sr.setProjectionMatrix(cam.combined);
-		sr.begin(ShapeType.Line);
+		if (SSJava.DEBUG) { 			
+			// Shape renderer (hitboxes) for DEBUG only
+			sr.setProjectionMatrix(cam.combined);
+			sr.begin(ShapeType.Line);
 			sr.setColor(Color.RED);
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
 			
@@ -184,7 +186,8 @@ public class WorldRenderer {
 			for (Bullet b: world.bullets) {
 				sr.rect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
 			}
-		sr.end();
+			sr.end();
+		}
 	}
 
 	/**

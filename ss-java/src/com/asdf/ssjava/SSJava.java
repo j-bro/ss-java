@@ -19,12 +19,14 @@ public class SSJava extends Game {
 	/**
 	 * 
 	 */
-	public static final String VERSION = "0.0.2";
+	public static final String VERSION = "0.0.3";
 	
 	/**
 	 * 
 	 */
 	public static final String LOG = "SS-Java";
+	
+	public static final boolean DEBUG = true;
 	
 	/**
 	 * 
@@ -37,8 +39,12 @@ public class SSJava extends Game {
 	
 	@Override
 	public void create() {
-		setScreen(new GameScreen(this));
-//		setScreen(new SplashScreen(this)); //TEMP FOR DEVELOPMENT
+		if (SSJava.DEBUG) { // straight to game screen for DEBUG
+			setScreen(new GameScreen(this));			
+		}
+		else {
+			setScreen(new SplashScreen(this));			
+		}
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		
 		width = Gdx.graphics.getWidth();
