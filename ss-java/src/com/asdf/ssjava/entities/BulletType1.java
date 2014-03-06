@@ -1,5 +1,6 @@
 /**
- * 
+ * Concrete definition of a bullet to model a certain look and behaviour.
+ * Behaviour is defined here and look in the WorldRenderer class.
  */
 package com.asdf.ssjava.entities;
 

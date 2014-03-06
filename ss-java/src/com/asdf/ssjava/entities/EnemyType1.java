@@ -16,7 +16,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The World's instance
 	 */
-	World world;
+	private World world;
 	
 	/**
 	 * Default velocity for the Type 1 Enemy
@@ -26,12 +26,12 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The enemy's type
 	 */
-	final int type = 1;
+	public final int type = 1;
 	
 	/**
 	 * The type of bullets the ship will fire
 	 */
-	int bulletType = 1;
+	public final int bulletType = 1;
 	
 	/**
 	 * @param position the position of the enemy
