@@ -50,7 +50,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The time allowed between shots from this ship, in milliseconds
 	 */
-	private int shotCooldown = 500;
+	private int shotCooldown = 300;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.

@@ -21,7 +21,7 @@ public class BulletType0 extends Bullet {
 	/**
 	 * The bullet's default velocity
 	 */
-	private Vector2 DEFAULT_VELOCITY = new Vector2(10, 0);
+	private Vector2 DEFAULT_VELOCITY = new Vector2(50, 0);
 	
 	/**
 	 * @param position
