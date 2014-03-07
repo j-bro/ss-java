@@ -67,7 +67,7 @@ public class Ship extends MoveableEntity {
 	
 	/**
 	 * Fire a bullet from the ship
-	 * Bullet leaves in the ... direction
+	 * Bullet leaves in the horizontal (right-side) direction
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {

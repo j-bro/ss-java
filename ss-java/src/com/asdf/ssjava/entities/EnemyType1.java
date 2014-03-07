@@ -3,9 +3,11 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
 
 /**
  * @author Jeremy Brown
@@ -34,6 +36,16 @@ public class EnemyType1 extends Enemy {
 	public final int bulletType = 1;
 	
 	/**
+	 * The cooldown, in milliseconds, of the enemy's fire
+	 */
+	private int shotCooldown = 300;
+	
+	/**
+	 * The time since the last shot was taken
+	 */
+	private long lastShotTime = 0;
+	
+	/**
 	 * @param position the position of the enemy
 	 * @param width the width of the enemy
 	 * @param height the height of the enemy
@@ -60,12 +72,17 @@ public class EnemyType1 extends Enemy {
 	 */
 	@Override
 	public void fire() { // TODO not tested!
+		if (TimeUtils.millis() - lastShotTime >= shotCooldown){
 		Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0);
 		b.getPosition().x = position.x - b.width;
 		b.getPosition().y = position.y + height / 2 - b.height / 2;
 		b.getVelocity().x =(-1) * b.getDEFAULT_VELOCITY().x;
 		b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
 		world.getBullets().add(b);
+		
+		lastShotTime = TimeUtils.millis();
+		Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
+		}
 	}
 
 	public void advance(Ship ship) {
@@ -79,5 +96,18 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public int getType() {
 		return type;
+	}
+	/**
+	 * @return the shot cooldown time for the enemy, in milliseconds
+	 */
+	public int getShotCooldown() {
+		return shotCooldown;
+	}
+
+	/**
+	 * @param shotCooldown the shot cooldown time to set, in milliseconds
+	 */
+	public void setShotCooldown(int shotCooldown) {
+		this.shotCooldown = shotCooldown;
 	}
 }
