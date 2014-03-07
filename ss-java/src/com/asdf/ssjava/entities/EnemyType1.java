@@ -72,16 +72,16 @@ public class EnemyType1 extends Enemy {
 	 */
 	@Override
 	public void fire() { // TODO not tested!
-		if (TimeUtils.millis() - lastShotTime >= shotCooldown){
-		Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0);
-		b.getPosition().x = position.x - b.width;
-		b.getPosition().y = position.y + height / 2 - b.height / 2;
-		b.getVelocity().x =(-1) * b.getDEFAULT_VELOCITY().x;
-		b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
-		world.getBullets().add(b);
-		
-		lastShotTime = TimeUtils.millis();
-		Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
+		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
+			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0);
+			b.getPosition().x = position.x - b.width;
+			b.getPosition().y = position.y + height / 2 - b.height / 2;
+			b.getVelocity().x =(-1) * b.getDEFAULT_VELOCITY().x;
+			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
+			world.getBullets().add(b);
+			
+			lastShotTime = TimeUtils.millis();
+			Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
 		}
 	}
 

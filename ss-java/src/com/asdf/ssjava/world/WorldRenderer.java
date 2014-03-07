@@ -5,12 +5,13 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -52,6 +53,7 @@ public class WorldRenderer {
 	 * Textures for the various elements 
 	 */
 	Texture shipTexture;
+	Texture spaceRockTexture, asteroidTexture;
 	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
 	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
 	Texture speedOfLightTexture, healthUpTexture;
@@ -86,6 +88,9 @@ public class WorldRenderer {
 		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 //		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
+		spaceRockTexture = new Texture("data/textures/space_rock.png");
+		asteroidTexture = new Texture("data/textures/brick.png");
+		
 		enemyType1Texture = new Texture("data/textures/enemy1.png");
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
@@ -113,9 +118,18 @@ public class WorldRenderer {
 		batch.setProjectionMatrix(cam.combined);
 		
 		batch.begin();
+		
 			for (Obstacle o: world.obstacles) {
-				
+				Texture obstacleTexture = null;
+				if (o instanceof SpaceRock) {
+					obstacleTexture = spaceRockTexture;
+				}
+				else if (o instanceof Asteroid) {
+					obstacleTexture = asteroidTexture;
+				}
+				batch.draw(obstacleTexture, o.getPosition().x, o.getPosition().y, o.getWidth(), o.getHeight());
 			}
+			
 			for (Enemy e: world.enemies) {
 				Texture enemyTexture = null;
 				switch(e.getType()) {
@@ -134,6 +148,7 @@ public class WorldRenderer {
 				}
 				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
+			
 			for (Bullet b: world.bullets) {
 				Texture bulletTexture = null;
 				int srcX = 0, srcY = 0, srcWidth = 0, srcHeight = 0;
@@ -164,9 +179,11 @@ public class WorldRenderer {
 				}
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
-			for (Powerup p: world.powerups) {
+			
+			for (@SuppressWarnings("unused") Powerup p: world.powerups) {
 				
 			}
+			
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 		batch.end();  
 		
@@ -176,6 +193,11 @@ public class WorldRenderer {
 			sr.begin(ShapeType.Line);
 			sr.setColor(Color.RED);
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
+			
+			sr.setColor(Color.LIGHT_GRAY);
+			for (Obstacle o: world.obstacles) {
+				sr.rect(o.getHitbox().x, o.getHitbox().y, o.getHitbox().width, o.getHitbox().height);
+			}
 			
 			sr.setColor(Color.ORANGE);
 			for (Enemy e: world.enemies) {

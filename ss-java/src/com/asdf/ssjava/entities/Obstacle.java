@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 
-public class Obstacle extends MoveableEntity {
+public abstract class Obstacle extends MoveableEntity {
 
 	/**
 	 * @param position
@@ -32,5 +32,6 @@ public class Obstacle extends MoveableEntity {
 		super.update();
 	}
 
+	public abstract Vector2 getDEFAULT_VELOCITY();
 	
 }

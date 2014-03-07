@@ -33,9 +33,6 @@ public abstract class Bullet extends MoveableEntity {
 		super(position, width, height, rotation);
 	}
 
-	public abstract int getType();	
-	public abstract Vector2 getDEFAULT_VELOCITY();
-
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
 	 */
@@ -44,4 +41,8 @@ public abstract class Bullet extends MoveableEntity {
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		super.update();
 	}
+	
+	public abstract int getType();	
+	public abstract Vector2 getDEFAULT_VELOCITY();
+	
 }

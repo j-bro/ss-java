@@ -7,12 +7,14 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -68,6 +70,17 @@ public class World {
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
+		
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (j % 2 == 0) {					
+					obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), 1, 1, 0));
+				}
+				else {
+					obstacles.add(new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), 1, 1, 0));
+				}
+			}
+		}
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {

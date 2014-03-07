@@ -107,7 +107,7 @@ public class MainMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/textures/button.pack");    
+		atlas = new TextureAtlas("data/menu/button.pack");    
 		skin = new Skin();
 		skin.addRegions(atlas);
 		white = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
