@@ -74,10 +74,12 @@ public class World {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), 1, 1, 0));
+					obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), 2, 2, 0));
 				}
 				else {
-					obstacles.add(new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), 1, 1, 0));
+					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), 2, 2, 0);
+					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
+					obstacles.add(o);
 				}
 			}
 		}

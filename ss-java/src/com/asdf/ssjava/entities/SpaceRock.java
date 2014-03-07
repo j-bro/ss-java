@@ -8,7 +8,7 @@ public class SpaceRock extends Obstacle {
 	/**
 	 * The space rock's default velocity (yes, it is static)
 	 */
-	Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	private final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
 	 * @param position

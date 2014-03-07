@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,6 +14,11 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Obstacle extends MoveableEntity {
 
 	/**
+	 * The bullet's default velocity
+	 */
+	Vector2 DEFAULT_VELOCITY;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
@@ -20,7 +26,6 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	public Obstacle(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -28,7 +33,7 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		super.update();
 	}
 

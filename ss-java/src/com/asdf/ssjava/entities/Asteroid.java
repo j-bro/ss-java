@@ -14,7 +14,7 @@ public class Asteroid extends Obstacle {
 	/**
 	 * The asteroid's default velocity
 	 */
-	public Vector2 DEFAULT_VELOCITY = new Vector2(5, 0);
+	private final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
 	
 	/**
 	 * @param position
