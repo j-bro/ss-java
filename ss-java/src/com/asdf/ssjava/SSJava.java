@@ -34,7 +34,7 @@ public class SSJava extends Game {
 	/**
 	 * 
 	 */
-	public Preferences prefs;
+	public static Preferences prefs;
 	
 	public int width;
 	
@@ -57,7 +57,7 @@ public class SSJava extends Game {
 	@Override
 	public void dispose() { 
 		super.dispose();
-		AudioPlayer.dispose();
+//		AudioPlayer.dispose();
 	}
 
 	@Override

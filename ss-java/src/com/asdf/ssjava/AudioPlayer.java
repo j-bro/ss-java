@@ -22,8 +22,9 @@ public class AudioPlayer {
 	public static Sound bulletImpact = Gdx.audio.newSound(Gdx.files.internal("data/assets/sounds/")); // loc!
 	public static Sound shipImpact = Gdx.audio.newSound(Gdx.files.internal("data/assets/sounds/")); // loc!
 	
-	
-	public static void playGameMusic() {
+	public static void playGameMusic(boolean looping) {
+		gameMusic.setVolume(SSJava.prefs.getInteger("soundVolume", 100));
+		gameMusic.setLooping(looping);
 		gameMusic.play();
 	}
 	
@@ -32,7 +33,15 @@ public class AudioPlayer {
 	}
 	
 	public static void shoot() {
-		
+		shot.play(SSJava.prefs.getInteger("soundVolume", 100));
+	}
+	
+	public static void bulletImpact() {
+		bulletImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+	}
+	
+	public static void shipImpact() {
+		shipImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
 	}
 	
 	public static void dispose() {
