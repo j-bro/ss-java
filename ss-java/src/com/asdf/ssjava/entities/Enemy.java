@@ -18,6 +18,11 @@ public abstract class Enemy extends MoveableEntity {
 	int type;
 	
 	/**
+	 * The enemy's default velocity
+	 */
+	Vector2 DEFAULT_VELOCITY;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height

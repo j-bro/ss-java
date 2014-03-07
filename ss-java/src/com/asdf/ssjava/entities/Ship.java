@@ -71,7 +71,7 @@ public class Ship extends MoveableEntity {
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0);
+			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, this);
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
 			b.getVelocity().x = b.getDEFAULT_VELOCITY().x;
 			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
