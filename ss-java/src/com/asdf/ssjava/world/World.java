@@ -5,6 +5,7 @@
  */
 package com.asdf.ssjava.world;
 
+import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
@@ -54,7 +55,8 @@ public class World {
 	Array<Powerup> powerups;
 	
 	/**
-	 * @param game
+	 * Creates a world for an instance of SSJava
+	 * @param game the instance of the game
 	 */
 	public World(SSJava game) {
 		this.game = game;
@@ -67,8 +69,8 @@ public class World {
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
 		
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 7; j++) {
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 6; j++) {
 				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
 			}
 		}
@@ -76,7 +78,6 @@ public class World {
 		// Set game input processor
 		Gdx.input.setInputProcessor(new InputManager(game, this));
 	}
-
 	
 	/**
 	 * Update method run in every iteration of the main loop to update entity position, behaviour and collision
@@ -101,12 +102,12 @@ public class World {
 		// Collision detection
 		for (Enemy e: enemies) { 
 			if (e.getHitbox().overlaps(ship.getHitbox())) {
-				Gdx.app.log(SSJava.LOG, "Ship collided with enemy");
+				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
 			}
 			
 			for (Bullet b: bullets) {
 				if (e.getHitbox().overlaps(b.getHitbox())) {
-					Gdx.app.log(SSJava.LOG, "Ship fired on an enemy");
+					Gdx.app.log(SSJava.LOG, "Ship's bullet hit enemy " + Integer.toHexString(e.hashCode()));
 				}
 			}
 		}
@@ -125,6 +126,22 @@ public class World {
 	 */
 	public Ship getShip() {
 		return ship;
+	}
+	
+	/**
+	 * 
+	 * @return the obstacles array
+	 */
+	public Array<Obstacle> getObstacles() {
+		return obstacles;
+	}
+	
+	/**
+	 * 
+	 * @return the enemies array
+	 */
+	public Array<Enemy> getEnemies() {
+		return enemies;
 	}
 	
 	/**

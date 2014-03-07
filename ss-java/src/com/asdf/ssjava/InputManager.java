@@ -3,11 +3,11 @@
  * Currently maps ship's up and down movements to the arrow keys, as well as W and S and mouse clicks/screen touches in the top and bottom of the left half of the screen.
  * Firing a bullet is done with the spacebar or clicking/touching anywhere in the right half of the screen. 
  */
-package com.asdf.ssjava.world;
+package com.asdf.ssjava;
 
-import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -68,7 +68,7 @@ public class InputManager implements InputProcessor {
 				
 			case Keys.ENTER: // for testing enemy firing
 				if (SSJava.DEBUG) {					
-					for (Enemy e: world.enemies) {
+					for (Enemy e: world.getEnemies()) {
 						e.fire();
 					}
 				}
@@ -83,7 +83,7 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO fix this badly implemented
+		// TODO fix this badly implemented?
 		switch (keycode) {
 		case Keys.UP: 
 			ship.getAcceleration().y = 0;
@@ -110,7 +110,6 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -160,7 +159,6 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -169,7 +167,6 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -178,7 +175,6 @@ public class InputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
