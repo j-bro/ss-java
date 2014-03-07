@@ -113,12 +113,12 @@ public class World {
 		}
 		
 		// TODO bullets cleanup if they go offscreen
-		/*
+		
 		for (Bullet b: bullets) {
-			if (b.getPosition().x > screen width) {
-			bullets.remove(b, true);
+			if (b.getPosition().x > ship.getPosition().x + 50 || b.getPosition().x < ship.getPosition().x - 30) {
+				bullets.removeValue(b, true);
+			}
 		}
-		*/
 	}
 	
 	/**
