@@ -24,13 +24,19 @@ public abstract class Bullet extends MoveableEntity {
 	Vector2 DEFAULT_VELOCITY;
 	
 	/**
+	 * The entity that shot this bullet
+	 */
+	AbstractEntity shooter;
+	
+	/**
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation) {
+	public Bullet(Vector2 position, float width, float height, float rotation, AbstractEntity shooter) {
 		super(position, width, height, rotation);
+		this.shooter = shooter;
 	}
 
 	/* (non-Javadoc)

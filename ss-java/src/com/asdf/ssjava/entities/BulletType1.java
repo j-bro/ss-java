@@ -21,7 +21,7 @@ public class BulletType1 extends Bullet {
 	/**
 	 * The bullet's default velocity
 	 */
-	private Vector2 DEFAULT_VELOCITY = new Vector2(20, 0);
+	private final Vector2 DEFAULT_VELOCITY = new Vector2(20, 0);
 	
 	/**
 	 * @param position
@@ -30,8 +30,8 @@ public class BulletType1 extends Bullet {
 	 * @param rotation
 	 */
 	public BulletType1(Vector2 position, float width, float height,
-			float rotation) {
-		super(position, width, height, rotation);
+			float rotation, AbstractEntity shooter) {
+		super(position, width, height, rotation, shooter);
 	}
 
 	/* (non-Javadoc)

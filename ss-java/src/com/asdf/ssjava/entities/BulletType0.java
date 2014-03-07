@@ -21,7 +21,7 @@ public class BulletType0 extends Bullet {
 	/**
 	 * The bullet's default velocity
 	 */
-	private Vector2 DEFAULT_VELOCITY = new Vector2(50, 0);
+	private final Vector2 DEFAULT_VELOCITY = new Vector2(50, 0);
 	
 	/**
 	 * @param position
@@ -31,8 +31,8 @@ public class BulletType0 extends Bullet {
 	 * @param type
 	 */
 	public BulletType0(Vector2 position, float width, float height,
-			float rotation) {
-		super(position, width, height, rotation);
+			float rotation, AbstractEntity shooter) {
+		super(position, width, height, rotation, shooter);
 		hitbox.x = position.x + 0.85f;
 		hitbox.y = position.y + 0.8f;
 		hitbox.width = 1.35f;
