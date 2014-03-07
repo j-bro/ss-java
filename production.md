@@ -12,10 +12,15 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 ####To do list
 
-- element 1
-- element 2
-- element 3
+- AudioPlayer sounds
+- Obstacles types
+- Powerups
+- Score Keeper
+- Correct hitboxes
+- Ship textures
+- Levels
 
 
-####Potential font
+
+####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
