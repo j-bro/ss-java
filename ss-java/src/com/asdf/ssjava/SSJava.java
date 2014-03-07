@@ -17,15 +17,18 @@ import com.badlogic.gdx.Preferences;
 public class SSJava extends Game {
 
 	/**
-	 * 
+	 * Version number
 	 */
 	public static final String VERSION = "0.0.3";
 	
 	/**
-	 * 
+	 * Log tag
 	 */
 	public static final String LOG = "SS-Java";
 	
+	/**
+	 * Debugging switch
+	 */
 	public static final boolean DEBUG = true;
 	
 	/**
@@ -54,6 +57,7 @@ public class SSJava extends Game {
 	@Override
 	public void dispose() { 
 		super.dispose();
+		AudioPlayer.dispose();
 	}
 
 	@Override
