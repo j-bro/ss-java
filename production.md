@@ -19,8 +19,9 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Correct hitboxes
 - Ship textures
 - Levels
-- Collision
-
+- Collision (physics)
+- Health points
+- And more..!
 
 
 ####Potential fonts
