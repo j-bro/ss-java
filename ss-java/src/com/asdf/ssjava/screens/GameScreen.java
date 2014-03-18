@@ -39,6 +39,7 @@ public class GameScreen implements Screen {
 		this.game = game;
 		world = new World(game);
 		renderer = new WorldRenderer(world);
+		world.setRenderer(renderer);
 	}
 
 	@Override

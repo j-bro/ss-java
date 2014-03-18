@@ -38,6 +38,11 @@ public class World {
 	Ship ship;
 	
 	/**
+	 * The WorldRenderer instance
+	 */
+	WorldRenderer render;
+	
+	/**
 	 * ArrayList containing all the obstacles in the current level
 	 */
 	Array<Obstacle> obstacles;
@@ -163,6 +168,17 @@ public class World {
 				// enemy check if dead
 			}
 		}
+		//Edge of screen collision
+		//System.out.println(render.cam.viewportHeight + "   " + ship.getPosition().y);
+		if(ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight || ship.getPosition().y <= 0){
+			ship.getVelocity().y = 0;
+			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= 0){
+				ship.getPosition().y = 0;
+			}
+			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight){
+				ship.getPosition().y = render.cam.viewportHeight - ship.getHeight();
+			}
+		}
 		
 		// Obstacle collision with ship
 		for (Obstacle o: obstacles) {
@@ -172,7 +188,6 @@ public class World {
 				// obstacle damage?
 			}
 		}
-		
 		
 		// ship check if dead
 	}
@@ -205,6 +220,12 @@ public class World {
 	 */
 	public Array<Bullet> getBullets() {
 		return bullets;
+	}
+	/**
+	 * Passes the WorldRenderer into this class
+	 */
+	public void setRenderer(WorldRenderer render){
+		this.render = render;
 	}
 	
 	/**
