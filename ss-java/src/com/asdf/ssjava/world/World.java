@@ -169,7 +169,6 @@ public class World {
 			}
 		}
 		//Edge of screen collision
-		//System.out.println(render.cam.viewportHeight + "   " + ship.getPosition().y);
 		if(ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight || ship.getPosition().y <= 0){
 			ship.getVelocity().y = 0;
 			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= 0){
@@ -177,6 +176,15 @@ public class World {
 			}
 			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight){
 				ship.getPosition().y = render.cam.viewportHeight - ship.getHeight();
+			}
+		}
+		if(ship.getPosition().x + ship.getWidth() >= render.cam.viewportWidth || ship.getPosition().x <= 0){
+			ship.getVelocity().x = 0;
+			if (ship.getAcceleration().x < 0 && ship.getPosition().x <= 0){
+				ship.getPosition().x = 0;
+			}
+			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= render.cam.viewportWidth){
+				ship.getPosition().x = render.cam.viewportWidth - ship.getWidth();
 			}
 		}
 		
