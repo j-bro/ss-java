@@ -1,7 +1,3 @@
-# *UNNAMED Java Sidescroller Game
-
-KazIsInsane & OnlyIKnowTheAnswer
-
 ####Useful links
 
 BitBucket Repo: https://bitbucket.org/j_brown/ss-java
