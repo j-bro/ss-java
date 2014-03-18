@@ -29,6 +29,11 @@ public abstract class Bullet extends MoveableEntity {
 	AbstractEntity shooter;
 	
 	/**
+	 * The damage incurred when the bullet hits the ship or an enemy
+	 */
+	float damage;
+	
+	/**
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
 	 * @param height the height of the bullet
@@ -49,6 +54,7 @@ public abstract class Bullet extends MoveableEntity {
 	}
 	
 	public abstract int getType();	
+	public abstract AbstractEntity getShooter();
 	public abstract Vector2 getDEFAULT_VELOCITY();
 	
 }

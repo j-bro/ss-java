@@ -49,4 +49,14 @@ public class BulletType1 extends Bullet {
 	public Vector2 getDEFAULT_VELOCITY() {
 		return DEFAULT_VELOCITY;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Bullet#getShooter()
+	 */
+	@Override
+	public AbstractEntity getShooter() {
+		return shooter;
+	}
+	
+	
 }
