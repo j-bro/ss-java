@@ -5,6 +5,7 @@
  */
 package com.asdf.ssjava.world;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Asteroid;
@@ -92,6 +93,7 @@ public class World {
 		
 		// Set game input processor
 		Gdx.input.setInputProcessor(new InputManager(game, this));
+		AudioPlayer.playGameMusic(true);
 	}
 	
 	/**
@@ -114,26 +116,56 @@ public class World {
 			p.update();
 		}
 		
-		// Collision detection
-		for (Enemy e: enemies) { 
-			if (e.getHitbox().overlaps(ship.getHitbox())) {
-				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
-			}
-			
-			for (Bullet b: bullets) {
-				if (e.getHitbox().overlaps(b.getHitbox())) {
-					Gdx.app.log(SSJava.LOG, "Ship's bullet hit enemy " + Integer.toHexString(e.hashCode()));
-				}
-			}
-		}
-		
-		// TODO bullets cleanup if they go offscreen
+		// TODO Collision detection		
 		
 		for (Bullet b: bullets) {
+			// TODO Bullets cleanup if they go offscreen
 			if (b.getPosition().x > ship.getPosition().x + 50 || b.getPosition().x < ship.getPosition().x - 30) {
 				bullets.removeValue(b, true);
 			}
+			// Bullet collision with enemies
+			for (Enemy e: enemies) { 
+				if (e.getHitbox().overlaps(b.getHitbox())) {
+					AudioPlayer.bulletImpact();
+					bullets.removeValue(b, true);
+					// enemy take damage
+					
+					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
+				}
+			}
+			
+			// Bullet collision with obstacles
+			for (Obstacle o: obstacles) { 
+				if (o.getHitbox().overlaps(b.getHitbox())) {
+					AudioPlayer.bulletImpact();
+					bullets.removeValue(b, true);
+					// obstacle damage?
+					
+					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
+				}
+			}
+			
+			// Bullet collision with ship
+			if (ship.getHitbox().overlaps(b.getHitbox())) {
+				AudioPlayer.bulletImpact();
+				bullets.removeValue(b, true);
+				// ship take damage
+				
+				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
+			}
+			
 		}
+		// Enemy collision with ship
+		for (Enemy e: enemies) {
+			if (e.getHitbox().overlaps(ship.getHitbox())) {
+				AudioPlayer.shipImpact();
+				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
+				// enemy check if dead
+			}
+		}
+		
+		
+		// ship check if dead
 	}
 	
 	/**

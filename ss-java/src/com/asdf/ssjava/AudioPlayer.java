@@ -16,11 +16,11 @@ public class AudioPlayer {
 
 	private AudioPlayer() {	}
 
-	public static Music gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/assets/music/")); // loc!
+	public static Music gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/music/ambience.mp3")); // loc!
 	
-	public static Sound shot = Gdx.audio.newSound(Gdx.files.internal("data/assets/sounds/")); // loc!
-	public static Sound bulletImpact = Gdx.audio.newSound(Gdx.files.internal("data/assets/sounds/")); // loc!
-	public static Sound shipImpact = Gdx.audio.newSound(Gdx.files.internal("data/assets/sounds/")); // loc!
+	public static Sound shot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pewpew.mp3")); // loc!
+	public static Sound bulletImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3")); // loc!
+	public static Sound shipImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3")); // loc!
 	
 	public static void playGameMusic(boolean looping) {
 		gameMusic.setVolume(SSJava.prefs.getInteger("soundVolume", 100));

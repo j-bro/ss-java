@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.badlogic.gdx.Gdx;
@@ -78,6 +79,7 @@ public class Ship extends MoveableEntity {
 			world.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
+			AudioPlayer.shoot();
 			Gdx.app.log(SSJava.LOG, "Ship fired a bullet!");			
 		}
 	}
