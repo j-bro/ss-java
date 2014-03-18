@@ -164,6 +164,15 @@ public class World {
 			}
 		}
 		
+		// Obstacle collision with ship
+		for (Obstacle o: obstacles) {
+			if (o.getHitbox().overlaps(ship.getHitbox())) {
+				AudioPlayer.shipImpact();
+				Gdx.app.log(SSJava.LOG, "Ship collided with obstacle " + Integer.toHexString(o.hashCode()));
+				// obstacle damage?
+			}
+		}
+		
 		
 		// ship check if dead
 	}
