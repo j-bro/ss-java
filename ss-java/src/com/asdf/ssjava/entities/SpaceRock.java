@@ -18,6 +18,7 @@ public class SpaceRock extends Obstacle {
 	 */
 	public SpaceRock(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
+		setHealth(1);
 	}
 
 	/* (non-Javadoc)

@@ -64,6 +64,7 @@ public class Ship extends MoveableEntity {
 	public Ship(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
 		this.world = world;
+		setHealth(6);
 	}
 	
 	/**
@@ -80,8 +81,15 @@ public class Ship extends MoveableEntity {
 			
 			lastShotTime = TimeUtils.millis();
 			AudioPlayer.shoot();
-			Gdx.app.log(SSJava.LOG, "Ship fired a bullet!");			
+			Gdx.app.log(SSJava.LOG, "Ship fired bullet " + Integer.toHexString(b.hashCode()));			
 		}
+	}
+	
+	/**
+	 * Is called when the ship's health reaches zero (or lower)
+	 */
+	public void die() {
+		Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
 	}
 
 	@Override

@@ -36,6 +36,11 @@ public abstract class AbstractEntity {
 	protected Rectangle hitbox;
 	
 	/**
+	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
+	 */
+	protected int health;
+	
+	/**
 	 * Creates an entity
 	 */
 	protected AbstractEntity(Vector2 position, float width, float height) {
@@ -109,5 +114,19 @@ public abstract class AbstractEntity {
 	public void setHitbox(Rectangle hitbox) {
 		this.hitbox = hitbox;
 	}
+	
+	public int getHealth() {
+		return health;
+	}
+	
+	public synchronized void setHealth(int health) {
+		this.health = health;
+	}
+	
+	public synchronized void healthChange(int increment) {
+		health += increment;
+	}
+	
+	public abstract void die();
 }
     

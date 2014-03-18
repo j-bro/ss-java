@@ -26,8 +26,16 @@ public class Powerup extends MoveableEntity {
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
 	 */
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void update() { // TODO
 		super.update();
 	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		// TODO
+	}
+	
 }

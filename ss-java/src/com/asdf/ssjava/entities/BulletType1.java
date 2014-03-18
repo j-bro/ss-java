@@ -32,6 +32,7 @@ public class BulletType1 extends Bullet {
 	public BulletType1(Vector2 position, float width, float height,
 			float rotation, AbstractEntity shooter) {
 		super(position, width, height, rotation, shooter);
+		damage = 1;
 	}
 
 	/* (non-Javadoc)
@@ -58,5 +59,12 @@ public class BulletType1 extends Bullet {
 		return shooter;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Bullet#getDamage()
+	 */
+	@Override
+	public int getDamage() {
+		return damage;
+	}
 	
 }

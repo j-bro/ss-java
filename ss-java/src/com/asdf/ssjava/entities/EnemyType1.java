@@ -1,5 +1,5 @@
 /**
- * 
+ * Implementation of an enemy type.
  */
 package com.asdf.ssjava.entities;
 
@@ -55,6 +55,7 @@ public class EnemyType1 extends Enemy {
 	public EnemyType1(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
 		this.world = world;
+		setHealth(3);
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +72,7 @@ public class EnemyType1 extends Enemy {
 	 * @see com.asdf.ssjava.entities.Enemy#fire()
 	 */
 	@Override
-	public void fire() { // TODO not tested!
+	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
 			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, this);
 			b.getPosition().x = position.x - b.width;
@@ -110,4 +111,13 @@ public class EnemyType1 extends Enemy {
 	public void setShotCooldown(int shotCooldown) {
 		this.shotCooldown = shotCooldown;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		
+	}
+	
 }

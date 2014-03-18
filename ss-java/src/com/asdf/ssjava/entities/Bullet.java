@@ -31,7 +31,7 @@ public abstract class Bullet extends MoveableEntity {
 	/**
 	 * The damage incurred when the bullet hits the ship or an enemy
 	 */
-	float damage;
+	int damage;
 	
 	/**
 	 * @param position the position of the bullet
@@ -53,7 +53,16 @@ public abstract class Bullet extends MoveableEntity {
 		super.update();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		// do nothing?
+	}
+
 	public abstract int getType();	
+	public abstract int getDamage();
 	public abstract AbstractEntity getShooter();
 	public abstract Vector2 getDEFAULT_VELOCITY();
 	

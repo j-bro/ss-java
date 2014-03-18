@@ -24,6 +24,7 @@ public class Asteroid extends Obstacle {
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
+		setHealth(2);
 	}
 
 	/* (non-Javadoc)

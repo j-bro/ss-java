@@ -36,6 +36,14 @@ public abstract class Obstacle extends MoveableEntity {
 		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
 		super.update();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		
+	}
 
 	public abstract Vector2 getDEFAULT_VELOCITY();
 	
