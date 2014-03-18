@@ -8,7 +8,6 @@ package com.asdf.ssjava.world;
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
@@ -129,14 +128,9 @@ public class World {
 				if (e.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
-					
 					// enemy take damage
-					e.healthChange((-1) * b.getDamage());
-					if (checkIfDead(e)) {
-						enemies.removeValue(e, true);
-					}
 					
-					Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
+					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
 				}
 			}
 			
@@ -145,13 +139,9 @@ public class World {
 				if (o.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
+					// obstacle damage?
 					
-					// obstacle damage
-					o.healthChange((-1) * b.getDamage());
-					if (checkIfDead(o)) {
-						obstacles.removeValue(o, true);
-					}
-					Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
+					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
 				}
 			}
 			
@@ -160,30 +150,17 @@ public class World {
 				AudioPlayer.bulletImpact();
 				bullets.removeValue(b, true);
 				// ship take damage
-				ship.healthChange((-1) * b.getDamage());
 				
-				// SHIP DIES!
-				if (checkIfDead(ship)) {
-					
-				}
-				Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
+				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
 			}
+			
 		}
-		
 		// Enemy collision with ship
 		for (Enemy e: enemies) {
 			if (e.getHitbox().overlaps(ship.getHitbox())) {
 				AudioPlayer.shipImpact();
 				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
-				
-				e.healthChange(-1);
-				ship.healthChange(-1);
 				// enemy check if dead
-				if (checkIfDead(e)) {
-					enemies.removeValue(e, true);
-				}
-				// SHIP DIES!
-				checkIfDead(ship);
 			}
 		}
 		
@@ -192,21 +169,13 @@ public class World {
 			if (o.getHitbox().overlaps(ship.getHitbox())) {
 				AudioPlayer.shipImpact();
 				Gdx.app.log(SSJava.LOG, "Ship collided with obstacle " + Integer.toHexString(o.hashCode()));
+				
 				// obstacle damage?
 			}
 		}
 		
 		
 		// ship check if dead
-	}
-	
-	public boolean checkIfDead(AbstractEntity e) {
-		if (e.getHealth() <=0) {
-			e.die();
-			return true;
-		}
-		return false;
-		
 	}
 	
 	/**
