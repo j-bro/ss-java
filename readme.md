@@ -1,4 +1,6 @@
-# *UNNAMED Java Sidescroller Game
+# SS-Java
+
+**A Java sidescroller game**
 
 UML: https://cacoo.com/diagrams/17jqY7TMYrox6kTB/edit
 

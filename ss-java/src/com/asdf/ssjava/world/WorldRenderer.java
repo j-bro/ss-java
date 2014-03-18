@@ -89,6 +89,8 @@ public class WorldRenderer {
 //		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		spaceRockTexture = new Texture("data/textures/space_rock.png");
+		spaceRockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		asteroidTexture = new Texture("data/textures/brick.png");
 		
 		enemyType1Texture = new Texture("data/textures/enemy1.png");
