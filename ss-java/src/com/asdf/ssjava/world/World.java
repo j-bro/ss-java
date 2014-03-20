@@ -8,6 +8,7 @@ package com.asdf.ssjava.world;
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
@@ -133,7 +134,13 @@ public class World {
 				if (e.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
-					// enemy take damage
+					
+					// enemy damage
+					e.healthChange((-1) * b.getDamage());
+					// life check
+					if (checkIfDead(e)) {
+						enemies.removeValue(e, true);
+					}
 					
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
 				}
@@ -144,8 +151,14 @@ public class World {
 				if (o.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
-					// obstacle damage?
 					
+					// obstacle damage
+					o.healthChange((-1) * b.getDamage());
+					// life check
+					if (checkIfDead(o)) {
+						obstacles.removeValue(o, true);
+					}
+
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
 				}
 			}
@@ -154,8 +167,14 @@ public class World {
 			if (ship.getHitbox().overlaps(b.getHitbox())) {
 				AudioPlayer.bulletImpact();
 				bullets.removeValue(b, true);
-				// ship take damage
 				
+				// ship damage
+				ship.healthChange((-1) * b.getDamage());
+				// life check
+				if (checkIfDead(ship)) {
+					
+				}
+
 				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
 			}
 			
@@ -165,7 +184,16 @@ public class World {
 			if (e.getHitbox().overlaps(ship.getHitbox())) {
 				AudioPlayer.shipImpact();
 				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
-				// enemy check if dead
+				
+				// ship and enemy damage
+				e.healthChange(-1);
+				ship.healthChange(-1);
+				// life check
+				if (checkIfDead(e)) {
+					enemies.removeValue(e, true);
+				}
+				checkIfDead(ship);
+
 			}
 		}
 		
@@ -173,6 +201,17 @@ public class World {
 		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
 		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
 		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
+		
+		
+		// Obstacle collision with ship
+		for (Obstacle o: obstacles) {
+			if (o.getHitbox().overlaps(ship.getHitbox())) {
+				AudioPlayer.shipImpact();
+				Gdx.app.log(SSJava.LOG, "Ship collided with obstacle " + Integer.toHexString(o.hashCode()));
+				
+				// obstacle damage?
+			}
+		}
 		
 		//Edge of screen collision
 		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
@@ -194,18 +233,20 @@ public class World {
 				ship.getPosition().x = screenRight - ship.getWidth();
 			}
 		}
-		
-		// Obstacle collision with ship
-		for (Obstacle o: obstacles) {
-			if (o.getHitbox().overlaps(ship.getHitbox())) {
-				AudioPlayer.shipImpact();
-				Gdx.app.log(SSJava.LOG, "Ship collided with obstacle " + Integer.toHexString(o.hashCode()));
-				
-				// obstacle damage?
-			}
+	}
+	
+	/**
+	 * Verifies if the passed entity is dead (life <= 0) and should be removed from the screen
+	 * @param e the entity to verify
+	 * @return true if the verified entity is dead
+	 */
+	public boolean checkIfDead(AbstractEntity e) {
+		if (e.getHealth() <=0) {
+			e.die();
+			return true;
 		}
+		return false;
 		
-		// ship check if dead
 	}
 	
 	/**
