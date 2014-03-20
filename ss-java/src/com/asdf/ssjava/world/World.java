@@ -168,23 +168,30 @@ public class World {
 				// enemy check if dead
 			}
 		}
+		
+		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
+		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
+		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
+		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
+		
 		//Edge of screen collision
-		if(ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight || ship.getPosition().y <= 0){
+		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
 			ship.getVelocity().y = 0;
-			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= 0){
-				ship.getPosition().y = 0;
+			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
+				ship.getPosition().y = screenBottom;
 			}
-			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= render.cam.viewportHeight){
-				ship.getPosition().y = render.cam.viewportHeight - ship.getHeight();
+			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
+				ship.getPosition().y = screenTop - ship.getHeight();
 			}
 		}
-		if(ship.getPosition().x + ship.getWidth() >= render.cam.viewportWidth || ship.getPosition().x <= 0){
+		
+		if (ship.getPosition().x + ship.getWidth() >= screenRight || ship.getPosition().x <= screenLeft) {
 			ship.getVelocity().x = 0;
-			if (ship.getAcceleration().x < 0 && ship.getPosition().x <= 0){
-				ship.getPosition().x = 0;
+			if (ship.getAcceleration().x < 0 && ship.getPosition().x <= screenLeft) {
+				ship.getPosition().x = screenLeft;
 			}
-			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= render.cam.viewportWidth){
-				ship.getPosition().x = render.cam.viewportWidth - ship.getWidth();
+			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= screenRight) {
+				ship.getPosition().x = screenRight - ship.getWidth();
 			}
 		}
 		
