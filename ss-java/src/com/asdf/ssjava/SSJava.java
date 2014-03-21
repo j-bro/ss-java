@@ -63,7 +63,7 @@ public class SSJava extends Game {
 	@Override
 	public void dispose() { 
 		super.dispose();
-//		AudioPlayer.dispose();
+		AudioPlayer.dispose();
 	}
 
 	@Override

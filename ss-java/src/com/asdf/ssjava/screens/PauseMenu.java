@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
@@ -65,22 +64,6 @@ public class PauseMenu implements Screen {
 		 
 		Gdx.input.setInputProcessor(stage);
 		
-		// options button
-		optionsButton = new MenuButton("Options", 280, 65);
-		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
-		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
-		
-		optionsButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button down");
-				return true;
-			}
-			
-			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button up");
-			}
-		});
-		
 		// return to game button
 		returnButton = new MenuButton("Back to game", 280, 65);
 		returnButton.setX(Gdx.graphics.getWidth() / 2 - returnButton.getWidth() / 2);
@@ -95,6 +78,22 @@ public class PauseMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
 				game.setScreen(game.gameScreen);
+			}
+		});
+		
+		// options button
+		optionsButton = new MenuButton("Options", 280, 65);
+		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
+		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
+		
+		optionsButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Options button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Options button up");
 			}
 		});
 		

@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
@@ -43,7 +42,6 @@ public class MainMenu implements Screen {
 	MenuButton highScoresButton;
 	MenuButton creditsButton;
 	MenuButton exitButton;
-	
 	
 	/**
 	 * 
@@ -74,17 +72,10 @@ public class MainMenu implements Screen {
 		 
 		Gdx.input.setInputProcessor(stage);
 				
-		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("buttonnormal");
-		style.down = skin.getDrawable("buttonpressed");
-		style.font = blackFont;  
-		
-		playButton = new TextButton("Play", style);
-		playButton.setWidth(280);
-		playButton.setHeight(65);
-		
+		// play button
+		playButton = new MenuButton("Play", 280, 65);		
 		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
-		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2);
+		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 150);
 		
 		playButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -100,15 +91,89 @@ public class MainMenu implements Screen {
 			}
 		});
 		
+		// options button
+		optionsButton = new MenuButton("Options", 280, 65);
+		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
+		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 50);
+		
+		optionsButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button up");
+//				game.setScreen(new OptionsMenu());
+			}
+		});
+		
+		// high scores button
+		highScoresButton = new MenuButton("High Scores", 280, 65);
+		highScoresButton.setX(Gdx.graphics.getWidth() / 2 - highScoresButton.getWidth() / 2);
+		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 50);
+		
+		highScoresButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button up");
+//				game.setScreen(new HighScoresMenu());
+			}
+		});
+		
+		// credits button
+		creditsButton = new MenuButton("Credits", 280, 65);
+		creditsButton.setX(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2);
+		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 150);
+		
+		creditsButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button up");
+//				game.setScreen(new CreditsMenu());
+			}
+		});
+		
+		// exit button
+		exitButton = new MenuButton("Exit", 280, 65);
+		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
+		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 250);
+		
+		exitButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Return button up");
+//				TODO game.dispose();
+			}
+		});
+		
+		
+		// Title text
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("SS-Java", ls);
 		titleLabel.setX(0);
-		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 150);
+		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 200);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
 		stage.addActor(titleLabel);		
 		stage.addActor(playButton);
+		stage.addActor(optionsButton);
+		stage.addActor(highScoresButton);
+		stage.addActor(creditsButton);
+		stage.addActor(exitButton);
 	}
  
 	@Override
@@ -143,8 +208,6 @@ public class MainMenu implements Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		skin.dispose();
-		atlas.dispose();
 		whiteFont.dispose();
 		blackFont.dispose();
 	}
