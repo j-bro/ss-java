@@ -28,6 +28,10 @@ public class AudioPlayer {
 		gameMusic.play();
 	}
 	
+	public static void pauseGameMusic() {
+		gameMusic.pause();
+	}
+	
 	public static void stopGameMusic() {
 		gameMusic.stop();
 	}

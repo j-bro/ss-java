@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.screens;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.World;
 import com.asdf.ssjava.world.WorldRenderer;
@@ -60,12 +61,13 @@ public class GameScreen implements Screen {
 			Gdx.input.setInputProcessor(world.getManager());
 		}
 		Gdx.app.log(SSJava.LOG, "Show game");
+		AudioPlayer.playGameMusic(true);
 
 	}
 
 	@Override
 	public void hide() {
-		
+		AudioPlayer.pauseGameMusic();
 	}
 
 	@Override

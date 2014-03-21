@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.screens;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -109,8 +110,9 @@ public class PauseMenu implements Screen {
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button up");
+				AudioPlayer.stopGameMusic();
 				game.setScreen(new MainMenu(game));
+				Gdx.app.log(SSJava.LOG, "Options button up");
 			}
 		});
 		

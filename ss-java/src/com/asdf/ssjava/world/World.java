@@ -114,7 +114,6 @@ public class World {
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);
-		AudioPlayer.playGameMusic(true);
 	}
 	
 	/**
