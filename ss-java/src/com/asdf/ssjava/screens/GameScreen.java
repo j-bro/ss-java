@@ -50,20 +50,22 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void show() {
+		if (world != null) {
+			Gdx.input.setInputProcessor(world.getManager());
+		}
 		Gdx.app.log(SSJava.LOG, "Show game");
 
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -83,5 +85,4 @@ public class GameScreen implements Screen {
 		world.dispose();
 		renderer.dispose();
 	}
-
 }

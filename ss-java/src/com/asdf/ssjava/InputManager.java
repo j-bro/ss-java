@@ -18,11 +18,6 @@ import com.badlogic.gdx.InputProcessor;
  * 
  */
 public class InputManager implements InputProcessor {
-
-	/**
-	 * The game's instance
-	 */
-	SSJava game;
 	
 	/**
 	 * The world's instance
@@ -65,7 +60,9 @@ public class InputManager implements InputProcessor {
 			case Keys.SPACE: 
 				ship.fire();
 				break;
-				
+			case Keys.ESCAPE:
+				world.pauseGame(); 
+				break;
 			case Keys.ENTER: // for testing enemy firing
 				if (SSJava.DEBUG) {					
 					for (Enemy e: world.getEnemies()) {

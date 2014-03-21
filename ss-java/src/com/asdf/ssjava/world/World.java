@@ -17,6 +17,7 @@ import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
+import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -42,6 +43,11 @@ public class World {
 	 * The WorldRenderer instance
 	 */
 	WorldRenderer render;
+	
+	/**
+	 * The InputManager instance
+	 */
+	InputManager manager;
 	
 	/**
 	 * ArrayList containing all the obstacles in the current level
@@ -98,7 +104,8 @@ public class World {
 		}
 		
 		// Set game input processor
-		Gdx.input.setInputProcessor(new InputManager(game, this));
+		manager = new InputManager(game, this);
+		Gdx.input.setInputProcessor(manager);
 		AudioPlayer.playGameMusic(true);
 	}
 	
@@ -250,6 +257,13 @@ public class World {
 	}
 	
 	/**
+	 * Calls the pause screen and stops rendering the game
+	 */
+	public void pauseGame() {
+		game.setScreen(new PauseMenu(game));
+	}
+	
+	/**
 	 * @return the ship
 	 */
 	public Ship getShip() {
@@ -283,6 +297,10 @@ public class World {
 	 */
 	public void setRenderer(WorldRenderer render){
 		this.render = render;
+	}
+	
+	public InputManager getManager() {
+		return manager;
 	}
 	
 	/**

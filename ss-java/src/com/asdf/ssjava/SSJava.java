@@ -3,16 +3,16 @@
  */
 package com.asdf.ssjava;
 
-/**
- * @author Jeremy Brown
- * 
- */
-
 import com.asdf.ssjava.screens.GameScreen;
 import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+
+/**
+ * @author Jeremy Brown
+ * 
+ */
 
 public class SSJava extends Game {
 
@@ -29,12 +29,16 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = true;
-	
+	public static final boolean DEBUG = false;
 	/**
 	 * 
 	 */
 	public static Preferences prefs;
+	
+	/**
+	 * A reference to the game screen
+	 */
+	public GameScreen gameScreen;
 	
 	public int width;
 	
@@ -45,7 +49,8 @@ public class SSJava extends Game {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		
 		if (SSJava.DEBUG) { // straight to game screen for DEBUG
-			setScreen(new GameScreen(this));			
+			gameScreen = new GameScreen(this);
+			setScreen(gameScreen);			
 		}
 		else {
 			setScreen(new SplashScreen(this));			

@@ -30,13 +30,20 @@ public class MainMenu implements Screen {
 	
 	SSJava game;
 	Stage stage;
+	SpriteBatch batch;
 	TextureAtlas atlas;
 	Skin skin; 
-	SpriteBatch batch;
-	BitmapFont black;
-	BitmapFont white;
-	TextButton button; 
-	Label label;
+	BitmapFont blackFont;
+	BitmapFont whiteFont;
+	
+	Label titleLabel;
+	
+	TextButton playButton;
+	MenuButton optionsButton;
+	MenuButton highScoresButton;
+	MenuButton creditsButton;
+	MenuButton exitButton;
+	
 	
 	/**
 	 * 
@@ -66,20 +73,20 @@ public class MainMenu implements Screen {
 		stage.clear();
 		 
 		Gdx.input.setInputProcessor(stage);
-		 
+				
 		TextButtonStyle style = new TextButtonStyle();
 		style.up = skin.getDrawable("buttonnormal");
 		style.down = skin.getDrawable("buttonpressed");
-		style.font = black;  
+		style.font = blackFont;  
 		
-		button = new TextButton("Play", style);
-		button.setWidth(400);
-		button.setHeight(100);
+		playButton = new TextButton("Play", style);
+		playButton.setWidth(280);
+		playButton.setHeight(65);
 		
-		button.setX(Gdx.graphics.getWidth() / 2 - button.getWidth() / 2);
-		button.setY(Gdx.graphics.getHeight() / 2 - button.getHeight() / 2);
+		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
+		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2);
 		
-		button.addListener(new InputListener() {
+		playButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Play button down");
 				return true;
@@ -87,19 +94,21 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Play button up");
-				game.setScreen(new GameScreen(game));
+				game.gameScreen = new GameScreen(game);
+				game.setScreen(game.gameScreen);
+//				TODO dispose();
 			}
 		});
 		
-		LabelStyle ls = new LabelStyle(white, Color.WHITE);
-		label = new Label("SS-Java", ls);
-		label.setX(0);
-		label.setY(Gdx.graphics.getHeight() / 2 + 100);
-		label.setWidth(width);
-		label.setAlignment(Align.center);
+		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
+		titleLabel = new Label("SS-Java", ls);
+		titleLabel.setX(0);
+		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 150);
+		titleLabel.setWidth(width);
+		titleLabel.setAlignment(Align.center);
 		
-		stage.addActor(button);
-		stage.addActor(label);		
+		stage.addActor(titleLabel);		
+		stage.addActor(playButton);
 	}
  
 	@Override
@@ -110,8 +119,8 @@ public class MainMenu implements Screen {
 		atlas = new TextureAtlas("data/menu/button.pack");    
 		skin = new Skin();
 		skin.addRegions(atlas);
-		white = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
-		black = new BitmapFont(Gdx.files.internal("data/fonts/font.fnt"), false);
+		whiteFont = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
+		blackFont = new BitmapFont(Gdx.files.internal("data/fonts/font.fnt"), false);
 		
 		
 	}
@@ -136,8 +145,8 @@ public class MainMenu implements Screen {
 		batch.dispose();
 		skin.dispose();
 		atlas.dispose();
-		white.dispose();
-		black.dispose();
+		whiteFont.dispose();
+		blackFont.dispose();
 	}
 
 }
