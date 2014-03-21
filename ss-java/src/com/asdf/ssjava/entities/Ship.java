@@ -128,8 +128,5 @@ public class Ship extends MoveableEntity {
 	 */
 	public void setShotCooldown(int shotCooldown) {
 		this.shotCooldown = shotCooldown;
-	}
-	
-	
-	
+	}	
 }
