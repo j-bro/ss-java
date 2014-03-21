@@ -15,6 +15,8 @@ import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
+import com.asdf.ssjava.entities.PowerupHealthUp;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
@@ -88,6 +90,12 @@ public class World {
 					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
 					obstacles.add(o);
 				}
+			}
+		}
+		for (int i = 0; i < 10; i++){
+			for (int j = 0; j < 5; j++){
+				powerups.add(new PowerupSpeedOfLight(new Vector2(50 * i, 4 * j), 1, 1, 0));
+				powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), 1, 1, 0));
 			}
 		}
 		
@@ -197,13 +205,7 @@ public class World {
 			}
 		}
 		
-		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
-		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
-		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
-		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
-		
-		
-		// Obstacle collision with ship
+		// Obstacle collision with ship		
 		for (Obstacle o: obstacles) {
 			if (o.getHitbox().overlaps(ship.getHitbox())) {
 				AudioPlayer.shipImpact();
@@ -212,8 +214,26 @@ public class World {
 				// obstacle damage?
 			}
 		}
+		//Power-up collision with ship
+		for (Powerup p: powerups){
+			if (p.getHitbox().overlaps(ship.getHitbox())) {
+				if (p.toString().equals("Speed of Light Powerup")) {
+					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 2;
+					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
+				}
+				else if (p.toString().equals("Health Up Powerup")) {
+					ship.healthChange(2);
+					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
+				}
+			}
+		}
 		
-		//Edge of screen collision
+		//Edge of screen collision	
+		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
+		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
+		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
+		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
+		
 		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
 			ship.getVelocity().y = 0;
 			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
