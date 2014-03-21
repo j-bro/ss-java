@@ -156,6 +156,7 @@ public class MainMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
 //				TODO game.dispose();
+				System.exit(0);
 			}
 		});
 		
