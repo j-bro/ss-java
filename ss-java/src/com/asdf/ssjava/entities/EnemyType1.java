@@ -120,4 +120,10 @@ public class EnemyType1 extends Enemy {
 		
 	}
 	
+	/**
+	 * @return the object's description string
+	 */
+	public String toString() {
+		return "Enemy Type 1";
+	}
 }

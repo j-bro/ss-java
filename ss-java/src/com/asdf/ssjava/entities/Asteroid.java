@@ -35,4 +35,10 @@ public class Asteroid extends Obstacle {
 		return DEFAULT_VELOCITY;
 	}
 	
+	/**
+	 * @return the object's description string
+	 */
+	public String toString() {
+		return "Asteroid";
+	}
 }

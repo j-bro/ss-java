@@ -82,4 +82,11 @@ public class BulletType0 extends Bullet {
 		return damage;
 	}
 	
+	/**
+	 * @return the object's description string
+	 */
+	public String toString() {
+		return "Bullet Type 0";
+	}
+	
 }

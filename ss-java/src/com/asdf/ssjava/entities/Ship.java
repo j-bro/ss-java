@@ -116,6 +116,10 @@ public class Ship extends MoveableEntity {
 		super.update();
 	}
 
+	public String toString() {
+		return "Player's ship";
+	}
+	
 	/**
 	 * @return the shot cooldown time for the ship, in milliseconds
 	 */

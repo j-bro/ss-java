@@ -29,4 +29,7 @@ public class SpaceRock extends Obstacle {
 		return DEFAULT_VELOCITY;
 	}
 
+	public String toString() {
+		return "Space Rock";
+	}
 }
