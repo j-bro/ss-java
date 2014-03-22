@@ -23,6 +23,8 @@ import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 /**
  * @author Jeremy Brown
@@ -72,6 +74,11 @@ public class World {
 	Array<Powerup> powerups;
 	
 	/**
+	 * Task to restore default speed (after Speed Of Light powerup)
+	 */
+	Task resetShipXVelocity;
+	
+	/**
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
 	 */
@@ -114,6 +121,13 @@ public class World {
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);
+		
+		resetShipXVelocity = new Task() {
+			@Override
+			public void run() {
+				ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
+			}
+		};
 	}
 	
 	/**
@@ -220,11 +234,13 @@ public class World {
 				// obstacle damage?
 			}
 		}
+		
 		//Power-up collision with ship
 		for (Powerup p: powerups){
 			if (p.getHitbox().overlaps(ship.getHitbox())) {
 				if (p.toString().equals("Speed of Light Powerup")) {
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 2;
+					new Timer().scheduleTask(resetShipXVelocity, 5f);
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
 				else if (p.toString().equals("Health Up Powerup")) {
