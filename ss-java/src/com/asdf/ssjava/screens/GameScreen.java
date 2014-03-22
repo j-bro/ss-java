@@ -78,7 +78,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		game.setScreen(new PauseMenu(game));
 
 	}
 
