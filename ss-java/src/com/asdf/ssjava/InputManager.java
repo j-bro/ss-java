@@ -64,7 +64,7 @@ public class InputManager implements InputProcessor {
 				world.pauseGame(); 
 				break;
 			case Keys.ENTER: // for testing enemy firing
-				if (SSJava.DEBUG) {					
+				if (SSJava.DEBUG) {
 					for (Enemy e: world.getEnemies()) {
 						e.fire();
 					}
@@ -140,13 +140,20 @@ public class InputManager implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (Gdx.app.getType() == Application.ApplicationType.Android || Gdx.app.getType() == Application.ApplicationType.iOS) {			
-			if (screenY > Gdx.graphics.getHeight() / 2) {
+			
+			// FIX TOUCH SCREEN PAUSE
+			if (screenX < Gdx.graphics.getWidth() / 10 && screenY > Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 5) {
+				world.pauseGame();
+			}
+			
+			else if (screenY > Gdx.graphics.getHeight() / 2) {
 				ship.getAcceleration().y = 0;
 			}
 			else {
 				ship.getAcceleration().y = 0;
 			}
 			return true;
+			
 		}
 		return false;
 	}
