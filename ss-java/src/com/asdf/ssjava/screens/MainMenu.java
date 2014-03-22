@@ -75,7 +75,7 @@ public class MainMenu implements Screen {
 		// play button
 		playButton = new MenuButton("Play", 280, 65);		
 		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
-		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 150);
+		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 140);
 		
 		playButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -94,7 +94,7 @@ public class MainMenu implements Screen {
 		// options button
 		optionsButton = new MenuButton("Options", 280, 65);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
-		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 50);
+		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 60);
 		
 		optionsButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -111,7 +111,7 @@ public class MainMenu implements Screen {
 		// high scores button
 		highScoresButton = new MenuButton("High Scores", 280, 65);
 		highScoresButton.setX(Gdx.graphics.getWidth() / 2 - highScoresButton.getWidth() / 2);
-		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 50);
+		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 20);
 		
 		highScoresButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -128,7 +128,7 @@ public class MainMenu implements Screen {
 		// credits button
 		creditsButton = new MenuButton("Credits", 280, 65);
 		creditsButton.setX(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2);
-		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 150);
+		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 100);
 		
 		creditsButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -145,7 +145,7 @@ public class MainMenu implements Screen {
 		// exit button
 		exitButton = new MenuButton("Exit", 280, 65);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
-		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 250);
+		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 180);
 		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
@@ -165,7 +165,7 @@ public class MainMenu implements Screen {
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("SS-Java", ls);
 		titleLabel.setX(0);
-		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 200);
+		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
