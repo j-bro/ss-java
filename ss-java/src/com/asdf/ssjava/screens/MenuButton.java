@@ -12,7 +12,8 @@ public class MenuButton extends TextButton {
 	
 	/**
 	 * @param text
-	 * @param style
+	 * @param width
+	 * @param height
 	 */
 	public MenuButton(String text, float width, float height) {
 		super(text, new TextButtonStyle() {{

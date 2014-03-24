@@ -28,7 +28,7 @@ public class BulletType0 extends Bullet {
 	 * @param width
 	 * @param height
 	 * @param rotation
-	 * @param type
+	 * @param shooter
 	 */
 	public BulletType0(Vector2 position, float width, float height,
 			float rotation, AbstractEntity shooter) {
