@@ -14,6 +14,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Correct hitboxes (requires ship textures)
 - Ship textures
 - Options/preferences
+- Asset Manager
 - And more..!
 
 ####In Progress
