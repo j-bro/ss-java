@@ -45,6 +45,7 @@ public class MainMenu implements Screen {
 	
 	/**
 	 * 
+	 * @param game The game instance of type SSJava
 	 */
 	public MainMenu(SSJava game) {
 		this.game = game;
@@ -103,7 +104,7 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
-//				game.setScreen(new OptionsMenu());
+				game.setScreen(new OptionsMenu(game));
 			}
 		});
 		
@@ -121,7 +122,6 @@ public class MainMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
 				game.setScreen(new HighScoresMenu(game));
-//				game.setScreen(new HighScoresMenu());
 			}
 		});
 		
@@ -132,13 +132,13 @@ public class MainMenu implements Screen {
 		
 		creditsButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button down");
+				Gdx.app.log(SSJava.LOG, "Credits button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button up");
-//				game.setScreen(new CreditsMenu());
+				Gdx.app.log(SSJava.LOG, "Credits button up");
+				game.setScreen(new CreditsMenu(game));
 			}
 		});
 		

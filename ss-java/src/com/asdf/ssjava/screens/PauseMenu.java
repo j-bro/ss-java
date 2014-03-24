@@ -40,6 +40,10 @@ public class PauseMenu implements Screen {
 	
 	Label titleLabel;
 	
+	/**
+	 * 
+	 * @param game The game instance of type SSJava
+	 */
 	public PauseMenu(SSJava game) {
 		this.game = game;
 	}
@@ -54,7 +58,6 @@ public class PauseMenu implements Screen {
 		batch.begin();
 			stage.draw(); 
 		batch.end();
-		
 	}
 
 	@Override

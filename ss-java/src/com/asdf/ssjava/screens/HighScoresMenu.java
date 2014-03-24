@@ -38,6 +38,7 @@ public class HighScoresMenu implements Screen {
 	
 	/**
 	 * 
+	 * @param game The game instance of type SSJava
 	 */
 	public HighScoresMenu(SSJava game) {
 		this.game = game;
@@ -64,21 +65,21 @@ public class HighScoresMenu implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		// exit to main menu button
-				backButton = new MenuButton("Back", 280, 65);
-				backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-				backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
-				
-				backButton.addListener(new InputListener() {
-					public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-						Gdx.app.log(SSJava.LOG, "Back button down");
-						return true;
-					}
-					
-					public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-						game.setScreen(new MainMenu(game));
-						Gdx.app.log(SSJava.LOG, "Back button up");
-					}
-				});
+		backButton = new MenuButton("Back", 280, 65);
+		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
+		
+		backButton.addListener(new InputListener() {
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Back button down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				game.setScreen(new MainMenu(game));
+				Gdx.app.log(SSJava.LOG, "Back button up");
+			}
+		});
 		
 		// Title text
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
