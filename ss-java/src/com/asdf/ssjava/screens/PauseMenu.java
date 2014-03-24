@@ -71,7 +71,6 @@ public class PauseMenu implements Screen {
 			};
 		}
 		stage.clear();
-		 
 		Gdx.input.setInputProcessor(stage);
 		
 		// return to game button
@@ -81,12 +80,12 @@ public class PauseMenu implements Screen {
 		
 		returnButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button down");
+				Gdx.app.log(SSJava.LOG, "Back to game button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button up");
+				Gdx.app.log(SSJava.LOG, "Back to game button up");
 				game.setScreen(game.gameScreen);
 			}
 		});
@@ -114,17 +113,16 @@ public class PauseMenu implements Screen {
 		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button down");
+				Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				AudioPlayer.stopGameMusic();
 				game.setScreen(new MainMenu(game));
-				Gdx.app.log(SSJava.LOG, "Options button up");
+				Gdx.app.log(SSJava.LOG, "Exit button up");
 			}
 		});
-		
 		
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("Paused", ls);
