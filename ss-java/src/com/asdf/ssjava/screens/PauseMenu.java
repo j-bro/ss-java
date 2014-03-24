@@ -59,7 +59,15 @@ public class PauseMenu implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
-			stage = new Stage(width, height, true);
+			stage = new Stage(width, height, true) {
+				@Override
+		        public boolean keyDown(int keyCode) {
+		            if (keyCode == Keys.ESCAPE) {
+		                game.setScreen(game.gameScreen);
+		            }
+		            return super.keyDown(keyCode);
+		        }
+			};
 		}
 		stage.clear();
 		 
