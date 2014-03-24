@@ -121,13 +121,6 @@ public class World {
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);
-		
-		resetShipXVelocity = new Task() {
-			@Override
-			public void run() {
-				ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
-			}
-		};
 	}
 	
 	/**
@@ -240,7 +233,12 @@ public class World {
 			if (p.getHitbox().overlaps(ship.getHitbox())) {
 				if (p.toString().equals("Speed of Light Powerup")) {
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 2;
-					new Timer().scheduleTask(resetShipXVelocity, 5f);
+					new Timer().scheduleTask(new Task() {
+						@Override
+						public void run() {
+							ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
+						}
+					}, 5f);
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
 				else if (p.toString().equals("Health Up Powerup")) {
