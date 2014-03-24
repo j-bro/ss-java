@@ -9,7 +9,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 ####To do list
 
 - Obstacles types
-- Powerups
 - Enemies
 - Score Keeper
 - Correct hitboxes (requires ship textures)
@@ -22,6 +21,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Menu GUI
 - AudioPlayer sounds
 - Health points
+- Powerups
 - Collision (physics)
 - Level design
 
