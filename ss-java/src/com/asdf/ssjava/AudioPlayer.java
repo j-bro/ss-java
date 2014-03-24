@@ -35,17 +35,44 @@ public class AudioPlayer {
 	public static void stopGameMusic() {
 		gameMusic.stop();
 	}
-	
+	/**
+	 * Plays the shot sound for a fired bullet
+	 */
 	public static void shoot() {
-		shot.play(SSJava.prefs.getInteger("soundVolume", 100));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				shot.play(SSJava.prefs.getInteger("soundVolume", 100));
+			}
+			
+		}).start();
 	}
 	
+	/**
+	 * Plays the explosion sound for the bullet impact
+	 */
 	public static void bulletImpact() {
-		bulletImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				bulletImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+			}
+		}).start();
 	}
 	
+	/**
+	 * Plays the explosion sound for the ship impact
+	 */
 	public static void shipImpact() {
-		shipImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				shipImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+			}
+		}).start();
 	}
 	
 	public static void dispose() {
@@ -54,5 +81,4 @@ public class AudioPlayer {
 		bulletImpact.dispose();
 		shipImpact.dispose();
 	}
-	
 }
