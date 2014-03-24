@@ -4,6 +4,7 @@
 package com.asdf.ssjava;
 
 import com.asdf.ssjava.screens.GameScreen;
+import com.asdf.ssjava.screens.MainMenu;
 import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -29,7 +30,7 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	/**
 	 * 
 	 */
@@ -49,8 +50,9 @@ public class SSJava extends Game {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		
 		if (SSJava.DEBUG) { // straight to game screen for DEBUG
-			gameScreen = new GameScreen(this);
-			setScreen(gameScreen);			
+//			gameScreen = new GameScreen(this);
+//			setScreen(gameScreen);
+			setScreen(new MainMenu(this));
 		}
 		else {
 			setScreen(new SplashScreen(this));			
