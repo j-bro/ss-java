@@ -107,7 +107,7 @@ public class World {
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				powerups.add(new PowerupSpeedOfLight(new Vector2(50 * i, 4 * j), 1, 1, 0));
+				powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), 1, 1, 0));
 				powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), 1, 1, 0));
 			}
 		}
@@ -186,64 +186,95 @@ public class World {
 			
 			// Bullet collision with ship
 			if (ship.getHitbox().overlaps(b.getHitbox())) {
-				AudioPlayer.bulletImpact();
 				bullets.removeValue(b, true);
-				
-				// ship damage
-				ship.healthChange((-1) * b.getDamage());
-				// life check
-				if (checkIfDead(ship)) {
+				if(!ship.lightSpeedMode){
+					AudioPlayer.bulletImpact();
 					
+					// ship damage
+					ship.healthChange((-1) * b.getDamage());
+					// life check
+					if (checkIfDead(ship)) {
+						
+					}
 				}
-
 				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
 			}
 			
 		}
 		// Enemy collision with ship
 		for (Enemy e: enemies) {
-			if (e.getHitbox().overlaps(ship.getHitbox()) && !e.alreadyCollided) {
-				AudioPlayer.shipImpact();
-				Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
-				e.alreadyCollided = true;
-				// ship and enemy damage
-				e.healthChange(-1);
-				ship.healthChange(-1);
-				// life check
-				if (checkIfDead(e)) {
-					enemies.removeValue(e, true);
+			if (e.getHitbox().overlaps(ship.getHitbox()) && !e.alreadyCollided){
+				if (ship.lightSpeedMode){
+					//enemy damage
+					e.healthChange(-999);
+					// life check
+					if (checkIfDead(e)) {
+						enemies.removeValue(e, true);
+					}
 				}
-				checkIfDead(ship);
-
-			}
+				else {
+					AudioPlayer.shipImpact();
+					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
+					e.alreadyCollided = true;
+					// ship and enemy damage
+					e.healthChange(-1);
+					ship.healthChange(-1);
+					// life check
+					if (checkIfDead(e)) {
+						enemies.removeValue(e, true);
+					}
+					checkIfDead(ship);
+				}
+			}	
 		}
 		
 		// Obstacle collision with ship		
 		for (Obstacle o: obstacles) {
 			if (o.getHitbox().overlaps(ship.getHitbox()) && !o.alreadyCollided) {
-				AudioPlayer.shipImpact();
-				Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
-				o.alreadyCollided = true;
-				// ship and enemy damage
-				o.healthChange(-1);
-				ship.healthChange(-1);
+				if (ship.lightSpeedMode){
+					//obstacle damage
+					o.healthChange(-999);
+					// life check
+					if (checkIfDead(o)) {
+						obstacles.removeValue(o, true);
+					}
+				}
+				else {
+					AudioPlayer.shipImpact();
+					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
+					o.alreadyCollided = true;
+					// ship and enemy damage
+					o.healthChange(-1);
+					ship.healthChange(-1);
+					// life check
+					if (checkIfDead(o)) {
+						obstacles.removeValue(o, true);
+					}
+				}
 			}
 		}
 		
 		//Power-up collision with ship
 		for (Powerup p: powerups){
 			if (p.getHitbox().overlaps(ship.getHitbox())) {
+				//Collision with the Speed of Light power-up
 				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
-					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 2;
+					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 4;
+					ship.getVelocity().x = ship.DEFAULT_VELOCITY.y * 2;
+					ship.lightSpeedMode = true;
+					//Reset the ship to default after 5 seconds
 					new Timer().scheduleTask(new Task() {
 						@Override
 						public void run() {
 							ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
+							ship.getVelocity().y = ship.DEFAULT_VELOCITY.y;
+							ship.lightSpeedMode = false;
 						}
 					}, 5f);
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
+				//Collision with the Health Up power-up
 				else if (p.toString().equals("Health Up Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
 					ship.healthChange(2);

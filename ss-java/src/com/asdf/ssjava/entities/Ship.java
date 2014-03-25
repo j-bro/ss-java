@@ -54,6 +54,11 @@ public class Ship extends MoveableEntity {
 	private int shotCooldown = 300;
 	
 	/**
+	 * The ship cannot lose health from collisions as long as this is true
+	 */
+	public boolean lightSpeedMode = false;
+	
+	/**
 	 * Creates a ship with a position, dimensions and rotation.
 	 * Does not give the ship an initial speed.
 	 * @param position
