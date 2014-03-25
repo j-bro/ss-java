@@ -32,6 +32,20 @@ public class LevelSelectButton extends TextButton {
 		addLevelButtonListener();
 	}
 	
+	public LevelSelectButton(LevelSelectButton button) {
+		super(button.text, new TextButtonStyle() {{
+			font = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
+		}});
+		
+		this.game = button.game;
+		this.text = button.text;
+		
+		setWidth(button.getWidth());
+		setHeight(button.getHeight());
+		
+		addLevelButtonListener();
+	}
+	
 	public void addLevelButtonListener() {
 		addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
