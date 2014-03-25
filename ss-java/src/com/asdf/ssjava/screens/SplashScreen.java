@@ -13,11 +13,14 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.tweenaccessors.SpriteTween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
  * @author Jeremy Brown
@@ -30,7 +33,8 @@ public class SplashScreen implements Screen {
 	Sprite splashSprite;
 	SpriteBatch batch;
 	SSJava game;
-	TweenManager manager;
+	TweenManager tweenManager;
+	AssetManager assetManager;
 	
 	/**
 	 * 
@@ -44,7 +48,16 @@ public class SplashScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		manager.update(delta);
+		if (assetManager.update()) {
+			// done loading
+		}
+		else {
+			float progress = assetManager.getProgress();
+			int percentProgress = (int) (progress * 100);
+			Gdx.app.log(SSJava.LOG, "Assets loading (" + percentProgress + "%)");			
+		}
+		
+		tweenManager.update(delta);
 		
 		batch.begin();
 			splashSprite.draw(batch);
@@ -60,6 +73,8 @@ public class SplashScreen implements Screen {
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show splash screen"); // LOG
 		
+		assetManager = game.assetManager;
+		
 		splashTexture = new Texture("data/SplashScreen_black.png");
 		splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
@@ -71,7 +86,7 @@ public class SplashScreen implements Screen {
 		
 		Tween.registerAccessor(Sprite.class, new SpriteTween());
 		
-		manager = new TweenManager();
+		tweenManager = new TweenManager();
 		
 		TweenCallback cb = new TweenCallback() {
 			@Override
@@ -80,13 +95,33 @@ public class SplashScreen implements Screen {
 			}
 		};
 		
-		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1.5f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(manager);
+		// LOAD ASSETS
+		loadAssets();
 		
+		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1.5f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(tweenManager);
 	}
 
 	private void tweenCompleted() {
 		Gdx.app.log(SSJava.LOG, "Splash screen tween complete");
 		game.setScreen(new MainMenu(game));
+		
+		splashTexture.dispose();
+	}
+	
+	private void loadAssets() {
+		// Menu assets
+		assetManager.load("data/fonts/font.fnt", BitmapFont.class);
+		assetManager.load("data/fonts/whitefont.fnt", BitmapFont.class);
+		assetManager.load("data/menu/button.pack", TextureAtlas.class);
+		
+		// Gameplay assets
+		assetManager.load("data/textures/player_ship.png", Texture.class);
+		assetManager.load("data/textures/space_rock.png", Texture.class);
+		assetManager.load("data/textures/brick.png", Texture.class);
+		assetManager.load("data/textures/enemy1.png", Texture.class);
+		assetManager.load("data/textures/bullet_strip.png", Texture.class);
+		assetManager.load("data/textures/ninjastar.png", Texture.class);
+		assetManager.load("data/textures/waterball.png", Texture.class);
 	}
 	
 	@Override

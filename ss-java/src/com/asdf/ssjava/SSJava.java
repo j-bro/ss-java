@@ -9,6 +9,7 @@ import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.AssetManager;
 
 /**
  * @author Jeremy Brown
@@ -30,11 +31,17 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
+	
 	/**
 	 * 
 	 */
 	public static Preferences prefs;
+	
+	/**
+	 * 
+	 */
+	public AssetManager assetManager;
 	
 	/**
 	 * A reference to the game screen
@@ -48,6 +55,7 @@ public class SSJava extends Game {
 	@Override
 	public void create() {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
+		assetManager = new AssetManager();
 		
 		if (SSJava.DEBUG) { // straight to game screen for DEBUG
 //			gameScreen = new GameScreen(this);

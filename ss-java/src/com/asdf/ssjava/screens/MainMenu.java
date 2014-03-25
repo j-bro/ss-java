@@ -11,13 +11,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
@@ -31,9 +29,6 @@ public class MainMenu implements Screen {
 	SSJava game;
 	Stage stage;
 	SpriteBatch batch;
-	TextureAtlas atlas;
-	Skin skin; 
-	BitmapFont blackFont;
 	BitmapFont whiteFont;
 	
 	Label titleLabel;
@@ -76,7 +71,7 @@ public class MainMenu implements Screen {
 		Gdx.input.setInputProcessor(stage);
 				
 		// play button
-		playButton = new MenuButton("Play", 280, 65);		
+		playButton = new MenuButton("Play", 280, 65, game);		
 		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
 		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 140);
 		
@@ -94,7 +89,7 @@ public class MainMenu implements Screen {
 		});
 		
 		// options button
-		optionsButton = new MenuButton("Options", 280, 65);
+		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 60);
 		
@@ -111,7 +106,7 @@ public class MainMenu implements Screen {
 		});
 		
 		// high scores button
-		highScoresButton = new MenuButton("High Scores", 280, 65);
+		highScoresButton = new MenuButton("High Scores", 280, 65, game);
 		highScoresButton.setX(Gdx.graphics.getWidth() / 2 - highScoresButton.getWidth() / 2);
 		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 20);
 		
@@ -128,7 +123,7 @@ public class MainMenu implements Screen {
 		});
 		
 		// credits button
-		creditsButton = new MenuButton("Credits", 280, 65);
+		creditsButton = new MenuButton("Credits", 280, 65, game);
 		creditsButton.setX(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2);
 		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 100);
 		
@@ -145,7 +140,7 @@ public class MainMenu implements Screen {
 		});
 		
 		// exit button
-		exitButton = new MenuButton("Exit", 280, 65);
+		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 180);
 		
@@ -183,13 +178,7 @@ public class MainMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/menu/button.pack");    
-		skin = new Skin();
-		skin.addRegions(atlas);
-		whiteFont = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
-		blackFont = new BitmapFont(Gdx.files.internal("data/fonts/font.fnt"), false);
-		
-		
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
 	@Override 
@@ -210,8 +199,6 @@ public class MainMenu implements Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		whiteFont.dispose();
-		blackFont.dispose();
 	}
 
 }

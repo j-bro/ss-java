@@ -19,7 +19,7 @@ public class BackButton extends MenuButton {
 	 * @param height
 	 */
 	public BackButton(float width, float height, SSJava game, Screen referrer) {
-		super("Back", width, height);
+		super("Back", width, height, game);
 		
 		this.game = game;
 		this.referrer = referrer;

@@ -10,6 +10,8 @@ import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
+import com.asdf.ssjava.entities.PowerupHealthUp;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
@@ -29,6 +31,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class WorldRenderer {
 
+	/**
+	 * The game's instance
+	 */
+	SSJava game;
 	/**
 	 * The World's instance
 	 */
@@ -57,6 +63,7 @@ public class WorldRenderer {
 	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
 	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
 	Texture speedOfLightTexture, healthUpTexture;
+	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture;
 	
 	// TODO ...
 	float width, height;
@@ -72,6 +79,7 @@ public class WorldRenderer {
 	 */
 	public WorldRenderer(World world) {
 		this.world = world;
+		game = world.game;
 		
 		// TODO potentially fix this square/rectangle
 		width = Gdx.graphics.getWidth() / 20;
@@ -84,20 +92,27 @@ public class WorldRenderer {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 		
-		shipTexture = new Texture("data/textures/player_ship.png");
+		shipTexture = game.assetManager.get("data/textures/player_ship.png", Texture.class);
 		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 //		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		spaceRockTexture = new Texture("data/textures/space_rock.png");
+		spaceRockTexture = game.assetManager.get("data/textures/space_rock.png", Texture.class);
 		spaceRockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		asteroidTexture = new Texture("data/textures/brick.png");
+		asteroidTexture = game.assetManager.get("data/textures/brick.png", Texture.class);
+		asteroidTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		enemyType1Texture = new Texture("data/textures/enemy1.png");
+		enemyType1Texture = game.assetManager.get("data/textures/enemy1.png", Texture.class);
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bulletType0Texture = new Texture("data/textures/bullet_strip.png");
+		bulletType0Texture = game.assetManager.get("data/textures/bullet_strip.png", Texture.class);
 		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		powerupHealthUpTexture = game.assetManager.get("data/textures/ninjastar.png", Texture.class);
+		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/waterball.png", Texture.class);
+		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
@@ -182,8 +197,15 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
 			
-			for (@SuppressWarnings("unused") Powerup p: world.powerups) {
-				
+			for (Powerup p: world.powerups) {
+				Texture powerupTexture = null;
+				if (p instanceof PowerupHealthUp) {
+					powerupTexture = powerupHealthUpTexture;
+				}
+				else if (p instanceof PowerupSpeedOfLight) {
+					powerupTexture = powerupSpeedOfLightTexture;
+				}
+				batch.draw(powerupTexture, p.getPosition().x, p.getPosition().y, p.getWidth(), p.getHeight());
 			}
 			
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);

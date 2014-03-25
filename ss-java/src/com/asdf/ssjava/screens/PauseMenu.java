@@ -94,7 +94,7 @@ public class PauseMenu implements Screen {
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
 		
 		// options button
-		optionsButton = new MenuButton("Options", 280, 65);
+		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
 		
@@ -111,7 +111,7 @@ public class PauseMenu implements Screen {
 		});
 		
 		// exit to main menu button
-		exitButton = new MenuButton("Exit", 280, 65);
+		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 150);
 		

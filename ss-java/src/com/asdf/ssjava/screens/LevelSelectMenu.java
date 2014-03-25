@@ -113,31 +113,31 @@ public class LevelSelectMenu implements Screen {
 		levelWidgetGroup.setWidth(Gdx.graphics.getWidth() / 3);
 		levelWidgetGroup.setHeight(900);
 		levelWidgetGroup.addActor(level1Button);
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 100);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 50);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 100);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
 		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
 			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 200);
 		}});
