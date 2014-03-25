@@ -17,7 +17,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
@@ -36,11 +38,14 @@ public class LevelSelectMenu implements Screen {
 	
 	MenuButton backButton;
 	
-	TextButton level1Button;
-	TextButton level2Button;
-	TextButton level3Button;
-	TextButton level4Button;
-	TextButton level5Button;
+	ScrollPane levelSelectPane;
+	WidgetGroup levelWidgetGroup;
+	
+	LevelSelectButton level1Button;
+	LevelSelectButton level2Button;
+	LevelSelectButton level3Button;
+	LevelSelectButton level4Button;
+	LevelSelectButton level5Button;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -102,14 +107,57 @@ public class LevelSelectMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
-		stage.addActor(titleLabel);
+		// TODO for scrolling!
+		/*
+		levelWidgetGroup = new WidgetGroup();
+		levelWidgetGroup.setWidth(Gdx.graphics.getWidth() / 3);
+		levelWidgetGroup.setHeight(900);
+		levelWidgetGroup.addActor(level1Button);
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 100);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 50);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 100);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
+		}});
+		levelWidgetGroup.addActor(new LevelSelectButton(level1Button) {{
+			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 200);
+		}});
+		
+		levelSelectPane = new ScrollPane(levelWidgetGroup);
+		levelSelectPane.setBounds(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 150, 200, 600);
+		Gdx.app.log(SSJava.LOG, levelSelectPane.getWidth() + ", " + levelSelectPane.getHeight());
+		
+		Gdx.app.log(SSJava.LOG, levelWidgetGroup.getWidth() + ", " + levelWidgetGroup.getHeight());
+		stage.addActor(levelSelectPane);*/
+		
 		stage.addActor(level1Button);
+		stage.addActor(titleLabel);
 		stage.addActor(backButton);
+		
 	}
 
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show credits");
+		Gdx.app.log(SSJava.LOG, "Show level selection");
 		
 		batch = new SpriteBatch();
 		whiteFont = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
