@@ -8,6 +8,7 @@ import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.LevelSelectButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -63,14 +64,22 @@ public class LevelSelectMenu implements Screen {
 		stage.act(delta);
 		
 		batch.begin();
-			stage.draw(); 
+			stage.draw();
 		batch.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
-			stage = new Stage(width, height, true);
+			stage = new Stage(width, height, true) {
+				@Override
+		        public boolean keyDown(int keyCode) {
+		            if (keyCode == Keys.ESCAPE) {
+		                game.setScreen(referrer);
+		            }
+		            return super.keyDown(keyCode);
+		        }
+			};
 		}
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);

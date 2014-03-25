@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -80,7 +79,7 @@ public class PauseMenu implements Screen {
 				@Override
 		        public boolean keyDown(int keyCode) {
 		            if (keyCode == Keys.ESCAPE) {
-		                game.setScreen(game.gameScreen);
+		                game.setScreen(referrer);
 		            }
 		            return super.keyDown(keyCode);
 		        }
@@ -123,9 +122,9 @@ public class PauseMenu implements Screen {
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Exit button up");
 				AudioPlayer.stopGameMusic();
 				game.setScreen(new MainMenu(game));
-				Gdx.app.log(SSJava.LOG, "Exit button up");
 			}
 		});
 		

@@ -100,12 +100,12 @@ public class MainMenu implements Screen {
 		
 		optionsButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button down");
+				Gdx.app.log(SSJava.LOG, "Options button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button up");
+				Gdx.app.log(SSJava.LOG, "Options button up");
 				game.setScreen(new OptionsMenu(game, thisMainMenu));
 			}
 		});
@@ -117,12 +117,12 @@ public class MainMenu implements Screen {
 		
 		highScoresButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button down");
+				Gdx.app.log(SSJava.LOG, "High scores button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button up");
+				Gdx.app.log(SSJava.LOG, "High scores button up");
 				game.setScreen(new HighScoresMenu(game, thisMainMenu));
 			}
 		});
@@ -151,12 +151,12 @@ public class MainMenu implements Screen {
 		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button down");
+				Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Return button up");
+				Gdx.app.log(SSJava.LOG, "Exit button up");
 				Gdx.app.exit();
 			}
 		});
