@@ -293,7 +293,7 @@ public class World {
 	 * Calls the pause screen and stops rendering the game
 	 */
 	public void pauseGame() {
-		game.setScreen(new PauseMenu(game));
+		game.setScreen(new PauseMenu(game, game.gameScreen));
 	}
 	
 	/**

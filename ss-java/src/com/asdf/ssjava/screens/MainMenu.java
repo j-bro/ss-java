@@ -4,6 +4,7 @@
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -42,6 +43,8 @@ public class MainMenu implements Screen {
 	MenuButton highScoresButton;
 	MenuButton creditsButton;
 	MenuButton exitButton;
+	
+	Screen thisMainMenu = this;
 	
 	/**
 	 * 
@@ -85,8 +88,7 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Play button up");
-				game.gameScreen = new GameScreen(game);
-				game.setScreen(game.gameScreen);
+				game.setScreen(new LevelSelectMenu(game, thisMainMenu));
 //				TODO dispose();
 			}
 		});
@@ -104,7 +106,7 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
-				game.setScreen(new OptionsMenu(game));
+				game.setScreen(new OptionsMenu(game, thisMainMenu));
 			}
 		});
 		
@@ -121,7 +123,7 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
-				game.setScreen(new HighScoresMenu(game));
+				game.setScreen(new HighScoresMenu(game, thisMainMenu));
 			}
 		});
 		
@@ -138,7 +140,7 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Credits button up");
-				game.setScreen(new CreditsMenu(game));
+				game.setScreen(new CreditsMenu(game, thisMainMenu));
 			}
 		});
 		
@@ -155,7 +157,6 @@ public class MainMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Return button up");
-//				TODO game.dispose();
 				Gdx.app.exit();
 			}
 		});

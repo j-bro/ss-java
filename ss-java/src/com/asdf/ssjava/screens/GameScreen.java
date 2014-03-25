@@ -78,7 +78,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resume() {
-		game.setScreen(new PauseMenu(game));
+		game.setScreen(new PauseMenu(game, this));
 
 	}
 

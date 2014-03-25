@@ -3,20 +3,17 @@
  */
 package com.asdf.ssjava.screens;
 
-import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.screens.screenelements.BackButton;
+import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
@@ -37,11 +34,17 @@ public class HighScoresMenu implements Screen {
 	MenuButton backButton;
 	
 	/**
+	 * The screen which to switch to when the back button is clicked
+	 */
+	Screen referrer;
+	
+	/**
 	 * 
 	 * @param game The game instance of type SSJava
 	 */
-	public HighScoresMenu(SSJava game) {
+	public HighScoresMenu(SSJava game, Screen referrer) {
 		this.game = game;
+		this.referrer = referrer;
 	}
 	
 	@Override
@@ -65,21 +68,9 @@ public class HighScoresMenu implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		// exit to main menu button
-		backButton = new MenuButton("Back", 280, 65);
+		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
-		
-		backButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Back button down");
-				return true;
-			}
-			
-			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				game.setScreen(new MainMenu(game));
-				Gdx.app.log(SSJava.LOG, "Back button up");
-			}
-		});
 		
 		// Title text
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);

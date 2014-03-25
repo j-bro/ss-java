@@ -5,6 +5,8 @@ package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.screens.screenelements.BackButton;
+import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -12,8 +14,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -34,18 +35,30 @@ public class PauseMenu implements Screen {
 	BitmapFont whiteFont;
 	BitmapFont blackFont;
 	
+	MenuButton backButton;
 	MenuButton optionsButton;
-	MenuButton returnButton;
 	MenuButton exitButton;
 	
 	Label titleLabel;
 	
 	/**
+	 * A reference to this menu object to pass to the anonymous listener classes
+	 */
+	Screen thisPauseMenu = this;
+	
+	/**
+	 * The screen which to switch to when the back button is clicked
+	 */
+	Screen referrer;
+	
+	/**
 	 * 
 	 * @param game The game instance of type SSJava
+	 * @param referer The screen object that called this screen
 	 */
-	public PauseMenu(SSJava game) {
+	public PauseMenu(SSJava game, Screen referrer) {
 		this.game = game;
+		this.referrer = referrer;
 	}
 
 	@Override
@@ -77,21 +90,9 @@ public class PauseMenu implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		// return to game button
-		returnButton = new MenuButton("Back to game", 280, 65);
-		returnButton.setX(Gdx.graphics.getWidth() / 2 - returnButton.getWidth() / 2);
-		returnButton.setY(Gdx.graphics.getHeight() / 2 - returnButton.getHeight() / 2 + 50);
-		
-		returnButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Back to game button down");
-				return true;
-			}
-			
-			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Back to game button up");
-				game.setScreen(game.gameScreen);
-			}
-		});
+		backButton = new BackButton(280, 65, game, referrer);
+		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
+		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
 		
 		// options button
 		optionsButton = new MenuButton("Options", 280, 65);
@@ -105,6 +106,7 @@ public class PauseMenu implements Screen {
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				game.setScreen(new OptionsMenu(game, thisPauseMenu));
 				Gdx.app.log(SSJava.LOG, "Options button up");
 			}
 		});
@@ -135,20 +137,10 @@ public class PauseMenu implements Screen {
 		titleLabel.setAlignment(Align.center);
 		
 		stage.addActor(titleLabel);
+		stage.addActor(backButton);
 		stage.addActor(optionsButton);
-		stage.addActor(returnButton);
 		stage.addActor(exitButton);
 		
-		// TODO escape key listener
-		stage.addListener(new EventListener() {
-
-			@Override
-			public boolean handle(Event event) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-		});
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class BackButton extends MenuButton {
 
 	SSJava game;
 	
-	Screen referer;
+	Screen referrer;
 	
 	/**
 	 * 
@@ -18,11 +18,11 @@ public class BackButton extends MenuButton {
 	 * @param width
 	 * @param height
 	 */
-	public BackButton(float width, float height, SSJava game, Screen referer) {
+	public BackButton(float width, float height, SSJava game, Screen referrer) {
 		super("Back", width, height);
 		
 		this.game = game;
-		this.referer = referer;
+		this.referrer = referrer;
 		
 		addBackButtonListener();
 	}
@@ -36,7 +36,7 @@ public class BackButton extends MenuButton {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Back to game button up");
-				game.setScreen(referer);
+				game.setScreen(referrer);
 			}
 		});
 	}
