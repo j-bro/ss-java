@@ -8,13 +8,12 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 ####To do list
 
-- Obstacles types
-- Enemies
+- Enemy AI
 - Score Keeper
 - Correct hitboxes (requires ship textures)
-- Ship textures
 - Options/preferences
-- Asset Manager
+- All Textures
+- Game HUD (life, progress, score)
 - And more..!
 
 ####In Progress
@@ -23,12 +22,13 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - AudioPlayer sounds
 - Health points
 - Powerups
-- Collision (physics)
+- Collision physics
 - Level design
 
 ####Complete
 - Ship movement
 - User input (controls)
+- Asset Manager
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
