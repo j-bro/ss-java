@@ -202,10 +202,10 @@ public class World {
 		}
 		// Enemy collision with ship
 		for (Enemy e: enemies) {
-			if (e.getHitbox().overlaps(ship.getHitbox())) {
+			if (e.getHitbox().overlaps(ship.getHitbox()) && !e.alreadyCollided) {
 				AudioPlayer.shipImpact();
-				Gdx.app.log(SSJava.LOG, "Ship collided with enemy " + Integer.toHexString(e.hashCode()));
-				
+				Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
+				e.alreadyCollided = true;
 				// ship and enemy damage
 				e.healthChange(-1);
 				ship.healthChange(-1);
@@ -220,18 +220,21 @@ public class World {
 		
 		// Obstacle collision with ship		
 		for (Obstacle o: obstacles) {
-			if (o.getHitbox().overlaps(ship.getHitbox())) {
+			if (o.getHitbox().overlaps(ship.getHitbox()) && !o.alreadyCollided) {
 				AudioPlayer.shipImpact();
-				Gdx.app.log(SSJava.LOG, "Ship collided with obstacle " + Integer.toHexString(o.hashCode()));
-				
-				// obstacle damage?
+				Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
+				o.alreadyCollided = true;
+				// ship and enemy damage
+				o.healthChange(-1);
+				ship.healthChange(-1);
 			}
 		}
 		
 		//Power-up collision with ship
 		for (Powerup p: powerups){
 			if (p.getHitbox().overlaps(ship.getHitbox())) {
-				if (p.toString().equals("Speed of Light Powerup")) {
+				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
+					p.alreadyCollided = true;
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 2;
 					new Timer().scheduleTask(new Task() {
 						@Override
@@ -241,7 +244,8 @@ public class World {
 					}, 5f);
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
-				else if (p.toString().equals("Health Up Powerup")) {
+				else if (p.toString().equals("Health Up Powerup") && !p.alreadyCollided) {
+					p.alreadyCollided = true;
 					ship.healthChange(2);
 					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
 				}

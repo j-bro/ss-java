@@ -19,6 +19,11 @@ public abstract class Obstacle extends MoveableEntity {
 	Vector2 DEFAULT_VELOCITY;
 	
 	/**
+	 * A trigger to stop the ship from colliding with the obstacle multiple times
+	 */
+	public boolean alreadyCollided = false;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
