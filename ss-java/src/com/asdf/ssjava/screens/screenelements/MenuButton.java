@@ -1,4 +1,4 @@
-package com.asdf.ssjava.screens;
+package com.asdf.ssjava.screens.screenelements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,5 +25,6 @@ public class MenuButton extends TextButton {
 		
 		setWidth(width);
 		setHeight(height);
+		
 	}
 }
