@@ -10,6 +10,11 @@ import com.badlogic.gdx.math.Vector2;
  * 
  */
 public class Powerup extends MoveableEntity {
+	
+	/**
+	 * A trigger to stop the ship from colliding with the enemy multiple times
+	 */
+	public boolean alreadyCollided = false;
 
 	/**
 	 * @param position

@@ -23,6 +23,11 @@ public abstract class Enemy extends MoveableEntity {
 	Vector2 DEFAULT_VELOCITY;
 	
 	/**
+	 * A trigger to stop the ship from colliding with the enemy multiple times
+	 */
+	public boolean alreadyCollided = false;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
