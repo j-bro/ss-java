@@ -76,7 +76,7 @@ public class World {
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
 	 */
-	public World(SSJava game) {
+	public World(SSJava game, String levelPath) {
 		this.game = game;
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
@@ -85,7 +85,7 @@ public class World {
 		bullets = new Array<Bullet>();
 		
 		// Level Loading
-		loadLevel("levels/level1.json");
+		loadLevel(levelPath);
 		
 		/*
 		level = new Level();
@@ -115,7 +115,7 @@ public class World {
 			}
 		}
 		
-		exportLevel("levels/level1.json");
+		exportLevel(levelPath);
 		*/
 		// Set game input processor
 		manager = new InputManager(game, this);
@@ -334,17 +334,14 @@ public class World {
 	 * Exports the current level to a file in JSON format
 	 */
 	public void exportLevel(String path) {
-		Json json = new Json();
-		FileHandle levelFile = Gdx.files.local(path);
-		levelFile.writeString(json.prettyPrint(level), false);
+		Gdx.files.local(path).writeString(new Json().prettyPrint(level), false);
 	}
 	
 	/**
 	 * Loads a level from a JSON file into the level
 	 */
 	private void loadLevel(String path) {		
-		Json json = new Json();
-		level = json.fromJson(Level.class, Gdx.files.internal(path));
+		level = new Json().fromJson(Level.class, Gdx.files.local(path));
 	}
 	
 	/**

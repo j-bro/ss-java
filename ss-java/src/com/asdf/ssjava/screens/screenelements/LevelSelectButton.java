@@ -12,19 +12,21 @@ public class LevelSelectButton extends TextButton {
 
 	SSJava game;
 	String text;
+	String levelPath;
 	
 	/**
 	 * @param text
 	 * @param width
 	 * @param height
 	 */
-	public LevelSelectButton(String text, float width, float height, final SSJava game) {
+	public LevelSelectButton(String text, float width, float height, final SSJava game, String levelPath) {
 		super(text, new TextButtonStyle() {{
 			font = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		}});
 		
 		this.game = game;
 		this.text = text;
+		this.levelPath = levelPath;
 		
 		setWidth(width);
 		setHeight(height);
@@ -39,6 +41,7 @@ public class LevelSelectButton extends TextButton {
 		
 		this.game = button.game;
 		this.text = button.text;
+		this.levelPath = levelPath;
 		
 		setWidth(button.getWidth());
 		setHeight(button.getHeight());
@@ -54,7 +57,7 @@ public class LevelSelectButton extends TextButton {
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				game.gameScreen = new GameScreen(game);
+				game.gameScreen = new GameScreen(game, levelPath);
 				game.setScreen(game.gameScreen);
 				Gdx.app.log(SSJava.LOG, text + " button up");
 			}
