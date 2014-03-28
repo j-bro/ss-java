@@ -12,14 +12,18 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 /**
  * @author Jeremy Brown
@@ -99,7 +103,9 @@ public class OptionsMenu implements Screen {
 		musicLabel.setY(Gdx.graphics.getHeight() / 2 + 20);
 		musicLabel.setAlignment(Align.center);
 		
-		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, null, null, null));
+		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
+		
+		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
 		musicField.setMaxLength(3);
 		musicField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		musicField.setTextFieldListener(new TextField.TextFieldListener() {
@@ -110,10 +116,12 @@ public class OptionsMenu implements Screen {
 					if (newVolume > 100) {
 						SSJava.prefs.putInteger("musicVolume", 100);
 						SSJava.prefs.flush();
+						Gdx.app.log(SSJava.LOG, "Music volume saved");
 					}
 					else {
 						SSJava.prefs.putInteger("musicVolume", newVolume);
 						SSJava.prefs.flush();
+						Gdx.app.log(SSJava.LOG, "Music volume saved");
 					}
 				}
 			}
@@ -138,10 +146,12 @@ public class OptionsMenu implements Screen {
 					if (newVolume > 100) {
 						SSJava.prefs.putInteger("soundVolume", 100);
 						SSJava.prefs.flush();
+						Gdx.app.log(SSJava.LOG, "Sound volume saved");
 					}
 					else {
 						SSJava.prefs.putInteger("soundVolume", newVolume);
 						SSJava.prefs.flush();
+						Gdx.app.log(SSJava.LOG, "Sound volume saved");
 					}
 				}
 			}
