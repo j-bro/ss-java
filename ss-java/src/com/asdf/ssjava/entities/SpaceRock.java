@@ -8,7 +8,12 @@ public class SpaceRock extends Obstacle {
 	/**
 	 * The space rock's default velocity (yes, it is static)
 	 */
-	private final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
+	public static final float DEFAULT_WIDTH = 2;
+	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_ROTATION = 0;
+	public static final int DEFAULT_HEALTH = 1;
 	
 	/**
 	 * @param position
@@ -18,13 +23,13 @@ public class SpaceRock extends Obstacle {
 	 */
 	public SpaceRock(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(EntityConstants.SpaceRockHealth);
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	// constructor for serialization
 	public SpaceRock() {
-		super(new Vector2(0, 0), EntityConstants.SpaceRockWidth, EntityConstants.SpaceRockHeight, EntityConstants.SpaceRockRotation);
-		setHealth(EntityConstants.SpaceRockHealth);
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)

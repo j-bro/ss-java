@@ -25,6 +25,11 @@ public class EnemyType1 extends Enemy {
 	 */
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
+	public static final float DEFAULT_WIDTH = 2;
+	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_ROTATION = 0;
+	public static final int DEFAULT_HEALTH = 3;
+	
 	/**
 	 * The enemy's type
 	 */
@@ -55,14 +60,14 @@ public class EnemyType1 extends Enemy {
 	public EnemyType1(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
 		this.world = world;
-		setHealth(EntityConstants.EnemyType1Health);
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	// constructor for serialization
 	public EnemyType1() {
-		super(new Vector2(0, 0), EntityConstants.EnemyType1Width, EntityConstants.EnemyType1Height, EntityConstants.EnemyType1Rotation);
-		// world something
-		setHealth(EntityConstants.EnemyType1Health);
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		// TODO world something init for bullets...
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)

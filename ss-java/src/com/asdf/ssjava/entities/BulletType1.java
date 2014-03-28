@@ -16,12 +16,12 @@ public class BulletType1 extends Bullet {
 	/**
 	 * The type of bullet
 	 */
-	final int type = 1;
+	public final int TYPE = 1;
 	
 	/**
 	 * The bullet's default velocity
 	 */
-	private final Vector2 DEFAULT_VELOCITY = new Vector2(20, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(20, 0);
 	
 	/**
 	 * @param position

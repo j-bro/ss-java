@@ -93,10 +93,10 @@ public class World {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), EntityConstants.SpaceRockWidth, EntityConstants.SpaceRockHeight, EntityConstants.SpaceRockRotation));
+					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION));
 				}
 				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), EntityConstants.AsteroidWidth, EntityConstants.AsteroidHeight, EntityConstants.AsteroidRotation);
+					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION);
 					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
 					level.obstacles.add(o);
 				}
@@ -104,19 +104,19 @@ public class World {
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), EntityConstants.SpeedOfLightWidth, EntityConstants.SpeedOfLightHeight, EntityConstants.SpeedOfLightRotation));
-				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), EntityConstants.HealthUpWidth, EntityConstants.HealthUpHeight, EntityConstants.HealthUpRotation));
+				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION));
+				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION));
 			}
 		}
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EntityConstants.EnemyType1Width, EntityConstants.EnemyType1Height, EntityConstants.EnemyType1Rotation, this));
+				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this));
 			}
-		}
+		}*/
 		
 		exportLevel(levelPath);
-		*/
+		
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);

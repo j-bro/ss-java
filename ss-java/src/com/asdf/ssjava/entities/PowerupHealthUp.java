@@ -4,6 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class PowerupHealthUp extends Powerup {
 	
+	public static final float DEFAULT_WIDTH = 2;
+	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_ROTATION = 0;
+	public static final int DEFAULT_HEALTH = 1;
+	
 	/**
 	 * 
 	 * @param position
@@ -13,13 +18,13 @@ public class PowerupHealthUp extends Powerup {
 	 */
 	public PowerupHealthUp(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(EntityConstants.HealthUpHealth);
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	// constructor for serialization
 	public PowerupHealthUp() {
-		super(new Vector2(0, 0), EntityConstants.HealthUpWidth, EntityConstants.HealthUpHeight, EntityConstants.HealthUpRotation);
-		setHealth(EntityConstants.HealthUpHealth);
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	/**

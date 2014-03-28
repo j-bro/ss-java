@@ -14,7 +14,12 @@ public class Asteroid extends Obstacle {
 	/**
 	 * The asteroid's default velocity
 	 */
-	private final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	
+	public static final float DEFAULT_WIDTH = 2;
+	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_ROTATION = 0;
+	public static final int DEFAULT_HEALTH = 2;
 	
 	/**
 	 * @param position
@@ -24,13 +29,13 @@ public class Asteroid extends Obstacle {
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(EntityConstants.AsteroidHealth);
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	// constructor for serialization
 	public Asteroid() {
-		super(new Vector2(0, 0), EntityConstants.AsteroidWidth, EntityConstants.AsteroidHeight, EntityConstants.AsteroidRotation);
-		setHealth(EntityConstants.AsteroidHealth);
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)
