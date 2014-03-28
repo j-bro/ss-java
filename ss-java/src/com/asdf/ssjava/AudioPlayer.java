@@ -16,14 +16,15 @@ public class AudioPlayer {
 
 	private AudioPlayer() {	}
 
-	public static Music gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/music/ambience.mp3")); // loc!
+	public static Music gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/music/ambience.mp3"));
 	
-	public static Sound shot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pewpew.mp3")); // loc!
-	public static Sound bulletImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3")); // loc!
-	public static Sound shipImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3")); // loc!
+	public static Sound shot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pewpew.mp3"));
+	public static Sound bulletImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3"));
+	public static Sound shipImpact = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3"));
 	
 	public static void playGameMusic(boolean looping) {
-		gameMusic.setVolume(SSJava.prefs.getInteger("soundVolume", 100));
+		
+		gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume", 100) / 100f);
 		gameMusic.setLooping(looping);
 		gameMusic.play();
 	}
@@ -43,7 +44,7 @@ public class AudioPlayer {
 
 			@Override
 			public void run() {
-				shot.play(SSJava.prefs.getInteger("soundVolume", 100));
+				shot.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
 			}
 			
 		}).start();
@@ -57,7 +58,7 @@ public class AudioPlayer {
 
 			@Override
 			public void run() {
-				bulletImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+				bulletImpact.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
 			}
 		}).start();
 	}
@@ -70,7 +71,7 @@ public class AudioPlayer {
 
 			@Override
 			public void run() {
-				shipImpact.play(SSJava.prefs.getInteger("soundVolume", 100));
+				shipImpact.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
 			}
 		}).start();
 	}
