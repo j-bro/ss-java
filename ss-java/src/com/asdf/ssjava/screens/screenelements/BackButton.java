@@ -1,6 +1,8 @@
 package com.asdf.ssjava.screens.screenelements;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.screens.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,6 +39,10 @@ public class BackButton extends MenuButton {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Back button up");
 				game.setScreen(referrer);
+				if (referrer instanceof GameScreen) {					
+					AudioPlayer.gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume", 100));
+					Gdx.app.log(SSJava.LOG, "New music volume: " + SSJava.prefs.getInteger("musicVolume"));
+				}
 			}
 		});
 	}
