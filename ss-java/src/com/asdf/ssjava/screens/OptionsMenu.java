@@ -36,7 +36,10 @@ public class OptionsMenu implements Screen {
 	Label titleLabel;
 	
 	Label volumeLabel;
-	TextField volumeField;
+	Label musicLabel;
+	Label soundLabel;
+	TextField musicField;
+	TextField soundField;
 	
 	MenuButton backButton;
 	
@@ -83,36 +86,70 @@ public class OptionsMenu implements Screen {
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
-		// TODO Volume still no go
+		// Volume controls
 		LabelStyle volumeLabelStyle = new LabelStyle(whiteFont, Color.WHITE);
-		volumeLabel = new Label("Volume: ", volumeLabelStyle);
-		volumeLabel.setX(width / 2 - volumeLabel.getWidth() / 2 - width / 15);
-		volumeLabel.setY(Gdx.graphics.getHeight() / 2);
-//		volumeLabel.setWidth(width);
+		volumeLabel = new Label("Volume", volumeLabelStyle);
+		volumeLabel.setX(0);
+		volumeLabel.setY(height / 2 + 70);
+		volumeLabel.setWidth(width);
 		volumeLabel.setAlignment(Align.center);
 		
-		volumeField = new TextField(new Integer(SSJava.prefs.getInteger("volume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, null, null, null));
-		volumeField.setMaxLength(3);
-		volumeField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
-		volumeField.setTextFieldListener(new TextField.TextFieldListener() {
+		musicLabel = new Label("Music: ", volumeLabelStyle);
+		musicLabel.setX(width / 2 - musicLabel.getWidth() / 2 - width / 15);
+		musicLabel.setY(Gdx.graphics.getHeight() / 2 + 20);
+		musicLabel.setAlignment(Align.center);
+		
+		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, null, null, null));
+		musicField.setMaxLength(3);
+		musicField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
+		musicField.setTextFieldListener(new TextField.TextFieldListener() {
 			@Override
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
-					int newVolume = Integer.parseInt(volumeField.getText()); 
+					int newVolume = Integer.parseInt(musicField.getText()); 
 					if (newVolume > 100) {
-						SSJava.prefs.putInteger("volume", 100);
+						SSJava.prefs.putInteger("musicVolume", 100);
+						SSJava.prefs.flush();
 					}
 					else {
-						SSJava.prefs.putInteger("volume", newVolume);
+						SSJava.prefs.putInteger("musicVolume", newVolume);
+						SSJava.prefs.flush();
 					}
-					Gdx.app.log(SSJava.LOG, "Volume: " + SSJava.prefs.getInteger("volume"));
 				}
 			}
 		});
-		volumeField.setWidth(80);
-		volumeField.setX(width / 2 - volumeField.getWidth() + width / 15);
-		volumeField.setY(Gdx.graphics.getHeight() / 2);
-		// TODO implement save when user hits enter
+		musicField.setWidth(80);
+		musicField.setX(width / 2 - musicField.getWidth() + width / 15);
+		musicField.setY(Gdx.graphics.getHeight() / 2 + 20);
+		
+		soundLabel = new Label("Sound: ", volumeLabelStyle);
+		soundLabel.setX(width / 2 - soundLabel.getWidth() / 2 - width / 15);
+		soundLabel.setY(Gdx.graphics.getHeight() / 2 - 30);
+		soundLabel.setAlignment(Align.center);
+		
+		soundField = new TextField(new Integer(SSJava.prefs.getInteger("soundVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, null, null, null));
+		soundField.setMaxLength(3);
+		soundField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
+		soundField.setTextFieldListener(new TextField.TextFieldListener() {
+			@Override
+			public void keyTyped(TextField textField, char key) {
+				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
+					int newVolume = Integer.parseInt(soundField.getText()); 
+					if (newVolume > 100) {
+						SSJava.prefs.putInteger("soundVolume", 100);
+						SSJava.prefs.flush();
+					}
+					else {
+						SSJava.prefs.putInteger("soundVolume", newVolume);
+						SSJava.prefs.flush();
+					}
+				}
+			}
+		});
+		soundField.setWidth(80);
+		soundField.setX(width / 2 - soundField.getWidth() + width / 15);
+		soundField.setY(Gdx.graphics.getHeight() / 2 - 30);
+		
 		
 		// exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
@@ -129,7 +166,10 @@ public class OptionsMenu implements Screen {
 		
 		stage.addActor(titleLabel);
 		stage.addActor(volumeLabel);
-		stage.addActor(volumeField);
+		stage.addActor(musicLabel);
+		stage.addActor(soundLabel);
+		stage.addActor(musicField);
+		stage.addActor(soundField);
 		stage.addActor(backButton);
 	}
 
