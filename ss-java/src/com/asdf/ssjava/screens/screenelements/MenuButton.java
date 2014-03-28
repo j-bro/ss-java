@@ -21,7 +21,8 @@ public class MenuButton extends TextButton {
 			}};
 			up = skin.getDrawable("buttonnormal");
 			down = skin.getDrawable("buttonpressed");
-			font = new BitmapFont(Gdx.files.internal("data/fonts/font.fnt"), false);
+			font = game.assetManager.get("data/fonts/font.fnt", BitmapFont.class);		
+
 		}});
 		
 		setWidth(width);
