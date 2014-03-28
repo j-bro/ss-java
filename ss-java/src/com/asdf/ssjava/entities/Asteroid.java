@@ -24,7 +24,13 @@ public class Asteroid extends Obstacle {
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(2);
+		setHealth(EntityConstants.AsteroidHealth);
+	}
+	
+	// constructor for serialization
+	public Asteroid() {
+		super(new Vector2(0, 0), EntityConstants.AsteroidWidth, EntityConstants.AsteroidHeight, EntityConstants.AsteroidRotation);
+		setHealth(EntityConstants.AsteroidHealth);
 	}
 
 	/* (non-Javadoc)

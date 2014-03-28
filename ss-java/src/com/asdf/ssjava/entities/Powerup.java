@@ -14,7 +14,7 @@ public class Powerup extends MoveableEntity {
 	/**
 	 * A trigger to stop the ship from colliding with the enemy multiple times
 	 */
-	public boolean alreadyCollided = false;
+	public transient boolean alreadyCollided = false;
 
 	/**
 	 * @param position
@@ -24,7 +24,6 @@ public class Powerup extends MoveableEntity {
 	 */
 	public Powerup(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)

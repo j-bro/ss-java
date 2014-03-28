@@ -23,7 +23,7 @@ public abstract class MoveableEntity extends AbstractEntity {
 	/**
 	 * The entity's acceleration
 	 */
-	protected Vector2 acceleration;
+	protected transient Vector2 acceleration;
 	
 	/**
 	 * The entity's rotation, in degrees

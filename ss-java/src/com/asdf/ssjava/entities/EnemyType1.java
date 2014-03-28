@@ -18,7 +18,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The World's instance
 	 */
-	private World world;
+	private transient World world;
 	
 	/**
 	 * Default velocity for the Type 1 Enemy
@@ -38,12 +38,12 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The cooldown, in milliseconds, of the enemy's fire
 	 */
-	private int shotCooldown = 300;
+	private transient int shotCooldown = 300;
 	
 	/**
 	 * The time since the last shot was taken
 	 */
-	private long lastShotTime = 0;
+	private transient long lastShotTime = 0;
 	
 	/**
 	 * @param position the position of the enemy
@@ -55,7 +55,14 @@ public class EnemyType1 extends Enemy {
 	public EnemyType1(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
 		this.world = world;
-		setHealth(3);
+		setHealth(EntityConstants.EnemyType1Health);
+	}
+	
+	// constructor for serialization
+	public EnemyType1() {
+		super(new Vector2(0, 0), EntityConstants.EnemyType1Width, EntityConstants.EnemyType1Height, EntityConstants.EnemyType1Rotation);
+		// world something
+		setHealth(EntityConstants.EnemyType1Health);
 	}
 
 	/* (non-Javadoc)

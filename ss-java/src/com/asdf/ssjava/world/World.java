@@ -13,6 +13,7 @@ import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.EntityConstants;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
@@ -21,8 +22,10 @@ import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -54,24 +57,15 @@ public class World {
 	InputManager manager;
 	
 	/**
-	 * ArrayList containing all the obstacles in the current level
+	 * The level object containing all level elements
+	 * This object is created when loading the selected level's data from a JSON file
 	 */
-	Array<Obstacle> obstacles;
-	
-	/**
-	 * ArrayList containing all the enemies in the current level
-	 */
-	Array<Enemy> enemies;
+	Level level;
 	
 	/**
 	 * Array containing all the bullets present in the level
 	 */
 	Array<Bullet> bullets;
-	
-	/**
-	 * ArrayList containing all the powerups in the current level
-	 */
-	Array<Powerup> powerups;
 	
 	/**
 	 * Task to restore default speed (after Speed Of Light powerup)
@@ -85,40 +79,44 @@ public class World {
 	public World(SSJava game) {
 		this.game = game;
 		
-		obstacles = new Array<Obstacle>();
-		enemies = new Array<Enemy>();
-		bullets = new Array<Bullet>();
-		powerups = new Array<Powerup>();
-		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
 		
+		bullets = new Array<Bullet>();
+		
 		// Level Loading
+		loadLevel("levels/level1.json");
+		
+		/*
+		level = new Level();
+		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), 2, 2, 0));
+					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), EntityConstants.SpaceRockWidth, EntityConstants.SpaceRockHeight, EntityConstants.SpaceRockRotation));
 				}
 				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), 2, 2, 0);
+					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), EntityConstants.AsteroidWidth, EntityConstants.AsteroidHeight, EntityConstants.AsteroidRotation);
 					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
-					obstacles.add(o);
+					level.obstacles.add(o);
 				}
 			}
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), 1, 1, 0));
-				powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), 1, 1, 0));
+				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), EntityConstants.SpeedOfLightWidth, EntityConstants.SpeedOfLightHeight, EntityConstants.SpeedOfLightRotation));
+				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), EntityConstants.HealthUpWidth, EntityConstants.HealthUpHeight, EntityConstants.HealthUpRotation));
 			}
 		}
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
+				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EntityConstants.EnemyType1Width, EntityConstants.EnemyType1Height, EntityConstants.EnemyType1Rotation, this));
 			}
 		}
 		
+		exportLevel("levels/level1.json");
+		*/
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);
@@ -131,16 +129,16 @@ public class World {
 		// Entity updates
 		ship.update();
 		
-		for (Obstacle o: obstacles) {
+		for (Obstacle o: level.obstacles) {
 			o.update();
 		}
-		for (Enemy e: enemies) {
+		for (Enemy e: level.enemies) {
 			e.update();
 		}
 		for (Bullet b: bullets) {
 			b.update();
 		}
-		for (Powerup p: powerups) {
+		for (Powerup p: level.powerups) {
 			p.update();
 		}
 		
@@ -152,7 +150,7 @@ public class World {
 				bullets.removeValue(b, true);
 			}
 			// Bullet collision with enemies
-			for (Enemy e: enemies) { 
+			for (Enemy e: level.enemies) { 
 				if (e.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
@@ -161,7 +159,7 @@ public class World {
 					e.healthChange((-1) * b.getDamage());
 					// life check
 					if (checkIfDead(e)) {
-						enemies.removeValue(e, true);
+						level.enemies.removeValue(e, true);
 					}
 					
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
@@ -169,7 +167,7 @@ public class World {
 			}
 			
 			// Bullet collision with obstacles
-			for (Obstacle o: obstacles) { 
+			for (Obstacle o: level.obstacles) { 
 				if (o.getHitbox().overlaps(b.getHitbox())) {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
@@ -178,7 +176,7 @@ public class World {
 					o.healthChange((-1) * b.getDamage());
 					// life check
 					if (checkIfDead(o)) {
-						obstacles.removeValue(o, true);
+						level.obstacles.removeValue(o, true);
 					}
 
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
@@ -203,14 +201,14 @@ public class World {
 			
 		}
 		// Enemy collision with ship
-		for (Enemy e: enemies) {
+		for (Enemy e: level.enemies) {
 			if (e.getHitbox().overlaps(ship.getHitbox()) && !e.alreadyCollided){
 				if (ship.lightSpeedMode){
 					//enemy damage
 					e.healthChange(-999);
 					// life check
 					if (checkIfDead(e)) {
-						enemies.removeValue(e, true);
+						level.enemies.removeValue(e, true);
 					}
 				}
 				else {
@@ -222,7 +220,7 @@ public class World {
 					ship.healthChange(-1);
 					// life check
 					if (checkIfDead(e)) {
-						enemies.removeValue(e, true);
+						level.enemies.removeValue(e, true);
 					}
 					checkIfDead(ship);
 				}
@@ -230,14 +228,14 @@ public class World {
 		}
 		
 		// Obstacle collision with ship		
-		for (Obstacle o: obstacles) {
+		for (Obstacle o: level.obstacles) {
 			if (o.getHitbox().overlaps(ship.getHitbox()) && !o.alreadyCollided) {
 				if (ship.lightSpeedMode){
 					//obstacle damage
 					o.healthChange(-999);
 					// life check
 					if (checkIfDead(o)) {
-						obstacles.removeValue(o, true);
+						level.obstacles.removeValue(o, true);
 					}
 				}
 				else {
@@ -249,14 +247,14 @@ public class World {
 					ship.healthChange(-1);
 					// life check
 					if (checkIfDead(o)) {
-						obstacles.removeValue(o, true);
+						level.obstacles.removeValue(o, true);
 					}
 				}
 			}
 		}
 		
 		//Power-up collision with ship
-		for (Powerup p: powerups){
+		for (Powerup p: level.powerups){
 			if (p.getHitbox().overlaps(ship.getHitbox())) {
 				//Collision with the Speed of Light power-up
 				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
@@ -333,6 +331,23 @@ public class World {
 	}
 	
 	/**
+	 * Exports the current level to a file in JSON format
+	 */
+	public void exportLevel(String path) {
+		Json json = new Json();
+		FileHandle levelFile = Gdx.files.local(path);
+		levelFile.writeString(json.prettyPrint(level), false);
+	}
+	
+	/**
+	 * Loads a level from a JSON file into the level
+	 */
+	private void loadLevel(String path) {		
+		Json json = new Json();
+		level = json.fromJson(Level.class, Gdx.files.internal(path));
+	}
+	
+	/**
 	 * @return the ship
 	 */
 	public Ship getShip() {
@@ -344,7 +359,7 @@ public class World {
 	 * @return the obstacles array
 	 */
 	public Array<Obstacle> getObstacles() {
-		return obstacles;
+		return level.obstacles;
 	}
 	
 	/**
@@ -352,15 +367,24 @@ public class World {
 	 * @return the enemies array
 	 */
 	public Array<Enemy> getEnemies() {
-		return enemies;
+		return level.enemies;
 	}
 	
 	/**
-	 * Returns the bullets array
+	 * @return the bullets array
 	 */
 	public Array<Bullet> getBullets() {
 		return bullets;
 	}
+	
+	/**
+	 * 
+	 * @return the powerups array
+	 */
+	public Array<Powerup> getPowerups() {
+		return level.powerups;
+	}
+	
 	/**
 	 * Passes the WorldRenderer into this class
 	 */
