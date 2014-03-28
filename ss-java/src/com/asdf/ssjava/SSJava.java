@@ -57,14 +57,7 @@ public class SSJava extends Game {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		assetManager = new AssetManager();
 		
-		if (SSJava.DEBUG) { // straight to game screen for DEBUG
-//			gameScreen = new GameScreen(this);
-//			setScreen(gameScreen);
-			setScreen(new MainMenu(this));
-		}
-		else {
-			setScreen(new SplashScreen(this));			
-		}
+		setScreen(new SplashScreen(this));			
 		
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
