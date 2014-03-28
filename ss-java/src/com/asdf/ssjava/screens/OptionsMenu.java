@@ -99,7 +99,7 @@ public class OptionsMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show Options menu");
 		
 		batch = new SpriteBatch();
-		whiteFont = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
 	@Override

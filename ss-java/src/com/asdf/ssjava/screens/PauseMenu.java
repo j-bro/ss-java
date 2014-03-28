@@ -147,9 +147,8 @@ public class PauseMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show pause menu");
 		
 		batch = new SpriteBatch();
-		whiteFont = new BitmapFont(Gdx.files.internal("data/fonts/whitefont.fnt"), false);
-		blackFont = new BitmapFont(Gdx.files.internal("data/fonts/font.fnt"), false);
-		
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
+		whiteFont = game.assetManager.get("data/fonts/font.fnt", BitmapFont.class);				
 	}
 
 	@Override
