@@ -9,6 +9,7 @@ import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
+import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
@@ -64,6 +65,7 @@ public class WorldRenderer {
 	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
 	Texture speedOfLightTexture, healthUpTexture;
 	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture;
+	Texture planetTexture;
 	
 	// TODO ...
 	float width, height;
@@ -108,11 +110,14 @@ public class WorldRenderer {
 		bulletType0Texture = game.assetManager.get("data/textures/bullet_strip.png", Texture.class);
 		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		powerupHealthUpTexture = game.assetManager.get("data/textures/ninjastar.png", Texture.class);
+		powerupHealthUpTexture = game.assetManager.get("data/textures/healthUp.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/waterball.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		planetTexture = game.assetManager.get("data/textures/planet.png", Texture.class);
+		planetTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
@@ -206,6 +211,14 @@ public class WorldRenderer {
 					powerupTexture = powerupSpeedOfLightTexture;
 				}
 				batch.draw(powerupTexture, p.getPosition().x, p.getPosition().y, p.getWidth(), p.getHeight());
+			}
+			
+			for (Obstacle g: world.gameChangers) {
+				Texture planetTexture = null;
+				if (g instanceof Planet) {
+					planetTexture = this.planetTexture;
+				}
+				batch.draw(planetTexture, g.getPosition().x, g.getPosition().y, g.getWidth(), g.getHeight());
 			}
 			
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
