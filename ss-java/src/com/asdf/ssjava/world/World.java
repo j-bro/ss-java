@@ -14,6 +14,7 @@ import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
+import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
@@ -74,6 +75,11 @@ public class World {
 	Array<Powerup> powerups;
 	
 	/**
+	 * ArrayList containing all of the game changers in the level
+	 */
+	Array<Obstacle> gameChangers;
+	
+	/**
 	 * Task to restore default speed (after Speed Of Light powerup)
 	 */
 	Task resetShipXVelocity;
@@ -89,6 +95,7 @@ public class World {
 		enemies = new Array<Enemy>();
 		bullets = new Array<Bullet>();
 		powerups = new Array<Powerup>();
+		gameChangers = new Array<Obstacle>();
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
@@ -106,16 +113,20 @@ public class World {
 				}
 			}
 		}
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 6; j++) {
+				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
+			}
+		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
 				powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), 1, 1, 0));
 				powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), 1, 1, 0));
 			}
 		}
-		
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 3; j++) {
+				gameChangers.add(new Planet(new Vector2(150 * i + 25, 7.5f + j * 10), 4, 4, 0));
 			}
 		}
 		
@@ -142,6 +153,9 @@ public class World {
 		}
 		for (Powerup p: powerups) {
 			p.update();
+		}
+		for (Obstacle g: gameChangers){
+			g.update();
 		}
 		
 		// TODO Collision detection		
@@ -185,6 +199,23 @@ public class World {
 				}
 			}
 			
+			//Bullet collision with gameChangers
+			for (Obstacle g: gameChangers) { 
+				if (g.getHitbox().overlaps(b.getHitbox())) {
+					AudioPlayer.bulletImpact();
+					bullets.removeValue(b, true);
+					
+					// obstacle damage
+					g.healthChange((-1) * b.getDamage());
+					// life check
+					if (checkIfDead(g)) {
+						gameChangers.removeValue(g, true);
+					}
+
+					Gdx.app.log(SSJava.LOG, "Planet's health: " + g.getHealth());
+				}
+			}
+			
 			// Bullet collision with ship
 			if (ship.getHitbox().overlaps(b.getHitbox())) {
 				bullets.removeValue(b, true);
@@ -225,6 +256,8 @@ public class World {
 						enemies.removeValue(e, true);
 					}
 					checkIfDead(ship);
+					//Change ship speed
+					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 				}
 			}	
 		}
@@ -251,6 +284,8 @@ public class World {
 					if (checkIfDead(o)) {
 						obstacles.removeValue(o, true);
 					}
+					//Change ship speed
+					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 				}
 			}
 		}
@@ -281,6 +316,30 @@ public class World {
 					ship.healthChange(2);
 					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
 				}
+				powerups.removeValue(p, true);
+			}
+		}
+		
+		//Planet collision with ship
+		for (Obstacle g: gameChangers) {
+			if (g.getHitbox().overlaps(ship.getHitbox()) && !g.alreadyCollided) {
+				if (ship.lightSpeedMode){
+
+				}
+				else {
+					AudioPlayer.shipImpact();
+					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
+					g.alreadyCollided = true;
+					// ship and enemy damage
+					g.healthChange(-1);
+					ship.healthChange(-1);
+					// life check
+					if (checkIfDead(g)) {
+						obstacles.removeValue(g, true);
+					}
+				}
+				//Change ship speed
+				ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 			}
 		}
 		

@@ -31,6 +31,12 @@ public class Ship extends MoveableEntity {
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
 	
 	/**
+	 * The ship's slow velocity
+	 * Slows down to this speed when it collides with another object
+	 */
+	public final Vector2 SLOW_VELOCITY = new Vector2(3, 0); 
+	
+	/**
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
@@ -110,6 +116,9 @@ public class Ship extends MoveableEntity {
 					acceleration.y = 0;
 				}
 			}
+		}
+		if (Math.abs(velocity.x) < DEFAULT_VELOCITY.x) {
+			velocity.x += 3 * Gdx.graphics.getDeltaTime();
 		}
 		
 		velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
