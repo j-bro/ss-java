@@ -11,7 +11,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Enemy AI
 - Score Keeper
 - Correct hitboxes (requires ship textures)
-- Options/preferences
 - All Textures
 - Game HUD (life, progress, score)
 - And more..!
@@ -19,6 +18,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 ####In Progress
 
 - Menu GUI
+- Options/preferences
 - AudioPlayer sounds
 - Health points
 - Powerups
@@ -26,9 +26,9 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level design
 
 ####Complete
-- Ship movement
-- User input (controls)
-- Asset Manager
+- Ship movement (completed DD/MM)
+- User input (controls) (completed DD/MM)
+- Asset Manager (completed 25/03)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro

@@ -114,6 +114,8 @@ public class OptionsMenu implements Screen {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
 					int newVolume = Integer.parseInt(musicField.getText()); 
 					if (newVolume > 100) {
+						musicField.setText(new Integer(100).toString());
+						musicField.setCursorPosition(musicField.getText().length());
 						SSJava.prefs.putInteger("musicVolume", 100);
 						SSJava.prefs.flush();
 						Gdx.app.log(SSJava.LOG, "Music volume saved");
@@ -135,7 +137,7 @@ public class OptionsMenu implements Screen {
 		soundLabel.setY(Gdx.graphics.getHeight() / 2 - 30);
 		soundLabel.setAlignment(Align.center);
 		
-		soundField = new TextField(new Integer(SSJava.prefs.getInteger("soundVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, null, null, null));
+		soundField = new TextField(new Integer(SSJava.prefs.getInteger("soundVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
 		soundField.setMaxLength(3);
 		soundField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		soundField.setTextFieldListener(new TextField.TextFieldListener() {
@@ -144,6 +146,8 @@ public class OptionsMenu implements Screen {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
 					int newVolume = Integer.parseInt(soundField.getText()); 
 					if (newVolume > 100) {
+						soundField.setText(new Integer(100).toString());
+						soundField.setCursorPosition(musicField.getText().length());
 						SSJava.prefs.putInteger("soundVolume", 100);
 						SSJava.prefs.flush();
 						Gdx.app.log(SSJava.LOG, "Sound volume saved");
