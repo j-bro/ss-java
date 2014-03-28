@@ -114,8 +114,8 @@ public class World {
 			}
 		}
 		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), 1, 1, 0, this));
+			for (int j = 0; j < 3; j++) {
+				enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 7 * (j + 1)), 1, 1, 0, this));
 			}
 		}
 		for (int i = 0; i < 10; i++){
@@ -126,7 +126,7 @@ public class World {
 		}
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 3; j++) {
-				gameChangers.add(new Planet(new Vector2(150 * i + 25, 7.5f + j * 10), 4, 4, 0));
+				gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0));
 			}
 		}
 		
@@ -304,10 +304,10 @@ public class World {
 						@Override
 						public void run() {
 							ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
-							ship.getVelocity().y = ship.DEFAULT_VELOCITY.y;
+//							ship.getVelocity().y = ship.DEFAULT_VELOCITY.y;
 							ship.lightSpeedMode = false;
 						}
-					}, 5f);
+					}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
 				//Collision with the Health Up power-up

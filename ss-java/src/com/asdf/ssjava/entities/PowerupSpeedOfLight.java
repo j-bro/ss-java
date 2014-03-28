@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class PowerupSpeedOfLight extends Powerup {
 
+	public static final float COOLDOWN_SECONDS = 5;
+	
 	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
 		setHealth(1);
