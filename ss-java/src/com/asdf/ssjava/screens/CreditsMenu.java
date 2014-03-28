@@ -98,7 +98,7 @@ public class CreditsMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show credits");
 		
 		batch = new SpriteBatch();
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	@Override
