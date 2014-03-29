@@ -9,25 +9,28 @@ import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Asteroid;
+
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.EnemyType1;
-import com.asdf.ssjava.entities.EntityConstants;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
+/* Commented imports
+import com.asdf.ssjava.entities.Asteroid;
+import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.PowerupHealthUp;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
+import com.asdf.ssjava.entities.SpaceRock;
+import com.badlogic.gdx.files.FileHandle;
+ */
 
 /**
  * @author Jeremy Brown
