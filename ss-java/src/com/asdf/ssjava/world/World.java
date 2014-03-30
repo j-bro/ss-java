@@ -55,6 +55,11 @@ public class World {
 	InputManager manager;
 	
 	/**
+	 * The ScoreKeeper instance
+	 */
+	ScoreKeeper scoreKeeper;
+	
+	/**
 	 * ArrayList containing all the obstacles in the current level
 	 */
 	Array<Obstacle> obstacles;
@@ -133,6 +138,9 @@ public class World {
 		// Set game input processor
 		manager = new InputManager(game, this);
 		Gdx.input.setInputProcessor(manager);
+		
+		// Score keeper
+		scoreKeeper = new ScoreKeeper();
 	}
 	
 	/**
@@ -176,6 +184,10 @@ public class World {
 					// life check
 					if (checkIfDead(e)) {
 						enemies.removeValue(e, true);
+						scoreKeeper.add(500);
+					}
+					else {
+						scoreKeeper.add(50);
 					}
 					
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
@@ -193,6 +205,10 @@ public class World {
 					// life check
 					if (checkIfDead(o)) {
 						obstacles.removeValue(o, true);
+						scoreKeeper.add(10);
+					}
+					else {
+						scoreKeeper.add(5);
 					}
 
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
@@ -205,13 +221,17 @@ public class World {
 					AudioPlayer.bulletImpact();
 					bullets.removeValue(b, true);
 					
-					// obstacle damage
+					// game changer damage
 					g.healthChange((-1) * b.getDamage());
 					// life check
 					if (checkIfDead(g)) {
 						gameChangers.removeValue(g, true);
+						scoreKeeper.add(1000);
 					}
-
+					else {
+						scoreKeeper.add(100);
+					}
+					
 					Gdx.app.log(SSJava.LOG, "Planet's health: " + g.getHealth());
 				}
 			}
@@ -255,7 +275,9 @@ public class World {
 					if (checkIfDead(e)) {
 						enemies.removeValue(e, true);
 					}
-					checkIfDead(ship);
+					
+					checkIfDead(ship); // TODO
+					
 					//Change ship speed
 					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 				}
@@ -297,7 +319,7 @@ public class World {
 				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 4;
-					ship.getVelocity().x = ship.DEFAULT_VELOCITY.y * 2;
+//					ship.getVelocity().y = ship.DEFAULT_VELOCITY.y * 2;
 					ship.lightSpeedMode = true;
 					//Reset the ship to default after 5 seconds
 					new Timer().scheduleTask(new Task() {

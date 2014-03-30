@@ -21,9 +21,13 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 /**
  * @author Jeremy Brown
@@ -42,9 +46,16 @@ public class WorldRenderer {
 	World world;
 	
 	/**
-	 * The sprite batch responsible for drawing all elements in the world
+	 * The sprite batches responsible for drawing all elements in the world
 	 */
 	SpriteBatch batch;
+	SpriteBatch stageBatch;
+	
+	/**
+	 * The stage for drawing the score
+	 */
+	Stage stage;
+	Label scoreLabel;
 	
 	/**
 	 * The camera 
@@ -71,7 +82,7 @@ public class WorldRenderer {
 	float width, height;
 	
 	/**
-	 * Shape renderer for debugging ONLY!
+	 * TODO Shape renderer for debugging ONLY!
 	 */
 	ShapeRenderer sr;
 	
@@ -125,6 +136,24 @@ public class WorldRenderer {
 		
 		ship = world.getShip();
 		
+		// HUD stage
+		stageBatch = new SpriteBatch();
+		stageBatch.setProjectionMatrix(cam.combined);
+		
+		if (stage == null) {
+			stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		}
+		stage.clear();
+		
+		LabelStyle ls = new LabelStyle(game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
+		scoreLabel = new Label("Score: " + world.scoreKeeper.getScore(), ls);
+		scoreLabel.setX(10);
+		scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
+		
+		stage.addActor(scoreLabel);
+		
+		
+		// shape renderer
 		sr = new ShapeRenderer();
 	}
 	
@@ -141,6 +170,7 @@ public class WorldRenderer {
 		
 		batch.begin();
 		
+			// obstacle rendering
 			for (Obstacle o: world.obstacles) {
 				Texture obstacleTexture = null;
 				if (o instanceof SpaceRock) {
@@ -152,6 +182,7 @@ public class WorldRenderer {
 				batch.draw(obstacleTexture, o.getPosition().x, o.getPosition().y, o.getWidth(), o.getHeight());
 			}
 			
+			// enemy rendering
 			for (Enemy e: world.enemies) {
 				Texture enemyTexture = null;
 				switch(e.getType()) {
@@ -171,6 +202,7 @@ public class WorldRenderer {
 				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 			
+			// bullet rendering
 			for (Bullet b: world.bullets) {
 				Texture bulletTexture = null;
 				int srcX = 0, srcY = 0, srcWidth = 0, srcHeight = 0;
@@ -202,6 +234,7 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
 			
+			// powerup rendering
 			for (Powerup p: world.powerups) {
 				Texture powerupTexture = null;
 				if (p instanceof PowerupHealthUp) {
@@ -213,6 +246,7 @@ public class WorldRenderer {
 				batch.draw(powerupTexture, p.getPosition().x, p.getPosition().y, p.getWidth(), p.getHeight());
 			}
 			
+			// game changer rendering
 			for (Obstacle g: world.gameChangers) {
 				Texture planetTexture = null;
 				if (g instanceof Planet) {
@@ -221,8 +255,16 @@ public class WorldRenderer {
 				batch.draw(planetTexture, g.getPosition().x, g.getPosition().y, g.getWidth(), g.getHeight());
 			}
 			
+			// ship rendering
 			batch.draw(shipTexture, ship.getPosition().x, ship.getPosition().y, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
-		batch.end();  
+			
+		batch.end();
+		
+		// HUD rendering
+		scoreLabel.setText("Score: " + new Integer(world.scoreKeeper.getScore()).toString());
+		stageBatch.begin();
+			stage.draw();
+		stageBatch.end();
 		
 		if (SSJava.DEBUG) { 			
 			// Shape renderer (hitboxes) for DEBUG only

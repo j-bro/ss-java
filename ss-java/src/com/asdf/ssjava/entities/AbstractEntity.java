@@ -115,7 +115,7 @@ public abstract class AbstractEntity {
 		this.hitbox = hitbox;
 	}
 	
-	public int getHealth() {
+	public synchronized int getHealth() {
 		return health;
 	}
 	
