@@ -9,10 +9,8 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 ####To do list
 
 - Enemy AI
-- Score Keeper
 - Correct hitboxes (requires ship textures)
 - All Textures
-- Game HUD (life, progress, score)
 - And more..!
 
 ####In Progress
@@ -21,9 +19,11 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Options/preferences
 - AudioPlayer sounds
 - Health points
+- Score Keeper
 - Powerups
 - Collision physics
 - Level design
+- Game HUD (life, progress, score)
 
 ####Complete
 - Ship movement (completed DD/MM)
