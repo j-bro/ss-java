@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -99,7 +98,7 @@ public class OptionsMenu implements Screen {
 		volumeLabel.setAlignment(Align.center);
 		
 		musicLabel = new Label("Music: ", volumeLabelStyle);
-		musicLabel.setX(width / 2 - musicLabel.getWidth() / 2 - width / 15);
+		musicLabel.setX(width / 2 - musicLabel.getWidth() / 2 - width / 25);
 		musicLabel.setY(Gdx.graphics.getHeight() / 2 + 20);
 		musicLabel.setAlignment(Align.center);
 		
@@ -129,11 +128,11 @@ public class OptionsMenu implements Screen {
 			}
 		});
 		musicField.setWidth(80);
-		musicField.setX(width / 2 - musicField.getWidth() + width / 15);
+		musicField.setX(musicLabel.getX() + musicLabel.getWidth() + width / 50);
 		musicField.setY(Gdx.graphics.getHeight() / 2 + 20);
 		
 		soundLabel = new Label("Sound: ", volumeLabelStyle);
-		soundLabel.setX(width / 2 - soundLabel.getWidth() / 2 - width / 15);
+		soundLabel.setX(width / 2 - soundLabel.getWidth() / 2 - width / 25);
 		soundLabel.setY(Gdx.graphics.getHeight() / 2 - 30);
 		soundLabel.setAlignment(Align.center);
 		
@@ -161,7 +160,7 @@ public class OptionsMenu implements Screen {
 			}
 		});
 		soundField.setWidth(80);
-		soundField.setX(width / 2 - soundField.getWidth() + width / 15);
+		soundField.setX(soundLabel.getX() + soundLabel.getWidth() + width / 50);
 		soundField.setY(Gdx.graphics.getHeight() / 2 - 30);
 		
 		
