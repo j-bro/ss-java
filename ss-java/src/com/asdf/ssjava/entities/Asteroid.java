@@ -14,7 +14,17 @@ public class Asteroid extends Obstacle {
 	/**
 	 * The asteroid's default velocity
 	 */
-	private final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	
+	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 5;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 20; 
 	
 	/**
 	 * @param position

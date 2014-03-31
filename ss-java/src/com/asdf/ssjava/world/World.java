@@ -182,12 +182,19 @@ public class World {
 					// enemy damage
 					e.healthChange((-1) * b.getDamage());
 					// life check
+					int killScore = 0;
+					int hitScore = 0;
+					if (e instanceof EnemyType1) {
+						killScore = EnemyType1.KILL_SCORE;
+						hitScore = EnemyType1.HIT_SCORE;
+					}
+					
 					if (checkIfDead(e)) {
 						enemies.removeValue(e, true);
-						scoreKeeper.add(500);
+						scoreKeeper.add(killScore);
 					}
 					else {
-						scoreKeeper.add(50);
+						scoreKeeper.add(hitScore);
 					}
 					
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
@@ -203,12 +210,23 @@ public class World {
 					// obstacle damage
 					o.healthChange((-1) * b.getDamage());
 					// life check
+					int killScore = 0;
+					int hitScore = 0;
+					if (o instanceof Asteroid) {
+						killScore = Asteroid.KILL_SCORE;
+						hitScore = Asteroid.HIT_SCORE;
+					}
+					else if (o instanceof SpaceRock) {
+						killScore = SpaceRock.KILL_SCORE;
+						hitScore = SpaceRock.HIT_SCORE;
+					}
+					
 					if (checkIfDead(o)) {
 						obstacles.removeValue(o, true);
-						scoreKeeper.add(10);
+						scoreKeeper.add(killScore);
 					}
 					else {
-						scoreKeeper.add(5);
+						scoreKeeper.add(hitScore);
 					}
 
 					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
@@ -224,12 +242,19 @@ public class World {
 					// game changer damage
 					g.healthChange((-1) * b.getDamage());
 					// life check
+					int killScore = 0;
+					int hitScore = 0;
+					if (g instanceof Planet) {
+						killScore = Planet.KILL_SCORE;
+						hitScore = Planet.HIT_SCORE;
+					}
+					
 					if (checkIfDead(g)) {
 						gameChangers.removeValue(g, true);
-						scoreKeeper.add(1000);
+						scoreKeeper.add(killScore);
 					}
 					else {
-						scoreKeeper.add(100);
+						scoreKeeper.add(hitScore);
 					}
 					
 					Gdx.app.log(SSJava.LOG, "Planet's health: " + g.getHealth());
@@ -342,7 +367,7 @@ public class World {
 			}
 		}
 		
-		//Planet collision with ship
+		//Game-changer collision with ship
 		for (Obstacle g: gameChangers) {
 			if (g.getHitbox().overlaps(ship.getHitbox()) && !g.alreadyCollided) {
 				if (ship.lightSpeedMode){

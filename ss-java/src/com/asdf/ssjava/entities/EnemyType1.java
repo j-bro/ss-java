@@ -26,14 +26,24 @@ public class EnemyType1 extends Enemy {
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 50;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 500; 
+	
+	/**
 	 * The enemy's type
 	 */
-	public final int type = 1;
+	public static final int type = 1;
 	
 	/**
 	 * The type of bullets the ship will fire
 	 */
-	public final int bulletType = 1;
+	public static final int bulletType = 1;
 	
 	/**
 	 * The cooldown, in milliseconds, of the enemy's fire

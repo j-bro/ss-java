@@ -8,7 +8,17 @@ public class SpaceRock extends Obstacle {
 	/**
 	 * The space rock's default velocity (yes, it is static)
 	 */
-	private final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
+	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 5;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 10; 
 	
 	/**
 	 * @param position
