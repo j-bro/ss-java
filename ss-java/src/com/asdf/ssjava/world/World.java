@@ -344,14 +344,12 @@ public class World {
 				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 4;
-//					ship.getVelocity().y = ship.DEFAULT_VELOCITY.y * 2;
 					ship.lightSpeedMode = true;
 					//Reset the ship to default after 5 seconds
 					new Timer().scheduleTask(new Task() {
 						@Override
 						public void run() {
 							ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
-//							ship.getVelocity().y = ship.DEFAULT_VELOCITY.y;
 							ship.lightSpeedMode = false;
 						}
 					}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
@@ -360,7 +358,10 @@ public class World {
 				//Collision with the Health Up power-up
 				else if (p.toString().equals("Health Up Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
-					ship.healthChange(2);
+					ship.healthChange(PowerupHealthUp.HEALTH_GIVEN);
+					if (ship.getHealth() > 6) {
+						ship.setHealth(6);
+					}
 					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
 				}
 				powerups.removeValue(p, true);
