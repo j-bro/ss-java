@@ -18,6 +18,11 @@ public class Planet extends Obstacle{
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
+	 * The entity's starting health
+	 */
+	public static final int DEFAULT_HEALTH = 4;
+	
+	/**
 	 * The score given for hitting this entity
 	 */
 	public static final int HIT_SCORE = 100;
@@ -36,7 +41,7 @@ public class Planet extends Obstacle{
 	 */
 	public Planet(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(4);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/*

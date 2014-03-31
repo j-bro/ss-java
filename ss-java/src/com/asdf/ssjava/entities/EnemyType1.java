@@ -26,6 +26,11 @@ public class EnemyType1 extends Enemy {
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
+	 * The entity's starting health
+	 */
+	public static final int DEFAULT_HEALTH = 3;
+	
+	/**
 	 * The score given for hitting this entity
 	 */
 	public static final int HIT_SCORE = 50;
@@ -65,7 +70,7 @@ public class EnemyType1 extends Enemy {
 	public EnemyType1(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation);
 		this.world = world;
-		setHealth(3);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)

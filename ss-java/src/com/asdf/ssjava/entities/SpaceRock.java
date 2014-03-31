@@ -8,7 +8,12 @@ public class SpaceRock extends Obstacle {
 	/**
 	 * The space rock's default velocity (yes, it is static)
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
+	/**
+	 * The entity's starting health
+	 */
+	public static final int DEFAULT_HEALTH = 1;
 	
 	/**
 	 * The score given for hitting this entity
@@ -28,7 +33,7 @@ public class SpaceRock extends Obstacle {
 	 */
 	public SpaceRock(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(1);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)

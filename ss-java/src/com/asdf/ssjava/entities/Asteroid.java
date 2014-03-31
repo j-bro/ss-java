@@ -17,6 +17,11 @@ public class Asteroid extends Obstacle {
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
 	
 	/**
+	 * The entity's starting health
+	 */
+	public static final int DEFAULT_HEALTH = 2;
+	
+	/**
 	 * The score given for hitting this entity
 	 */
 	public static final int HIT_SCORE = 5;
@@ -34,7 +39,7 @@ public class Asteroid extends Obstacle {
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
-		setHealth(2);
+		setHealth(DEFAULT_HEALTH);
 	}
 
 	/* (non-Javadoc)

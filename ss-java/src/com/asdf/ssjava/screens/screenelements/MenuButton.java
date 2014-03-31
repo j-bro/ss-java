@@ -1,7 +1,6 @@
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.SSJava;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;

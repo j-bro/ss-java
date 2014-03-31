@@ -4,7 +4,6 @@
 package com.asdf.ssjava;
 
 import com.asdf.ssjava.screens.GameScreen;
-import com.asdf.ssjava.screens.MainMenu;
 import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

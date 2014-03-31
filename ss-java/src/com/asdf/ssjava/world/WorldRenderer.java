@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
@@ -77,6 +78,9 @@ public class WorldRenderer {
 	Texture speedOfLightTexture, healthUpTexture;
 	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture;
 	Texture planetTexture;
+	
+	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, halfHeartImage;
+	Texture fullHeartTexture, halfHeartTexture;
 	
 	// TODO ...
 	float width, height;
@@ -134,6 +138,9 @@ public class WorldRenderer {
 		bulletType1Texture = bulletType0Texture;
 		bulletType2Texture = bulletType0Texture;
 		
+		fullHeartTexture = game.assetManager.get("data/textures/heart_full.png", Texture.class);
+		halfHeartTexture = game.assetManager.get("data/textures/heart_half.png", Texture.class);
+		
 		ship = world.getShip();
 		
 		// HUD stage
@@ -151,6 +158,25 @@ public class WorldRenderer {
 		scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
 		
 		stage.addActor(scoreLabel);
+		
+		fullHeartImage1 = new Image(fullHeartTexture);
+		fullHeartImage2 = new Image(fullHeartTexture);
+		fullHeartImage3 = new Image(fullHeartTexture);
+		halfHeartImage = new Image(halfHeartTexture);
+		
+		int heartScale = 5;
+		
+		fullHeartImage1.setBounds(10, 10, heartScale, heartScale);
+		fullHeartImage2.setBounds(10, 10, heartScale, heartScale);
+		fullHeartImage3.setBounds(10, 10, heartScale, heartScale);
+		fullHeartImage2.setPosition(10 + fullHeartImage1.getWidth(), 10);
+		fullHeartImage3.setPosition(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth(), 10);
+		halfHeartImage.setY(10);
+		
+		stage.addActor(fullHeartImage1);
+		stage.addActor(fullHeartImage2);
+		stage.addActor(fullHeartImage3);
+		stage.addActor(halfHeartImage);
 		
 		
 		// shape renderer
@@ -260,11 +286,65 @@ public class WorldRenderer {
 			
 		batch.end();
 		
+		
+		
 		// HUD rendering
+		// score
 		scoreLabel.setText("Score: " + new Integer(world.scoreKeeper.getScore()).toString());
-		stageBatch.begin();
-			stage.draw();
-		stageBatch.end();
+		
+
+		// health (hearts) display
+		switch(ship.getHealth()) {
+		case 0:
+			halfHeartImage.setVisible(false);
+			fullHeartImage1.setVisible(false);
+			fullHeartImage2.setVisible(false);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 1: 
+			halfHeartImage.setX(10);
+			halfHeartImage.setVisible(true);
+			fullHeartImage1.setVisible(false);
+			fullHeartImage2.setVisible(false);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 2: 
+			halfHeartImage.setVisible(false);
+			fullHeartImage1.setVisible(true);
+			fullHeartImage2.setVisible(false);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 3: 
+			halfHeartImage.setX(10 + fullHeartImage1.getWidth());
+			halfHeartImage.setVisible(true);
+			fullHeartImage1.setVisible(true);
+			fullHeartImage2.setVisible(false);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 4: 
+			halfHeartImage.setVisible(false);
+			fullHeartImage1.setVisible(true);
+			fullHeartImage2.setVisible(true);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 5: 
+			halfHeartImage.setX(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+			halfHeartImage.setVisible(true);
+			fullHeartImage1.setVisible(true);
+			fullHeartImage2.setVisible(true);
+			fullHeartImage3.setVisible(false);
+			break;
+		case 6: 
+			halfHeartImage.setVisible(false);
+			fullHeartImage1.setVisible(true);
+			fullHeartImage2.setVisible(true);
+			fullHeartImage3.setVisible(true);
+			break;
+		}
+		
+		// TODO hearts problem
+		stage.draw();
+		
 		
 		if (SSJava.DEBUG) { 			
 			// Shape renderer (hitboxes) for DEBUG only
