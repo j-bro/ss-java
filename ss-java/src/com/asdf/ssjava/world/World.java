@@ -362,7 +362,7 @@ public class World {
 					if (ship.getHealth() > Ship.DEFAULT_HEALTH) {
 						ship.setHealth(Ship.DEFAULT_HEALTH);
 					}
-					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
+					Gdx.app.log(SSJava.LOG, "Ship healed, heath: " + ship.getHealth());	
 				}
 				powerups.removeValue(p, true);
 			}

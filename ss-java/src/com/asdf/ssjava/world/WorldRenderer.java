@@ -164,7 +164,7 @@ public class WorldRenderer {
 		fullHeartImage3 = new Image(fullHeartTexture);
 		halfHeartImage = new Image(halfHeartTexture);
 		
-		int heartScale = 5;
+		int heartScale = 10;
 		
 		fullHeartImage1.setBounds(10, 10, heartScale, heartScale);
 		fullHeartImage2.setBounds(10, 10, heartScale, heartScale);

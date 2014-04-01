@@ -125,6 +125,9 @@ public abstract class AbstractEntity {
 	
 	public synchronized void healthChange(int increment) {
 		health += increment;
+		if (getHealth() < 0) {
+			setHealth(0);
+		}
 	}
 	
 	public abstract void die();
