@@ -196,7 +196,12 @@ public class WorldRenderer {
 		
 		batch.begin();
 		
+<<<<<<< HEAD
+			// obstacle rendering
+			for (Obstacle o: world.obstacles) {
+=======
 			for (Obstacle o: world.level.obstacles) {
+>>>>>>> level-loader
 				Texture obstacleTexture = null;
 				if (o instanceof SpaceRock) {
 					obstacleTexture = spaceRockTexture;
@@ -207,7 +212,12 @@ public class WorldRenderer {
 				batch.draw(obstacleTexture, o.getPosition().x, o.getPosition().y, o.getWidth(), o.getHeight());
 			}
 			
+<<<<<<< HEAD
+			// enemy rendering
+			for (Enemy e: world.enemies) {
+=======
 			for (Enemy e: world.level.enemies) {
+>>>>>>> level-loader
 				Texture enemyTexture = null;
 				switch(e.getType()) {
 					case 1:
@@ -258,7 +268,12 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
 			
+<<<<<<< HEAD
+			// powerup rendering
+			for (Powerup p: world.powerups) {
+=======
 			for (Powerup p: world.level.powerups) {
+>>>>>>> level-loader
 				Texture powerupTexture = null;
 				if (p instanceof PowerupHealthUp) {
 					powerupTexture = powerupHealthUpTexture;
@@ -270,7 +285,7 @@ public class WorldRenderer {
 			}
 			
 			// game changer rendering
-			for (Obstacle g: world.level.gameChangers) {
+			for (Obstacle g: world.gameChangers) {
 				Texture planetTexture = null;
 				if (g instanceof Planet) {
 					planetTexture = this.planetTexture;

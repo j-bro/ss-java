@@ -28,7 +28,6 @@ public class EnemyType1 extends Enemy {
 	public static final float DEFAULT_WIDTH = 2;
 	public static final float DEFAULT_HEIGHT = 2;
 	public static final float DEFAULT_ROTATION = 0;
-	public static final int DEFAULT_HEALTH = 3;
 	
 	/**
 	 * The entity's starting health
@@ -76,8 +75,6 @@ public class EnemyType1 extends Enemy {
 		super(position, width, height, rotation);
 		this.world = world;
 		setHealth(DEFAULT_HEALTH);
-<<<<<<< HEAD
-=======
 	}
 	
 	// constructor for serialization
@@ -85,7 +82,6 @@ public class EnemyType1 extends Enemy {
 		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
 		// TODO world something init for bullets...
 		setHealth(DEFAULT_HEALTH);
->>>>>>> level-loader
 	}
 
 	/* (non-Javadoc)
@@ -150,8 +146,9 @@ public class EnemyType1 extends Enemy {
 		
 	}
 	
-	/**
-	 * @return the object's description string
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return "Enemy Type 1";

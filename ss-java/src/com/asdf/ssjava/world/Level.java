@@ -30,10 +30,16 @@ public class Level {
 	 */
 	Array<Powerup> powerups;
 	
+	/**
+	 * ArrayList containing all the powerups in the current level
+	 */
+	Array<Obstacle> gameChangers;
+	
 	public Level() {
 		obstacles = new Array<Obstacle>();
 		enemies = new Array<Enemy>();
 		powerups = new Array<Powerup>();
+		gameChangers = new Array<Obstacle>();
 	}
 
 }

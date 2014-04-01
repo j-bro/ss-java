@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 
 public class PowerupSpeedOfLight extends Powerup {
 
-<<<<<<< HEAD
 	public static final float COOLDOWN_SECONDS = 5;
 	
 	/**
@@ -12,11 +11,10 @@ public class PowerupSpeedOfLight extends Powerup {
 	 */
 	public static final int DEFAULT_HEALTH = 1;
 	
-=======
+
 	public static final float DEFAULT_WIDTH = 2;
 	public static final float DEFAULT_HEIGHT = 2;
 	public static final float DEFAULT_ROTATION = 0;
-	public static final int DEFAULT_HEALTH = 1;
 	
 	/**
 	 * 
@@ -25,7 +23,6 @@ public class PowerupSpeedOfLight extends Powerup {
 	 * @param height
 	 * @param rotation
 	 */
->>>>>>> level-loader
 	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation);
 		setHealth(DEFAULT_HEALTH);
