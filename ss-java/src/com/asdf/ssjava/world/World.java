@@ -359,8 +359,8 @@ public class World {
 				else if (p.toString().equals("Health Up Powerup") && !p.alreadyCollided) {
 					p.alreadyCollided = true;
 					ship.healthChange(PowerupHealthUp.HEALTH_GIVEN);
-					if (ship.getHealth() > 6) {
-						ship.setHealth(6);
+					if (ship.getHealth() > Ship.DEFAULT_HEALTH) {
+						ship.setHealth(Ship.DEFAULT_HEALTH);
 					}
 					Gdx.app.log(SSJava.LOG, "Ship healed up!" + Integer.toHexString(p.hashCode()));	
 				}

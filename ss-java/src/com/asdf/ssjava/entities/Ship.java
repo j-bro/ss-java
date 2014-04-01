@@ -23,6 +23,11 @@ public class Ship extends MoveableEntity {
 	private World world;
 	
 	/**
+	 * The entity's starting health
+	 */
+	public static final int DEFAULT_HEALTH = 6;
+	
+	/**
 	 * The ship's default velocity
 	 * The ship will slowly return to the x velocity after it has hit another entity.
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
