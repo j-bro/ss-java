@@ -21,7 +21,7 @@ public abstract class Obstacle extends MoveableEntity {
 	/**
 	 * A trigger to stop the ship from colliding with the obstacle multiple times
 	 */
-	public boolean alreadyCollided = false;
+	public transient boolean alreadyCollided = false;
 	
 	/**
 	 * @param position

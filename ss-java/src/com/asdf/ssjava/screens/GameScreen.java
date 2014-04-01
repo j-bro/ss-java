@@ -37,9 +37,9 @@ public class GameScreen implements Screen {
 	 * Constructor of the Game Screen which takes 
 	 * @param game The game instance of type SSJava
 	 */
-	public GameScreen(SSJava game) {
+	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		world = new World(game);
+		world = new World(game, levelPath);
 		renderer = new WorldRenderer(world);
 		world.setRenderer(renderer);
 		

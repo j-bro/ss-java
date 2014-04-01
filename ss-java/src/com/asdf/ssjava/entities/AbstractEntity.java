@@ -33,12 +33,12 @@ public abstract class AbstractEntity {
 	/**
 	 * The entity's hitbox
 	 */
-	protected Rectangle hitbox;
+	protected transient Rectangle hitbox;
 	
 	/**
 	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
 	 */
-	protected int health;
+	protected transient int health;
 	
 	/**
 	 * Creates an entity

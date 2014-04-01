@@ -18,12 +18,17 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The World's instance
 	 */
-	private World world;
+	private transient World world;
 	
 	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
+	public static final float DEFAULT_WIDTH = 2;
+	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_ROTATION = 0;
+	public static final int DEFAULT_HEALTH = 3;
 	
 	/**
 	 * The entity's starting health
@@ -53,12 +58,12 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The cooldown, in milliseconds, of the enemy's fire
 	 */
-	private int shotCooldown = 300;
+	private transient int shotCooldown = 300;
 	
 	/**
 	 * The time since the last shot was taken
 	 */
-	private long lastShotTime = 0;
+	private transient long lastShotTime = 0;
 	
 	/**
 	 * @param position the position of the enemy
@@ -71,6 +76,16 @@ public class EnemyType1 extends Enemy {
 		super(position, width, height, rotation);
 		this.world = world;
 		setHealth(DEFAULT_HEALTH);
+<<<<<<< HEAD
+=======
+	}
+	
+	// constructor for serialization
+	public EnemyType1() {
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		// TODO world something init for bullets...
+		setHealth(DEFAULT_HEALTH);
+>>>>>>> level-loader
 	}
 
 	/* (non-Javadoc)

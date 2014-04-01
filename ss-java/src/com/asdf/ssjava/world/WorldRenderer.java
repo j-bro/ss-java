@@ -196,8 +196,7 @@ public class WorldRenderer {
 		
 		batch.begin();
 		
-			// obstacle rendering
-			for (Obstacle o: world.obstacles) {
+			for (Obstacle o: world.level.obstacles) {
 				Texture obstacleTexture = null;
 				if (o instanceof SpaceRock) {
 					obstacleTexture = spaceRockTexture;
@@ -208,8 +207,7 @@ public class WorldRenderer {
 				batch.draw(obstacleTexture, o.getPosition().x, o.getPosition().y, o.getWidth(), o.getHeight());
 			}
 			
-			// enemy rendering
-			for (Enemy e: world.enemies) {
+			for (Enemy e: world.level.enemies) {
 				Texture enemyTexture = null;
 				switch(e.getType()) {
 					case 1:
@@ -260,8 +258,7 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), srcX, srcY, srcWidth, srcHeight, false, false);
 			}
 			
-			// powerup rendering
-			for (Powerup p: world.powerups) {
+			for (Powerup p: world.level.powerups) {
 				Texture powerupTexture = null;
 				if (p instanceof PowerupHealthUp) {
 					powerupTexture = powerupHealthUpTexture;
@@ -354,12 +351,12 @@ public class WorldRenderer {
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
 			
 			sr.setColor(Color.LIGHT_GRAY);
-			for (Obstacle o: world.obstacles) {
+			for (Obstacle o: world.level.obstacles) {
 				sr.rect(o.getHitbox().x, o.getHitbox().y, o.getHitbox().width, o.getHitbox().height);
 			}
 			
 			sr.setColor(Color.ORANGE);
-			for (Enemy e: world.enemies) {
+			for (Enemy e: world.level.enemies) {
 				sr.rect(e.getHitbox().x, e.getHitbox().y, e.getHitbox().width, e.getHitbox().height);
 			}
 			

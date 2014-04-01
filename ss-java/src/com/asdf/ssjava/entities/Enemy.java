@@ -15,7 +15,7 @@ public abstract class Enemy extends MoveableEntity {
 	/**
 	 * The enemy's type
 	 */
-	int type;
+	transient int type;
 	
 	/**
 	 * The enemy's default velocity
@@ -25,7 +25,7 @@ public abstract class Enemy extends MoveableEntity {
 	/**
 	 * A trigger to stop the ship from colliding with the enemy multiple times
 	 */
-	public boolean alreadyCollided = false;
+	public transient boolean alreadyCollided = false;
 	
 	/**
 	 * @param position

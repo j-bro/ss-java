@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+package com.asdf.ssjava.world;
+
+import com.asdf.ssjava.entities.Enemy;
+import com.asdf.ssjava.entities.Obstacle;
+import com.asdf.ssjava.entities.Powerup;
+import com.badlogic.gdx.utils.Array;
+
+/**
+ * @author Jeremy Brown
+ *
+ */
+
+public class Level {
+
+	/**
+	 * Array containing all the obstacles in the current level
+	 */
+	Array<Obstacle> obstacles;
+	
+	/**
+	 * ArrayList containing all the enemies in the current level
+	 */
+	Array<Enemy> enemies;
+	
+	/**
+	 * ArrayList containing all the powerups in the current level
+	 */
+	Array<Powerup> powerups;
+	
+	public Level() {
+		obstacles = new Array<Obstacle>();
+		enemies = new Array<Enemy>();
+		powerups = new Array<Powerup>();
+	}
+
+}

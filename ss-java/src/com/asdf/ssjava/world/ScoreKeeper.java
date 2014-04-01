@@ -1,4 +1,12 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.world;
+
+/**
+ * @author Jeremy Brown
+ *
+ */
 
 public class ScoreKeeper {
 
