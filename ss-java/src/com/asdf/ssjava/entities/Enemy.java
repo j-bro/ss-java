@@ -48,5 +48,12 @@ public abstract class Enemy extends MoveableEntity {
 		super.update();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		dead = true;
+	}
 
 }

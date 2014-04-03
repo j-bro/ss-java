@@ -16,6 +16,7 @@ import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -186,11 +187,18 @@ public class WorldRenderer {
 	/**
 	 * Render loop
 	 */
-	public void render() {  
+	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
-		cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
+		// TODO camera follows ship if in game
+		if (world.getWorldType() == 0) {			
+			cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
+		}
+		else {
+			
+		}
+
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		
@@ -283,83 +291,89 @@ public class WorldRenderer {
 			
 		batch.end();
 		
-		
-		
-		// HUD rendering
-		// score
-		scoreLabel.setText("Score: " + new Integer(world.scoreKeeper.getScore()).toString());
-		
-
-		// health (hearts) display
-		switch(ship.getHealth()) {
-		case 0:
-			halfHeartImage.setVisible(false);
-			fullHeartImage1.setVisible(false);
-			fullHeartImage2.setVisible(false);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 1: 
-			halfHeartImage.setX(10);
-			halfHeartImage.setVisible(true);
-			fullHeartImage1.setVisible(false);
-			fullHeartImage2.setVisible(false);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 2: 
-			halfHeartImage.setVisible(false);
-			fullHeartImage1.setVisible(true);
-			fullHeartImage2.setVisible(false);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 3: 
-			halfHeartImage.setX(10 + fullHeartImage1.getWidth());
-			halfHeartImage.setVisible(true);
-			fullHeartImage1.setVisible(true);
-			fullHeartImage2.setVisible(false);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 4: 
-			halfHeartImage.setVisible(false);
-			fullHeartImage1.setVisible(true);
-			fullHeartImage2.setVisible(true);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 5: 
-			halfHeartImage.setX(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
-			halfHeartImage.setVisible(true);
-			fullHeartImage1.setVisible(true);
-			fullHeartImage2.setVisible(true);
-			fullHeartImage3.setVisible(false);
-			break;
-		case 6: 
-			halfHeartImage.setVisible(false);
-			fullHeartImage1.setVisible(true);
-			fullHeartImage2.setVisible(true);
-			fullHeartImage3.setVisible(true);
-			break;
+		// game HUD
+		if (world.getWorldType() == 0) {
+			// score
+			scoreLabel.setText("Score: " + new Integer(world.scoreKeeper.getScore()).toString());
+			
+			// health (hearts) display
+			switch(ship.getHealth()) {
+			case 0:
+				halfHeartImage.setVisible(false);
+				fullHeartImage1.setVisible(false);
+				fullHeartImage2.setVisible(false);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 1: 
+				halfHeartImage.setX(10);
+				halfHeartImage.setVisible(true);
+				fullHeartImage1.setVisible(false);
+				fullHeartImage2.setVisible(false);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 2: 
+				halfHeartImage.setVisible(false);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(false);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 3: 
+				halfHeartImage.setX(10 + fullHeartImage1.getWidth());
+				halfHeartImage.setVisible(true);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(false);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 4: 
+				halfHeartImage.setVisible(false);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(true);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 5: 
+				halfHeartImage.setX(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+				halfHeartImage.setVisible(true);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(true);
+				fullHeartImage3.setVisible(false);
+				break;
+			case 6: 
+				halfHeartImage.setVisible(false);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(true);
+				fullHeartImage3.setVisible(true);
+				break;
+			}
+			// TODO hearts problem
+			stage.act();
+			stage.draw();
 		}
-		
-		// TODO hearts problem
-		stage.draw();
+		// creator HUD
+		else {
+			
+		}
 		
 		
 		if (SSJava.DEBUG) { 			
 			// Shape renderer (hitboxes) for DEBUG only
 			sr.setProjectionMatrix(cam.combined);
 			sr.begin(ShapeType.Line);
-			sr.setColor(Color.RED);
+			
+			sr.setColor(Color.GREEN);
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
 			
 			sr.setColor(Color.LIGHT_GRAY);
 			for (Obstacle o: world.level.obstacles) {
 				sr.rect(o.getHitbox().x, o.getHitbox().y, o.getHitbox().width, o.getHitbox().height);
 			}
-			
 			sr.setColor(Color.ORANGE);
 			for (Enemy e: world.level.enemies) {
 				sr.rect(e.getHitbox().x, e.getHitbox().y, e.getHitbox().width, e.getHitbox().height);
 			}
-			
+			sr.setColor(Color.RED);
+			for (Powerup p: world.level.powerups) {
+				sr.rect(p.getHitbox().x, p.getHitbox().y, p.getHitbox().width, p.getHitbox().height);
+			}
 			sr.setColor(Color.PINK);
 			for (Bullet b: world.bullets) {
 				sr.rect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
@@ -385,5 +399,13 @@ public class WorldRenderer {
 		bulletType3Texture.dispose();
 		
 		sr.dispose();
+	}
+	
+	/**
+	 * 
+	 * @return the renderer's camera
+	 */
+	public Camera getCamera() {
+		return cam;
 	}
 }

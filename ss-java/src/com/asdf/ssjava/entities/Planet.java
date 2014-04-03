@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author Simon Thompson
  *
  */
-public class Planet extends Obstacle{
+public class Planet extends Obstacle {
 	
 	/**
 	 * The planet's default velocity (static)
@@ -32,6 +32,10 @@ public class Planet extends Obstacle{
 	 */
 	public static final int KILL_SCORE = 1000; 
 	
+	public static final float DEFAULT_WIDTH = 4;
+	public static final float DEFAULT_HEIGHT = 4;
+	public static final float DEFAULT_ROTATION = 0;
+	
 	/**
 	 * 
 	 * @param position
@@ -43,6 +47,12 @@ public class Planet extends Obstacle{
 		super(position, width, height, rotation);
 		setHealth(DEFAULT_HEALTH);
 	}
+	
+	// constructor for serialization
+		public Planet() {
+			super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+			setHealth(DEFAULT_HEALTH);
+		}
 
 	/*
 	 * (non-Javadoc)

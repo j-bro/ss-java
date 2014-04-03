@@ -106,31 +106,34 @@ public class Ship extends MoveableEntity {
 	 */
 	public void die() {
 		Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
+		dead = true;
 	}
 
 	@Override
 	public void update() { 
-		if (Math.abs(velocity.y) >= DEFAULT_VELOCITY.y) {
-			if (velocity.y > 0) {
-				if (acceleration.y > 0) {
-					acceleration.y = 0;
+		if (!isDead()) {			
+			if (Math.abs(velocity.y) >= DEFAULT_VELOCITY.y) {
+				if (velocity.y > 0) {
+					if (acceleration.y > 0) {
+						acceleration.y = 0;
+					}
+				}
+				else {
+					if (acceleration.y < 0) {
+						acceleration.y = 0;
+					}
 				}
 			}
-			else {
-				if (acceleration.y < 0) {
-					acceleration.y = 0;
-				}
+			if (Math.abs(velocity.x) < DEFAULT_VELOCITY.x) {
+				velocity.x += 3 * Gdx.graphics.getDeltaTime();
 			}
+			
+			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
+			velocity.y += acceleration.y * Gdx.graphics.getDeltaTime();
+			
+			position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
+			rotation = new Vector2(velocity.x * 2, velocity.y * 0.5f).angle();
 		}
-		if (Math.abs(velocity.x) < DEFAULT_VELOCITY.x) {
-			velocity.x += 3 * Gdx.graphics.getDeltaTime();
-		}
-		
-		velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
-		velocity.y += acceleration.y * Gdx.graphics.getDeltaTime();
-		
-		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-		rotation = new Vector2(velocity.x * 2, velocity.y * 0.5f).angle();
 		
 		super.update();
 	}

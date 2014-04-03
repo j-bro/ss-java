@@ -7,6 +7,7 @@ package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.world.GameInputManager;
 import com.asdf.ssjava.world.World;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
@@ -39,10 +40,11 @@ public class GameScreen implements Screen {
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		world = new World(game, levelPath);
+		world = new World(game, 0, levelPath);
 		renderer = new WorldRenderer(world);
 		world.setRenderer(renderer);
-		
+		world.setManager(new GameInputManager(game, world));
+		Gdx.input.setInputProcessor(world.getManager());
 	}
 	
 	/*
@@ -70,10 +72,10 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void show() {
+		Gdx.app.log(SSJava.LOG, "Show game");
 		if (world != null) {
 			Gdx.input.setInputProcessor(world.getManager());
 		}
-		Gdx.app.log(SSJava.LOG, "Show game");
 		AudioPlayer.playGameMusic(true);
 
 	}
@@ -84,7 +86,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void hide() {
-		AudioPlayer.pauseGameMusic();
+		
 	}
 
 	/*
@@ -93,7 +95,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void pause() {
-
+		world.pauseGame();
 	}
 
 	/*
@@ -102,7 +104,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void resume() {
-		game.setScreen(new PauseMenu(game, this));
+		
 	}
 
 	/*

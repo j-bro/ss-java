@@ -137,14 +137,6 @@ public class EnemyType1 extends Enemy {
 	public void setShotCooldown(int shotCooldown) {
 		this.shotCooldown = shotCooldown;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
-	 */
-	@Override
-	public void die() {
-		
-	}
 	
 	/*
 	 * (non-Javadoc)
