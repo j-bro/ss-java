@@ -110,7 +110,7 @@ public class WorldRenderer {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 		
-		shipTexture = game.assetManager.get("data/textures/player_ship.png", Texture.class);
+		shipTexture = game.assetManager.get("data/textures/shipA.png", Texture.class);
 		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 //		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
