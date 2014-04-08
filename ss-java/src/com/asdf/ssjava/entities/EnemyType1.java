@@ -4,9 +4,10 @@
 package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
@@ -18,7 +19,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The World's instance
 	 */
-	private transient World world;
+	private transient GameWorld gameWorld;
 	
 	/**
 	 * Default velocity for the Type 1 Enemy
@@ -71,18 +72,20 @@ public class EnemyType1 extends Enemy {
 	 * @param rotation the rotation of the enemy in degrees
 	 * @param world the world instance
 	 */
-	public EnemyType1(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation);
-		this.world = world;
+	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, world);
+		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
 	}
 	
-	// constructor for serialization
+	// TODO constructor for serialization
+	/*
 	public EnemyType1() {
 		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
 		// TODO world something init for bullets...
 		setHealth(DEFAULT_HEALTH);
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Enemy#update()
@@ -100,12 +103,12 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, this);
+			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, world, this);
 			b.getPosition().x = position.x - b.width;
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
 			b.getVelocity().x =(-1) * b.getDEFAULT_VELOCITY().x;
 			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
-			world.getBullets().add(b);
+			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
 			Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	

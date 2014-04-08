@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -51,7 +52,7 @@ public class WorldRenderer {
 	/**
 	 * The World's instance
 	 */
-	World world;
+	GameWorld gameWorld;
 	
 	/**
 	 * The sprite batches responsible for drawing all elements in the world
@@ -100,9 +101,9 @@ public class WorldRenderer {
 	 * Creates the world instance
 	 * @param world
 	 */
-	public WorldRenderer(World world) {
-		this.world = world;
-		game = world.game;
+	public WorldRenderer(GameWorld gameWorld) {
+		this.gameWorld = gameWorld;
+		game = gameWorld.game;
 		
 		// TODO potentially fix this square/rectangle
 		width = Gdx.graphics.getWidth() / 20;
@@ -147,7 +148,7 @@ public class WorldRenderer {
 		fullHeartTexture = game.assetManager.get("data/textures/heart_full.png", Texture.class);
 		halfHeartTexture = game.assetManager.get("data/textures/heart_half.png", Texture.class);
 		
-		ship = world.getShip();
+		ship = gameWorld.getShip();
 		
 		// HUD stage
 		
@@ -156,9 +157,9 @@ public class WorldRenderer {
 		}
 		stage.clear();
 		
-		if (world.getWorldType() == 0) { // game HUD
+		if (gameWorld.getWorldType() == 0) { // game HUD
 			LabelStyle ls = new LabelStyle(game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
-			scoreLabel = new Label("Score: " + world.scoreKeeper.getScore(), ls);
+			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
 			scoreLabel.setX(10);
 			scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
 			
@@ -184,15 +185,14 @@ public class WorldRenderer {
 			stage.addActor(halfHeartImage);
 		}
 		else { // TODO creator HUD
-			
-			stage.addActor(LevelCreator.selectedEntity);
-			
+						
 		}
 		
 		
 		// shape renderer
 		sr = new ShapeRenderer();
 	}
+	
 	
 	/**
 	 * Render loop
@@ -202,7 +202,7 @@ public class WorldRenderer {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
 		// TODO camera follows ship if in game
-		if (world.getWorldType() == 0) {			
+		if (gameWorld.getWorldType() == 0) {			
 			cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
 		}
 		else {
@@ -214,18 +214,18 @@ public class WorldRenderer {
 		
 		batch.begin();
 		
-			for (Obstacle o: world.level.obstacles) {
+			for (Obstacle o: gameWorld.level.obstacles) {
 				Texture obstacleTexture = getTexture(o);
 				batch.draw(obstacleTexture, o.getPosition().x, o.getPosition().y, o.getWidth(), o.getHeight());
 			}
 			
-			for (Enemy e: world.level.enemies) {
+			for (Enemy e: gameWorld.level.enemies) {
 				Texture enemyTexture = getTexture(e);
 				batch.draw(enemyTexture, e.getPosition().x, e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 			
 			// bullet rendering
-			for (Bullet b: world.bullets) {
+			for (Bullet b: gameWorld.bullets) {
 				Texture bulletTexture = getTexture(b);
 				
 				/* TODO find a better way to fix bullet texture & hitboxes
@@ -259,13 +259,13 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
 			}
 			
-			for (Powerup p: world.level.powerups) {
+			for (Powerup p: gameWorld.level.powerups) {
 				Texture powerupTexture = getTexture(p);
 				batch.draw(powerupTexture, p.getPosition().x, p.getPosition().y, p.getWidth(), p.getHeight());
 			}
 			
 			// game changer rendering
-			for (Obstacle g: world.level.gameChangers) {
+			for (Obstacle g: gameWorld.level.gameChangers) {
 				Texture planetTexture = getTexture(g);
 				batch.draw(planetTexture, g.getPosition().x, g.getPosition().y, g.getWidth(), g.getHeight());
 			}
@@ -276,9 +276,9 @@ public class WorldRenderer {
 		batch.end();
 		
 		// game HUD
-		if (world.getWorldType() == 0) {
+		if (gameWorld.getWorldType() == 0) {
 			// score
-			scoreLabel.setText("Score: " + new Integer(world.scoreKeeper.getScore()).toString());
+			scoreLabel.setText("Score: " + new Integer(gameWorld.scoreKeeper.getScore()).toString());
 			
 			// health (hearts) display
 			switch(ship.getHealth()) {
@@ -349,19 +349,19 @@ public class WorldRenderer {
 			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
 			
 			sr.setColor(Color.LIGHT_GRAY);
-			for (Obstacle o: world.level.obstacles) {
+			for (Obstacle o: gameWorld.level.obstacles) {
 				sr.rect(o.getHitbox().x, o.getHitbox().y, o.getHitbox().width, o.getHitbox().height);
 			}
 			sr.setColor(Color.ORANGE);
-			for (Enemy e: world.level.enemies) {
+			for (Enemy e: gameWorld.level.enemies) {
 				sr.rect(e.getHitbox().x, e.getHitbox().y, e.getHitbox().width, e.getHitbox().height);
 			}
 			sr.setColor(Color.RED);
-			for (Powerup p: world.level.powerups) {
+			for (Powerup p: gameWorld.level.powerups) {
 				sr.rect(p.getHitbox().x, p.getHitbox().y, p.getHitbox().width, p.getHitbox().height);
 			}
 			sr.setColor(Color.PINK);
-			for (Bullet b: world.bullets) {
+			for (Bullet b: gameWorld.bullets) {
 				sr.rect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
 			}
 			sr.end();

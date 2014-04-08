@@ -11,7 +11,7 @@ import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.SpaceRock;
-import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -36,7 +36,7 @@ public class LevelCreator implements Screen {
 	/**
 	 * The world instance
 	 */
-	World world;
+	GameWorld world;
 	
 	/**
 	 * The renderer instance
@@ -62,12 +62,13 @@ public class LevelCreator implements Screen {
 	 */
 	public LevelCreator(SSJava game) {
 		this.game = game;
-		world = new World(game, 1, null);
+		world = new GameWorld(game, 1, null);
 		renderer = new WorldRenderer(world);
 		world.setRenderer(renderer);
 		world.setManager(new LevelCreatorInput());
 		Gdx.input.setInputProcessor(world.getManager());
 		
+		/*
 		entityTypes = new Array<AbstractEntity>() {{
 			add(new Asteroid());
 			add(new SpaceRock());
@@ -76,10 +77,13 @@ public class LevelCreator implements Screen {
 			add(new PowerupSpeedOfLight());
 			add(new Planet());
 		}};
+		
+		
 		for (AbstractEntity e: entityTypes) {
 			e.addListener(new DragListener());
 		}
 		selectedEntity = entityTypes.get(1);
+		*/
 	}
 
 	/*

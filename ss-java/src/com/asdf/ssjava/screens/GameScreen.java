@@ -8,10 +8,11 @@ package com.asdf.ssjava.screens;
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameInputManager;
-import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 /**
  * @author Jeremy Brown
@@ -27,20 +28,20 @@ public class GameScreen implements Screen {
 	/**
 	 * The world instance
 	 */
-	World world;
+	GameWorld world;
 	
 	/**
 	 * The renderer instance
 	 */
 	WorldRenderer renderer;
-	
+		
 	/**
 	 * Constructor of the Game Screen which takes 
 	 * @param game The game instance of type SSJava
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		world = new World(game, 0, levelPath);
+		world = new GameWorld(game, 0, levelPath);
 		renderer = new WorldRenderer(world);
 		world.setRenderer(renderer);
 		world.setManager(new GameInputManager(game, world));
@@ -53,8 +54,12 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
-		world.update();
 		renderer.render();
+		world.update();
+		world.box2DWorld.step(1/60f, 6, 2);
+		
+		Gdx.app.log(SSJava.LOG, "Camera box2D: " + renderer.getCamera().position.x + ", " + renderer.getCamera().position.y);
+//		Gdx.app.log(SSJava.LOG, "Ship: " + world.getShip().getPosition().x + ", " + world.getShip().getPosition().y);
 	}
 
 	/*

@@ -5,6 +5,8 @@
  */
 package com.asdf.ssjava.world;
 
+import java.util.Iterator;
+
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
@@ -22,7 +24,10 @@ import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
@@ -42,7 +47,7 @@ import com.badlogic.gdx.files.FileHandle;
  *
  */
 
-public class World {
+public class GameWorld {
 
 	/**
 	 * The game's instance
@@ -93,33 +98,42 @@ public class World {
 	Task resetShipXVelocity;
 	
 	/**
+	 * The Box2D World
+	 */
+	public World box2DWorld;
+	
+	/**
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
 	 */
-	public World(SSJava game, int worldType, String levelPath) {
+	public GameWorld(SSJava game, int worldType, String levelPath) {
 		this.game = game;
 		this.worldType = worldType;
 		
-		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
+		// TODO Box2D stuff
+		box2DWorld = new World(new Vector2(0, 10f), true);
+		
+		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
+		ship.getBody().setLinearVelocity(ship.DEFAULT_VELOCITY);
 		
 		bullets = new Array<Bullet>();
 		
 		// Level Loading
-		if (levelPath != null) {			
+		/*if (levelPath != null) {			
 			loadLevel(levelPath);
-		}
+		}*/
 		
-		/*
+		
 		level = new Level();
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION));
+					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, box2DWorld));
 				}
 				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION);
+					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, box2DWorld);
 					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
 					level.obstacles.add(o);
 				}
@@ -127,30 +141,54 @@ public class World {
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION));
-				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION));
+				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, box2DWorld));
+				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, box2DWorld));
 			}
 		}
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this));
+				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld));
+			}
+		}
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 3; j++) {
-				gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0));
+				level.gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0, box2DWorld));
 			}
-		}*/
+		}
 		
 //		exportLevel(levelPath);		
 		
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
+		
 	}
 	
 	/**
 	 * Update method run in every iteration of the main loop to update entity position, behaviour and collision
 	 */
 	public void update() {
+		Array<Body> bodiesArray = new Array<Body>();
+		box2DWorld.getBodies(bodiesArray);
+		Iterator<Body> bi = bodiesArray.iterator(); 
+
+		while (bi.hasNext()){
+			
+		    Body b = bi.next();
+
+		    // Get the body's user data - in this example, our user 
+		    // data is an instance of the Entity class
+		    AbstractEntity e = (AbstractEntity) b.getUserData();
+
+		    if (e != null) {
+		        // Update the entities/sprites position and angle
+		        e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
+		        // We need to convert our angle from radians to degrees
+		        e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
+		    }
+		}
+		
+		/*
 		// Entity updates
 		ship.update();
 		
@@ -398,8 +436,9 @@ public class World {
 				ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 			}
 		}
+		*/
 		
-		//Edge of screen collision	
+		// Edge of screen collision	
 		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
 		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
 		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;

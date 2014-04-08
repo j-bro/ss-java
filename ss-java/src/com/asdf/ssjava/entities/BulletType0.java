@@ -6,6 +6,7 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * @author Jeremy Brown
@@ -31,8 +32,8 @@ public class BulletType0 extends Bullet {
 	 * @param shooter
 	 */
 	public BulletType0(Vector2 position, float width, float height,
-			float rotation, AbstractEntity shooter) {
-		super(position, width, height, rotation, shooter);
+			float rotation, World world, AbstractEntity shooter) {
+		super(position, width, height, rotation, world, shooter);
 		damage = 1;
 		hitbox.x = position.x + 0.85f;
 		hitbox.y = position.y + 0.8f;

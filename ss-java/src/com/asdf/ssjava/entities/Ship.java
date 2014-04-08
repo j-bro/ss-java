@@ -5,9 +5,10 @@ package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
@@ -20,7 +21,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The World's instance
 	 */
-	private World world;
+	private GameWorld gameWorld;
 	
 	/**
 	 * The entity's starting health
@@ -33,7 +34,7 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 0); 
 	
 	/**
 	 * The ship's slow velocity
@@ -77,9 +78,9 @@ public class Ship extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Ship(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation);
-		this.world = world;
+	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, world);
+		this.gameWorld = gameWorld;
 		setHealth(6);
 	}
 	
@@ -89,11 +90,11 @@ public class Ship extends MoveableEntity {
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, this);
+			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, world, this);
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
 			b.getVelocity().x = b.getDEFAULT_VELOCITY().x;
 			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
-			world.getBullets().add(b);
+			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
 			AudioPlayer.shoot();

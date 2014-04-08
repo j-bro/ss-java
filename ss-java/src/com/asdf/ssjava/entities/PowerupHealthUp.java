@@ -1,6 +1,7 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class PowerupHealthUp extends Powerup {
 	
@@ -25,8 +26,8 @@ public class PowerupHealthUp extends Powerup {
 	 * @param height
 	 * @param rotation
 	 */
-	public PowerupHealthUp(Vector2 position, float width, float height, float rotation) {
-		super(position, width, height, rotation);
+	public PowerupHealthUp(Vector2 position, float width, float height, float rotation, World world) {
+		super(position, width, height, rotation, world);
 		setHealth(DEFAULT_HEALTH);
 	}
 	
@@ -39,12 +40,14 @@ public class PowerupHealthUp extends Powerup {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * TODO Constructor for serialization
 	 */
+	/*
 	public PowerupHealthUp() {
 		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
 		setHealth(DEFAULT_HEALTH);
 	}
+	*/
 	
 	/*
 	 * (non-Javadoc)

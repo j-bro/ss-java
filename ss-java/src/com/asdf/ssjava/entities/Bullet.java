@@ -6,6 +6,7 @@ package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * @author Jeremy Brown
@@ -39,8 +40,8 @@ public abstract class Bullet extends MoveableEntity {
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, AbstractEntity shooter) {
-		super(position, width, height, rotation);
+	public Bullet(Vector2 position, float width, float height, float rotation, World world, AbstractEntity shooter) {
+		super(position, width, height, rotation, world);
 		this.shooter = shooter;
 	}
 

@@ -22,7 +22,7 @@ public class GameInputManager implements InputProcessor {
 	/**
 	 * The world's instance
 	 */
-	World world;
+	GameWorld world;
 	
 	/**
 	 * The ship's instance
@@ -33,7 +33,7 @@ public class GameInputManager implements InputProcessor {
 	 * @param game
 	 * @param world 
 	 */
-	public GameInputManager(SSJava game, World world) {
+	public GameInputManager(SSJava game, GameWorld world) {
 		this.world = world;
 		ship = world.getShip();
 	}

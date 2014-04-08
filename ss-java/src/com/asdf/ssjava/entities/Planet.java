@@ -4,6 +4,7 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * 
@@ -43,16 +44,18 @@ public class Planet extends Obstacle {
 	 * @param height
 	 * @param rotation
 	 */
-	public Planet(Vector2 position, float width, float height, float rotation) {
-		super(position, width, height, rotation);
+	public Planet(Vector2 position, float width, float height, float rotation, World world) {
+		super(position, width, height, rotation, world);
 		setHealth(DEFAULT_HEALTH);
 	}
 	
-	// constructor for serialization
-		public Planet() {
-			super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
-			setHealth(DEFAULT_HEALTH);
-		}
+	// TODO constructor for serialization
+	/*
+	public Planet() {
+		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		setHealth(DEFAULT_HEALTH);
+	}
+	*/
 
 	/*
 	 * (non-Javadoc)

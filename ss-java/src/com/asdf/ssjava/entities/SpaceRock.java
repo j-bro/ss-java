@@ -1,6 +1,7 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class SpaceRock extends Obstacle {
 
@@ -36,16 +37,18 @@ public class SpaceRock extends Obstacle {
 	 * @param height
 	 * @param rotation
 	 */
-	public SpaceRock(Vector2 position, float width, float height, float rotation) {
-		super(position, width, height, rotation);
+	public SpaceRock(Vector2 position, float width, float height, float rotation, World world) {
+		super(position, width, height, rotation, world);
 		setHealth(DEFAULT_HEALTH);
 	}
 	
-	// constructor for serialization
+	// TODO constructor for serialization
+	/*
 	public SpaceRock() {
 		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
 		setHealth(DEFAULT_HEALTH);
 	}
+	*/
 
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Obstacle#getDEFAULT_VELOCITY()
