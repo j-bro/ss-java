@@ -18,6 +18,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -50,7 +51,7 @@ public class LevelCreator implements Screen {
 	/**
 	 * The currently selected entity
 	 */
-	AbstractEntity selectedEntity;
+	public static AbstractEntity selectedEntity;
 	
 	
 	SpriteBatch batch;
@@ -75,6 +76,9 @@ public class LevelCreator implements Screen {
 			add(new PowerupSpeedOfLight());
 			add(new Planet());
 		}};
+		for (AbstractEntity e: entityTypes) {
+			e.addListener(new DragListener());
+		}
 		selectedEntity = entityTypes.get(1);
 	}
 

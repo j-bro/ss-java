@@ -30,6 +30,7 @@ public class Asteroid extends Obstacle {
 	 * The score given for killing this entity
 	 */
 	public static final int KILL_SCORE = 20; 
+	
 	public static final float DEFAULT_WIDTH = 2;
 	public static final float DEFAULT_HEIGHT = 2;
 	public static final float DEFAULT_ROTATION = 0;
@@ -65,4 +66,5 @@ public class Asteroid extends Obstacle {
 	public String toString() {
 		return "Asteroid";
 	}
+	
 }
