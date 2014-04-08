@@ -68,6 +68,11 @@ public class Ship extends MoveableEntity {
 	 * The ship cannot lose health from collisions as long as this is true
 	 */
 	public boolean lightSpeedMode = false;
+
+	/**
+	 * The ship's weight mod
+	 */
+	public static final long SHIP_WEIGHT_MOD = 36200;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.

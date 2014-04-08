@@ -33,6 +33,21 @@ public class Planet extends Obstacle{
 	public static final int KILL_SCORE = 1000; 
 	
 	/**
+	 * The gravitationnal constant
+	 */
+	public static final double GRAVITATIONNAL_CONSTANT = 6.67;
+
+	/**
+	 * The planet's weight modifier
+	 */
+	public static final long PLANET_WEIGHT_MOD = 59720000000000L;
+	
+	/**
+	 * The planet's radius
+	 */
+	public static final long PLANET_RADIUS = 6378;
+	
+	/**
 	 * 
 	 * @param position
 	 * @param width
@@ -51,6 +66,12 @@ public class Planet extends Obstacle{
 	@Override
 	public Vector2 getDEFAULT_VELOCITY() {
 		return DEFAULT_VELOCITY;
+	}
+	
+	public double gravitationnalPull(long mass, long distance){
+		double force;
+		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT_MOD * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
+		return force;
 	}
 	
 	/*

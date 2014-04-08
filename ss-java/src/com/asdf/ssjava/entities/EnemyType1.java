@@ -65,6 +65,11 @@ public class EnemyType1 extends Enemy {
 	private transient long lastShotTime = 0;
 	
 	/**
+	 * The enemy's weight modifier
+	 */
+	public static final long ENEMY_TYPE_1_WEIGHT_MOD = 22800;
+	
+	/**
 	 * @param position the position of the enemy
 	 * @param width the width of the enemy
 	 * @param height the height of the enemy
