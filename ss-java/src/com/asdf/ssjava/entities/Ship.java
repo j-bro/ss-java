@@ -34,7 +34,7 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 0); 
+	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
 	
 	/**
 	 * The ship's slow velocity
@@ -48,7 +48,7 @@ public class Ship extends MoveableEntity {
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 * This is not automatically set by the constructor!
 	 */
-	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(100, 1000);
+	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(10, 1000);
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -69,6 +69,12 @@ public class Ship extends MoveableEntity {
 	 * The ship cannot lose health from collisions as long as this is true
 	 */
 	public boolean lightSpeedMode = false;
+	
+	/**
+	 * Indicates whether or not the ship is currently at its maximum speed 
+	 */
+	public boolean maxUpSpeedReached = false;
+	public boolean maxDownSpeedReached = false;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.
@@ -111,8 +117,23 @@ public class Ship extends MoveableEntity {
 
 	@Override
 	public void update() { 
-		if (!isDead()) {	
+		if (!isDead()) {
+			if (Math.abs(getBody().getLinearVelocity().y) >= DEFAULT_VELOCITY.y) {
+				if (getBody().getLinearVelocity().y > 0) {
+					maxUpSpeedReached = true;
+				}
+				else {
+					maxDownSpeedReached = true;
+				}
+			}
+			else {
+				maxUpSpeedReached = false;
+				maxDownSpeedReached = false;
+			}
+			
+			// TODO fix too high velocity
 			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x); {
+				Gdx.app.log(SSJava.LOG, "vel: " + getBody().getLinearVelocity().x + " def: " + DEFAULT_VELOCITY.x);
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 		}

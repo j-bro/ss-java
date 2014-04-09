@@ -46,16 +46,24 @@ public class GameInputManager implements InputProcessor {
 		// TODO add keyconfigs 
 		switch (keycode) {
 			case Keys.UP: 
-				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
+				if (!ship.maxUpSpeedReached){					
+					ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				}
 				break;
 			case Keys.DOWN: 
-				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
+				if (!ship.maxDownSpeedReached) {					
+					ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				}
 				break;
 			case Keys.W:
-				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
+				if (!ship.maxUpSpeedReached){					
+					ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				}
 				break;
 			case Keys.S:
-				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
+				if (!ship.maxDownSpeedReached) {					
+					ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				}
 				break;
 			case Keys.SPACE: 
 				ship.fire();

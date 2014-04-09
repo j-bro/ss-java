@@ -114,7 +114,7 @@ public class GameWorld {
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
-		ship.getBody().setLinearVelocity(ship.DEFAULT_VELOCITY);
+		ship.getBody().setLinearVelocity(ship.DEFAULT_VELOCITY.x, 0);
 		
 		bullets = new Array<Bullet>();
 		
@@ -133,7 +133,7 @@ public class GameWorld {
 				}
 				else {
 					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, box2DWorld);
-//					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
+					o.getBody().setLinearVelocity(Asteroid.DEFAULT_VELOCITY);
 					level.obstacles.add(o);
 				}
 			}
@@ -187,10 +187,10 @@ public class GameWorld {
 		    }
 		}
 		
-		/*
+		
 		// Entity updates
 		ship.update();
-		
+		/*
 		for (Obstacle o: level.obstacles) {
 			o.update();
 		}
@@ -467,7 +467,7 @@ public class GameWorld {
 		
 		// TODO Box2D attempt
 		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
-			ship.getBody().getLinearVelocity().y = 0;
+			ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
 			/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
 				ship.getPosition().y = screenBottom;
 			}
@@ -477,7 +477,7 @@ public class GameWorld {
 		}
 		
 		if (ship.getPosition().x + ship.getWidth() >= screenRight || ship.getPosition().x <= screenLeft) {
-			ship.getBody().getLinearVelocity().x = 0;
+			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
 			/*if (ship.getAcceleration().x < 0 && ship.getPosition().x <= screenLeft) {
 				ship.getPosition().x = screenLeft;
 			}

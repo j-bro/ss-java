@@ -58,8 +58,6 @@ public class GameScreen implements Screen {
 		world.box2DWorld.step(1/60f, 6, 2);
 		world.update();
 		
-		Gdx.app.log(SSJava.LOG, "Camera: " + renderer.getCamera().position.x + ", " + renderer.getCamera().position.y);
-		Gdx.app.log(SSJava.LOG, "Ship: " + world.getShip().getPosition().x + ", " + world.getShip().getPosition().y);
 	}
 
 	/*
