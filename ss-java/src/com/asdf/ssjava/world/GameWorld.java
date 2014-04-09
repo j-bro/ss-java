@@ -133,7 +133,7 @@ public class GameWorld {
 				}
 				else {
 					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, box2DWorld);
-					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
+//					o.getVelocity().x = o.getDEFAULT_VELOCITY().x;
 					level.obstacles.add(o);
 				}
 			}
@@ -443,6 +443,7 @@ public class GameWorld {
 		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
 		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
 		
+		/*
 		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
 			ship.getVelocity().y = 0;
 			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
@@ -461,6 +462,28 @@ public class GameWorld {
 			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= screenRight) {
 				ship.getPosition().x = screenRight - ship.getWidth();
 			}
+		}
+		*/
+		
+		// TODO Box2D attempt
+		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
+			ship.getBody().getLinearVelocity().y = 0;
+			/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
+				ship.getPosition().y = screenBottom;
+			}
+			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
+				ship.getPosition().y = screenTop - ship.getHeight();
+			}*/
+		}
+		
+		if (ship.getPosition().x + ship.getWidth() >= screenRight || ship.getPosition().x <= screenLeft) {
+			ship.getBody().getLinearVelocity().x = 0;
+			/*if (ship.getAcceleration().x < 0 && ship.getPosition().x <= screenLeft) {
+				ship.getPosition().x = screenLeft;
+			}
+			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= screenRight) {
+				ship.getPosition().x = screenRight - ship.getWidth();
+			}*/
 		}
 	}
 	

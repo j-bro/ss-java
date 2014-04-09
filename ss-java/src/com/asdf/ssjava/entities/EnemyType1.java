@@ -93,8 +93,6 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void update() {
 		super.update();
-		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-		
 	}
 	
 	/* (non-Javadoc)
@@ -106,8 +104,7 @@ public class EnemyType1 extends Enemy {
 			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, world, this);
 			b.getPosition().x = position.x - b.width;
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
-			b.getVelocity().x =(-1) * b.getDEFAULT_VELOCITY().x;
-			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
+			b.getBody().setLinearVelocity(BulletType1.DEFAULT_VELOCITY);
 			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();

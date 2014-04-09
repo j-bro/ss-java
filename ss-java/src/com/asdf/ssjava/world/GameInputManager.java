@@ -46,16 +46,16 @@ public class GameInputManager implements InputProcessor {
 		// TODO add keyconfigs 
 		switch (keycode) {
 			case Keys.UP: 
-				ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				break;
 			case Keys.DOWN: 
-				ship.getAcceleration().y = (-1) *  ship.DEFAULT_ACCELERATION.y;
+				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				break;
 			case Keys.W:
-				ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				break;
 			case Keys.S:
-				ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
+				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				break;
 			case Keys.SPACE: 
 				ship.fire();
@@ -83,16 +83,16 @@ public class GameInputManager implements InputProcessor {
 		// TODO fix this badly implemented?
 		switch (keycode) {
 		case Keys.UP: 
-			ship.getAcceleration().y = 0;
+			ship.getBody().applyForceToCenter(0, 0, false);
 			break;
 		case Keys.DOWN:
-			ship.getAcceleration().y = 0;
+			ship.getBody().applyForceToCenter(0, 0, false);
 			break;
 		case Keys.W:
-			ship.getAcceleration().y = 0;
+			ship.getBody().applyForceToCenter(0, 0, false);
 			break;
 		case Keys.S:
-			ship.getAcceleration().y = 0;
+			ship.getBody().applyForceToCenter(0, 0, false);
 			break;
 		case Keys.SPACE: 
 			
@@ -119,10 +119,10 @@ public class GameInputManager implements InputProcessor {
 			// Ship movement input
 			if (screenX < Gdx.graphics.getWidth() / 2) {
 				if (screenY > Gdx.graphics.getHeight() / 2) {
-					ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
+					ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				}
 				else {
-					ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+					ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				}
 			}
 			// Ship firing input
@@ -147,10 +147,10 @@ public class GameInputManager implements InputProcessor {
 			}
 			
 			else if (screenY > Gdx.graphics.getHeight() / 2) {
-				ship.getAcceleration().y = 0;
+				ship.getBody().applyForceToCenter(0, 0, true);
 			}
 			else {
-				ship.getAcceleration().y = 0;
+				ship.getBody().applyForceToCenter(0, 0, true);
 			}
 			return true;
 			

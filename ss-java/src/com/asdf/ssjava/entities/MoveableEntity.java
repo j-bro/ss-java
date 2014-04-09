@@ -17,16 +17,6 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class MoveableEntity extends AbstractEntity {
 	
 	/**
-	 * The entity's velocity
-	 */
-	protected Vector2 velocity;
-	
-	/**
-	 * The entity's acceleration
-	 */
-	protected transient Vector2 acceleration;
-	
-	/**
 	 * The entity's default velocity vector, as values for x and y
 	 */
 	protected Vector2 DEFAULT_VELOCITY;
@@ -39,50 +29,12 @@ public abstract class MoveableEntity extends AbstractEntity {
 	 */
 	protected MoveableEntity(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation, world);
-		velocity = new Vector2(0, 0);
-		acceleration = new Vector2(0, 0);
 	}
 	
 	/**
-	 * Returns the entity's velocity
-	 * @return the velocity of the entity
-	 */
-	public Vector2 getVelocity() {
-		return velocity;
-	}
-	
-	/**
-	 * Sets the entity's velocity
-	 * @deprecated use the getVelocity() method to obtain the instance of velocity and set the x, y variables
-	 * @param velocity the velocity to set
-	 */
-	public void setVelocity(Vector2 velocity) {
-		this.velocity = velocity;
-	}
-
-	/**
-	 * Returns the entity's acceleration
-	 * @return the acceleration of the entity
-	 */
-	public Vector2 getAcceleration() {
-		return acceleration;
-	}
-
-	/**
-	 * Sets the entity's acceleration
-	 * @deprecated use the getAcceleration() method to obtain the instance of acceleration and set the x, y variables
-	 * @param acceleration the acceleration to set
-	 */
-	public void setAcceleration(Vector2 acceleration) {
-		this.acceleration = acceleration;
-	}
-	
-	/**
-	 * Updates the entity's hitbox.
 	 * Runs every time the game renders a frame.
 	 */
 	public void update() {
-		hitbox.x = position.x;
-		hitbox.y = position.y;
+		
 	}
 }

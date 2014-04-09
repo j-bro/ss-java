@@ -95,7 +95,7 @@ public class WorldRenderer {
 	/**
 	 * TODO Shape renderer for debugging ONLY!
 	 */
-	ShapeRenderer sr;
+	Box2DDebugRenderer debugRenderer;
 	
 	/**
 	 * Creates the world instance
@@ -190,7 +190,7 @@ public class WorldRenderer {
 		
 		
 		// shape renderer
-		sr = new ShapeRenderer();
+		debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	
@@ -312,30 +312,7 @@ public class WorldRenderer {
 		
 		
 		if (SSJava.DEBUG) { 			
-			// Shape renderer (hitboxes) for DEBUG only
-			sr.setProjectionMatrix(cam.combined);
-			sr.begin(ShapeType.Line);
-			
-			sr.setColor(Color.GREEN);
-			sr.rect(ship.getHitbox().x, ship.getHitbox().y, ship.getHitbox().width, ship.getHitbox().height);
-			
-			sr.setColor(Color.LIGHT_GRAY);
-			for (Obstacle o: gameWorld.level.obstacles) {
-				sr.rect(o.getHitbox().x, o.getHitbox().y, o.getHitbox().width, o.getHitbox().height);
-			}
-			sr.setColor(Color.ORANGE);
-			for (Enemy e: gameWorld.level.enemies) {
-				sr.rect(e.getHitbox().x, e.getHitbox().y, e.getHitbox().width, e.getHitbox().height);
-			}
-			sr.setColor(Color.RED);
-			for (Powerup p: gameWorld.level.powerups) {
-				sr.rect(p.getHitbox().x, p.getHitbox().y, p.getHitbox().width, p.getHitbox().height);
-			}
-			sr.setColor(Color.PINK);
-			for (Bullet b: gameWorld.bullets) {
-				sr.rect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
-			}
-			sr.end();
+			debugRenderer.render(gameWorld.box2DWorld, cam.combined);
 		}
 	}
 
@@ -355,7 +332,7 @@ public class WorldRenderer {
 		bulletType2Texture.dispose();
 		bulletType3Texture.dispose();
 		
-		sr.dispose();
+		debugRenderer.dispose();
 	}
 	
 	public Texture getTexture(AbstractEntity e) {

@@ -38,8 +38,7 @@ public abstract class Obstacle extends MoveableEntity {
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
 	 */
 	@Override
-	public void update() {
-		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
+	public void update() { 
 		super.update();
 	}
 	

@@ -35,10 +35,6 @@ public class BulletType0 extends Bullet {
 			float rotation, World world, AbstractEntity shooter) {
 		super(position, width, height, rotation, world, shooter);
 		damage = 1;
-		hitbox.x = position.x + 0.85f;
-		hitbox.y = position.y + 0.8f;
-		hitbox.width = 1.35f;
-		hitbox.height = 0.3f;
 	}
 
 	/* (non-Javadoc)
@@ -55,8 +51,6 @@ public class BulletType0 extends Bullet {
 	@Override
 	public void update() {
 		super.update();
-		hitbox.x = position.x + 0.85f;
-		hitbox.y = position.y + 0.8f;
 	}
 
 	/* (non-Javadoc)

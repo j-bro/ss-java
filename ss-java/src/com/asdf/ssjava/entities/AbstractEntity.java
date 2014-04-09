@@ -43,11 +43,6 @@ public abstract class AbstractEntity {
 	protected float rotation;
 	
 	/**
-	 * The entity's hitbox
-	 */
-	protected transient Rectangle hitbox;
-	
-	/**
 	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
 	 */
 	protected transient int health;
@@ -60,12 +55,12 @@ public abstract class AbstractEntity {
 	/**
 	 * The Box2D world
 	 */
-	World world;
+	protected World world;
 	
 	/**
 	 * The Box2D body of this entity
 	 */
-	Body body;
+	protected Body body;
 	
 	/**
 	 * Creates an entity
@@ -76,7 +71,6 @@ public abstract class AbstractEntity {
 		this.height = height;
 		this.rotation = rotation;
 		this.world = world;
-		hitbox = new Rectangle(position.x, position.y, width, height);
 		
 		// TODO Box2D stuff
 		// First we create a body definition
@@ -161,34 +155,18 @@ public abstract class AbstractEntity {
 	public float getRotation() {
 		return rotation;
 	}
-
+	
 	/**
-	 * Sets the entity's rotation
-	 * @param rotation the rotation to set
+	 * 
+	 * @param rotation
 	 */
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
 	
 	/**
-	 * Returns the entity's hitbox
-	 * @return the hitbox of the entity
-	 */
-	public Rectangle getHitbox() {
-		return hitbox;
-	}
-	/**
-	 * Sets the entity's hitbox
-	 * @deprecated use the getHitbox() method to obtain the instance of hitbox and set the x, y variables
-	 * @param hitbox the hitbox to set
-	 */
-	public void setHitbox(Rectangle hitbox) {
-		this.hitbox = hitbox;
-	}
-	
-	/**
 	 * 
-	 * @return
+	 * @return the entity's health points
 	 */
 	public synchronized int getHealth() {
 		return health;
@@ -196,7 +174,7 @@ public abstract class AbstractEntity {
 	
 	/**
 	 * 
-	 * @param health
+	 * @param health the entity's health to be set
 	 */
 	public synchronized void setHealth(int health) {
 		this.health = health;
@@ -204,7 +182,7 @@ public abstract class AbstractEntity {
 	
 	/**
 	 * 
-	 * @param increment
+	 * @param increment the value to add/subtract from the entity's health
 	 */
 	public synchronized void healthChange(int increment) {
 		health += increment;
@@ -232,5 +210,6 @@ public abstract class AbstractEntity {
 	 * 
 	 */
 	public abstract void die();
+
 }
     

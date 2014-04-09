@@ -48,7 +48,7 @@ public class Ship extends MoveableEntity {
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_ACCELERATION = new Vector2(0, 100);
+	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(100, 1000);
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -92,8 +92,7 @@ public class Ship extends MoveableEntity {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
 			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, world, this);
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
-			b.getVelocity().x = b.getDEFAULT_VELOCITY().x;
-			b.getVelocity().y = b.getDEFAULT_VELOCITY().y;
+			b.getBody().setLinearVelocity(BulletType0.DEFAULT_VELOCITY);
 			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
@@ -112,28 +111,10 @@ public class Ship extends MoveableEntity {
 
 	@Override
 	public void update() { 
-		if (!isDead()) {			
-			if (Math.abs(velocity.y) >= DEFAULT_VELOCITY.y) {
-				if (velocity.y > 0) {
-					if (acceleration.y > 0) {
-						acceleration.y = 0;
-					}
-				}
-				else {
-					if (acceleration.y < 0) {
-						acceleration.y = 0;
-					}
-				}
+		if (!isDead()) {	
+			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x); {
+				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
-			if (Math.abs(velocity.x) < DEFAULT_VELOCITY.x) {
-				velocity.x += 3 * Gdx.graphics.getDeltaTime();
-			}
-			
-			velocity.x += acceleration.x * Gdx.graphics.getDeltaTime();
-			velocity.y += acceleration.y * Gdx.graphics.getDeltaTime();
-			
-			position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-			rotation = new Vector2(velocity.x * 2, velocity.y * 0.5f).angle();
 		}
 		
 		super.update();
