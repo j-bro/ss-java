@@ -201,7 +201,7 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		
-		// TODO camera follows ship if in game
+		// camera follows ship if in game
 		if (gameWorld.getWorldType() == 0) {			
 			cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
 		}
@@ -227,35 +227,6 @@ public class WorldRenderer {
 			// bullet rendering
 			for (Bullet b: gameWorld.bullets) {
 				Texture bulletTexture = getTexture(b);
-				
-				/* TODO find a better way to fix bullet texture & hitboxes
-				int srcX = 0, srcY = 0, srcWidth = 0, srcHeight = 0;
-				switch(b.getType()) {
-					case 0:
-						bulletTexture = bulletType0Texture;
-						srcX = 7;
-						srcY = 15;
-						srcWidth = 50;
-						srcHeight = 33;
-						break;
-					case 1: 
-						bulletTexture = bulletType1Texture;
-						// TODO also temp
-						srcX = 7;
-						srcY = 15;
-						srcWidth = 50;
-						srcHeight = 33;
-						break;
-					case 2: 
-						bulletTexture = bulletType2Texture;
-						break;
-					case 3:
-						bulletTexture = bulletType3Texture;
-						break;
-					default:
-						break;
-				}
-				*/
 				batch.draw(bulletTexture, b.getPosition().x, b.getPosition().y, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
 			}
 			

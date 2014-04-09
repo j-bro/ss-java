@@ -55,11 +55,11 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		renderer.render();
-		world.update();
 		world.box2DWorld.step(1/60f, 6, 2);
+		world.update();
 		
-		Gdx.app.log(SSJava.LOG, "Camera box2D: " + renderer.getCamera().position.x + ", " + renderer.getCamera().position.y);
-//		Gdx.app.log(SSJava.LOG, "Ship: " + world.getShip().getPosition().x + ", " + world.getShip().getPosition().y);
+		Gdx.app.log(SSJava.LOG, "Camera: " + renderer.getCamera().position.x + ", " + renderer.getCamera().position.y);
+		Gdx.app.log(SSJava.LOG, "Ship: " + world.getShip().getPosition().x + ", " + world.getShip().getPosition().y);
 	}
 
 	/*

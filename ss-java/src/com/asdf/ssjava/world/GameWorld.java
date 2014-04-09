@@ -111,16 +111,15 @@ public class GameWorld {
 		this.worldType = worldType;
 		
 		// TODO Box2D stuff
-		box2DWorld = new World(new Vector2(0, 10f), true);
+		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
-		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
 		ship.getBody().setLinearVelocity(ship.DEFAULT_VELOCITY);
 		
 		bullets = new Array<Bullet>();
 		
 		// Level Loading
-		/*if (levelPath != null) {			
+		/*if (levelPath != null) {
 			loadLevel(levelPath);
 		}*/
 		
