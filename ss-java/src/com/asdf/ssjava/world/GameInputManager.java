@@ -45,25 +45,21 @@ public class GameInputManager implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		// TODO add keyconfigs 
 		switch (keycode) {
-			case Keys.UP: 
-				if (!ship.maxUpSpeedReached){					
-					ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
-				}
+			case Keys.UP: 				
+//				ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 100, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				break;
-			case Keys.DOWN: 
-				if (!ship.maxDownSpeedReached) {					
-					ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
-				}
+			case Keys.DOWN: 					
+//				ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 100, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				break;
-			case Keys.W:
-				if (!ship.maxUpSpeedReached){					
-					ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
-				}
+			case Keys.W:			
+//				ship.getBody().applyForce(0, Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 100, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				break;
-			case Keys.S:
-				if (!ship.maxDownSpeedReached) {					
-					ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 4, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
-				}
+			case Keys.S:			
+//				ship.getBody().applyForce(0, (-1) * Ship.DEFAULT_ACCELERATION.y, ship.getBody().getPosition().x + ship.getWidth() / 2 + ship.getWidth() / 100, ship.getBody().getPosition().y + ship.getHeight() / 2, true);
+				ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				break;
 			case Keys.SPACE: 
 				ship.fire();
@@ -88,26 +84,8 @@ public class GameInputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO fix this badly implemented?
-		switch (keycode) {
-		case Keys.UP: 
-			ship.getBody().applyForceToCenter(0, 0, false);
-			break;
-		case Keys.DOWN:
-			ship.getBody().applyForceToCenter(0, 0, false);
-			break;
-		case Keys.W:
-			ship.getBody().applyForceToCenter(0, 0, false);
-			break;
-		case Keys.S:
-			ship.getBody().applyForceToCenter(0, 0, false);
-			break;
-		case Keys.SPACE: 
-			
-			break;
-		default: break;
-		}
-	return true;
+		
+		return true;
 	}
 
 	/* (non-Javadoc)
