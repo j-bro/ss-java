@@ -3,8 +3,14 @@
  */
 package com.asdf.ssjava.world;
 
+import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Bullet;
+import com.asdf.ssjava.entities.Powerup;
+import com.asdf.ssjava.entities.PowerupHealthUp;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
+import com.asdf.ssjava.entities.Ship;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -28,27 +34,72 @@ public class GameCollisionListener implements ContactListener {
 		Body body1 = contact.getFixtureA().getBody();
 		Body body2 = contact.getFixtureB().getBody();
 		
-		// TODO fix disappearing bullets
+		// Bullet collision
 		if (body1.getUserData() instanceof Bullet) {			
-			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
-			System.out.println("b1 is bullet, b2 is " + body2.getUserData().toString());
-			
+			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());			
 		}
 		else if (body2.getUserData() instanceof Bullet) {
 			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
-			System.out.println("b2 is bullet, b1 is " + body1.getUserData().toString());
 		}
 		
-		
-		
+		// Powerup collection
+		else if (body1.getUserData() instanceof Ship) {	
+			Ship ship = (Ship) body1.getUserData();
+			if (body2.getUserData() instanceof PowerupHealthUp) {
+				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
+			}
+			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
+				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
+			}
+		}
+		else if (body2.getUserData() instanceof Ship) {
+			Ship ship = (Ship) body2.getUserData();
+			if (body1.getUserData() instanceof PowerupHealthUp) {
+				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
+			}
+			else if (body1.getUserData() instanceof PowerupSpeedOfLight) {
+				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
+			}
+		}
+			
 	}
 	
 	/**
-	 * 
+	 * Called when a bullet collides with an entity
+	 * Removes the bullet and deals damage to the entity
+	 * @param b the bullet that collided
+	 * @param e the entity that collided
 	 */
 	public void bulletImpact(Bullet b, AbstractEntity e) {
-		e.healthChange((-1) * b.getDamage()); 
-		b.healthChange(-1);
+		if (!(e instanceof Powerup)) {
+			Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " collided with " + e.toString() + " " + Integer.toHexString(e.hashCode()));
+			e.healthChange((-1) * b.getDamage()); 
+			b.setHealth(0);
+		}
+	}
+	
+	/**
+	 * Called when the "health up" powerup is picked up
+	 * Removes the powerup and gives health to the ship
+	 * @param p the powerup picked up
+	 * @param s the ship
+	 */
+	public void healthUpActivate(PowerupHealthUp p, Ship s) {
+		Gdx.app.log(SSJava.LOG, "Health up " + Integer.toHexString(p.hashCode()) + " activated: " + PowerupHealthUp.HEALTH_GIVEN + " health points restored");
+		s.healthChange(PowerupHealthUp.HEALTH_GIVEN);
+		p.setHealth(0);
+	}
+	
+	/**
+	 * Called when the "speed of light" powerup is picked up
+	 * Removes the powerup and sends the ship into light speed mode
+	 * @param p the powerup picked up
+	 * @param s the ship
+	 */
+	public void speedOfLightActivate(PowerupSpeedOfLight p, Ship s) {
+		Gdx.app.log(SSJava.LOG, "Speed of light " + Integer.toHexString(p.hashCode()) + " activated");
+		// TODO speed of light
+		p.setHealth(0);
 	}
 	
 	/*
