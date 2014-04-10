@@ -8,6 +8,8 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -46,9 +48,8 @@ public class Ship extends MoveableEntity {
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
-	 * This is not automatically set by the constructor!
 	 */
-	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(10, 1000);
+	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(8, 1000);
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -87,7 +88,10 @@ public class Ship extends MoveableEntity {
 	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
 		super(position, width, height, rotation, world);
 		this.gameWorld = gameWorld;
-		setHealth(6);
+		setHealth(DEFAULT_HEALTH);
+		
+		createFixtureDef();
+		
 	}
 	
 	/**
@@ -118,22 +122,10 @@ public class Ship extends MoveableEntity {
 	@Override
 	public void update() { 
 		if (!isDead()) {
-			if (Math.abs(getBody().getLinearVelocity().y) >= DEFAULT_VELOCITY.y) {
-				if (getBody().getLinearVelocity().y > 0) {
-					maxUpSpeedReached = true;
-				}
-				else {
-					maxDownSpeedReached = true;
-				}
-			}
-			else {
-				maxUpSpeedReached = false;
-				maxDownSpeedReached = false;
-			}
-			
+						
 			// TODO fix too high velocity
 			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x); {
-				Gdx.app.log(SSJava.LOG, "vel: " + getBody().getLinearVelocity().x + " def: " + DEFAULT_VELOCITY.x);
+//				Gdx.app.log(SSJava.LOG, "vel: " + getBody().getLinearVelocity().x + " def: " + DEFAULT_VELOCITY.x);
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 		}
@@ -157,5 +149,26 @@ public class Ship extends MoveableEntity {
 	 */
 	public void setShotCooldown(int shotCooldown) {
 		this.shotCooldown = shotCooldown;
-	}	
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 */
+	@Override
+	public void createFixtureDef() {
+		// TODO Box2D stuff
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = rectangle;
+		fixtureDef.density = 0.5f; 
+		fixtureDef.friction = 1.0f;
+		fixtureDef.restitution = 0.1f;
+		
+		body.createFixture(fixtureDef);
+
+	}
+	
 }

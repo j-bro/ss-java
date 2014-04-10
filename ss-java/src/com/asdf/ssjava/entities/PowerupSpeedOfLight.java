@@ -1,6 +1,8 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class PowerupSpeedOfLight extends Powerup {
@@ -27,6 +29,7 @@ public class PowerupSpeedOfLight extends Powerup {
 	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation, world);
 		setHealth(DEFAULT_HEALTH);
+		createFixtureDef();
 	}
 
 	// TODO constructor for serialization
@@ -49,5 +52,25 @@ public class PowerupSpeedOfLight extends Powerup {
 	 */
 	public String toString() {
 		return "Speed of Light Powerup";
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 */
+	@Override
+	public void createFixtureDef() {
+		// TODO Box2D stuff
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = rectangle;
+		fixtureDef.density = 0.5f; 
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.1f;
+		
+		body.createFixture(fixtureDef);
+
 	}
 }

@@ -7,6 +7,8 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -76,6 +78,8 @@ public class EnemyType1 extends Enemy {
 		super(position, width, height, rotation, world);
 		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
+		
+		createFixtureDef();
 	}
 	
 	// TODO constructor for serialization
@@ -144,5 +148,25 @@ public class EnemyType1 extends Enemy {
 	 */
 	public String toString() {
 		return "Enemy Type 1";
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 */
+	@Override
+	public void createFixtureDef() {
+		// TODO Box2D stuff
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = rectangle;
+		fixtureDef.density = 0.5f; 
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.1f;
+		
+		body.createFixture(fixtureDef);
+
 	}
 }

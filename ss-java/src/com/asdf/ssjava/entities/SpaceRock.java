@@ -1,6 +1,8 @@
 package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class SpaceRock extends Obstacle {
@@ -40,6 +42,8 @@ public class SpaceRock extends Obstacle {
 	public SpaceRock(Vector2 position, float width, float height, float rotation, World world) {
 		super(position, width, height, rotation, world);
 		setHealth(DEFAULT_HEALTH);
+		
+		createFixtureDef();
 	}
 	
 	// TODO constructor for serialization
@@ -60,5 +64,25 @@ public class SpaceRock extends Obstacle {
 
 	public String toString() {
 		return "Space Rock";
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 */
+	@Override
+	public void createFixtureDef() {
+		// TODO Box2D stuff
+		CircleShape circle = new CircleShape();
+		circle.setRadius(width / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = circle;
+		fixtureDef.density = 0.5f; 
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.1f;
+		
+		body.createFixture(fixtureDef);
+
 	}
 }
