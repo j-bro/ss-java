@@ -30,7 +30,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /* Commented imports
@@ -90,7 +89,7 @@ public class GameWorld {
 	/**
 	 * Array containing all the bullets present in the level
 	 */
-	Array<Bullet> bullets;
+	public Array<Bullet> bullets;
 	
 	/**
 	 * Task to restore default speed (after Speed Of Light powerup)
@@ -129,10 +128,10 @@ public class GameWorld {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, box2DWorld));
+					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld));
 				}
 				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, box2DWorld);
+					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, this, box2DWorld);
 					o.getBody().setLinearVelocity(Asteroid.DEFAULT_VELOCITY);
 					level.obstacles.add(o);
 				}
@@ -140,8 +139,8 @@ public class GameWorld {
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, box2DWorld));
-				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, box2DWorld));
+				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld));
+				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld));
 			}
 		}
 		
@@ -152,7 +151,7 @@ public class GameWorld {
 		}
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 3; j++) {
-				level.gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0, box2DWorld));
+				level.gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0, this, box2DWorld));
 			}
 		}
 		
@@ -164,34 +163,47 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Update method run in every iteration of the main loop to update entity position, behaviour and collision
+	 * Update method run in every iteration of the main loop to update entity position and rotation
+	 * Also verifies which entities/bodies are dead and removes them
 	 */
 	public void update() {
 		// Map Box2D physics to game entities
 		Array<Body> bodiesArray = new Array<Body>();
 		box2DWorld.getBodies(bodiesArray);
-		Iterator<Body> bi = bodiesArray.iterator(); 
-
-		while (bi.hasNext()){
-			
-		    Body b = bi.next();
-
-		    // Get the body's user data - in this example, our user 
-		    // data is an instance of the Entity class
+		
+		Array<Body> deadBodies = new Array<Body>();
+		
+		// Iterate through all bodies
+		for (Body b: bodiesArray) {
+			// Get the entity corresponding to the body
 		    AbstractEntity e = (AbstractEntity) b.getUserData();
 
 		    if (e != null) {
-		        // Update the entities/sprites position and angle
-		        e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
-		        // We need to convert our angle from radians to degrees
-		        e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
+		    	// Check if the entity is dead and act accordingly
+		    	if (e.isDead()) {				
+					e.die();
+					deadBodies.add(b);
+		    	}
+		    	else {
+		    		// Update the entity's position 
+		    		e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
+		    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
+		    		
+		    		e.update();
+		    	}
 		    }
 		}
 		
+		// Remove all dead bodies from Box2D and game
+		for (Body b: deadBodies) {
+			AbstractEntity e = (AbstractEntity) b.getUserData();
+			if (e != null) {				
+				e.die();
+			}
+			box2DWorld.destroyBody(b);
+		}
 		
-		
-		// Entity updates
-		ship.update();
+//		ship.update(); // TODO
 		
 		
 		// TODO Collision detection		
@@ -440,25 +452,6 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Verifies if the passed entity is dead (life <= 0) and should be removed from the screen
-	 * @param e the entity to verify
-	 * @return true if the verified entity is dead
-	 */
-	public boolean checkIfDead(AbstractEntity e) {
-		if (e.getHealth() <=0) {
-			if (!(e instanceof Ship)) {				
-				e.die();
-			}
-			else if (!SSJava.DEBUG) { // Don't kill the ship in DEBUG
-				e.die();
-			}
-			return true;
-		}
-		return false;
-		
-	}
-	
-	/**
 	 * Calls the pause screen and stops rendering the game
 	 */
 	public void pauseGame() {
@@ -539,6 +532,14 @@ public class GameWorld {
 	 */
 	public int getWorldType() {
 		return worldType;
+	}
+	
+	/**
+	 * 
+	 * @return level the game world's level instance
+	 */
+	public Level getLevel() {
+		return level;
 	}
 	
 	/**
