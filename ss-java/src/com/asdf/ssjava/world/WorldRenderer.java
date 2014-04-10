@@ -4,6 +4,8 @@
  */
 package com.asdf.ssjava.world;
 
+import java.util.Iterator;
+
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
@@ -19,7 +21,6 @@ import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
-import com.asdf.ssjava.screens.LevelCreator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -29,8 +30,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -214,6 +214,22 @@ public class WorldRenderer {
 		
 		batch.begin();
 		
+		/* TODO simpler rendering
+		Array<Body> bodiesArray = new Array<Body>();
+		gameWorld.box2DWorld.getBodies(bodiesArray);
+		Iterator<Body> bi = bodiesArray.iterator(); 
+		while (bi.hasNext()) {
+			Body b = bi.next();
+
+		    // Get the entity corresponding to the body
+		    AbstractEntity e = (AbstractEntity) b.getUserData();
+
+		    if (e != null) {
+		    	Texture texture = getTexture(e);
+		    	batch.draw(texture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
+		    }
+		}
+		*/
 			for (Obstacle o: gameWorld.level.obstacles) {
 				Texture obstacleTexture = getTexture(o);
 				batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);
