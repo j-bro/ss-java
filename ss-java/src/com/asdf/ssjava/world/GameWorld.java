@@ -167,6 +167,7 @@ public class GameWorld {
 	 * Update method run in every iteration of the main loop to update entity position, behaviour and collision
 	 */
 	public void update() {
+		// Map Box2D physics to game entities
 		Array<Body> bodiesArray = new Array<Body>();
 		box2DWorld.getBodies(bodiesArray);
 		Iterator<Body> bi = bodiesArray.iterator(); 
@@ -188,27 +189,13 @@ public class GameWorld {
 		}
 		
 		
+		
 		// Entity updates
 		ship.update();
-		/*
-		for (Obstacle o: level.obstacles) {
-			o.update();
-		}
-		for (Enemy e: level.enemies) {
-			e.update();
-		}
-		for (Bullet b: bullets) {
-			b.update();
-		}
-		for (Powerup p: level.powerups) {
-			p.update();
-		}
-		for (Obstacle g: level.gameChangers) {
-			g.update();
-		}
+		
 		
 		// TODO Collision detection		
-		
+		/*
 		for (Bullet b: bullets) {
 			// TODO Bullets cleanup if they go offscreen
 			if (b.getPosition().x > ship.getPosition().x + 50 || b.getPosition().x < ship.getPosition().x - 30) {
@@ -442,48 +429,13 @@ public class GameWorld {
 		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
 		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
 		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
-		
-		/*
-		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
-			ship.getVelocity().y = 0;
-			if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
-				ship.getPosition().y = screenBottom;
-			}
-			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
-				ship.getPosition().y = screenTop - ship.getHeight();
-			}
-		}
-		
-		if (ship.getPosition().x + ship.getWidth() >= screenRight || ship.getPosition().x <= screenLeft) {
-			ship.getVelocity().x = 0;
-			if (ship.getAcceleration().x < 0 && ship.getPosition().x <= screenLeft) {
-				ship.getPosition().x = screenLeft;
-			}
-			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= screenRight) {
-				ship.getPosition().x = screenRight - ship.getWidth();
-			}
-		}
-		*/
-		
-		// TODO Box2D attempt
-		if (ship.getPosition().y + ship.getHeight() >= (screenTop) || ship.getPosition().y <= screenBottom) {
+				
+		if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
 			ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
-			/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
-				ship.getPosition().y = screenBottom;
-			}
-			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
-				ship.getPosition().y = screenTop - ship.getHeight();
-			}*/
 		}
 		
-		if (ship.getPosition().x + ship.getWidth() >= screenRight || ship.getPosition().x <= screenLeft) {
+		if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
 			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
-			/*if (ship.getAcceleration().x < 0 && ship.getPosition().x <= screenLeft) {
-				ship.getPosition().x = screenLeft;
-			}
-			else if (ship.getAcceleration().x > 0 && ship.getPosition().x + ship.getWidth() >= screenRight) {
-				ship.getPosition().x = screenRight - ship.getWidth();
-			}*/
 		}
 	}
 	
