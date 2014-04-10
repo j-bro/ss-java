@@ -7,12 +7,12 @@ package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.world.GameCollisionListener;
 import com.asdf.ssjava.world.GameInputManager;
 import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 /**
  * @author Jeremy Brown
@@ -78,6 +78,7 @@ public class GameScreen implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show game");
 		if (world != null) {
 			Gdx.input.setInputProcessor(world.getManager());
+			world.box2DWorld.setContactListener(new GameCollisionListener());
 		}
 		AudioPlayer.playGameMusic(true);
 
