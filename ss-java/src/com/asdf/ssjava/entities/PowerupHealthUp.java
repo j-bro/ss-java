@@ -68,8 +68,9 @@ public class PowerupHealthUp extends Powerup {
 		fixtureDef.density = 0.5f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
+		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-
+		
 	}
 }

@@ -5,8 +5,6 @@
  */
 package com.asdf.ssjava.world;
 
-import java.util.Iterator;
-
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
