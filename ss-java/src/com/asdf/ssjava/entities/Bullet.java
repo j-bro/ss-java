@@ -4,7 +4,7 @@
  */
 package com.asdf.ssjava.entities;
 
-import com.badlogic.gdx.Gdx;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -35,22 +35,20 @@ public abstract class Bullet extends MoveableEntity {
 	int damage;
 	
 	/**
+	 * The health of a bullet (1, as it disappears as soon as it collides)
+	 */
+	public static final int DEFAULT_HEALTH = 1;
+	
+	/**
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, World world, AbstractEntity shooter) {
-		super(position, width, height, rotation, world);
+	public Bullet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world, AbstractEntity shooter) {
+		super(position, width, height, rotation, gameWorld, world);
 		this.shooter = shooter;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() { 
-		super.update();
+		this.health = DEFAULT_HEALTH;
 	}
 	
 	/* (non-Javadoc)
@@ -58,7 +56,7 @@ public abstract class Bullet extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		gameWorld.bullets.removeValue(this, true);
 	}
 
 	public abstract int getType();	

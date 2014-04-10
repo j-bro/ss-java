@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -34,27 +35,19 @@ public abstract class Enemy extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Enemy(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
+	public Enemy(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 	}
 	
 	public abstract void fire();
 	public abstract int getType();
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() {
-		super.update();
-	}
 	
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		gameWorld.getLevel().enemies.removeValue(this, true);
 	}
 
 }

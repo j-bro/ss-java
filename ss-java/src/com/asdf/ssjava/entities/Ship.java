@@ -19,12 +19,7 @@ import com.badlogic.gdx.utils.TimeUtils;
  */
 
 public class Ship extends MoveableEntity {
-	
-	/**
-	 * The World's instance
-	 */
-	private GameWorld gameWorld;
-	
+		
 	/**
 	 * The entity's starting health
 	 */
@@ -86,7 +81,7 @@ public class Ship extends MoveableEntity {
 	 * @param rotation
 	 */
 	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, world);
+		super(position, width, height, rotation, gameWorld, world);
 		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
 		
@@ -100,7 +95,7 @@ public class Ship extends MoveableEntity {
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, world, this);
+			Bullet b = new BulletType0(new Vector2(position.x + width + 0.5f, position.y), 3, 2, 0, gameWorld, world, this);
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
 			b.getBody().setLinearVelocity(BulletType0.DEFAULT_VELOCITY);
 			gameWorld.getBullets().add(b);
@@ -116,7 +111,6 @@ public class Ship extends MoveableEntity {
 	 */
 	public void die() {
 		Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
-		dead = true;
 	}
 
 	@Override

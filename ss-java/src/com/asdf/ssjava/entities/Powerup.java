@@ -3,9 +3,8 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -25,16 +24,8 @@ public abstract class Powerup extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Powerup(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() { // TODO
-		super.update();
+	public Powerup(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 	}
 
 	/* (non-Javadoc)
@@ -42,7 +33,7 @@ public abstract class Powerup extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		gameWorld.getLevel().powerups.removeValue(this, true);
 	}
 	
 	

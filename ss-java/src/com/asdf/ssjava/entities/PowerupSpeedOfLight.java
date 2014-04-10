@@ -1,5 +1,6 @@
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -26,8 +27,8 @@ public class PowerupSpeedOfLight extends Powerup {
 	 * @param height
 	 * @param rotation
 	 */
-	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
+	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 		setHealth(DEFAULT_HEALTH);
 		createFixtureDef();
 	}
@@ -39,13 +40,6 @@ public class PowerupSpeedOfLight extends Powerup {
 		setHealth(DEFAULT_HEALTH);
 	}
 	*/
-	
-	/**
-	 * 
-	 */
-	public void update() { // TODO
-		super.update();
-	}
 	
 	/**
 	 * 

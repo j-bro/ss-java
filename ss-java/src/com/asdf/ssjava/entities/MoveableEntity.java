@@ -6,6 +6,7 @@
 */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -27,14 +28,16 @@ public abstract class MoveableEntity extends AbstractEntity {
 	 * @param width the entity's width in pixels
 	 * @param height the entity's height in pixels
 	 */
-	protected MoveableEntity(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
+	protected MoveableEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 	}
 	
-	/**
-	 * Runs every time the game renders a frame.
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#update()
 	 */
+	@Override
 	public void update() {
-		
+		super.update();
 	}
 }

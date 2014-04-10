@@ -19,11 +19,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class EnemyType1 extends Enemy {
 	
 	/**
-	 * The World's instance
-	 */
-	private transient GameWorld gameWorld;
-	
-	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
 	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
@@ -75,7 +70,7 @@ public class EnemyType1 extends Enemy {
 	 * @param world the world instance
 	 */
 	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, world);
+		super(position, width, height, rotation, gameWorld, world);
 		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
 		
@@ -90,14 +85,6 @@ public class EnemyType1 extends Enemy {
 		setHealth(DEFAULT_HEALTH);
 	}
 	*/
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Enemy#update()
-	 */
-	@Override
-	public void update() {
-		super.update();
-	}
 	
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Enemy#fire()
@@ -105,7 +92,7 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, world, this);
+			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, gameWorld, world, this);
 			b.getPosition().x = position.x - b.width;
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
 			b.getBody().setLinearVelocity(BulletType1.DEFAULT_VELOCITY);

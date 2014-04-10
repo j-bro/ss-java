@@ -3,10 +3,10 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -47,8 +47,8 @@ public class Planet extends Obstacle {
 	 * @param height
 	 * @param rotation
 	 */
-	public Planet(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
+	public Planet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 		setHealth(DEFAULT_HEALTH);
 		
 		createFixtureDef();

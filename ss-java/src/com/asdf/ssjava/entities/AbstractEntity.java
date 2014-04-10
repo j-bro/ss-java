@@ -10,12 +10,11 @@ package com.asdf.ssjava.entities;
  *
  */
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
    
 public abstract class AbstractEntity {
@@ -46,12 +45,12 @@ public abstract class AbstractEntity {
 	protected transient int health;
 	
 	/**
-	 * Whether the entity is dead (or not)
+	 * The game world instance
 	 */
-	boolean dead;
+	protected GameWorld gameWorld;
 	
 	/**
-	 * The Box2D world
+	 * The Box2D world instance
 	 */
 	protected World world;
 	
@@ -63,11 +62,12 @@ public abstract class AbstractEntity {
 	/**
 	 * Creates an entity
 	 */
-	protected AbstractEntity(Vector2 position, float width, float height, float rotation, World world) {
+	protected AbstractEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
 		this.rotation = rotation;
+		this.gameWorld = gameWorld;
 		this.world = world;
 		
 		// TODO Box2D stuff
@@ -176,7 +176,12 @@ public abstract class AbstractEntity {
 	 * @return
 	 */
 	public boolean isDead() {
-		return dead;
+		if (health <= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	/**
@@ -184,6 +189,23 @@ public abstract class AbstractEntity {
 	 */
 	public Body getBody() {
 		return body;
+	}
+	
+	/**
+	 * 
+	 * @return gameWorld the gameWorld instance
+	 */
+	public GameWorld getGameWorld() {
+		return gameWorld;
+	}
+	
+	/**
+	 * Runs every time the game renders a frame.
+	 */
+	public void update() {
+		if (isDead()) {
+			
+		}
 	}
 	
 	/**

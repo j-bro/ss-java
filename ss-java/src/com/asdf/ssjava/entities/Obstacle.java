@@ -3,7 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
-import com.badlogic.gdx.Gdx;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -30,16 +30,8 @@ public abstract class Obstacle extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Obstacle(Vector2 position, float width, float height, float rotation, World world) {
-		super(position, width, height, rotation, world);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() { 
-		super.update();
+	public Obstacle(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+		super(position, width, height, rotation, gameWorld, world);
 	}
 	
 	/* (non-Javadoc)
@@ -47,7 +39,12 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		if (this instanceof Planet) {			
+			gameWorld.getLevel().gameChangers.removeValue(this, true);
+		}
+		else {
+			gameWorld.getLevel().obstacles.removeValue(this, true);
+		}
 	}
 
 	public abstract Vector2 getDEFAULT_VELOCITY();

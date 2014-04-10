@@ -5,6 +5,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -27,15 +28,19 @@ public class BulletType1 extends Bullet {
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(20, 0);
 	
 	/**
+	 * The damage dealt to an entity that collides with this bullet
+	 */
+	public static final int DEFAULT_DAMAGE = 1;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
 	 * @param rotation
 	 */
-	public BulletType1(Vector2 position, float width, float height,
-			float rotation, World world, AbstractEntity shooter) {
-		super(position, width, height, rotation, world, shooter);
-		damage = 1;
+	public BulletType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world, AbstractEntity shooter) {
+		super(position, width, height, rotation, gameWorld, world, shooter);
+		damage = DEFAULT_DAMAGE;
 		
 		createFixtureDef();
 	}
