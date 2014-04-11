@@ -137,6 +137,15 @@ public class EnemyType1 extends Enemy {
 		return "Enemy Type 1";
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Obstacle#die()
+	 */
+	@Override
+	public void die() {
+		gameWorld.getScoreKeeper().add(KILL_SCORE);
+		super.die();
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()

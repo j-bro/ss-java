@@ -71,6 +71,15 @@ public class SpaceRock extends Obstacle {
 		return "Space Rock";
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Obstacle#die()
+	 */
+	@Override
+	public void die() {
+		gameWorld.getScoreKeeper().add(KILL_SCORE);
+		super.die();
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()

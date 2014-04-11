@@ -534,6 +534,14 @@ public class GameWorld {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public ScoreKeeper getScoreKeeper() {
+		return scoreKeeper;
+	}
+	
+	/**
 	 * Dispose method
 	 */
 	public void dispose() {

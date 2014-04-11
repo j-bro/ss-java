@@ -75,6 +75,15 @@ public class Asteroid extends Obstacle {
 	public String toString() {
 		return "Asteroid";
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Obstacle#die()
+	 */
+	@Override
+	public void die() {
+		gameWorld.getScoreKeeper().add(KILL_SCORE);
+		super.die();
+	}
 
 	/*
 	 * (non-Javadoc)
