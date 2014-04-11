@@ -58,7 +58,7 @@ public abstract class Bullet extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		// do nothing?
+		dead = true;
 	}
 
 	public abstract int getType();	

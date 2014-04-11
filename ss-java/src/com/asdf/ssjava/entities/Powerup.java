@@ -39,7 +39,7 @@ public class Powerup extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		// TODO
+		dead = true;
 	}
 	
 }

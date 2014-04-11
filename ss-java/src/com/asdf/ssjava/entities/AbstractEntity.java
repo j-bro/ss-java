@@ -12,8 +12,9 @@ package com.asdf.ssjava.entities;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
    
-public abstract class AbstractEntity {
+public abstract class AbstractEntity extends Actor {
 	
 	/**
 	 * The entity's position
@@ -39,6 +40,11 @@ public abstract class AbstractEntity {
 	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
 	 */
 	protected transient int health;
+	
+	/**
+	 * Whether the entity is dead (or not)
+	 */
+	boolean dead;
 	
 	/**
 	 * Creates an entity
@@ -115,14 +121,26 @@ public abstract class AbstractEntity {
 		this.hitbox = hitbox;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public synchronized int getHealth() {
 		return health;
 	}
 	
+	/**
+	 * 
+	 * @param health
+	 */
 	public synchronized void setHealth(int health) {
 		this.health = health;
 	}
 	
+	/**
+	 * 
+	 * @param increment
+	 */
 	public synchronized void healthChange(int increment) {
 		health += increment;
 		if (getHealth() < 0) {
@@ -130,6 +148,17 @@ public abstract class AbstractEntity {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isDead() {
+		return dead;
+	}
+	
+	/**
+	 * 
+	 */
 	public abstract void die();
 }
     

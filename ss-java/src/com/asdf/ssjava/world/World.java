@@ -6,7 +6,6 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.AudioPlayer;
-import com.asdf.ssjava.InputManager;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
@@ -22,6 +21,7 @@ import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -62,7 +62,15 @@ public class World {
 	/**
 	 * The InputManager instance
 	 */
-	InputManager manager;
+	InputProcessor manager;
+	
+	/**
+	 * The world view type
+	 * 0 = game
+	 * 1 = creator 
+	 */
+	int worldType;
+	
 	
 	/**
 	 * The ScoreKeeper instance
@@ -88,8 +96,9 @@ public class World {
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
 	 */
-	public World(SSJava game, String levelPath) {
+	public World(SSJava game, int worldType, String levelPath) {
 		this.game = game;
+		this.worldType = worldType;
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this);
 		ship.getVelocity().x = ship.DEFAULT_VELOCITY.x; // default horizontal ship speed
@@ -97,7 +106,9 @@ public class World {
 		bullets = new Array<Bullet>();
 		
 		// Level Loading
-		loadLevel(levelPath);
+		if (levelPath != null) {			
+			loadLevel(levelPath);
+		}
 		
 		/*
 		level = new Level();
@@ -130,11 +141,7 @@ public class World {
 			}
 		}*/
 		
-		exportLevel(levelPath);
-		
-		// Set game input processor
-		manager = new InputManager(game, this);
-		Gdx.input.setInputProcessor(manager);
+//		exportLevel(levelPath);		
 		
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
@@ -159,7 +166,7 @@ public class World {
 		for (Powerup p: level.powerups) {
 			p.update();
 		}
-		for (Obstacle g: level.gameChangers){
+		for (Obstacle g: level.gameChangers) {
 			g.update();
 		}
 		
@@ -267,9 +274,7 @@ public class World {
 					// ship damage
 					ship.healthChange((-1) * b.getDamage());
 					// life check
-					if (checkIfDead(ship)) {
-						
-					}
+					checkIfDead(ship);
 				}
 				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
 			}
@@ -328,6 +333,9 @@ public class World {
 					if (checkIfDead(o)) {
 						level.obstacles.removeValue(o, true);
 					}
+					
+					checkIfDead(ship); // TODO
+					
 					//Change ship speed
 					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 				}
@@ -382,6 +390,9 @@ public class World {
 					if (checkIfDead(g)) {
 						level.obstacles.removeValue(g, true);
 					}
+					
+					checkIfDead(ship); // TODO
+					
 				}
 				//Change ship speed
 				ship.getVelocity().x = ship.SLOW_VELOCITY.x;
@@ -422,7 +433,12 @@ public class World {
 	 */
 	public boolean checkIfDead(AbstractEntity e) {
 		if (e.getHealth() <=0) {
-			e.die();
+			if (!(e instanceof Ship)) {				
+				e.die();
+			}
+			else if (!SSJava.DEBUG) { // Don't kill the ship in DEBUG
+				e.die();
+			}
 			return true;
 		}
 		return false;
@@ -434,6 +450,7 @@ public class World {
 	 */
 	public void pauseGame() {
 		game.setScreen(new PauseMenu(game, game.gameScreen));
+		AudioPlayer.pauseGameMusic();
 	}
 	
 	/**
@@ -495,14 +512,30 @@ public class World {
 		this.render = render;
 	}
 	
-	public InputManager getManager() {
+	/**
+	 * 
+	 * @return the input processor
+	 */
+	public InputProcessor getManager() {
 		return manager;
 	}
 	
 	/**
-	 *
+	 * 
+	 * @return the world's type (game or creator)
+	 */
+	public int getWorldType() {
+		return worldType;
+	}
+	
+	/**
+	 * Dispose method
 	 */
 	public void dispose() {
 		
+	}
+
+	public void setManager(InputProcessor manager) {
+		this.manager = manager;		
 	}
 }

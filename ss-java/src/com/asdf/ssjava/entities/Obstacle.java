@@ -47,7 +47,7 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		
+		dead = true;
 	}
 
 	public abstract Vector2 getDEFAULT_VELOCITY();
