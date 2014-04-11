@@ -68,8 +68,9 @@ public class Asteroid extends Obstacle {
 		return DEFAULT_VELOCITY;
 	}
 	
-	/**
-	 * @return the object's description string
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return "Asteroid";

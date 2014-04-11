@@ -36,6 +36,12 @@ public abstract class Powerup extends MoveableEntity {
 		gameWorld.getLevel().powerups.removeValue(this, true);
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Powerup";
+	}
 	
 }

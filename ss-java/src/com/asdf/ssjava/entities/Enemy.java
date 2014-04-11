@@ -50,4 +50,11 @@ public abstract class Enemy extends MoveableEntity {
 		gameWorld.getLevel().enemies.removeValue(this, true);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Enemy";
+	}
 }

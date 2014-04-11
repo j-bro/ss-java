@@ -127,8 +127,12 @@ public class Ship extends MoveableEntity {
 		super.update();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
-		return "Player's ship";
+		return "Ship";
 	}
 	
 	/**

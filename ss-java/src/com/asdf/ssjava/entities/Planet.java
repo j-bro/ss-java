@@ -76,7 +76,7 @@ public class Planet extends Obstacle {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "Planet";
+		return "Abstract Planet";
 	}
 
 	/*

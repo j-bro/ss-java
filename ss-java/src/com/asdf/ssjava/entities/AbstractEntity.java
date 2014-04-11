@@ -203,9 +203,7 @@ public abstract class AbstractEntity {
 	 * Runs every time the game renders a frame.
 	 */
 	public void update() {
-		if (isDead()) {
-			
-		}
+		
 	}
 	
 	/**
@@ -217,5 +215,13 @@ public abstract class AbstractEntity {
 	 * Creates and applies the fixture definition for this entity
 	 */
 	public abstract void createFixtureDef();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Entity";
+	}
 }
     

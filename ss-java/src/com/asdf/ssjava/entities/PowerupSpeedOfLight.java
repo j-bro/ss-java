@@ -41,8 +41,9 @@ public class PowerupSpeedOfLight extends Powerup {
 	}
 	*/
 	
-	/**
-	 * 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return "Speed of Light Powerup";

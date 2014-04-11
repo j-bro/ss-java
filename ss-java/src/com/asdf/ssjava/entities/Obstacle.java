@@ -46,6 +46,14 @@ public abstract class Obstacle extends MoveableEntity {
 			gameWorld.getLevel().obstacles.removeValue(this, true);
 		}
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Obstacle";
+	}
 
 	public abstract Vector2 getDEFAULT_VELOCITY();
 	

@@ -63,6 +63,10 @@ public class SpaceRock extends Obstacle {
 		return DEFAULT_VELOCITY;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "Space Rock";
 	}
