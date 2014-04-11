@@ -117,9 +117,8 @@ public class Ship extends MoveableEntity {
 	public void update() { 
 		if (!isDead()) {
 						
-			// TODO fix too high velocity
-			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x); {
-//				Gdx.app.log(SSJava.LOG, "vel: " + getBody().getLinearVelocity().x + " def: " + DEFAULT_VELOCITY.x);
+			// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity
+			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 		}

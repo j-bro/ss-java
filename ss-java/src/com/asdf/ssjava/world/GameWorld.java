@@ -180,6 +180,7 @@ public class GameWorld {
 		    	// Check if the entity is dead and act accordingly
 		    	if (e.isDead()) {				
 					e.die();
+					Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(b.hashCode()) + " died.");
 					deadBodies.add(b);
 		    	}
 		    	else {
@@ -194,23 +195,13 @@ public class GameWorld {
 		
 		// Remove all dead bodies from Box2D and game
 		for (Body b: deadBodies) {
-			AbstractEntity e = (AbstractEntity) b.getUserData();
-			if (e != null) {				
-				e.die();
-			}
 			box2DWorld.destroyBody(b);
 		}
-		
-//		ship.update(); // TODO
-		
 		
 		// TODO Collision detection		
 		/*
 		for (Bullet b: bullets) {
-			// TODO Bullets cleanup if they go offscreen
-			if (b.getPosition().x > ship.getPosition().x + 50 || b.getPosition().x < ship.getPosition().x - 30) {
-				bullets.removeValue(b, true);
-			}
+
 			// Bullet collision with enemies
 			for (Enemy e: level.enemies) { 
 				if (e.getHitbox().overlaps(b.getHitbox())) {
@@ -441,10 +432,12 @@ public class GameWorld {
 		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
 				
 		if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
+			Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
 			ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
 		}
 		
 		if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
+			Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
 			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
 		}
 	}
