@@ -59,6 +59,26 @@ public abstract class Bullet extends MoveableEntity {
 		gameWorld.bullets.removeValue(this, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
+	 */
+	@Override
+	public void update() {
+		// Remove bullets if they go offscreen
+		if (getPosition().x > gameWorld.getShip().getPosition().x + 50 || getPosition().x < gameWorld.getShip().getPosition().x - 30) {
+			setHealth(0);
+		}
+		super.update();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Bullet";
+	}
+
 	public abstract int getType();	
 	public abstract int getDamage();
 	public abstract AbstractEntity getShooter();
