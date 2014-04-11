@@ -41,6 +41,8 @@ public abstract class MoveableEntity extends AbstractEntity {
 		super.update();
 	}
 	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()

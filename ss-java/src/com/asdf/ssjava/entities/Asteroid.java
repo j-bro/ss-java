@@ -104,5 +104,23 @@ public class Asteroid extends Obstacle {
 		body.createFixture(fixtureDef);
 
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
+	@Override
+	public int getHitScore() {
+		return HIT_SCORE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getKillScore()
+	 */
+	@Override
+	public int getKillScore() {
+		return KILL_SCORE;
+	}
 	
 }

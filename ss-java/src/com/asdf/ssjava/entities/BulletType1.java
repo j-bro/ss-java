@@ -33,6 +33,16 @@ public class BulletType1 extends Bullet {
 	public static final int DEFAULT_DAMAGE = 1;
 	
 	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 0;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 0;
+	
+	/**
 	 * @param position
 	 * @param width
 	 * @param height
@@ -103,6 +113,24 @@ public class BulletType1 extends Bullet {
 		
 		body.createFixture(fixtureDef);
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
+	@Override
+	public int getHitScore() {
+		return HIT_SCORE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getKillScore()
+	 */
+	@Override
+	public int getKillScore() {
+		return KILL_SCORE;
 	}
 	
 }

@@ -44,6 +44,7 @@ public abstract class AbstractEntity {
 	 */
 	protected transient int health;
 	
+	
 	/**
 	 * The game world instance
 	 */
@@ -205,6 +206,9 @@ public abstract class AbstractEntity {
 	public void update() {
 		
 	}
+	
+	public abstract int getHitScore();
+	public abstract int getKillScore();
 	
 	/**
 	 * Called when the entity's health is 0

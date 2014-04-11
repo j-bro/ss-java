@@ -5,11 +5,15 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
+import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
+import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.entities.SpaceRock;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -24,6 +28,13 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  */
 public class GameCollisionListener implements ContactListener {
 
+	GameWorld gameWorld;
+	
+	public GameCollisionListener(GameWorld gameWorld) {
+		this.gameWorld = gameWorld;
+	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.badlogic.gdx.physics.box2d.ContactListener#beginContact(com.badlogic.gdx.physics.box2d.Contact)
@@ -75,6 +86,9 @@ public class GameCollisionListener implements ContactListener {
 			Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " collided with " + e.toString() + " " + Integer.toHexString(e.hashCode()));
 			e.healthChange((-1) * b.getDamage()); 
 			b.setHealth(0);
+			
+			// Hit score
+			gameWorld.getScoreKeeper().add(e.getHitScore());
 		}
 	}
 	

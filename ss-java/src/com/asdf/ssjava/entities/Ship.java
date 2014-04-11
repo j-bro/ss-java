@@ -73,6 +73,16 @@ public class Ship extends MoveableEntity {
 	public boolean maxDownSpeedReached = false;
 	
 	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 0;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 0; 
+	
+	/**
 	 * Creates a ship with a position, dimensions and rotation.
 	 * Does not give the ship an initial speed.
 	 * @param position
@@ -168,4 +178,21 @@ public class Ship extends MoveableEntity {
 
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
+	@Override
+	public int getHitScore() {
+		return HIT_SCORE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getKillScore()
+	 */
+	@Override
+	public int getKillScore() {
+		return KILL_SCORE;
+	}
 }

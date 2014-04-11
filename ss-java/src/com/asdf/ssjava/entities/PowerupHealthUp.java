@@ -23,6 +23,16 @@ public class PowerupHealthUp extends Powerup {
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 0;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 100;
+	
+	/**
 	 * 
 	 * @param position
 	 * @param width
@@ -72,5 +82,33 @@ public class PowerupHealthUp extends Powerup {
 		
 		body.createFixture(fixtureDef);
 		
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
+	@Override
+	public int getHitScore() {
+		return HIT_SCORE;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#die()
+	 */
+	@Override
+	public void die() {
+		gameWorld.getScoreKeeper().add(KILL_SCORE);
+		gameWorld.getLevel().powerups.removeValue(this, true);
+		super.die();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getKillScore()
+	 */
+	@Override
+	public int getKillScore() {
+		return KILL_SCORE;
 	}
 }

@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 	/**
 	 * The world instance
 	 */
-	GameWorld world;
+	GameWorld gameWorld;
 	
 	/**
 	 * The renderer instance
@@ -41,11 +41,11 @@ public class GameScreen implements Screen {
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		world = new GameWorld(game, 0, levelPath);
-		renderer = new WorldRenderer(world);
-		world.setRenderer(renderer);
-		world.setManager(new GameInputManager(game, world));
-		Gdx.input.setInputProcessor(world.getManager());
+		gameWorld = new GameWorld(game, 0, levelPath);
+		renderer = new WorldRenderer(gameWorld);
+		gameWorld.setRenderer(renderer);
+		gameWorld.setManager(new GameInputManager(game, gameWorld));
+		Gdx.input.setInputProcessor(gameWorld.getManager());
 	}
 	
 	/*
@@ -55,8 +55,8 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		renderer.render();
-		world.box2DWorld.step(1/60f, 6, 2);
-		world.update();
+		gameWorld.box2DWorld.step(1/60f, 6, 2);
+		gameWorld.update();
 		
 	}
 
@@ -76,9 +76,9 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show game");
-		if (world != null) {
-			Gdx.input.setInputProcessor(world.getManager());
-			world.box2DWorld.setContactListener(new GameCollisionListener());
+		if (gameWorld != null) {
+			Gdx.input.setInputProcessor(gameWorld.getManager());
+			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
 		}
 		AudioPlayer.playGameMusic(true);
 
@@ -99,7 +99,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void pause() {
-		world.pauseGame();
+		gameWorld.pauseGame();
 	}
 
 	/*
@@ -117,7 +117,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void dispose() {
-		world.dispose();
+		gameWorld.dispose();
 		renderer.dispose();
 	}
 }
