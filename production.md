@@ -9,7 +9,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 ####To do list
 
 - Enemy AI
-- Correct hitboxes (requires ship textures)
 - All Textures
 - High scores
 - And more..!
@@ -21,6 +20,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - AudioPlayer sounds
 - Powerups
 - Collision physics
+- Hitbox shapes
 - Level design
 - Level creator
 - Game HUD (life, progress, score)

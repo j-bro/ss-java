@@ -2,6 +2,7 @@ package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -56,11 +57,11 @@ public class PowerupSpeedOfLight extends Powerup {
 	@Override
 	public void createFixtureDef() {
 		// TODO Box2D stuff
-		PolygonShape rectangle = new PolygonShape();
-		rectangle.setAsBox(width / 2, height / 2);
+		CircleShape circle = new CircleShape();
+		circle.setRadius(width / 2);
 		
 		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = rectangle;
+		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
