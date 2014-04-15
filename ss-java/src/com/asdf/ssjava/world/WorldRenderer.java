@@ -62,6 +62,11 @@ public class WorldRenderer {
 	Label scoreLabel;
 	
 	/**
+	 * The debug text elements
+	 */
+	Label debugLabel;
+	
+	/**
 	 * The camera 
 	 */
 	OrthographicCamera cam;
@@ -184,6 +189,16 @@ public class WorldRenderer {
 						
 		}
 		
+		// Debug text
+		LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+		debugLabel = new Label("DEBUG TEXT HOLDER"
+				+ "\nDEBUG TEXT HOLDER"
+				+ "\nDEBUG TEXT HOLDER", dbls);
+		debugLabel.setX(Gdx.graphics.getWidth() - 20 - debugLabel.getWidth());
+		debugLabel.setY(Gdx.graphics.getHeight() - 10 - debugLabel.getHeight());
+		
+		stage.addActor(debugLabel);
+		
 		
 		// shape renderer
 		debugRenderer = new Box2DDebugRenderer();
@@ -256,6 +271,7 @@ public class WorldRenderer {
 			// ship rendering
 			batch.draw(shipTexture, ship.getPosition().x - ship.getWidth() / 2, ship.getPosition().y - ship.getHeight() / 2, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 			
+			
 		batch.end();
 		
 		// game HUD
@@ -322,9 +338,15 @@ public class WorldRenderer {
 		stage.act();
 		stage.draw();
 		
-		
+		// Debug renderer
 		if (SSJava.DEBUG) { 			
 			debugRenderer.render(gameWorld.box2DWorld, cam.combined);
+
+			// Debug info
+			debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100 + 
+					"\nRotation (rad): " + (float) Math.round(ship.getBody().getAngle() * 10000) / 10000 + 
+					"\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 + 
+					"");
 		}
 	}
 
