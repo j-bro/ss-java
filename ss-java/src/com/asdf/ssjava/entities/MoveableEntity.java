@@ -20,7 +20,7 @@ public abstract class MoveableEntity extends AbstractEntity {
 	/**
 	 * The entity's default velocity vector, as values for x and y
 	 */
-	protected Vector2 DEFAULT_VELOCITY;
+	public static Vector2 DEFAULT_VELOCITY;
 	
 	/**
 	 * Creates an entity with a position, dimensions, [SPEED]

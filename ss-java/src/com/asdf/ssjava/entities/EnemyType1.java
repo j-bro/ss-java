@@ -21,7 +21,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public final static Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	public static final float DEFAULT_WIDTH = 2;
 	public static final float DEFAULT_HEIGHT = 2;

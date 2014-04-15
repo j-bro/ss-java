@@ -126,7 +126,9 @@ public class GameWorld {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (j % 2 == 0) {					
-					level.obstacles.add(new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld));
+					Obstacle o = new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld);
+					o.getBody().setLinearVelocity(SpaceRock.DEFAULT_VELOCITY);
+					level.obstacles.add(o);
 				}
 				else {
 					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, this, box2DWorld);
@@ -137,19 +139,27 @@ public class GameWorld {
 		}
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 5; j++){
-				level.powerups.add(new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld));
-				level.powerups.add(new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld));
+				Powerup p = new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld);
+				p.getBody().setLinearVelocity(PowerupSpeedOfLight.DEFAULT_VELOCITY);
+				level.powerups.add(p);
+				p = new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld);
+				p.getBody().setLinearVelocity(PowerupHealthUp.DEFAULT_VELOCITY);
+				level.powerups.add(p);
 			}
 		}
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				level.enemies.add(new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld));
+				Enemy e = new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld);
+				e.getBody().setLinearVelocity(EnemyType1.DEFAULT_VELOCITY);
+				level.enemies.add(e);
 			}
 		}
 		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 3; j++) {
-				level.gameChangers.add(new Planet(new Vector2(250 * i + 25, 7.5f + j * 10), 4, 4, 0, this, box2DWorld));
+			for (int j = 0; j < 1; j++) {
+				Planet p = new Planet(new Vector2(250 * i + 100, 40 + j * 50), Planet.DEFAULT_WIDTH, Planet.DEFAULT_HEIGHT, Planet.DEFAULT_ROTATION, this, box2DWorld);
+				p.getBody().setLinearVelocity(Planet.DEFAULT_VELOCITY);
+				level.gameChangers.add(p);
 			}
 		}
 		
@@ -180,7 +190,7 @@ public class GameWorld {
 		    	// Check if the entity is dead and act accordingly
 		    	if (e.isDead()) {				
 					e.die();
-					Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(b.hashCode()) + " died.");
+					Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
 					deadBodies.add(b);
 		    	}
 		    	else {

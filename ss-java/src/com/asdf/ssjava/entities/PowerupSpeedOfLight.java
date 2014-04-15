@@ -16,7 +16,8 @@ public class PowerupSpeedOfLight extends Powerup {
 	 */
 	public static final int DEFAULT_HEALTH = 1;
 	
-
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
 	public static final float DEFAULT_WIDTH = 2;
 	public static final float DEFAULT_HEIGHT = 2;
 	public static final float DEFAULT_ROTATION = 0;

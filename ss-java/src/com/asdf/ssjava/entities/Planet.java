@@ -19,12 +19,12 @@ public class Planet extends Obstacle {
 	/**
 	 * The planet's default velocity (static)
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-3, -1);
 	
 	/**
 	 * The entity's starting health
 	 */
-	public static final int DEFAULT_HEALTH = 4;
+	public static final int DEFAULT_HEALTH = 6;
 	
 	/**
 	 * The score given for hitting this entity

@@ -14,6 +14,11 @@ public class PowerupHealthUp extends Powerup {
 	public static final int DEFAULT_HEALTH = 1;
 	
 	/**
+	 * Default velocity for the Health up powerup
+	 */
+	public final static Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	
+	/**
 	 * The health points given to the ship when it picks up this power up
 	 */
 	public static final int HEALTH_GIVEN = 2;
