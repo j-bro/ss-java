@@ -36,8 +36,8 @@ public class Planet extends Obstacle {
 	 */
 	public static final int KILL_SCORE = 1000; 
 	
-	public static final float DEFAULT_WIDTH = 4;
-	public static final float DEFAULT_HEIGHT = 4;
+	public static final float DEFAULT_WIDTH = 20;
+	public static final float DEFAULT_HEIGHT = 20;
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
@@ -76,7 +76,7 @@ public class Planet extends Obstacle {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "Abstract Planet";
+		return "Planet";
 	}
 
 	/* (non-Javadoc)
