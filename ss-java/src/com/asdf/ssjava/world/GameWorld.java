@@ -443,6 +443,13 @@ public class GameWorld {
 				
 		if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
 			Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
+			// TODO FIX moveable up increments
+			/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
+				ship.getPosition().y = screenBottom;
+			}
+			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
+				ship.getPosition().y = screenTop - ship.getHeight();
+			}*/
 			ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
 		}
 		

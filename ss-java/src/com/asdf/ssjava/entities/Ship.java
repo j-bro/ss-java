@@ -123,14 +123,25 @@ public class Ship extends MoveableEntity {
 		Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
+	 */
 	@Override
 	public void update() { 
 		if (!isDead()) {
-						
 			// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity
 			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
+			
+			// TODO Correct ship rotation course
+			
+			// check if angle multiple of 2*pi
+			if (!(getBody().getAngle() % (2 * Math.PI) == 0)) {
+				
+			}
+			
 		}
 		
 		super.update();
