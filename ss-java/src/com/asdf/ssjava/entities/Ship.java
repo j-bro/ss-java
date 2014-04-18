@@ -59,11 +59,11 @@ public class Ship extends MoveableEntity {
 	 * The time allowed between shots from this ship, in milliseconds
 	 */
 	private int shotCooldown = 300;
-	
+
 	/**
 	 * The ship cannot lose health from collisions as long as this is true
 	 */
-	public boolean lightSpeedMode = false;
+	private boolean lightSpeedEnabled = false;
 	
 	/**
 	 * Indicates whether or not the ship is currently at its maximum speed 
@@ -171,6 +171,20 @@ public class Ship extends MoveableEntity {
 	public void setShotCooldown(int shotCooldown) {
 		this.shotCooldown = shotCooldown;
 	}
+	
+	/**
+	 * @return true if light speed mode is enabled
+	 */
+	public boolean isLightSpeedEnabled() {
+		return lightSpeedEnabled;
+	}
+
+	/**
+	 * @param lightSpeedMode the lightSpeedMode to set
+	 */
+	public void setLightSpeedEnabled(boolean lightSpeedMode) {
+		this.lightSpeedEnabled = lightSpeedMode;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -190,6 +204,32 @@ public class Ship extends MoveableEntity {
 		
 		body.createFixture(fixtureDef);
 
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#setHealth(int)
+	 */
+	@Override
+	public synchronized void setHealth(int health) {
+		this.health = health;
+		if (health > DEFAULT_HEALTH) {
+			this.health = DEFAULT_HEALTH;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#healthChange(int)
+	 */
+	public synchronized void healthChange(int increment) {
+		health += increment;
+		if (health > DEFAULT_HEALTH) {
+			health = DEFAULT_HEALTH;
+		}
+		if (health < 0) {
+			health = 0;
+		}
 	}
 	
 	/*
