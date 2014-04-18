@@ -10,7 +10,10 @@ package com.asdf.ssjava.entities;
  *
  */
 
+import aurelienribon.bodyeditor.BodyEditorLoader;
+
 import com.asdf.ssjava.world.GameWorld;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -49,17 +52,22 @@ public abstract class AbstractEntity {
 	/**
 	 * The game world instance
 	 */
-	protected GameWorld gameWorld;
+	protected transient GameWorld gameWorld;
 	
 	/**
 	 * The Box2D world instance
 	 */
-	protected World world;
+	protected transient World world;
 	
 	/**
 	 * The Box2D body of this entity
 	 */
 	protected Body body;
+	
+	/**
+	 * The loader instance for the body's fixtures
+	 */
+	BodyEditorLoader loader;
 	
 	/**
 	 * Creates an entity
@@ -73,6 +81,8 @@ public abstract class AbstractEntity {
 		this.world = world;
 		
 		// TODO Box2D stuff
+//		loader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
+		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x, position.y);
@@ -80,6 +90,7 @@ public abstract class AbstractEntity {
 
 		body = world.createBody(bodyDef);
 		body.setUserData(this);	
+		
 		
 	}
 	

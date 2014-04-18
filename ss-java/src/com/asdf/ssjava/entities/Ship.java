@@ -3,6 +3,8 @@
  */
 package com.asdf.ssjava.entities;
 
+import aurelienribon.bodyeditor.BodyEditorLoader;
+
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
@@ -203,6 +205,7 @@ public class Ship extends MoveableEntity {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
+//		loader.attachFixture(body, "Ship", fixtureDef, DEFAULT_WIDTH);
 
 	}
 	
