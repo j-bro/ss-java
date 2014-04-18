@@ -19,10 +19,10 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Options/preferences
 - AudioPlayer sounds
 - Powerups
-- Collision physics
+- Collision physics (Box2D)
 - Hitbox shapes
-- Level design
 - Level creator
+- Level design
 - Game HUD (life, progress, score)
 
 ####Complete
