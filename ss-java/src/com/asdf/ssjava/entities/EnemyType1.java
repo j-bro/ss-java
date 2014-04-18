@@ -23,9 +23,9 @@ public class EnemyType1 extends Enemy {
 	 */
 	public final static Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
-	public static final float DEFAULT_ROTATION = 0;
+	public static final float DEFAULT_WIDTH = 6;
+	public static final float DEFAULT_HEIGHT = 3;
+	public static final float DEFAULT_ROTATION = 180;
 	
 	/**
 	 * The entity's starting health

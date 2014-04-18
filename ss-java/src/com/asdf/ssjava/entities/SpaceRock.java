@@ -30,8 +30,8 @@ public class SpaceRock extends Obstacle {
 	 */
 	public static final int KILL_SCORE = 10; 
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_WIDTH = 6;
+	public static final float DEFAULT_HEIGHT = 6;
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**

@@ -124,19 +124,19 @@ public class WorldRenderer {
 		spaceRockTexture = game.assetManager.get("data/textures/space_rock.png", Texture.class);
 		spaceRockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		asteroidTexture = game.assetManager.get("data/textures/brick.png", Texture.class);
+		asteroidTexture = game.assetManager.get("data/textures/asteroid.png", Texture.class);
 		asteroidTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		enemyType1Texture = game.assetManager.get("data/textures/enemy1.png", Texture.class);
+		enemyType1Texture = game.assetManager.get("data/textures/enemy_1.png", Texture.class);
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		bulletType0Texture = game.assetManager.get("data/textures/bullet_strip.png", Texture.class);
 		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		powerupHealthUpTexture = game.assetManager.get("data/textures/healthUp.png", Texture.class);
+		powerupHealthUpTexture = game.assetManager.get("data/textures/health_up.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/waterball.png", Texture.class);
+		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/speed_of_light.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		planetTexture = game.assetManager.get("data/textures/planet.png", Texture.class);
@@ -193,9 +193,11 @@ public class WorldRenderer {
 		LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
 		debugLabel = new Label("DEBUG TEXT HOLDER"
 				+ "\nDEBUG TEXT HOLDER"
+				+ "\nDEBUG TEXT HOLDER"
+				+ "\nDEBUG TEXT HOLDER"
 				+ "\nDEBUG TEXT HOLDER", dbls);
-		debugLabel.setX(Gdx.graphics.getWidth() - 20 - debugLabel.getWidth());
-		debugLabel.setY(Gdx.graphics.getHeight() - 10 - debugLabel.getHeight());
+		debugLabel.setX(10);
+		debugLabel.setY(scoreLabel.getY() - 20 - debugLabel.getHeight());
 		
 		stage.addActor(debugLabel);
 		
@@ -257,15 +259,16 @@ public class WorldRenderer {
 				batch.draw(bulletTexture, b.getPosition().x - b.getWidth() / 2, b.getPosition().y - b.getHeight() / 2, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
 			}
 			
-			for (Powerup p: gameWorld.level.powerups) {
-				Texture powerupTexture = getTexture(p);
-				batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);
-			}
 			
 			// game changer rendering
 			for (Obstacle g: gameWorld.level.gameChangers) {
 				Texture gameChangerTexture = getTexture(g);
 				batch.draw(gameChangerTexture, g.getPosition().x - g.getWidth() / 2, g.getPosition().y - g.getHeight() / 2, g.getWidth() / 2, g.getHeight() / 2 , g.getWidth(), g.getHeight(), 1, 1, g.getRotation(), 0, 0, gameChangerTexture.getWidth(), gameChangerTexture.getHeight(), false, false);
+			}
+			
+			for (Powerup p: gameWorld.level.powerups) {
+				Texture powerupTexture = getTexture(p);
+				batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);
 			}
 			
 			// ship rendering
@@ -346,7 +349,8 @@ public class WorldRenderer {
 			debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100 + 
 					"\nRotation (rad): " + (float) Math.round(ship.getBody().getAngle() * 10000) / 10000 + 
 					"\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 + 
-					"");
+					"\nHealth: " + ship.getHealth() + " half hearts" + 
+					"\nLight speed enabled: " + ship.isLightSpeedEnabled());
 		}
 	}
 

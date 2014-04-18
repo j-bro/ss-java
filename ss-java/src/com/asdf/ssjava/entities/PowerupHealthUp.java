@@ -23,8 +23,8 @@ public class PowerupHealthUp extends Powerup {
 	 */
 	public static final int HEALTH_GIVEN = 2;
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_WIDTH = 3;
+	public static final float DEFAULT_HEIGHT = 3;
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**

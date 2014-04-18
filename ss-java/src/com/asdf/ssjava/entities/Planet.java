@@ -36,8 +36,8 @@ public class Planet extends Obstacle {
 	 */
 	public static final int KILL_SCORE = 1000; 
 	
-	public static final float DEFAULT_WIDTH = 20;
-	public static final float DEFAULT_HEIGHT = 20;
+	public static final float DEFAULT_WIDTH = 24;
+	public static final float DEFAULT_HEIGHT = 24;
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**

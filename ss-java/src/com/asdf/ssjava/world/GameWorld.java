@@ -124,33 +124,33 @@ public class GameWorld {
 		level = new Level();
 		
 		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 7; j++) {
+			for (int j = 0; j < 4; j++) {
 				if (j % 2 == 0) {					
-					Obstacle o = new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 5), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld);
+					Obstacle o = new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 10), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld);
 					o.getBody().setLinearVelocity(SpaceRock.DEFAULT_VELOCITY);
 					level.obstacles.add(o);
 				}
 				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 25, 2.5f + j * 5), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, this, box2DWorld);
+					Obstacle o = new Asteroid(new Vector2(50 * i + 50, 2.5f + j * 10), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, this, box2DWorld);
 					o.getBody().setLinearVelocity(Asteroid.DEFAULT_VELOCITY);
 					level.obstacles.add(o);
 				}
 			}
 		}
 		for (int i = 0; i < 10; i++){
-			for (int j = 0; j < 5; j++){
-				Powerup p = new PowerupSpeedOfLight(new Vector2(200 * i, 4 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld);
+			for (int j = 0; j < 2; j++){
+				Powerup p = new PowerupSpeedOfLight(new Vector2(200 * i, 4 + 10 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld);
 				p.getBody().setLinearVelocity(PowerupSpeedOfLight.DEFAULT_VELOCITY);
 				level.powerups.add(p);
-				p = new PowerupHealthUp(new Vector2(50 * i - 10, 4 * j + 30), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld);
+				p = new PowerupHealthUp(new Vector2(100 * i - 10, 7 * j + 15), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld);
 				p.getBody().setLinearVelocity(PowerupHealthUp.DEFAULT_VELOCITY);
 				level.powerups.add(p);
 			}
 		}
 		
 		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				Enemy e = new EnemyType1(new Vector2(50 * (i + 1), 5 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld);
+			for (int j = 0; j < 3; j++) {
+				Enemy e = new EnemyType1(new Vector2(50 * (i + 1), 10 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld);
 				e.getBody().setLinearVelocity(EnemyType1.DEFAULT_VELOCITY);
 				level.enemies.add(e);
 			}
@@ -208,38 +208,11 @@ public class GameWorld {
 			box2DWorld.destroyBody(b);
 		}
 		
+		
 		// TODO Collision detection		
 		/*
 		for (Bullet b: bullets) {
-
-			// Bullet collision with enemies
-			for (Enemy e: level.enemies) { 
-				if (e.getHitbox().overlaps(b.getHitbox())) {
-					AudioPlayer.bulletImpact();
-					bullets.removeValue(b, true);
-					
-					// enemy damage
-					e.healthChange((-1) * b.getDamage());
-					// life check
-					int killScore = 0;
-					int hitScore = 0;
-					if (e instanceof EnemyType1) {
-						killScore = EnemyType1.KILL_SCORE;
-						hitScore = EnemyType1.HIT_SCORE;
-					}
-					
-					if (checkIfDead(e)) {
-						level.enemies.removeValue(e, true);
-						scoreKeeper.add(killScore);
-					}
-					else {
-						scoreKeeper.add(hitScore);
-					}
-					
-					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit enemy " + Integer.toHexString(e.hashCode()));
-				}
-			}
-			
+		
 			// Bullet collision with obstacles
 			for (Obstacle o: level.obstacles) { 
 				if (o.getHitbox().overlaps(b.getHitbox())) {
@@ -386,13 +359,7 @@ public class GameWorld {
 					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 4;
 					ship.lightSpeedMode = true;
 					//Reset the ship to default after 5 seconds
-					new Timer().scheduleTask(new Task() {
-						@Override
-						public void run() {
-							ship.getVelocity().x = ship.DEFAULT_VELOCITY.x;
-							ship.lightSpeedMode = false;
-						}
-					}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
+					
 					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
 				}
 				//Collision with the Health Up power-up
@@ -415,22 +382,8 @@ public class GameWorld {
 
 				}
 				else {
-					AudioPlayer.shipImpact();
-					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
-					g.alreadyCollided = true;
-					// ship and enemy damage
-					g.healthChange(-1);
-					ship.healthChange(-1);
-					// life check
-					if (checkIfDead(g)) {
-						level.obstacles.removeValue(g, true);
-					}
-					
-					checkIfDead(ship); // TODO
 					
 				}
-				//Change ship speed
-				ship.getVelocity().x = ship.SLOW_VELOCITY.x;
 			}
 		}
 		*/
@@ -457,6 +410,9 @@ public class GameWorld {
 			Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
 			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
 		}
+		
+		// TODO fix ship rotation
+		// maybe use angular velocity?
 	}
 	
 	/**

@@ -11,6 +11,7 @@ package com.asdf.ssjava.entities;
  */
 
 import com.asdf.ssjava.world.GameWorld;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -75,6 +76,7 @@ public abstract class AbstractEntity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x, position.y);
+		bodyDef.angle = MathUtils.degreesToRadians * rotation;
 
 		body = world.createBody(bodyDef);
 		body.setUserData(this);	

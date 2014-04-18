@@ -31,20 +31,19 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10); 
+	public final static Vector2 DEFAULT_VELOCITY = new Vector2(10, 10);  
 	
 	/**
-	 * The ship's slow velocity
-	 * Slows down to this speed when it collides with another object
+	 * The velocity of the ship when the speed of light powerup is activated
 	 */
-	public final Vector2 SLOW_VELOCITY = new Vector2(3, 0); 
+	public static final Vector2 SPEED_OF_LIGHT_VELOCITY = new Vector2(25, 0);
 	
 	/**
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public final static Vector2 DEFAULT_ACCELERATION = new Vector2(8, 1000);
+	public static final Vector2 DEFAULT_ACCELERATION = new Vector2(8, 1000);
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -81,6 +80,10 @@ public class Ship extends MoveableEntity {
 	 * The score given for killing this entity
 	 */
 	public static final int KILL_SCORE = 0; 
+	
+	public static final float DEFAULT_WIDTH = 6;
+	public static final float DEFAULT_HEIGHT = 3;
+	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.

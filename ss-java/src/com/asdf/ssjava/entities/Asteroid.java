@@ -18,7 +18,7 @@ public class Asteroid extends Obstacle {
 	/**
 	 * The asteroid's default velocity
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-6, 0);
 	
 	/**
 	 * The entity's starting health
@@ -35,8 +35,8 @@ public class Asteroid extends Obstacle {
 	 */
 	public static final int KILL_SCORE = 20; 
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
+	public static final float DEFAULT_WIDTH = 12;
+	public static final float DEFAULT_HEIGHT = 6;
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
@@ -97,7 +97,7 @@ public class Asteroid extends Obstacle {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = rectangle;
-		fixtureDef.density = 0.5f; 
+		fixtureDef.density = 1f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
 		
