@@ -244,11 +244,13 @@ public class WorldRenderer {
 		    }
 		}
 		*/
+			// obstacles rendering
 			for (Obstacle o: gameWorld.level.obstacles) {
 				Texture obstacleTexture = getTexture(o);
 				batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);
 			}
 			
+			// enemies rendering
 			for (Enemy e: gameWorld.level.enemies) {
 				Texture enemyTexture = getTexture(e);
 				batch.draw(enemyTexture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
