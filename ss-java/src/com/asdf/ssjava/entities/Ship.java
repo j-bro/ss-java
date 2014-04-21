@@ -231,8 +231,8 @@ public class Ship extends MoveableEntity {
 	 */
 	@Override
 	public synchronized void setHealth(int health) {
-		this.health = health;
-		if (health > DEFAULT_HEALTH) {
+		super.setHealth(health);
+		if (this.health > DEFAULT_HEALTH) {
 			this.health = DEFAULT_HEALTH;
 		}
 	}
@@ -242,12 +242,9 @@ public class Ship extends MoveableEntity {
 	 * @see com.asdf.ssjava.entities.AbstractEntity#healthChange(int)
 	 */
 	public synchronized void healthChange(int increment) {
-		health += increment;
+		super.healthChange(increment);
 		if (health > DEFAULT_HEALTH) {
 			health = DEFAULT_HEALTH;
-		}
-		if (health < 0) {
-			health = 0;
 		}
 	}
 	
