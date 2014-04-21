@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -134,7 +135,10 @@ public class GameCollisionListener implements ContactListener {
 			@Override
 			public void run() {
 				s.getBody().setLinearVelocity(Ship.DEFAULT_VELOCITY.x, 0);
-				s.getBody().getFixtureList().get(0).setSensor(false);
+				Fixture f = s.getBody().getFixtureList().get(0);
+				if (f != null) { 					
+					s.getBody().getFixtureList().get(0).setSensor(false);
+				}
 				s.setLightSpeedEnabled(false);
 			}
 		}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
