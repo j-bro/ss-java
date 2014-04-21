@@ -195,6 +195,7 @@ public class WorldRenderer {
 				+ "\nDEBUG TEXT HOLDER"
 				+ "\nDEBUG TEXT HOLDER"
 				+ "\nDEBUG TEXT HOLDER"
+				+ "\nDEBUG TEXT HOLDER"
 				+ "\nDEBUG TEXT HOLDER", dbls);
 		debugLabel.setX(10);
 		debugLabel.setY(scoreLabel.getY() - 20 - debugLabel.getHeight());
@@ -345,12 +346,17 @@ public class WorldRenderer {
 		if (SSJava.DEBUG) { 			
 			debugRenderer.render(gameWorld.box2DWorld, cam.combined);
 
+			float shipAngle = ship.getBody().getAngle();
+			float mod = (float) (2 * Math.PI);
+			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+			
 			// Debug info
 			debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100 + 
-					"\nRotation (rad): " + (float) Math.round(ship.getBody().getAngle() * 10000) / 10000 + 
+					"\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000 +
 					"\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 + 
 					"\nHealth: " + ship.getHealth() + " half hearts" + 
 					"\nLight speed enabled: " + ship.isLightSpeedEnabled());
+			
 		}
 	}
 

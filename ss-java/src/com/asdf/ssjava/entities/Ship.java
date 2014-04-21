@@ -154,11 +154,23 @@ public class Ship extends MoveableEntity {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 			
-			// TODO Correct ship rotation course
 			
-			// check if angle multiple of 2*pi
-			if (!(getBody().getAngle() % (2 * Math.PI) == 0)) {
-				
+			float shipAngle = getBody().getAngle();
+			float mod = (float) (2 * Math.PI);
+			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+			
+			// TODO fix ship rotation
+			if (angleMod < Math.PI) {
+				float diff = angleMod;
+				Gdx.app.log(SSJava.LOG, "smaller");
+//					getBody().applyAngularImpulse(-3f * diff, true);
+					getBody().setAngularVelocity(-0.2f * diff);
+			}
+			else {
+				float diff = mod - angleMod;
+				Gdx.app.log(SSJava.LOG, "greater");
+//				getBody().applyAngularImpulse(3f * diff, true);
+				getBody().setAngularVelocity(0.2f * diff);
 			}
 			
 		}
