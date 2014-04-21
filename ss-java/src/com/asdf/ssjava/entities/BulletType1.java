@@ -112,7 +112,7 @@ public class BulletType1 extends Bullet {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
+		body.setLinearVelocity(-DEFAULT_VELOCITY.x, -DEFAULT_VELOCITY.y);
 	}
 
 	/*
