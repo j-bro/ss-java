@@ -9,6 +9,7 @@ import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -45,8 +46,11 @@ public class Ship extends MoveableEntity {
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public static final Vector2 DEFAULT_ACCELERATION = new Vector2(12, 1000);
+	public static Vector2 DEFAULT_ACCELERATION = new Vector2(12, 300);
 	
+	/**
+	 * 
+	 */
 	public static final int DEFAULT_SHOT_COOLDOWN_MS = 300;
 	
 	/**
@@ -152,6 +156,14 @@ public class Ship extends MoveableEntity {
 			// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity
 			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
+			}
+			
+			// Key input
+			if (Gdx.input.isKeyPressed(Keys.W)) {
+				getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+			}
+			else if (Gdx.input.isKeyPressed(Keys.S)) {
+				getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
 			}
 			
 			
