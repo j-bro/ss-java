@@ -8,17 +8,11 @@ package com.asdf.ssjava.world;
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.EnemyType1;
 import com.asdf.ssjava.entities.Obstacle;
-import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -111,18 +105,18 @@ public class GameWorld {
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
-		ship.getBody().setLinearVelocity(ship.DEFAULT_VELOCITY.x, 0);
 		
 		bullets = new Array<Bullet>();
 		
-		// Level Loading
-		/*if (levelPath != null) {
-			loadLevel(levelPath);
-		}*/
-		
-		
 		level = new Level();
 		
+		// Level Loading
+		if (levelPath != null) {
+			loadLevel(levelPath);
+		}
+		
+		
+		/*
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (j % 2 == 0) {					
@@ -162,8 +156,28 @@ public class GameWorld {
 				level.gameChangers.add(p);
 			}
 		}
+		*/
 		
-//		exportLevel(levelPath);		
+		// Initialize loaded level elements 
+		for (Obstacle o: level.obstacles) {
+			o.initWorlds(this, box2DWorld);
+			o.createDef();
+		}
+		for (Enemy e: level.enemies) {
+			e.initWorlds(this, box2DWorld);
+			e.createDef();
+		}
+		for (Powerup p: level.powerups) {
+			p.initWorlds(this, box2DWorld);
+			p.createDef();
+		}
+		for (Obstacle g: level.gameChangers) {
+			g.initWorlds(this, box2DWorld);
+			g.createDef();
+		}
+		
+		
+//		exportLevel(levelPath);
 		
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
@@ -171,7 +185,7 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Update method run in every iteration of the main loop to update entity position and rotation
+	 * Update method run in every iteration of the main loop to update entity position, rotation and behaviour
 	 * Also verifies which entities/bodies are dead and removes them
 	 */
 	public void update() {
@@ -209,185 +223,6 @@ public class GameWorld {
 		}
 		
 		
-		// TODO Collision detection		
-		/*
-		for (Bullet b: bullets) {
-		
-			// Bullet collision with obstacles
-			for (Obstacle o: level.obstacles) { 
-				if (o.getHitbox().overlaps(b.getHitbox())) {
-					AudioPlayer.bulletImpact();
-					bullets.removeValue(b, true);
-					
-					// obstacle damage
-					o.healthChange((-1) * b.getDamage());
-					// life check
-					int killScore = 0;
-					int hitScore = 0;
-					if (o instanceof Asteroid) {
-						killScore = Asteroid.KILL_SCORE;
-						hitScore = Asteroid.HIT_SCORE;
-					}
-					else if (o instanceof SpaceRock) {
-						killScore = SpaceRock.KILL_SCORE;
-						hitScore = SpaceRock.HIT_SCORE;
-					}
-					
-					if (checkIfDead(o)) {
-						level.obstacles.removeValue(o, true);
-						scoreKeeper.add(killScore);
-					}
-					else {
-						scoreKeeper.add(hitScore);
-					}
-
-					Gdx.app.log(SSJava.LOG, "Ship's bullet " + Integer.toHexString(b.hashCode()) + " hit obstacle " + Integer.toHexString(o.hashCode()));
-				}
-			}
-			
-			//Bullet collision with gameChangers
-			for (Obstacle g: level.gameChangers) { 
-				if (g.getHitbox().overlaps(b.getHitbox())) {
-					AudioPlayer.bulletImpact();
-					bullets.removeValue(b, true);
-					
-					// game changer damage
-					g.healthChange((-1) * b.getDamage());
-					// life check
-					int killScore = 0;
-					int hitScore = 0;
-					if (g instanceof Planet) {
-						killScore = Planet.KILL_SCORE;
-						hitScore = Planet.HIT_SCORE;
-					}
-					
-					if (checkIfDead(g)) {
-						level.gameChangers.removeValue(g, true);
-						scoreKeeper.add(killScore);
-					}
-					else {
-						scoreKeeper.add(hitScore);
-					}
-					
-					Gdx.app.log(SSJava.LOG, "Planet's health: " + g.getHealth());
-				}
-			}
-			
-			// Bullet collision with ship
-			if (ship.getHitbox().overlaps(b.getHitbox())) {
-				bullets.removeValue(b, true);
-				if(!ship.lightSpeedMode){
-					AudioPlayer.bulletImpact();
-					
-					// ship damage
-					ship.healthChange((-1) * b.getDamage());
-					// life check
-					checkIfDead(ship);
-				}
-				Gdx.app.log(SSJava.LOG, "Enemy " + Integer.toHexString(b.getShooter().hashCode()) + "'s bullet " + Integer.toHexString(b.hashCode()) + " hit ship");
-			}
-			
-		}
-		// Enemy collision with ship
-		for (Enemy e: level.enemies) {
-			if (e.getHitbox().overlaps(ship.getHitbox()) && !e.alreadyCollided){
-				if (ship.lightSpeedMode){
-					//enemy damage
-					e.healthChange(-999);
-					// life check
-					if (checkIfDead(e)) {
-						level.enemies.removeValue(e, true);
-					}
-				}
-				else {
-					AudioPlayer.shipImpact();
-					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
-					e.alreadyCollided = true;
-					// ship and enemy damage
-					e.healthChange(-1);
-					ship.healthChange(-1);
-					// life check
-					if (checkIfDead(e)) {
-						level.enemies.removeValue(e, true);
-					}
-					
-					checkIfDead(ship); // TODO
-					
-					//Change ship speed
-					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
-				}
-			}	
-		}
-		
-		// Obstacle collision with ship		
-		for (Obstacle o: level.obstacles) {
-			if (o.getHitbox().overlaps(ship.getHitbox()) && !o.alreadyCollided) {
-				if (ship.lightSpeedMode){
-					//obstacle damage
-					o.healthChange(-999);
-					// life check
-					if (checkIfDead(o)) {
-						level.obstacles.removeValue(o, true);
-					}
-				}
-				else {
-					AudioPlayer.shipImpact();
-					Gdx.app.log(SSJava.LOG, "Remaining health: " + ship.getHealth());
-					o.alreadyCollided = true;
-					// ship and enemy damage
-					o.healthChange(-1);
-					ship.healthChange(-1);
-					// life check
-					if (checkIfDead(o)) {
-						level.obstacles.removeValue(o, true);
-					}
-					
-					checkIfDead(ship); // TODO
-					
-					//Change ship speed
-					ship.getVelocity().x = ship.SLOW_VELOCITY.x;
-				}
-			}
-		}
-		
-		//Power-up collision with ship
-		for (Powerup p: level.powerups){
-			if (p.getHitbox().overlaps(ship.getHitbox())) {
-				//Collision with the Speed of Light power-up
-				if (p.toString().equals("Speed of Light Powerup") && !p.alreadyCollided) {
-					p.alreadyCollided = true;
-					ship.getVelocity().x = ship.DEFAULT_VELOCITY.x * 4;
-					ship.lightSpeedMode = true;
-					//Reset the ship to default after 5 seconds
-					
-					Gdx.app.log(SSJava.LOG, "Ship sped up!" + Integer.toHexString(p.hashCode()));
-				}
-				//Collision with the Health Up power-up
-				else if (p.toString().equals("Health Up Powerup") && !p.alreadyCollided) {
-					p.alreadyCollided = true;
-					ship.healthChange(PowerupHealthUp.HEALTH_GIVEN);
-					if (ship.getHealth() > Ship.DEFAULT_HEALTH) {
-						ship.setHealth(Ship.DEFAULT_HEALTH);
-					}
-					Gdx.app.log(SSJava.LOG, "Ship healed, heath: " + ship.getHealth());	
-				}
-				level.powerups.removeValue(p, true);
-			}
-		}
-		
-		//Game-changer collision with ship
-		for (Obstacle g: level.gameChangers) {
-			if (g.getHitbox().overlaps(ship.getHitbox()) && !g.alreadyCollided) {
-				if (ship.lightSpeedMode){
-
-				}
-				else {
-					
-				}
-			}
-		}
-		*/
-		
 		// Edge of screen collision	
 		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
 		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
@@ -410,9 +245,6 @@ public class GameWorld {
 			Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
 			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
 		}
-		
-		// TODO fix ship rotation
-		// maybe use angular velocity?
 	}
 	
 	/**

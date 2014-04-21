@@ -15,23 +15,13 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class Obstacle extends MoveableEntity {
 
 	/**
-	 * The bullet's default velocity
-	 */
-	Vector2 DEFAULT_VELOCITY;
-	
-	/**
-	 * A trigger to stop the ship from colliding with the obstacle multiple times
-	 */
-	public transient boolean alreadyCollided = false;
-	
-	/**
 	 * @param position
 	 * @param width
 	 * @param height
 	 * @param rotation
 	 */
-	public Obstacle(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	public Obstacle(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 	}
 	
 	/* (non-Javadoc)

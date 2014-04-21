@@ -15,28 +15,13 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class Enemy extends MoveableEntity {
 	
 	/**
-	 * The enemy's type
-	 */
-	transient int type;
-	
-	/**
-	 * The enemy's default velocity
-	 */
-	Vector2 DEFAULT_VELOCITY;
-	
-	/**
-	 * A trigger to stop the ship from colliding with the enemy multiple times
-	 */
-	public transient boolean alreadyCollided = false;
-	
-	/**
 	 * @param position
 	 * @param width
 	 * @param height
 	 * @param rotation
 	 */
-	public Enemy(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	public Enemy(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 	}
 	
 	public abstract void fire();

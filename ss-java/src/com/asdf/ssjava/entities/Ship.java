@@ -33,7 +33,7 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public final static Vector2 DEFAULT_VELOCITY = new Vector2(10, 10);  
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10);  
 	
 	/**
 	 * The velocity of the ship when the speed of light powerup is activated
@@ -45,7 +45,9 @@ public class Ship extends MoveableEntity {
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public static final Vector2 DEFAULT_ACCELERATION = new Vector2(8, 1000);
+	public static final Vector2 DEFAULT_ACCELERATION = new Vector2(12, 1000);
+	
+	public static final int DEFAULT_SHOT_COOLDOWN_MS = 300;
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -60,7 +62,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The time allowed between shots from this ship, in milliseconds
 	 */
-	private int shotCooldown = 300;
+	private int shotCooldown;
 
 	/**
 	 * The ship cannot lose health from collisions as long as this is true
@@ -83,8 +85,19 @@ public class Ship extends MoveableEntity {
 	 */
 	public static final int KILL_SCORE = 0; 
 	
+	/**
+	 * The ship's default width, in game coordinates
+	 */
 	public static final float DEFAULT_WIDTH = 6;
+	
+	/**
+	 * The ship's default height, in game coordinates
+	 */
 	public static final float DEFAULT_HEIGHT = 3;
+	
+	/**
+	 * The ship's default rotation, in game degrees
+	 */
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
@@ -94,13 +107,15 @@ public class Ship extends MoveableEntity {
 	 * @param width
 	 * @param height
 	 * @param rotation
+	 * @param gameWorld
+	 * @param box2DWorld
 	 */
-	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
-		
-		createFixtureDef();
+		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
+		createDef();
 		
 	}
 	
@@ -110,9 +125,8 @@ public class Ship extends MoveableEntity {
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, gameWorld, world, this);
+			Bullet b = new BulletType0(new Vector2(position.x + width, position.y), 3, 2, 0, gameWorld, box2DWorld, this);
 			b.getPosition().y = position.y + height / 2 - b.height / 2;
-			b.getBody().setLinearVelocity(BulletType0.DEFAULT_VELOCITY);
 			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
@@ -190,10 +204,11 @@ public class Ship extends MoveableEntity {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createDef()
 	 */
 	@Override
-	public void createFixtureDef() {
+	public void createDef() {
+		super.createDef();
 		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
@@ -205,6 +220,7 @@ public class Ship extends MoveableEntity {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
+		body.setLinearVelocity(DEFAULT_VELOCITY.x, 0);
 //		loader.attachFixture(body, "Ship", fixtureDef, DEFAULT_WIDTH);
 
 	}

@@ -18,18 +18,13 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class MoveableEntity extends AbstractEntity {
 	
 	/**
-	 * The entity's default velocity vector, as values for x and y
-	 */
-	public static Vector2 DEFAULT_VELOCITY;
-	
-	/**
 	 * Creates an entity with a position, dimensions, [SPEED]
 	 * @param position the entity's position, as values for x and y
 	 * @param width the entity's width in pixels
 	 * @param height the entity's height in pixels
 	 */
-	protected MoveableEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	protected MoveableEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 	}
 	
 	/*

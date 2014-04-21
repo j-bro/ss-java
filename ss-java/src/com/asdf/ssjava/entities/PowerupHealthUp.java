@@ -16,15 +16,24 @@ public class PowerupHealthUp extends Powerup {
 	/**
 	 * Default velocity for the Health up powerup
 	 */
-	public final static Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
 	 * The health points given to the ship when it picks up this power up
 	 */
 	public static final int HEALTH_GIVEN = 2;
 	
+	/**
+	 * The powerup's default width, in game coordinates
+	 */
 	public static final float DEFAULT_WIDTH = 3;
+	/**
+	 * The powerup's default height, in game coordinates
+	 */
 	public static final float DEFAULT_HEIGHT = 3;
+	/**
+	 * The powerup's default rotation, in degrees
+	 */
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
@@ -43,22 +52,22 @@ public class PowerupHealthUp extends Powerup {
 	 * @param width
 	 * @param height
 	 * @param rotation
+	 * @param gameWorld
+	 * @param box2DWorld
 	 */
-	public PowerupHealthUp(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	public PowerupHealthUp(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 		setHealth(DEFAULT_HEALTH);
-		createFixtureDef();
+		createDef();
 	}
 	
 	/**
 	 * TODO Constructor for serialization
-	 */
-	/*
+	 **/
 	public PowerupHealthUp() {
-		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
-	*/
 	
 	/*
 	 * (non-Javadoc)
@@ -70,10 +79,11 @@ public class PowerupHealthUp extends Powerup {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createDef()
 	 */
 	@Override
-	public void createFixtureDef() {
+	public void createDef() {
+		super.createDef();
 		// TODO Box2D stuff
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
@@ -86,7 +96,7 @@ public class PowerupHealthUp extends Powerup {
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-		
+		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*
