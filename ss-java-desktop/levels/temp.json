@@ -1,17 +1,61 @@
 {
 obstacles: [
 	{
-		class: com.asdf.ssjava.entities.Planet,
+		class: com.asdf.ssjava.entities.SpaceRock,
 		position: {
-			x: 46.05,
-			y: 18.95
+			x: 42.5,
+			y: 21.7
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 31.75,
+			y: 6.6000004
 		}
 	},
 	{
-		class: com.asdf.ssjava.entities.Asteroid,
+		class: com.asdf.ssjava.entities.EnemyType1,
 		position: {
-			x: 66,
-			y: 19
+			x: 32.1,
+			y: 11.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 31.9,
+			y: 14.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 31.65,
+			y: 22.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 32,
+			y: 30.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 31.35,
+			y: 27.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 33,
+			y: 18.7
 		}
 	}
 ],
@@ -19,8 +63,8 @@ powerups: [
 	{
 		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
 		position: {
-			x: 31,
-			y: 18
+			x: 50.85,
+			y: 15.15
 		}
 	}
 ]
