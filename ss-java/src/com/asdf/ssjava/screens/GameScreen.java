@@ -7,8 +7,9 @@ package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.world.GameCollisionListener;
 import com.asdf.ssjava.world.GameInputManager;
-import com.asdf.ssjava.world.World;
+import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -27,12 +28,24 @@ public class GameScreen implements Screen {
 	/**
 	 * The world instance
 	 */
-	World world;
+	GameWorld gameWorld;
 	
 	/**
 	 * The renderer instance
 	 */
 	WorldRenderer renderer;
+		
+	/**
+	 * Constructor for testing levels
+	 */
+	public GameScreen(SSJava game, String levelPath, LevelCreator creator) {
+		this.game = game;
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath, creator);
+		renderer = new WorldRenderer(gameWorld);
+		gameWorld.setRenderer(renderer);
+		gameWorld.setManager(new GameInputManager(game, gameWorld));
+		Gdx.input.setInputProcessor(gameWorld.getManager());
+	}
 	
 	/**
 	 * Constructor of the Game Screen which takes 
@@ -40,11 +53,11 @@ public class GameScreen implements Screen {
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		world = new World(game, 0, levelPath);
-		renderer = new WorldRenderer(world);
-		world.setRenderer(renderer);
-		world.setManager(new GameInputManager(game, world));
-		Gdx.input.setInputProcessor(world.getManager());
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath);
+		renderer = new WorldRenderer(gameWorld);
+		gameWorld.setRenderer(renderer);
+		gameWorld.setManager(new GameInputManager(game, gameWorld));
+		Gdx.input.setInputProcessor(gameWorld.getManager());
 	}
 	
 	/*
@@ -53,8 +66,9 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
-		world.update();
 		renderer.render();
+		gameWorld.box2DWorld.step(1/60f, 6, 2);
+		gameWorld.update();
 	}
 
 	/*
@@ -73,11 +87,19 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show game");
-		if (world != null) {
-			Gdx.input.setInputProcessor(world.getManager());
+		if (gameWorld != null) {
+			Gdx.input.setInputProcessor(gameWorld.getManager());
+			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
 		}
 		AudioPlayer.playGameMusic(true);
 
+	}
+	
+	/**
+	 * @return the gameWorld
+	 */
+	public GameWorld getGameWorld() {
+		return gameWorld;
 	}
 
 	/*
@@ -95,7 +117,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void pause() {
-		world.pauseGame();
+		gameWorld.pauseGame();
 	}
 
 	/*
@@ -113,7 +135,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void dispose() {
-		world.dispose();
+		gameWorld.dispose();
 		renderer.dispose();
 	}
 }

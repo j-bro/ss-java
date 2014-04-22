@@ -22,7 +22,7 @@ public class GameInputManager implements InputProcessor {
 	/**
 	 * The world's instance
 	 */
-	World world;
+	GameWorld gameWorld;
 	
 	/**
 	 * The ship's instance
@@ -31,11 +31,11 @@ public class GameInputManager implements InputProcessor {
 	
 	/**
 	 * @param game
-	 * @param world 
+	 * @param gameWorld 
 	 */
-	public GameInputManager(SSJava game, World world) {
-		this.world = world;
-		ship = world.getShip();
+	public GameInputManager(SSJava game, GameWorld gameWorld) {
+		this.gameWorld = gameWorld;
+		ship = gameWorld.getShip();
 	}
 
 	/* (non-Javadoc)
@@ -43,29 +43,20 @@ public class GameInputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO add keyconfigs 
+		/*
+		 * Ship movement controls moved to com.asdf.ssjava.entities.ship#update()
+		 * The change to polling was required for Box2D implementation of force application
+		 */
 		switch (keycode) {
-			case Keys.UP: 
-				ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
-				break;
-			case Keys.DOWN: 
-				ship.getAcceleration().y = (-1) *  ship.DEFAULT_ACCELERATION.y;
-				break;
-			case Keys.W:
-				ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
-				break;
-			case Keys.S:
-				ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
-				break;
 			case Keys.SPACE: 
 				ship.fire();
 				break;
 			case Keys.ESCAPE:
-				world.pauseGame(); 
+				gameWorld.pauseGame(); 
 				break;
 			case Keys.ENTER: // for testing enemy firing
 				if (SSJava.DEBUG) {
-					for (Enemy e: world.getEnemies()) {
+					for (Enemy e: gameWorld.getEnemies()) {
 						e.fire();
 					}
 				}
@@ -80,26 +71,8 @@ public class GameInputManager implements InputProcessor {
 	 */
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO fix this badly implemented?
-		switch (keycode) {
-		case Keys.UP: 
-			ship.getAcceleration().y = 0;
-			break;
-		case Keys.DOWN:
-			ship.getAcceleration().y = 0;
-			break;
-		case Keys.W:
-			ship.getAcceleration().y = 0;
-			break;
-		case Keys.S:
-			ship.getAcceleration().y = 0;
-			break;
-		case Keys.SPACE: 
-			
-			break;
-		default: break;
-		}
-	return true;
+		
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -119,10 +92,10 @@ public class GameInputManager implements InputProcessor {
 			// Ship movement input
 			if (screenX < Gdx.graphics.getWidth() / 2) {
 				if (screenY > Gdx.graphics.getHeight() / 2) {
-					ship.getAcceleration().y = (-1) * ship.DEFAULT_ACCELERATION.y;
+					ship.getBody().applyForceToCenter(0, (-1) * Ship.DEFAULT_ACCELERATION.y, true);
 				}
 				else {
-					ship.getAcceleration().y = ship.DEFAULT_ACCELERATION.y;
+					ship.getBody().applyForceToCenter(0, Ship.DEFAULT_ACCELERATION.y, true);
 				}
 			}
 			// Ship firing input
@@ -143,14 +116,14 @@ public class GameInputManager implements InputProcessor {
 			
 			// FIX TOUCH SCREEN PAUSE
 			if (screenX < Gdx.graphics.getWidth() / 10 && screenY > Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 5) {
-				world.pauseGame();
+				gameWorld.pauseGame();
 			}
 			
 			else if (screenY > Gdx.graphics.getHeight() / 2) {
-				ship.getAcceleration().y = 0;
+				ship.getBody().applyForceToCenter(0, 0, true);
 			}
 			else {
-				ship.getAcceleration().y = 0;
+				ship.getBody().applyForceToCenter(0, 0, true);
 			}
 			return true;
 			

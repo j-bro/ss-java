@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
@@ -103,8 +104,9 @@ public class OptionsMenu implements Screen {
 		musicLabel.setAlignment(Align.center);
 		
 		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
+		TextFieldStyle fieldStyle = new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null);
 		
-		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
+		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), fieldStyle);
 		musicField.setMaxLength(3);
 		musicField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		musicField.setTextFieldListener(new TextField.TextFieldListener() {
@@ -136,7 +138,7 @@ public class OptionsMenu implements Screen {
 		soundLabel.setY(Gdx.graphics.getHeight() / 2 - 30);
 		soundLabel.setAlignment(Align.center);
 		
-		soundField = new TextField(new Integer(SSJava.prefs.getInteger("soundVolume", 100)).toString(), new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
+		soundField = new TextField(new Integer(SSJava.prefs.getInteger("soundVolume", 100)).toString(), fieldStyle);
 		soundField.setMaxLength(3);
 		soundField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		soundField.setTextFieldListener(new TextField.TextFieldListener() {

@@ -23,7 +23,7 @@ public class ScoreKeeper {
 	/**
 	 * The current multiplier;
 	 */
-	private int multiplier;
+	private int multiplier = 1;
 	
 	/**
 	 * @return the score
@@ -36,7 +36,7 @@ public class ScoreKeeper {
 	 * @param addedScore the points to add to the current score
 	 */
 	public synchronized void add(int addedScore) {
-		score += addedScore;
+		score += addedScore * multiplier;
 	}
 
 	/**

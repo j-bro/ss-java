@@ -10,14 +10,20 @@ package com.asdf.ssjava.entities;
  *
  */
 
-import com.badlogic.gdx.math.Rectangle;
+import aurelienribon.bodyeditor.BodyEditorLoader;
+
+import com.asdf.ssjava.world.GameWorld;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.World;
    
-public abstract class AbstractEntity extends Actor {
+public abstract class AbstractEntity {
 	
 	/**
-	 * The entity's position
+	 * The entity's position (now the center of the entity)
 	 */
 	protected Vector2 position;
 	
@@ -32,9 +38,9 @@ public abstract class AbstractEntity extends Actor {
 	protected float height;
 	
 	/**
-	 * The entity's hitbox
+	 * The entity's rotation, in degrees
 	 */
-	protected transient Rectangle hitbox;
+	protected float rotation;
 	
 	/**
 	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
@@ -42,18 +48,63 @@ public abstract class AbstractEntity extends Actor {
 	protected transient int health;
 	
 	/**
-	 * Whether the entity is dead (or not)
+	 * Whether or not the entity is currently visible
 	 */
-	boolean dead;
+	protected transient boolean visible = true;
+
+	/**
+	 * The game world instance
+	 */
+	protected transient GameWorld gameWorld;
+	
+	/**
+	 * The Box2D world instance
+	 */
+	protected transient World box2DWorld;
+	
+	/**
+	 * The Box2D body of this entity
+	 */
+	protected transient Body body;
+		
+	/**
+	 * The loader instance for the body's fixtures
+	 */
+//	private transient BodyEditorLoader loader;
 	
 	/**
 	 * Creates an entity
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 * @param gameWorld
+	 * @param box2DWorld
 	 */
-	protected AbstractEntity(Vector2 position, float width, float height) {
+	protected AbstractEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
-		hitbox = new Rectangle(position.x, position.y, width, height);
+		this.rotation = rotation;
+		this.gameWorld = gameWorld;
+		this.box2DWorld = box2DWorld;
+		
+	}
+	
+	/**
+	 * Creates the body definition for this entity
+	 */
+	public void createDef() {
+		// TODO Box2D stuff
+//		loader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
+		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.position.set(position.x, position.y);
+		bodyDef.angle = MathUtils.degreesToRadians * rotation;
+
+		body = box2DWorld.createBody(bodyDef);
+		body.setUserData(this);
 	}
 	
 	/**
@@ -66,7 +117,6 @@ public abstract class AbstractEntity extends Actor {
 	
 	/**
 	 * Sets the entity's position
-	 * @deprecated use the getPosition method to obtain the instance of position and set the x, y variables
 	 * @param position the position to set
 	 */
 	public void setPosition(Vector2 position) {
@@ -106,24 +156,24 @@ public abstract class AbstractEntity extends Actor {
 	}
 	
 	/**
-	 * Returns the entity's hitbox
-	 * @return the hitbox of the entity
+	 * Returns the entity's rotation
+	 * @return the rotation of the entity in degrees
 	 */
-	public Rectangle getHitbox() {
-		return hitbox;
-	}
-	/**
-	 * Sets the entity's hitbox
-	 * @deprecated use the getHitbox() method to obtain the instance of hitbox and set the x, y variables
-	 * @param hitbox the hitbox to set
-	 */
-	public void setHitbox(Rectangle hitbox) {
-		this.hitbox = hitbox;
+	public float getRotation() {
+		return rotation;
 	}
 	
 	/**
 	 * 
-	 * @return
+	 * @param rotation
+	 */
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
+	
+	/**
+	 * 
+	 * @return the entity's health points
 	 */
 	public synchronized int getHealth() {
 		return health;
@@ -131,7 +181,7 @@ public abstract class AbstractEntity extends Actor {
 	
 	/**
 	 * 
-	 * @param health
+	 * @param health the entity's health to be set
 	 */
 	public synchronized void setHealth(int health) {
 		this.health = health;
@@ -139,26 +189,86 @@ public abstract class AbstractEntity extends Actor {
 	
 	/**
 	 * 
-	 * @param increment
+	 * @param increment the value to add/subtract from the entity's health
 	 */
 	public synchronized void healthChange(int increment) {
 		health += increment;
-		if (getHealth() < 0) {
-			setHealth(0);
+		if (health < 0) {
+			health = 0;
 		}
 	}
 	
 	/**
 	 * 
-	 * @return
+	 * @return if the entity is dead
 	 */
 	public boolean isDead() {
-		return dead;
+		if (health <= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * @return whether or not the entity is currently visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible sets whether or not the entity is visible
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	/**
+	 * Returns the Box2D body for this entity
+	 */
+	public Body getBody() {
+		return body;
 	}
 	
 	/**
 	 * 
+	 * @return gameWorld the gameWorld instance
+	 */
+	public GameWorld getGameWorld() {
+		return gameWorld;
+	}
+	
+	/**
+	 * Initialize the non-serialized worlds
+	 */
+	public void initWorlds(GameWorld gameWorld, World box2DWorld) {
+		this.gameWorld = gameWorld;
+		this.box2DWorld = box2DWorld;
+	}
+	
+	/**
+	 * Runs every time the game renders a frame.
+	 */
+	public void update() {
+		
+	}
+	
+	public abstract int getHitScore();
+	public abstract int getKillScore();
+	
+	/**
+	 * Called when the entity's health is 0
 	 */
 	public abstract void die();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Entity";
+	}
 }
     

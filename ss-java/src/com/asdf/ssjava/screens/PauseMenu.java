@@ -3,7 +3,6 @@
  */
 package com.asdf.ssjava.screens;
 
-import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -28,9 +26,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class PauseMenu implements Screen {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
-	Stage stage;
-	SpriteBatch batch;
+	
+	/**
+	 * The stage instance
+	 */
+	Stage stage;	
+	
 	BitmapFont whiteFont;
 	
 	MenuButton backButton;
@@ -65,16 +70,17 @@ public class PauseMenu implements Screen {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 
 		stage.act(delta);
-		
-		batch.begin();
-			stage.draw(); 
-		batch.end();
+		stage.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
 			stage = new Stage(width, height, true) {
+				/*
+				 * (non-Javadoc)
+				 * @see com.badlogic.gdx.scenes.scene2d.Stage#keyDown(int)
+				 */
 				@Override
 		        public boolean keyDown(int keyCode) {
 		            if (keyCode == Keys.ESCAPE) {
@@ -122,15 +128,20 @@ public class PauseMenu implements Screen {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Exit button up");
-				AudioPlayer.stopGameMusic();
-				game.setScreen(new MainMenu(game));
+				// TODO potential bug??
+				if (((GameScreen) referrer).getGameWorld().getCreator() != null) {
+					game.setScreen(game.gameScreen.gameWorld.getCreator());
+				}
+				else {					
+					game.setScreen(new MainMenu(game));
+				}
 			}
 		});
 		
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("Paused", ls);
 		titleLabel.setX(0);
-		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 200);
+		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
@@ -144,8 +155,6 @@ public class PauseMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show pause menu");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
 	}
 
@@ -169,7 +178,6 @@ public class PauseMenu implements Screen {
 
 	@Override
 	public void dispose() {
-		
 	}
 
 }

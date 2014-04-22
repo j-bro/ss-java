@@ -1,0 +1,25 @@
+{
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 32,
+			y: 24
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 32,
+			y: 12
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 32,
+			y: 18
+		}
+	}
+]
+}

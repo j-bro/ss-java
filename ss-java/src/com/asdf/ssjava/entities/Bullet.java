@@ -4,8 +4,9 @@
  */
 package com.asdf.ssjava.entities;
 
-import com.badlogic.gdx.Gdx;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * @author Jeremy Brown
@@ -34,23 +35,20 @@ public abstract class Bullet extends MoveableEntity {
 	int damage;
 	
 	/**
+	 * The health of a bullet (1, as it disappears as soon as it collides)
+	 */
+	public static final int DEFAULT_HEALTH = 1;
+	
+	/**
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, AbstractEntity shooter) {
-		super(position, width, height, rotation);
+	public Bullet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld, AbstractEntity shooter) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 		this.shooter = shooter;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() {
-		position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime())); 
-		super.update();
+		this.health = DEFAULT_HEALTH;
 	}
 	
 	/* (non-Javadoc)
@@ -58,7 +56,27 @@ public abstract class Bullet extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		gameWorld.bullets.removeValue(this, true);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
+	 */
+	@Override
+	public void update() {
+		// Remove bullets if they go offscreen
+		if (getPosition().x > gameWorld.getShip().getPosition().x + 50 || getPosition().x < gameWorld.getShip().getPosition().x - 30) {
+			setHealth(0);
+		}
+		super.update();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Bullet";
 	}
 
 	public abstract int getType();	

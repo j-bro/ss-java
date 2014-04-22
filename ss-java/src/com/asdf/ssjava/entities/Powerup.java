@@ -3,18 +3,15 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * @author Jeremy Brown
  * 
  */
-public class Powerup extends MoveableEntity {
-	
-	/**
-	 * A trigger to stop the ship from colliding with the enemy multiple times
-	 */
-	public transient boolean alreadyCollided = false;
+public abstract class Powerup extends MoveableEntity {
 
 	/**
 	 * @param position
@@ -22,16 +19,8 @@ public class Powerup extends MoveableEntity {
 	 * @param height
 	 * @param rotation
 	 */
-	public Powerup(Vector2 position, float width, float height, float rotation) {
-		super(position, width, height, rotation);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
-	 */
-	@Override
-	public void update() { // TODO
-		super.update();
+	public Powerup(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 	}
 
 	/* (non-Javadoc)
@@ -39,7 +28,15 @@ public class Powerup extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		dead = true;
+		gameWorld.getLevel().powerups.removeValue(this, true);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "Abstract Powerup";
 	}
 	
 }

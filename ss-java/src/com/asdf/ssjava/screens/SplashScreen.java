@@ -118,15 +118,19 @@ public class SplashScreen implements Screen {
 		// Gameplay assets
 		assetManager.load("data/textures/shipA.png", Texture.class);
 		assetManager.load("data/textures/space_rock.png", Texture.class);
-		assetManager.load("data/textures/brick.png", Texture.class);
-		assetManager.load("data/textures/enemy1.png", Texture.class);
+		assetManager.load("data/textures/asteroid.png", Texture.class);
+		assetManager.load("data/textures/enemy_1.png", Texture.class);
 		assetManager.load("data/textures/bullet_strip.png", Texture.class);
-		assetManager.load("data/textures/healthUp.png", Texture.class);
-		assetManager.load("data/textures/waterball.png", Texture.class);
+		assetManager.load("data/textures/health_up.png", Texture.class);
+		assetManager.load("data/textures/speed_of_light.png", Texture.class);
 		assetManager.load("data/textures/planet.png", Texture.class);
 		
 		assetManager.load("data/textures/heart_full.png", Texture.class);
+		assetManager.load("data/textures/heart_empty.png", Texture.class);
 		assetManager.load("data/textures/heart_half.png", Texture.class);
+		
+		// Debug text
+		assetManager.load("data/fonts/debugFont-14.fnt", BitmapFont.class);
 	}
 	
 	@Override

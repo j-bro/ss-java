@@ -18,22 +18,22 @@ public class Level {
 	/**
 	 * Array containing all the obstacles in the current level
 	 */
-	Array<Obstacle> obstacles;
+	public Array<Obstacle> obstacles;
 	
 	/**
 	 * ArrayList containing all the enemies in the current level
 	 */
-	Array<Enemy> enemies;
+	public Array<Enemy> enemies;
 	
 	/**
 	 * ArrayList containing all the powerups in the current level
 	 */
-	Array<Powerup> powerups;
+	public Array<Powerup> powerups;
 	
 	/**
 	 * ArrayList containing all the powerups in the current level
 	 */
-	Array<Obstacle> gameChangers;
+	public Array<Obstacle> gameChangers;
 	
 	public Level() {
 		obstacles = new Array<Obstacle>();

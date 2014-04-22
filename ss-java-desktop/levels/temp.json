@@ -1,0 +1,27 @@
+{
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 46.05,
+			y: 18.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 66,
+			y: 19
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 31,
+			y: 18
+		}
+	}
+]
+}
