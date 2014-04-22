@@ -274,16 +274,20 @@ public class LevelCreator implements Screen {
 			switch (keycode) {
 			// Selected entity movement
 			case Keys.RIGHT: 
-				selectedEntity.getPosition().x += 1;
+				if (selectedEntity != null)
+					selectedEntity.getPosition().x += 1;
 				break;
 			case Keys.LEFT: 
-				selectedEntity.getPosition().x -= 1;
+				if (selectedEntity != null)
+					selectedEntity.getPosition().x -= 1;
 				break;
 			case Keys.UP:
-				selectedEntity.getPosition().y += 1;
+				if (selectedEntity != null)
+					selectedEntity.getPosition().y += 1;
 				break;
 			case Keys.DOWN:
-				selectedEntity.getPosition().y -= 1;
+				if (selectedEntity != null)
+					selectedEntity.getPosition().y -= 1;
 				break;
 			
 			// Pause / options menu

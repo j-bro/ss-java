@@ -58,7 +58,6 @@ public class GameCollisionListener implements ContactListener {
 			// Powerup collection
 			Ship ship = (Ship) body1.getUserData();
 			if (body2.getUserData() instanceof PowerupHealthUp) {
-				ship.setHealth(ship.getHealth() + 2);
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
 				// TODO powerup sound
 			}
