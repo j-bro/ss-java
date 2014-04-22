@@ -9,28 +9,30 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 ####To do list
 
 - Enemy AI
-- All Textures
 - High scores
 - And more..!
 
 ####In Progress
 
 - Menu GUI
-- Options/preferences
-- AudioPlayer sounds
 - Powerups
-- Collision physics (Box2D)
 - Hitbox shapes
 - Level creator
 - Level design
+- Textures
 - Game HUD (life, progress, score)
 
 ####Complete
 - Ship movement (completed DD/MM)
 - User input (controls) (completed DD/MM)
+- Options/preferences (completed 18/04)
+- AudioPlayer sounds (completed 21/04)
 - Asset Manager (completed 25/03)
 - Score Keeper (completed 31/03)
 - Health points (completed 01/04)
+- Collision physics/Box2D (completed 15/04)
+- Level saving/loading mechanism (completed 21/04)
+- Life display (hearts) (completed 22/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
