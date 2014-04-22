@@ -21,11 +21,22 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
-	public final static Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
-	public static final float DEFAULT_ROTATION = 0;
+	/**
+	 * The enemy's default width, in game coordinates
+	 */
+	public static final float DEFAULT_WIDTH = 6;
+	
+	/**
+	 * The enemy's default height, in game coordinates
+	 */
+	public static final float DEFAULT_HEIGHT = 3;
+	
+	/**
+	 * The enemy's default rotation, in degrees
+	 */
+	public static final float DEFAULT_ROTATION = 180;
 	
 	/**
 	 * The entity's starting health
@@ -43,6 +54,11 @@ public class EnemyType1 extends Enemy {
 	public static final int KILL_SCORE = 500; 
 	
 	/**
+	 * The default cooldown, in milliseconds, of the enemy's fire
+	 */
+	public static final int DEFAULT_SHOT_COOLDOWN_MS = 1000;
+	
+	/**
 	 * The enemy's type
 	 */
 	public static final int type = 1;
@@ -55,7 +71,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * The cooldown, in milliseconds, of the enemy's fire
 	 */
-	private transient int shotCooldown = 300;
+	private transient int shotCooldown;
 	
 	/**
 	 * The time since the last shot was taken
@@ -67,24 +83,37 @@ public class EnemyType1 extends Enemy {
 	 * @param width the width of the enemy
 	 * @param height the height of the enemy
 	 * @param rotation the rotation of the enemy in degrees
-	 * @param world the world instance
+	 * @param gameWorld the world instance
+	 * @param box2DWorld 
 	 */
 	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
 		super(position, width, height, rotation, gameWorld, world);
-		this.gameWorld = gameWorld;
 		setHealth(DEFAULT_HEALTH);
-		
-		createFixtureDef();
+		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
+		createDef();
 	}
 	
-	// TODO constructor for serialization
-	/*
+	/**
+	 * TODO Constructor for serialization
+	 */
 	public EnemyType1() {
-		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
-		// TODO world something init for bullets...
+		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
+		setHealth(DEFAULT_HEALTH);
+		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
+	}
+	
+	/**
+	 * Constructor for level creator
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 */
+	public EnemyType1(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
-	*/
+	
 	
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Enemy#fire()
@@ -92,10 +121,9 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
-			Bullet b = new BulletType1(new Vector2(position.x, position.y), 3, 2, 0, gameWorld, world, this);
-			b.getPosition().x = position.x - b.width;
-			b.getPosition().y = position.y + height / 2 - b.height / 2;
-			b.getBody().setLinearVelocity(BulletType1.DEFAULT_VELOCITY);
+			Bullet b = new BulletType1(new Vector2(position.x - width, position.y), 3, 2, 0, gameWorld, box2DWorld, this);
+			b.getPosition().x = position.x - width / 2 - b.width;
+			b.getPosition().y = position.y - b.height / 2;
 			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
@@ -148,10 +176,11 @@ public class EnemyType1 extends Enemy {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createDef()
 	 */
 	@Override
-	public void createFixtureDef() {
+	public void createDef() {
+		super.createDef();
 		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
@@ -163,7 +192,7 @@ public class EnemyType1 extends Enemy {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-
+		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*

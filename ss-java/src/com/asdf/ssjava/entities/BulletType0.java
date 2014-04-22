@@ -49,11 +49,10 @@ public class BulletType0 extends Bullet {
 	 * @param rotation
 	 * @param shooter
 	 */
-	public BulletType0(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world, AbstractEntity shooter) {
-		super(position, width, height, rotation, gameWorld, world, shooter);
+	public BulletType0(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld, AbstractEntity shooter) {
+		super(position, width, height, rotation, gameWorld, box2DWorld, shooter);
 		damage = DEFAULT_DAMAGE;
-		
-		createFixtureDef();
+		createDef();
 	}
 
 	/* (non-Javadoc)
@@ -106,10 +105,11 @@ public class BulletType0 extends Bullet {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createDef()
 	 */
 	@Override
-	public void createFixtureDef() {
+	public void createDef() {
+		super.createDef();
 		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
@@ -121,7 +121,7 @@ public class BulletType0 extends Bullet {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		
+		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*

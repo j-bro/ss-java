@@ -45,8 +45,8 @@ public abstract class Bullet extends MoveableEntity {
 	 * @param height the height of the bullet
 	 * @param rotation the rotation of the bullet in degrees
 	 */
-	public Bullet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world, AbstractEntity shooter) {
-		super(position, width, height, rotation, gameWorld, world);
+	public Bullet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld, AbstractEntity shooter) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 		this.shooter = shooter;
 		this.health = DEFAULT_HEALTH;
 	}

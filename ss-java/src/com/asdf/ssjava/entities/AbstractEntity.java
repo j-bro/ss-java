@@ -10,7 +10,10 @@ package com.asdf.ssjava.entities;
  *
  */
 
+import aurelienribon.bodyeditor.BodyEditorLoader;
+
 import com.asdf.ssjava.world.GameWorld;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -44,41 +47,64 @@ public abstract class AbstractEntity {
 	 */
 	protected transient int health;
 	
-	
+	/**
+	 * Whether or not the entity is currently visible
+	 */
+	protected transient boolean visible = true;
+
 	/**
 	 * The game world instance
 	 */
-	protected GameWorld gameWorld;
+	protected transient GameWorld gameWorld;
 	
 	/**
 	 * The Box2D world instance
 	 */
-	protected World world;
+	protected transient World box2DWorld;
 	
 	/**
 	 * The Box2D body of this entity
 	 */
-	protected Body body;
+	protected transient Body body;
+		
+	/**
+	 * The loader instance for the body's fixtures
+	 */
+//	private transient BodyEditorLoader loader;
 	
 	/**
 	 * Creates an entity
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 * @param gameWorld
+	 * @param box2DWorld
 	 */
-	protected AbstractEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
+	protected AbstractEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
 		this.rotation = rotation;
 		this.gameWorld = gameWorld;
-		this.world = world;
+		this.box2DWorld = box2DWorld;
 		
+	}
+	
+	/**
+	 * Creates the body definition for this entity
+	 */
+	public void createDef() {
 		// TODO Box2D stuff
+//		loader = new BodyEditorLoader(Gdx.files.internal("data/bodies.json"));
+		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x, position.y);
+		bodyDef.angle = MathUtils.degreesToRadians * rotation;
 
-		body = world.createBody(bodyDef);
-		body.setUserData(this);	
-		
+		body = box2DWorld.createBody(bodyDef);
+		body.setUserData(this);
 	}
 	
 	/**
@@ -167,14 +193,14 @@ public abstract class AbstractEntity {
 	 */
 	public synchronized void healthChange(int increment) {
 		health += increment;
-		if (getHealth() < 0) {
-			setHealth(0);
+		if (health < 0) {
+			health = 0;
 		}
 	}
 	
 	/**
 	 * 
-	 * @return
+	 * @return if the entity is dead
 	 */
 	public boolean isDead() {
 		if (health <= 0) {
@@ -183,6 +209,20 @@ public abstract class AbstractEntity {
 		else {
 			return false;
 		}
+	}
+	
+	/**
+	 * @return whether or not the entity is currently visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible sets whether or not the entity is visible
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 	
 	/**
@@ -201,6 +241,14 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
+	 * Initialize the non-serialized worlds
+	 */
+	public void initWorlds(GameWorld gameWorld, World box2DWorld) {
+		this.gameWorld = gameWorld;
+		this.box2DWorld = box2DWorld;
+	}
+	
+	/**
 	 * Runs every time the game renders a frame.
 	 */
 	public void update() {
@@ -214,11 +262,6 @@ public abstract class AbstractEntity {
 	 * Called when the entity's health is 0
 	 */
 	public abstract void die();
-
-	/**
-	 * Creates and applies the fixture definition for this entity
-	 */
-	public abstract void createFixtureDef();
 	
 	/*
 	 * (non-Javadoc)

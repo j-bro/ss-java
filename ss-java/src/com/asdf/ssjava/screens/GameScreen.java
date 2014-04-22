@@ -36,12 +36,24 @@ public class GameScreen implements Screen {
 	WorldRenderer renderer;
 		
 	/**
+	 * Constructor for testing levels
+	 */
+	public GameScreen(SSJava game, String levelPath, LevelCreator creator) {
+		this.game = game;
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath, creator);
+		renderer = new WorldRenderer(gameWorld);
+		gameWorld.setRenderer(renderer);
+		gameWorld.setManager(new GameInputManager(game, gameWorld));
+		Gdx.input.setInputProcessor(gameWorld.getManager());
+	}
+	
+	/**
 	 * Constructor of the Game Screen which takes 
 	 * @param game The game instance of type SSJava
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		gameWorld = new GameWorld(game, 0, levelPath);
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new GameInputManager(game, gameWorld));
@@ -57,7 +69,6 @@ public class GameScreen implements Screen {
 		renderer.render();
 		gameWorld.box2DWorld.step(1/60f, 6, 2);
 		gameWorld.update();
-		
 	}
 
 	/*
@@ -82,6 +93,13 @@ public class GameScreen implements Screen {
 		}
 		AudioPlayer.playGameMusic(true);
 
+	}
+	
+	/**
+	 * @return the gameWorld
+	 */
+	public GameWorld getGameWorld() {
+		return gameWorld;
 	}
 
 	/*

@@ -9,6 +9,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class PowerupSpeedOfLight extends Powerup {
 
+	/**
+	 * The time the powerup's effect will last, in seconds
+	 */
 	public static final float COOLDOWN_SECONDS = 5;
 	
 	/**
@@ -16,10 +19,22 @@ public class PowerupSpeedOfLight extends Powerup {
 	 */
 	public static final int DEFAULT_HEALTH = 1;
 	
+	/**
+	 * Default velocity for the Speed of Light powerup
+	 */
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
-	public static final float DEFAULT_WIDTH = 2;
-	public static final float DEFAULT_HEIGHT = 2;
+	/**
+	 * The powerup's default width, in game coordinates
+	 */
+	public static final float DEFAULT_WIDTH = 6;
+	/**
+	 * The powerup's default height, in game coordinates
+	 */
+	public static final float DEFAULT_HEIGHT = 3;
+	/**
+	 * The powerup's default rotation, in degrees
+	 */
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
@@ -38,21 +53,35 @@ public class PowerupSpeedOfLight extends Powerup {
 	 * @param width
 	 * @param height
 	 * @param rotation
+	 * @param gameWorld
+	 * @param box2DWorld
 	 */
-	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World world) {
-		super(position, width, height, rotation, gameWorld, world);
+	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
+		super(position, width, height, rotation, gameWorld, box2DWorld);
 		setHealth(DEFAULT_HEALTH);
-		createFixtureDef();
+		createDef();
 	}
 
-	// TODO constructor for serialization
-	/*
+	/**
+	 * Constructor for serialization
+	 */
 	public PowerupSpeedOfLight() {
-		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION);
+		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
-	*/
 	
+	/**
+	 * Constructor for level creator
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 */
+	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation, null, null);
+		setHealth(DEFAULT_HEALTH);
+	}
+		
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -63,10 +92,11 @@ public class PowerupSpeedOfLight extends Powerup {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.AbstractEntity#createFixtureDef()
+	 * @see com.asdf.ssjava.entities.AbstractEntity#createDef()
 	 */
 	@Override
-	public void createFixtureDef() {
+	public void createDef() {
+		super.createDef();
 		// TODO Box2D stuff
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
@@ -79,7 +109,7 @@ public class PowerupSpeedOfLight extends Powerup {
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-
+		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*
