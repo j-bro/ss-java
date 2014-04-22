@@ -19,7 +19,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Menu GUI
 - Powerups
 - Hitbox shapes
-- Level creator
 - Level design
 - Game HUD (life, progress, score)
 
@@ -35,6 +34,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level saving/loading mechanism (completed 21/04)
 - Textures (completed 21/04)
 - Life display (hearts) (completed 22/04)
+- Level creator (completed 22/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
