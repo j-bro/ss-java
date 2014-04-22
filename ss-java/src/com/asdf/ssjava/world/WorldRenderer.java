@@ -57,10 +57,15 @@ public class WorldRenderer {
 	SpriteBatch batch;
 	
 	/**
-	 * The stage for drawing the score
+	 * The stage for drawing the score, life hearts and level progress
 	 */
 	Stage stage;
 	Label scoreLabel;
+	
+	/**
+	 * Shape renderer for debugging
+	 */
+	Box2DDebugRenderer debugRenderer;
 	
 	/**
 	 * The debug text elements
@@ -93,7 +98,6 @@ public class WorldRenderer {
 	
 	Image asteroidImage, spaceRockImage, enemyType1Image, planetImage, powerupHealthUpImage, powerupSpeedOfLightImage;
 	
-	
 	/**
 	 * The entity type to add to the level
 	 */
@@ -102,14 +106,10 @@ public class WorldRenderer {
 	// TODO ...
 	float width, height;
 	
-	/**
-	 * TODO Shape renderer for debugging ONLY!
-	 */
-	Box2DDebugRenderer debugRenderer;
 	
 	/**
 	 * Creates the world instance
-	 * @param world
+	 * @param gameWorld
 	 */
 	public WorldRenderer(GameWorld gameWorld) {
 		this.gameWorld = gameWorld;
@@ -164,6 +164,7 @@ public class WorldRenderer {
 		
 		
 		ship = gameWorld.getShip();
+		
 		
 		// HUD stage
 		if (stage == null) {
@@ -221,6 +222,8 @@ public class WorldRenderer {
 			spaceRockImage.setBounds(10, 10, imageScale, imageScale);
 			planetImage.setBounds(10, 10, imageScale, imageScale);
 			enemyType1Image.setBounds(10, 10, imageScale * 2, imageScale);
+			enemyType1Image.setOrigin(enemyType1Image.getWidth() / 2, enemyType1Image.getHeight() / 2);
+			enemyType1Image.setRotation(180);
 			powerupHealthUpImage.setBounds(10, 10, imageScale, imageScale);
 			powerupSpeedOfLightImage.setBounds(10, 10, imageScale * 2, imageScale);
 			
@@ -232,6 +235,7 @@ public class WorldRenderer {
 			stage.addActor(powerupSpeedOfLightImage);
 		}
 		
+		// Debug display
 		if (SSJava.DEBUG) {
 			// Debug text
 			LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
@@ -247,7 +251,7 @@ public class WorldRenderer {
 			stage.addActor(debugLabel);
 			stage.addActor(new Label("", dbls));
 			
-			// shape renderer
+			// Shape (hitbox) renderer
 			debugRenderer = new Box2DDebugRenderer();
 		}
 	}
@@ -291,47 +295,47 @@ public class WorldRenderer {
 		    }
 		}
 		*/
-			// obstacles rendering
-			for (Obstacle o: gameWorld.level.obstacles) {
-				if (o.isVisible()) {
-					Texture obstacleTexture = getTexture(o);
-					batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);					
-				}
+		
+		// obstacles rendering
+		for (Obstacle o: gameWorld.level.obstacles) {
+			if (o.isVisible()) {
+				Texture obstacleTexture = getTexture(o);
+				batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);					
 			}
-			// enemies rendering
-			for (Enemy e: gameWorld.level.enemies) {
-				if (e.isVisible()) {					
-					Texture enemyTexture = getTexture(e);
-					batch.draw(enemyTexture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
-				}
+		}
+		// enemies rendering
+		for (Enemy e: gameWorld.level.enemies) {
+			if (e.isVisible()) {					
+				Texture enemyTexture = getTexture(e);
+				batch.draw(enemyTexture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
-			// bullet rendering
-			for (Bullet b: gameWorld.bullets) {
-				if (b.isVisible()) {					
-					Texture bulletTexture = getTexture(b);
-					batch.draw(bulletTexture, b.getPosition().x - b.getWidth() / 2, b.getPosition().y - b.getHeight() / 2, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
-				}
+		}
+		// bullet rendering
+		for (Bullet b: gameWorld.bullets) {
+			if (b.isVisible()) {					
+				Texture bulletTexture = getTexture(b);
+				batch.draw(bulletTexture, b.getPosition().x - b.getWidth() / 2, b.getPosition().y - b.getHeight() / 2, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
 			}
-			// game changer rendering
-			for (Obstacle g: gameWorld.level.gameChangers) {
-				if (g.isVisible()) {
-					Texture gameChangerTexture = getTexture(g);
-					batch.draw(gameChangerTexture, g.getPosition().x - g.getWidth() / 2, g.getPosition().y - g.getHeight() / 2, g.getWidth() / 2, g.getHeight() / 2 , g.getWidth(), g.getHeight(), 1, 1, g.getRotation(), 0, 0, gameChangerTexture.getWidth(), gameChangerTexture.getHeight(), false, false);
-				}
+		}
+		// game changer rendering
+		for (Obstacle g: gameWorld.level.gameChangers) {
+			if (g.isVisible()) {
+				Texture gameChangerTexture = getTexture(g);
+				batch.draw(gameChangerTexture, g.getPosition().x - g.getWidth() / 2, g.getPosition().y - g.getHeight() / 2, g.getWidth() / 2, g.getHeight() / 2 , g.getWidth(), g.getHeight(), 1, 1, g.getRotation(), 0, 0, gameChangerTexture.getWidth(), gameChangerTexture.getHeight(), false, false);
 			}
-			for (Powerup p: gameWorld.level.powerups) {
-				if (p.isVisible()) {					
-					Texture powerupTexture = getTexture(p);
-					batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);
-				}
+		}
+		for (Powerup p: gameWorld.level.powerups) {
+			if (p.isVisible()) {					
+				Texture powerupTexture = getTexture(p);
+				batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);
 			}
-			// ship rendering
-			if (ship.isVisible()) {
-				batch.draw(shipTexture, ship.getPosition().x - ship.getWidth() / 2, ship.getPosition().y - ship.getHeight() / 2, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
-			}
+		}
+		// ship rendering
+		if (ship.isVisible()) {
+			batch.draw(shipTexture, ship.getPosition().x - ship.getWidth() / 2, ship.getPosition().y - ship.getHeight() / 2, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
+		}
 			
 		batch.end();
-		
 		
 		// game HUD
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
@@ -407,8 +411,8 @@ public class WorldRenderer {
 				halfHeartImage.setVisible(false);
 				break;
 			}
-			
 		}
+		
 		// creator HUD
 		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 			if (entityToAdd instanceof Asteroid) {
