@@ -115,7 +115,7 @@ public class LevelSaveMenu implements Screen {
 				}
 			}
 		});
-		fileNameField.setWidth(80);
+		fileNameField.setWidth(100);
 		fileNameField.setX(Gdx.graphics.getWidth() / 2);
 		fileNameField.setY(Gdx.graphics.getHeight() / 2 + 20);
 		
