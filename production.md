@@ -10,6 +10,8 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 - Enemy AI
 - High scores
+- Backgrounds
+- Menu graphics
 - And more..!
 
 ####In Progress
@@ -19,7 +21,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Hitbox shapes
 - Level creator
 - Level design
-- Textures
 - Game HUD (life, progress, score)
 
 ####Complete
@@ -32,6 +33,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Health points (completed 01/04)
 - Collision physics/Box2D (completed 15/04)
 - Level saving/loading mechanism (completed 21/04)
+- Textures (completed 21/04)
 - Life display (hearts) (completed 22/04)
 
 ####Potential fonts
