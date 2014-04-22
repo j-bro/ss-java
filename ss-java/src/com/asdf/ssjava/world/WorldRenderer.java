@@ -28,6 +28,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -100,6 +102,16 @@ public class WorldRenderer {
 	 * The entity type to add to the level
 	 */
 	private AbstractEntity entityToAdd;
+	
+	/**
+	 * The currently selected entity
+	 */
+	private AbstractEntity selectedEntity;
+	
+	/**
+	 * Shape renderer for selected entity debugging
+	 */
+	ShapeRenderer sr;
 
 	// TODO ...
 	float width, height;
@@ -214,7 +226,7 @@ public class WorldRenderer {
 			powerupHealthUpImage = new Image(powerupHealthUpTexture);
 			powerupSpeedOfLightImage = new Image(powerupSpeedOfLightTexture);
 			
-			int imageScale = 50;
+			int imageScale = 70;
 			
 			asteroidImage.setBounds(10, 10, imageScale * 2, imageScale);
 			spaceRockImage.setBounds(10, 10, imageScale, imageScale);
@@ -231,6 +243,12 @@ public class WorldRenderer {
 			stage.addActor(enemyType1Image);
 			stage.addActor(powerupHealthUpImage);
 			stage.addActor(powerupSpeedOfLightImage);
+			
+			if (SSJava.DEBUG) {
+				// To draw around selected entity
+				sr = new ShapeRenderer();
+				sr.setProjectionMatrix(cam.combined);
+			}
 		}
 		
 		// Debug display
@@ -242,12 +260,13 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
-			debugLabel.setY(cam.position.y + cam.viewportHeight / 2 - 40 - debugLabel.getHeight());
+			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
+			
 			
 			stage.addActor(debugLabel);
-			stage.addActor(new Label("", dbls));
 			
 			// Shape (hitbox) renderer
 			debugRenderer = new Box2DDebugRenderer();
@@ -460,6 +479,12 @@ public class WorldRenderer {
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(true);
+				
+				if (selectedEntity != null) {
+					sr.begin(ShapeType.Line);
+					sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
+					sr.end();
+				}
 			}		
 		}
 		
@@ -477,16 +502,18 @@ public class WorldRenderer {
 						"\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000 +
 						"\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 + 
 						"\nHealth: " + ship.getHealth() + " half hearts" + 
-						"\nLight speed enabled: " + ship.isLightSpeedEnabled());	
+						"\nLight speed enabled: " + ship.isLightSpeedEnabled() + 
+						"\nDEBUG TEXT HOLDER");	
 			}
 			
 			else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 				// Debug info
-				debugLabel.setText("Position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 + 
-						"\n" + 
-						"\n" +  
-						"\n" + 
-						"\n");
+				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 + 
+						"\nMove camera: A & D " + 
+						"\nCycle entities: X & C" +  
+						"\nAdd/remove entities: V & Z" + 
+						"\nMove entities: arrows & mouse" +
+						"\nOptions menu: ESC");
 			}
 		}
 		
@@ -498,8 +525,11 @@ public class WorldRenderer {
 	 * Dispose method
 	 */
 	public void dispose() {
-		batch.dispose();		
-		debugRenderer.dispose();
+		batch.dispose();
+		if (sr != null)
+			sr.dispose();
+		if (debugRenderer != null)
+			debugRenderer.dispose();
 	}
 	
 	public Texture getTexture(AbstractEntity e) {
@@ -552,4 +582,12 @@ public class WorldRenderer {
 	public void setEntityToAdd(AbstractEntity entityToAdd) {
 		this.entityToAdd = entityToAdd;
 	}
+	/**
+	 * @param selectedEntity the selectedEntity to set
+	 */
+	public void setSelectedEntity(AbstractEntity selectedEntity) {
+		this.selectedEntity = selectedEntity;
+	}
+	
+	
 }

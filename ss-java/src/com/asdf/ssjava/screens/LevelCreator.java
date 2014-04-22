@@ -6,8 +6,11 @@ package com.asdf.ssjava.screens;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
+import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Planet;
+import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.SpaceRock;
@@ -19,6 +22,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -93,9 +97,7 @@ public class LevelCreator implements Screen {
 		renderer.render();
 		gameWorld.update();
 		
-		// TODO draw entityToAdd
-		// TODO outline selectedEntity
-			
+		// TODO outline selectedEntity	
 	}
 
 	/*
@@ -226,9 +228,40 @@ public class LevelCreator implements Screen {
 	}
 	
 	/**
+	 * Sets the currently selected entity
+	 */
+	public void setSelectedEntity(AbstractEntity e) {
+		selectedEntity = e;
+		renderer.setSelectedEntity(e);
+	}
+	
+	/**
+	 * Remove the selected entity from the level
+	 * @param selectedEntity
+	 */
+	public void removeEntity(AbstractEntity selectedEntity) {
+		if (selectedEntity instanceof Obstacle) {
+			gameWorld.getObstacles().removeValue((Obstacle) selectedEntity, true);
+		}
+		else if (selectedEntity instanceof Enemy) {
+			gameWorld.getEnemies().removeValue((Enemy) selectedEntity, true);
+		}
+		else if (selectedEntity instanceof Powerup) {
+			gameWorld.getPowerups().removeValue((Powerup) selectedEntity, true);
+		}
+	}
+	
+	
+	/**
+	 * @return the gameWorld
+	 */
+	public GameWorld getGameWorld() {
+		return gameWorld;
+	}
+
+	/**
 	 * Input manager for level creator
 	 * @author Jeremy Brown
-	 *
 	 */
 	class LevelCreatorInput implements InputProcessor {
 
@@ -241,16 +274,16 @@ public class LevelCreator implements Screen {
 			switch (keycode) {
 			// Selected entity movement
 			case Keys.RIGHT: 
-				
+				selectedEntity.getPosition().x += 1;
 				break;
 			case Keys.LEFT: 
-				
+				selectedEntity.getPosition().x -= 1;
 				break;
 			case Keys.UP:
-				
+				selectedEntity.getPosition().y += 1;
 				break;
 			case Keys.DOWN:
-				
+				selectedEntity.getPosition().y -= 1;
 				break;
 			
 			// Pause / options menu
@@ -269,6 +302,7 @@ public class LevelCreator implements Screen {
 				renderer.setEntityToAdd(getPrevEntityType());
 				break;
 			case Keys.Z:
+				removeEntity(selectedEntity);
 				break;
 			default: break;
 		}
@@ -287,6 +321,29 @@ public class LevelCreator implements Screen {
 
 		@Override
 		public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+			// Check if click is on an entity
+			// Select the entity
+			for (Obstacle o: gameWorld.getObstacles()) {
+				if (isClickOnEntity(o, screenX, screenY)) {
+					selectedEntity = o;
+					Gdx.app.log(SSJava.LOG, "Selected entity: " + o.toString() + " " + Integer.toHexString(o.hashCode()));
+					return true;
+				}
+			}
+			for (Enemy e: gameWorld.getEnemies()) {
+				if (isClickOnEntity(e, screenX, screenY)) {
+					selectedEntity = e;
+					Gdx.app.log(SSJava.LOG, "Selected entity: " + e.toString() + " " + Integer.toHexString(e.hashCode()));
+					return true;
+				}
+			}
+			for (Powerup p: gameWorld.getPowerups()) {
+				if (isClickOnEntity(p, screenX, screenY)) {
+					selectedEntity = p;
+					Gdx.app.log(SSJava.LOG, "Selected entity: " + p.toString() + " " + Integer.toHexString(p.hashCode()));
+					return true;
+				}
+			}
 			return false;
 		}
 
@@ -297,6 +354,13 @@ public class LevelCreator implements Screen {
 
 		@Override
 		public boolean touchDragged(int screenX, int screenY, int pointer) {
+			// TODO relative movement
+			if (isClickOnEntity(selectedEntity, screenX, screenY)) {
+				Vector3 v = new Vector3(screenX, screenY, 0);
+				renderer.getCamera().unproject(v);
+				selectedEntity.setPosition(new Vector2(v.x, v.y));
+				return true;			
+			}
 			return false;
 		}
 
@@ -310,6 +374,22 @@ public class LevelCreator implements Screen {
 			return false;
 		}
 		
+		/**
+		 * Checks whether or not the click is on the selected entity
+		 * @param e the entity to be checked
+		 * @param screenX the x coordinate of the pointer 
+		 * @param screenY the y coordinate of the pointer
+		 * @return
+		 */
+		public boolean isClickOnEntity(AbstractEntity e, float screenX, float screenY) {
+			Vector3 v = new Vector3(screenX, screenY, 0);
+			renderer.getCamera().unproject(v);
+			Vector2 op = e.getPosition();
+			if (v.x >= op.x - e.getWidth() / 2 && v.x <= op.x + e.getWidth() / 2 && v.y >= op.y - e.getHeight() / 2 && v.y <= op.y + e.getHeight() / 2) {
+				return true;
+			}
+			return false;
+		}
 	}
 }
 

@@ -41,7 +41,6 @@ public class BackButton extends MenuButton {
 				game.setScreen(referrer);
 				if (referrer instanceof GameScreen) {					
 					AudioPlayer.gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume", 100));
-					Gdx.app.log(SSJava.LOG, "New music volume: " + SSJava.prefs.getInteger("musicVolume"));
 				}
 			}
 		});

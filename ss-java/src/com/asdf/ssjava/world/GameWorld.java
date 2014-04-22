@@ -13,10 +13,11 @@ import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.screens.LevelCreator;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -67,6 +68,11 @@ public class GameWorld {
 	int worldType;
 	
 	/**
+	 * The level creator instance
+	 */
+	LevelCreator creator;
+	
+	/**
 	 * World type constant definition
 	 */
 	public static final int GAME_TYPE = 0;
@@ -102,6 +108,17 @@ public class GameWorld {
 	 */
 	public World box2DWorld;
 	
+	/**
+	 * Constructor for testing a level from the level creator
+	 * @param game
+	 * @param worldType
+	 * @param levelPath
+	 * @param creator
+	 */
+	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreator creator) {
+		this(game, worldType, levelPath);
+		this.creator = creator;
+	}
 	/**
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
@@ -374,7 +391,18 @@ public class GameWorld {
 		
 	}
 
+	/**
+	 * 
+	 * @param manager
+	 */
 	public void setManager(InputProcessor manager) {
 		this.manager = manager;		
+	}
+	
+	/**
+	 * 
+	 */
+	public LevelCreator getCreator() {
+		return creator;
 	}
 }
