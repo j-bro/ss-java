@@ -61,11 +61,19 @@ public class GameWorld {
 	InputProcessor manager;
 	
 	/**
-	 * The world view type
-	 * 0 = game
-	 * 1 = creator 
+	 * The world type
 	 */
 	int worldType;
+	
+	/**
+	 * World type constant definition
+	 */
+	public static final int GAME_TYPE = 0;
+	
+	/**
+	 * World type constant definition
+	 */
+	public static final int CREATOR_TYPE = 1;
 	
 	
 	/**
@@ -113,6 +121,24 @@ public class GameWorld {
 		// Level Loading
 		if (levelPath != null) {
 			loadLevel(levelPath);
+			
+			// Initialize loaded level elements 
+			for (Obstacle o: level.obstacles) {
+				o.initWorlds(this, box2DWorld);
+				o.createDef();
+			}
+			for (Enemy e: level.enemies) {
+				e.initWorlds(this, box2DWorld);
+				e.createDef();
+			}
+			for (Powerup p: level.powerups) {
+				p.initWorlds(this, box2DWorld);
+				p.createDef();
+			}
+			for (Obstacle g: level.gameChangers) {
+				g.initWorlds(this, box2DWorld);
+				g.createDef();
+			}
 		}
 		
 		
@@ -157,24 +183,6 @@ public class GameWorld {
 			}
 		}
 		*/
-		
-		// Initialize loaded level elements 
-		for (Obstacle o: level.obstacles) {
-			o.initWorlds(this, box2DWorld);
-			o.createDef();
-		}
-		for (Enemy e: level.enemies) {
-			e.initWorlds(this, box2DWorld);
-			e.createDef();
-		}
-		for (Powerup p: level.powerups) {
-			p.initWorlds(this, box2DWorld);
-			p.createDef();
-		}
-		for (Obstacle g: level.gameChangers) {
-			g.initWorlds(this, box2DWorld);
-			g.createDef();
-		}
 		
 		
 //		exportLevel(levelPath);

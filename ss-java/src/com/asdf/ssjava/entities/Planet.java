@@ -74,6 +74,17 @@ public class Planet extends Obstacle {
 		setHealth(DEFAULT_HEALTH);
 	}
 	
+	/**
+	 * Constructor for level creator
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 */
+	public Planet(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation, null, null);
+		setHealth(DEFAULT_HEALTH);
+	}
 
 	/*
 	 * (non-Javadoc)

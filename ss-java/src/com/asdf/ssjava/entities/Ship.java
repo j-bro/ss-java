@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Ship extends MoveableEntity {
 		
 	/**
-	 * The entity's starting health
+	 * The ship's default starting health
 	 */
 	public static final int DEFAULT_HEALTH = 6;
 	
@@ -39,19 +39,45 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The velocity of the ship when the speed of light powerup is activated
 	 */
-	public static final Vector2 SPEED_OF_LIGHT_VELOCITY = new Vector2(25, 0);
+	public static final Vector2 SPEED_OF_LIGHT_VELOCITY = new Vector2(35, 0);
 	
 	/**
 	 * The ship's default acceleration
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public static Vector2 DEFAULT_ACCELERATION = new Vector2(12, 300);
+	public static Vector2 DEFAULT_ACCELERATION = new Vector2(18, 300);
 	
 	/**
 	 * 
 	 */
 	public static final int DEFAULT_SHOT_COOLDOWN_MS = 300;
+	
+	/**
+	 * The score given for hitting this entity
+	 */
+	public static final int HIT_SCORE = 0;
+	
+	/**
+	 * The score given for killing this entity
+	 */
+	public static final int KILL_SCORE = 0; 
+	
+	/**
+	 * The ship's default width, in game coordinates
+	 */
+	public static final float DEFAULT_WIDTH = 6;
+	
+	/**
+	 * The ship's default height, in game coordinates
+	 */
+	public static final float DEFAULT_HEIGHT = 3;
+	
+	/**
+	 * The ship's default rotation, in game degrees
+	 */
+	public static final float DEFAULT_ROTATION = 0;
+	
 	
 	/**
 	 * The type of bullets the ship will fire
@@ -80,33 +106,8 @@ public class Ship extends MoveableEntity {
 	public boolean maxDownSpeedReached = false;
 	
 	/**
-	 * The score given for hitting this entity
-	 */
-	public static final int HIT_SCORE = 0;
-	
-	/**
-	 * The score given for killing this entity
-	 */
-	public static final int KILL_SCORE = 0; 
-	
-	/**
-	 * The ship's default width, in game coordinates
-	 */
-	public static final float DEFAULT_WIDTH = 6;
-	
-	/**
-	 * The ship's default height, in game coordinates
-	 */
-	public static final float DEFAULT_HEIGHT = 3;
-	
-	/**
-	 * The ship's default rotation, in game degrees
-	 */
-	public static final float DEFAULT_ROTATION = 0;
-	
-	/**
 	 * Creates a ship with a position, dimensions and rotation.
-	 * Does not give the ship an initial speed.
+	 * Also creates body & fixture definitions, and sets the default velocity
 	 * @param position
 	 * @param width
 	 * @param height
@@ -174,13 +175,13 @@ public class Ship extends MoveableEntity {
 			// TODO fix ship rotation
 			if (angleMod < Math.PI) {
 				float diff = angleMod;
-				Gdx.app.log(SSJava.LOG, "smaller");
-//					getBody().applyAngularImpulse(-3f * diff, true);
-					getBody().setAngularVelocity(-0.2f * diff);
+//				Gdx.app.log(SSJava.LOG, "smaller");
+//				getBody().applyAngularImpulse(-3f * diff, true);
+				getBody().setAngularVelocity(-0.2f * diff);
 			}
 			else {
 				float diff = mod - angleMod;
-				Gdx.app.log(SSJava.LOG, "greater");
+//				Gdx.app.log(SSJava.LOG, "greater");
 //				getBody().applyAngularImpulse(3f * diff, true);
 				getBody().setAngularVelocity(0.2f * diff);
 			}

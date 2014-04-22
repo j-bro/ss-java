@@ -64,10 +64,22 @@ public class Asteroid extends Obstacle {
 	}
 	
 	/**
-	 * TODO Constructor for serialization
+	 * Constructor for serialization
 	 */
 	public Asteroid() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
+		setHealth(DEFAULT_HEALTH);
+	}
+	
+	/**
+	 * Constructor for level creator
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 */
+	public Asteroid(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
 	

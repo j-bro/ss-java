@@ -537,4 +537,17 @@ public class WorldRenderer {
 	public Camera getCamera() {
 		return cam;
 	}
+	
+	/**
+	 * @return the entityToAdd
+	 */
+	public AbstractEntity getEntityToAdd() {
+		return entityToAdd;
+	}
+	/**
+	 * @param entityToAdd the entityToAdd to set
+	 */
+	public void setEntityToAdd(AbstractEntity entityToAdd) {
+		this.entityToAdd = entityToAdd;
+	}
 }

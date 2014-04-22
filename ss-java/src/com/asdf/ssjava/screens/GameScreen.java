@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
 	 */
 	public GameScreen(SSJava game, String levelPath) {
 		this.game = game;
-		gameWorld = new GameWorld(game, 0, levelPath);
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new GameInputManager(game, gameWorld));
@@ -57,7 +57,6 @@ public class GameScreen implements Screen {
 		renderer.render();
 		gameWorld.box2DWorld.step(1/60f, 6, 2);
 		gameWorld.update();
-		
 	}
 
 	/*

@@ -47,7 +47,11 @@ public abstract class AbstractEntity {
 	 */
 	protected transient int health;
 	
-	
+	/**
+	 * Whether or not the entity is currently visible
+	 */
+	protected transient boolean visible = true;
+
 	/**
 	 * The game world instance
 	 */
@@ -196,7 +200,7 @@ public abstract class AbstractEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return if the entity is dead
 	 */
 	public boolean isDead() {
 		if (health <= 0) {
@@ -205,6 +209,20 @@ public abstract class AbstractEntity {
 		else {
 			return false;
 		}
+	}
+	
+	/**
+	 * @return whether or not the entity is currently visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible sets whether or not the entity is visible
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 	
 	/**

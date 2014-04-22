@@ -102,6 +102,18 @@ public class EnemyType1 extends Enemy {
 		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 	}
 	
+	/**
+	 * Constructor for level creator
+	 * @param position
+	 * @param width
+	 * @param height
+	 * @param rotation
+	 */
+	public EnemyType1(Vector2 position, float width, float height, float rotation) {
+		super(position, width, height, rotation, null, null);
+		setHealth(DEFAULT_HEALTH);
+	}
+	
 	
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Enemy#fire()

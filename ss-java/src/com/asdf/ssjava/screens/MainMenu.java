@@ -77,7 +77,7 @@ public class MainMenu implements Screen {
 				@Override
 		        public boolean keyDown(int keyCode) {
 		            if (keyCode == Keys.C) {
-//		                game.setScreen(new LevelCreator(game);
+		                game.setScreen(new LevelCreator(game));
 		            }
 		            return super.keyDown(keyCode);
 		        }
