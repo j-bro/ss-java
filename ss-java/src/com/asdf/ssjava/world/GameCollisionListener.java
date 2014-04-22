@@ -57,6 +57,7 @@ public class GameCollisionListener implements ContactListener {
 		else if (body1.getUserData() instanceof Ship) {	
 			Ship ship = (Ship) body1.getUserData();
 			if (body2.getUserData() instanceof PowerupHealthUp) {
+				ship.setHealth(ship.getHealth() + 2);
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
 			}
 			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
