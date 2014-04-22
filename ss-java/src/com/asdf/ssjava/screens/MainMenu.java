@@ -7,7 +7,6 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,6 +38,8 @@ public class MainMenu implements Screen {
 	MenuButton highScoresButton;
 	MenuButton creditsButton;
 	MenuButton exitButton;
+	
+	MenuButton debugButton;
 	
 	Screen thisMainMenu = this;
 	
@@ -73,15 +74,7 @@ public class MainMenu implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
-			stage = new Stage(width, height, true) {
-				@Override
-		        public boolean keyDown(int keyCode) {
-		            if (keyCode == Keys.C) {
-		                game.setScreen(new LevelCreator(game));
-		            }
-		            return super.keyDown(keyCode);
-		        }
-			};
+			stage = new Stage(width, height, true);
 		}
 		stage.clear();
 		 
@@ -234,6 +227,35 @@ public class MainMenu implements Screen {
 		stage.addActor(highScoresButton);
 		stage.addActor(creditsButton);
 		stage.addActor(exitButton);
+		
+		// Level creator access button
+		if (SSJava.DEBUG) {
+			debugButton = new MenuButton("Level creator", 280, 65, game);
+			debugButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
+			debugButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 260);
+			
+			debugButton.addListener(new InputListener() {
+				/*
+				 * (non-Javadoc)
+				 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+				 */
+				public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+					Gdx.app.log(SSJava.LOG, "Level creator button down");
+					return true;
+				}
+				
+				/*
+				 * (non-Javadoc)
+				 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+				 */
+				public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+					Gdx.app.log(SSJava.LOG, "Level creator button up");
+					game.setScreen(new LevelCreator(game));
+				}
+			});
+			
+			stage.addActor(debugButton);
+		}
 	}
  
 	/*

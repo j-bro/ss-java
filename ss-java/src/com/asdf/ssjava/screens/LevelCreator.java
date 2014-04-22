@@ -3,8 +3,6 @@
  */
 package com.asdf.ssjava.screens;
 
-import java.util.Iterator;
-
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
