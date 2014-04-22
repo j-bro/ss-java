@@ -16,6 +16,7 @@ import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -53,7 +54,7 @@ public class GameWorld {
 	/**
 	 * The WorldRenderer instance
 	 */
-	WorldRenderer render;
+	WorldRenderer renderer;
 	
 	/**
 	 * The InputManager instance
@@ -197,61 +198,73 @@ public class GameWorld {
 	 * Also verifies which entities/bodies are dead and removes them
 	 */
 	public void update() {
-		// Map Box2D physics to game entities
-		Array<Body> bodiesArray = new Array<Body>();
-		box2DWorld.getBodies(bodiesArray);
-		
-		Array<Body> deadBodies = new Array<Body>();
-		
-		// Iterate through all bodies
-		for (Body b: bodiesArray) {
-			// Get the entity corresponding to the body
-		    AbstractEntity e = (AbstractEntity) b.getUserData();
-
-		    if (e != null) {
-		    	// Check if the entity is dead and act accordingly
-		    	if (e.isDead()) {				
-					e.die();
-					Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
-					deadBodies.add(b);
-		    	}
-		    	else {
-		    		// Update the entity's position 
-		    		e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
-		    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
-		    		
-		    		e.update();
-		    	}
-		    }
-		}
-		
-		// Remove all dead bodies from Box2D and game
-		for (Body b: deadBodies) {
-			box2DWorld.destroyBody(b);
-		}
-		
-		
-		// Edge of screen collision	
-		float screenTop = render.cam.position.y + render.cam.viewportHeight / 2;
-		float screenBottom = render.cam.position.y - render.cam.viewportHeight / 2;
-		float screenLeft = render.cam.position.x - render.cam.viewportWidth / 2;
-		float screenRight = render.cam.position.x + render.cam.viewportWidth / 2;
-				
-		if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
-			Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
-			// TODO FIX moveable up increments
-			/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
-				ship.getPosition().y = screenBottom;
+		if (getWorldType() == GAME_TYPE) {
+			// Map Box2D physics to game entities
+			Array<Body> bodiesArray = new Array<Body>();
+			box2DWorld.getBodies(bodiesArray);
+			
+			Array<Body> deadBodies = new Array<Body>();
+			
+			// Iterate through all bodies
+			for (Body b: bodiesArray) {
+				// Get the entity corresponding to the body
+			    AbstractEntity e = (AbstractEntity) b.getUserData();
+	
+			    if (e != null) {
+			    	// Check if the entity is dead and act accordingly
+			    	if (e.isDead()) {				
+						e.die();
+						Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
+						deadBodies.add(b);
+			    	}
+			    	else {
+			    		// Update the entity's position 
+			    		e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
+			    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
+			    		
+			    		e.update();
+			    	}
+			    }
 			}
-			else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
-				ship.getPosition().y = screenTop - ship.getHeight();
-			}*/
-			ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
+			// Remove all dead bodies from Box2D
+			for (Body b: deadBodies) {
+				box2DWorld.destroyBody(b);
+			}
+			
+			
+			// Edge of screen collision	
+			float screenTop = renderer.cam.position.y + renderer.cam.viewportHeight / 2;
+			float screenBottom = renderer.cam.position.y - renderer.cam.viewportHeight / 2;
+			float screenLeft = renderer.cam.position.x - renderer.cam.viewportWidth / 2;
+			float screenRight = renderer.cam.position.x + renderer.cam.viewportWidth / 2;
+					
+			if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
+				Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
+				// TODO FIX moveable up increments
+				/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
+					ship.getPosition().y = screenBottom;
+				}
+				else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
+					ship.getPosition().y = screenTop - ship.getHeight();
+				}*/
+				ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
+			}
+			
+			if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
+				Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+				ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
+			}
 		}
 		
-		if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
-			Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
-			ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
+		else if (getWorldType() == CREATOR_TYPE) {
+			// Camera controls
+			// Key input
+			if (Gdx.input.isKeyPressed(Keys.A)) {
+				renderer.getCamera().translate(-1, 0, 0);
+			}
+			else if (Gdx.input.isKeyPressed(Keys.D)) {
+				renderer.getCamera().translate(1, 0, 0);
+			}
 		}
 	}
 	
@@ -318,8 +331,8 @@ public class GameWorld {
 	/**
 	 * Passes the WorldRenderer into this class
 	 */
-	public void setRenderer(WorldRenderer render){
-		this.render = render;
+	public void setRenderer(WorldRenderer renderer){
+		this.renderer = renderer;
 	}
 	
 	/**

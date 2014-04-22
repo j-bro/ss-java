@@ -93,6 +93,7 @@ public class LevelCreator implements Screen {
 	@Override
 	public void render(float delta) {
 		renderer.render();
+		gameWorld.update();
 		
 		// TODO draw entityToAdd
 		// TODO outline selectedEntity
@@ -252,14 +253,6 @@ public class LevelCreator implements Screen {
 				break;
 			case Keys.DOWN:
 				
-				break;
-				
-			// Camera movement TODO move to gameWorld
-			case Keys.A:
-				renderer.getCamera().translate(-1, 0, 0);
-				break;
-			case Keys.D:
-				renderer.getCamera().translate(1, 0, 0);
 				break;
 			
 			// Pause / options menu
