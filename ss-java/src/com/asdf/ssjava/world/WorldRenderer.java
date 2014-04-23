@@ -557,6 +557,7 @@ public class WorldRenderer {
 			}
 			
 			if (selectedEntity != null) {
+				// TODO issue...
 				sr.begin(ShapeType.Line);
 				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
 				sr.end();

@@ -202,47 +202,47 @@ public class LevelCreator implements Screen {
 	protected void addEntity(AbstractEntity e) {
 		if (e instanceof Asteroid) {
 			Asteroid a = new Asteroid(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION);
-			selectedEntity = a;
+			setSelectedEntity(a);
 			gameWorld.getObstacles().add(a);
 		}
 		else if (e instanceof SpaceRock) {
 			SpaceRock s = new SpaceRock(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION);
-			selectedEntity = s;
+			setSelectedEntity(s);
 			gameWorld.getObstacles().add(s);
 		}
 		else if (e instanceof Planet) {
 			Planet p = new Planet(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Planet.DEFAULT_WIDTH, Planet.DEFAULT_HEIGHT, Planet.DEFAULT_ROTATION);
-			selectedEntity = p;
+			setSelectedEntity(p);
 			gameWorld.getGameChangers().add(p);
 		}
 		else if (e instanceof MagneticObject) {
 			MagneticObject m = new MagneticObject(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), MagneticObject.DEFAULT_WIDTH, MagneticObject.DEFAULT_HEIGHT, MagneticObject.DEFAULT_ROTATION);
-			selectedEntity = m;
+			setSelectedEntity(m);
 			gameWorld.getGameChangers().add(m);
 		}
 		else if (e instanceof Sun) {
 			Sun s = new Sun(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Sun.DEFAULT_WIDTH, Sun.DEFAULT_HEIGHT, Sun.DEFAULT_ROTATION);
-			selectedEntity = s;
+			setSelectedEntity(s);
 			gameWorld.getGameChangers().add(s);
 		}
 		else if (e instanceof EnemyType1) {
 			EnemyType1 e1 = new EnemyType1(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION);
-			selectedEntity = e1;
+			setSelectedEntity(e1);
 			gameWorld.getEnemies().add(e1);
 		}
 		else if (e instanceof PowerupHealthUp) {
 			PowerupHealthUp h = new PowerupHealthUp(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION);
-			selectedEntity = h;
+			setSelectedEntity(h);
 			gameWorld.getPowerups().add(h);
 		}
 		else if (e instanceof PowerupSpeedOfLight) {
 			PowerupSpeedOfLight s = new PowerupSpeedOfLight(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
-			selectedEntity = s;
+			setSelectedEntity(s);
 			gameWorld.getPowerups().add(s);
 		}
 		else if (e instanceof Points) {
 			Points p = new Points(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
-			selectedEntity = p;
+			setSelectedEntity(p);
 			gameWorld.getPowerups().add(p);
 		}
 		Gdx.app.log(SSJava.LOG, "Added new " + e.toString());
@@ -254,6 +254,7 @@ public class LevelCreator implements Screen {
 	public void setSelectedEntity(AbstractEntity e) {
 		selectedEntity = e;
 		renderer.setSelectedEntity(e);
+		Gdx.app.log(SSJava.LOG, "Selected entity: " + e.toString() + " " + Integer.toHexString(e.hashCode()));
 	}
 	
 	/**
@@ -270,6 +271,7 @@ public class LevelCreator implements Screen {
 		else if (selectedEntity instanceof Powerup) {
 			gameWorld.getPowerups().removeValue((Powerup) selectedEntity, true);
 		}
+		selectedEntity = null;
 	}
 	
 	
@@ -350,22 +352,25 @@ public class LevelCreator implements Screen {
 			// Select the entity
 			for (Obstacle o: gameWorld.getObstacles()) {
 				if (isClickOnEntity(o, screenX, screenY)) {
-					selectedEntity = o;
-					Gdx.app.log(SSJava.LOG, "Selected entity: " + o.toString() + " " + Integer.toHexString(o.hashCode()));
+					setSelectedEntity(o);
 					return true;
 				}
 			}
 			for (Enemy e: gameWorld.getEnemies()) {
 				if (isClickOnEntity(e, screenX, screenY)) {
-					selectedEntity = e;
-					Gdx.app.log(SSJava.LOG, "Selected entity: " + e.toString() + " " + Integer.toHexString(e.hashCode()));
+					setSelectedEntity(e);
 					return true;
 				}
 			}
 			for (Powerup p: gameWorld.getPowerups()) {
 				if (isClickOnEntity(p, screenX, screenY)) {
-					selectedEntity = p;
-					Gdx.app.log(SSJava.LOG, "Selected entity: " + p.toString() + " " + Integer.toHexString(p.hashCode()));
+					setSelectedEntity(p);
+					return true;
+				}
+			}
+			for (Obstacle g: gameWorld.getGameChangers()) {
+				if (isClickOnEntity(g, screenX, screenY)) {
+					setSelectedEntity(g);
 					return true;
 				}
 			}
