@@ -3,13 +3,12 @@
  */
 package com.asdf.ssjava.entities;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
-
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -159,12 +158,27 @@ public class Ship extends MoveableEntity {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 			
+			Camera cam = gameWorld.getRenderer().getCamera();
+			// Edge of screen collision	
+			float screenTop = cam.position.y + cam.viewportHeight / 2;
+			float screenBottom = cam.position.y - cam.viewportHeight / 2;
+			
 			// Key input
 			if (Gdx.input.isKeyPressed(Keys.W)) {
-				getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+				if (!(getPosition().y + getHeight() / 2 >= (screenTop))) {
+					getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+				}
+				else {
+					getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+				}
 			}
 			else if (Gdx.input.isKeyPressed(Keys.S)) {
-				getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
+				if (!(getPosition().y - getHeight() / 2 <= screenBottom)) {					
+					getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
+				}
+				else {
+					getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+				}
 			}
 			
 			
