@@ -19,8 +19,10 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Menu GUI
 - Powerups
 - Hitbox shapes
+- Game changers (planet, sun, magnetic object)
 - Level design
 - Game HUD (life, progress, score)
+- All sounds
 
 ####Complete
 - Ship movement (completed DD/MM)
