@@ -100,15 +100,6 @@ public class Planet extends Obstacle {
 		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Obstacle#getDEFAULT_VELOCITY()
-	 */
-	@Override
-	public Vector2 getDEFAULT_VELOCITY() {
-		return DEFAULT_VELOCITY;
-	}
 	
 	public double gravitationnalPull(long mass, long distance){
 		double force;

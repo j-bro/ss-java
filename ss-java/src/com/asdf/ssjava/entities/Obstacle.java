@@ -43,8 +43,5 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	public String toString() {
 		return "Abstract Obstacle";
-	}
-
-	public abstract Vector2 getDEFAULT_VELOCITY();
-	
+	}	
 }

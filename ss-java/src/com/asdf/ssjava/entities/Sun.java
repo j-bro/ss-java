@@ -25,11 +25,8 @@ public class Sun extends Obstacle{
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Obstacle#getDEFAULT_VELOCITY()
 	 */
 	@Override
-	public Vector2 getDEFAULT_VELOCITY() {
-		return DEFAULT_VELOCITY;
 	}
 	
 	/*

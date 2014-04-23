@@ -76,14 +76,6 @@ public class SpaceRock extends Obstacle {
 		setHealth(DEFAULT_HEALTH);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Obstacle#getDEFAULT_VELOCITY()
-	 */
-	@Override
-	public Vector2 getDEFAULT_VELOCITY() {
-		return DEFAULT_VELOCITY;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
