@@ -123,7 +123,10 @@ public class SplashScreen implements Screen {
 		assetManager.load("data/textures/bullet_strip.png", Texture.class);
 		assetManager.load("data/textures/health_up.png", Texture.class);
 		assetManager.load("data/textures/speed_of_light.png", Texture.class);
+		assetManager.load("data/textures/points.png", Texture.class);
 		assetManager.load("data/textures/planet.png", Texture.class);
+		assetManager.load("data/textures/sun.png", Texture.class);
+		assetManager.load("data/textures/magnetic_object.png", Texture.class);
 		
 		assetManager.load("data/textures/heart_full.png", Texture.class);
 		assetManager.load("data/textures/heart_empty.png", Texture.class);

@@ -3,7 +3,9 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -29,7 +31,7 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		if (this instanceof Planet) {			
+		if (this instanceof Planet || this instanceof MagneticObject || this instanceof Sun) {			
 			gameWorld.getLevel().gameChangers.removeValue(this, true);
 		}
 		else {

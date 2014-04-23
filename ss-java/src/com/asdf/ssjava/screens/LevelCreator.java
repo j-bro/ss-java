@@ -8,12 +8,15 @@ import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.MagneticObject;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Planet;
+import com.asdf.ssjava.entities.Points;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.SpaceRock;
+import com.asdf.ssjava.entities.Sun;
 import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
@@ -76,10 +79,13 @@ public class LevelCreator implements Screen {
 		entityTypes = new Array<AbstractEntity>() {{
 			add(new Asteroid());
 			add(new SpaceRock());
+			add(new Planet());
+			add(new Sun());
+			add(new MagneticObject());
 			add(new EnemyType1());
 			add(new PowerupHealthUp());
 			add(new PowerupSpeedOfLight());
-			add(new Planet());
+			add(new Points());
 		}};
 		
 		
@@ -207,7 +213,17 @@ public class LevelCreator implements Screen {
 		else if (e instanceof Planet) {
 			Planet p = new Planet(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Planet.DEFAULT_WIDTH, Planet.DEFAULT_HEIGHT, Planet.DEFAULT_ROTATION);
 			selectedEntity = p;
-			gameWorld.getObstacles().add(p);
+			gameWorld.getGameChangers().add(p);
+		}
+		else if (e instanceof MagneticObject) {
+			MagneticObject m = new MagneticObject(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), MagneticObject.DEFAULT_WIDTH, MagneticObject.DEFAULT_HEIGHT, MagneticObject.DEFAULT_ROTATION);
+			selectedEntity = m;
+			gameWorld.getGameChangers().add(m);
+		}
+		else if (e instanceof Sun) {
+			Sun s = new Sun(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Sun.DEFAULT_WIDTH, Sun.DEFAULT_HEIGHT, Sun.DEFAULT_ROTATION);
+			selectedEntity = s;
+			gameWorld.getGameChangers().add(s);
 		}
 		else if (e instanceof EnemyType1) {
 			EnemyType1 e1 = new EnemyType1(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION);
@@ -215,12 +231,17 @@ public class LevelCreator implements Screen {
 			gameWorld.getEnemies().add(e1);
 		}
 		else if (e instanceof PowerupHealthUp) {
-			PowerupHealthUp p = new PowerupHealthUp(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION);
-			selectedEntity = p;
-			gameWorld.getPowerups().add(p);
+			PowerupHealthUp h = new PowerupHealthUp(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION);
+			selectedEntity = h;
+			gameWorld.getPowerups().add(h);
 		}
 		else if (e instanceof PowerupSpeedOfLight) {
-			PowerupSpeedOfLight p = new PowerupSpeedOfLight(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
+			PowerupSpeedOfLight s = new PowerupSpeedOfLight(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
+			selectedEntity = s;
+			gameWorld.getPowerups().add(s);
+		}
+		else if (e instanceof Points) {
+			Points p = new Points(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
 			selectedEntity = p;
 			gameWorld.getPowerups().add(p);
 		}

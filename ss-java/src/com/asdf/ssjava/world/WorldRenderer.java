@@ -12,13 +12,16 @@ import com.asdf.ssjava.entities.BulletType0;
 import com.asdf.ssjava.entities.BulletType1;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.EnemyType1;
+import com.asdf.ssjava.entities.MagneticObject;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Planet;
+import com.asdf.ssjava.entities.Points;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.SpaceRock;
+import com.asdf.ssjava.entities.Sun;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -90,13 +93,16 @@ public class WorldRenderer {
 	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
 	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
 	Texture speedOfLightTexture, healthUpTexture;
-	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture;
-	Texture planetTexture;
+	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture, pointsTexture;
+	Texture planetTexture, sunTexture, magneticObjectTexture;
 	
 	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, emptyHeartImage1, emptyHeartImage2, emptyHeartImage3, halfHeartImage;
 	Texture fullHeartTexture, emptyHeartTexture, halfHeartTexture;
 	
-	Image asteroidImage, spaceRockImage, enemyType1Image, planetImage, powerupHealthUpImage, powerupSpeedOfLightImage;
+	Image asteroidImage, spaceRockImage;
+	Image enemyType1Image;
+	Image planetImage, sunImage, magneticObjectImage;
+	Image powerupHealthUpImage, powerupSpeedOfLightImage, pointsImage;
 	
 	/**
 	 * The entity type to add to the level
@@ -158,8 +164,17 @@ public class WorldRenderer {
 		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/speed_of_light.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
+		pointsTexture = game.assetManager.get("data/textures/points.png", Texture.class);
+		pointsTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		planetTexture = game.assetManager.get("data/textures/planet.png", Texture.class);
 		planetTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		sunTexture = game.assetManager.get("data/textures/sun.png", Texture.class);
+		sunTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		magneticObjectTexture = game.assetManager.get("data/textures/magnetic_object.png", Texture.class);
+		magneticObjectTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
@@ -222,30 +237,39 @@ public class WorldRenderer {
 			asteroidImage = new Image(asteroidTexture);
 			spaceRockImage = new Image(spaceRockTexture);
 			planetImage = new Image(planetTexture);
+			sunImage = new Image(sunTexture);
+			magneticObjectImage = new Image(magneticObjectTexture);
 			enemyType1Image = new Image(enemyType1Texture);
 			powerupHealthUpImage = new Image(powerupHealthUpTexture);
 			powerupSpeedOfLightImage = new Image(powerupSpeedOfLightTexture);
+			pointsImage = new Image(pointsTexture);
 			
 			int imageScale = 70;
 			
 			asteroidImage.setBounds(10, 10, imageScale * 2, imageScale);
 			spaceRockImage.setBounds(10, 10, imageScale, imageScale);
 			planetImage.setBounds(10, 10, imageScale, imageScale);
+			sunImage.setBounds(10, 10, imageScale, imageScale);
+			magneticObjectImage.setBounds(10, 10, imageScale, imageScale);
 			enemyType1Image.setBounds(10, 10, imageScale * 2, imageScale);
 			enemyType1Image.setOrigin(enemyType1Image.getWidth() / 2, enemyType1Image.getHeight() / 2);
 			enemyType1Image.setRotation(180);
 			powerupHealthUpImage.setBounds(10, 10, imageScale, imageScale);
 			powerupSpeedOfLightImage.setBounds(10, 10, imageScale * 2, imageScale);
+			pointsImage.setBounds(10, 10, imageScale, imageScale);
 			
 			stage.addActor(asteroidImage);
 			stage.addActor(spaceRockImage);
 			stage.addActor(planetImage);
+			stage.addActor(sunImage);
+			stage.addActor(magneticObjectImage);
 			stage.addActor(enemyType1Image);
 			stage.addActor(powerupHealthUpImage);
 			stage.addActor(powerupSpeedOfLightImage);
+			stage.addActor(pointsImage);
 			
 			if (SSJava.DEBUG) {
-				// To draw around selected entity
+				// TODO To draw around selected entity
 				sr = new ShapeRenderer();
 				sr.setProjectionMatrix(cam.combined);
 			}
@@ -436,55 +460,106 @@ public class WorldRenderer {
 				asteroidImage.setVisible(true);
 				spaceRockImage.setVisible(false);
 				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
 			}
 			else if (entityToAdd instanceof SpaceRock) {
 				asteroidImage.setVisible(false);
 				spaceRockImage.setVisible(true);
 				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
 			}
 			else if (entityToAdd instanceof Planet) {
 				asteroidImage.setVisible(false);
 				spaceRockImage.setVisible(false);
 				planetImage.setVisible(true);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
+			}
+			else if (entityToAdd instanceof Sun) {
+				asteroidImage.setVisible(false);
+				spaceRockImage.setVisible(false);
+				planetImage.setVisible(false);
+				sunImage.setVisible(true);
+				magneticObjectImage.setVisible(false);
+				enemyType1Image.setVisible(false);
+				powerupHealthUpImage.setVisible(false);
+				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
+			}
+			else if (entityToAdd instanceof MagneticObject) {
+				asteroidImage.setVisible(false);
+				spaceRockImage.setVisible(false);
+				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(true);
+				enemyType1Image.setVisible(false);
+				powerupHealthUpImage.setVisible(false);
+				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
 			}
 			else if (entityToAdd instanceof EnemyType1) {
 				asteroidImage.setVisible(false);
 				spaceRockImage.setVisible(false);
 				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(true);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
 			}
 			else if (entityToAdd instanceof PowerupHealthUp) {
 				asteroidImage.setVisible(false);
 				spaceRockImage.setVisible(false);
 				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(true);
 				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(false);
 			}
 			else if (entityToAdd instanceof PowerupSpeedOfLight) {
 				asteroidImage.setVisible(false);
 				spaceRockImage.setVisible(false);
 				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
 				enemyType1Image.setVisible(false);
 				powerupHealthUpImage.setVisible(false);
 				powerupSpeedOfLightImage.setVisible(true);
-				
-				if (selectedEntity != null) {
-					sr.begin(ShapeType.Line);
-					sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
-					sr.end();
-				}
+				pointsImage.setVisible(false);
+			}
+			else if (entityToAdd instanceof Points) {
+				asteroidImage.setVisible(false);
+				spaceRockImage.setVisible(false);
+				planetImage.setVisible(false);
+				sunImage.setVisible(false);
+				magneticObjectImage.setVisible(false);
+				enemyType1Image.setVisible(false);
+				powerupHealthUpImage.setVisible(false);
+				powerupSpeedOfLightImage.setVisible(false);
+				pointsImage.setVisible(true);
+			}
+			
+			if (selectedEntity != null) {
+				sr.begin(ShapeType.Line);
+				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
+				sr.end();
 			}		
 		}
 		
@@ -548,8 +623,17 @@ public class WorldRenderer {
 		else if (e instanceof PowerupSpeedOfLight) {
 			return powerupSpeedOfLightTexture;
 		}
+		else if (e instanceof Points) {
+			return pointsTexture;
+		}
 		else if (e instanceof Planet) {
 			return planetTexture;
+		}
+		else if (e instanceof Sun) {
+			return sunTexture;
+		}
+		else if (e instanceof MagneticObject) {
+			return magneticObjectTexture;
 		}
 		else if (e instanceof BulletType0) {
 			return bulletType0Texture;

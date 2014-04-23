@@ -52,7 +52,7 @@ public class Planet extends Obstacle {
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
-	 * The gravitationnal constant
+	 * The gravitational constant
 	 */
 	public static final double GRAVITATIONNAL_CONSTANT = 6.67;
 
@@ -82,10 +82,10 @@ public class Planet extends Obstacle {
 	}
 	
 	/**
-	 * TODO Constructor for serialization
+	 * Constructor for serialization
 	 */
 	public Planet() {
-		super(new Vector2(0, 0), DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
+		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
 	
@@ -101,6 +101,12 @@ public class Planet extends Obstacle {
 		setHealth(DEFAULT_HEALTH);
 	}
 	
+	/**
+	 * 
+	 * @param mass
+	 * @param distance
+	 * @return
+	 */
 	public double gravitationnalPull(long mass, long distance){
 		double force;
 		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT_MOD * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
@@ -131,7 +137,6 @@ public class Planet extends Obstacle {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
 		

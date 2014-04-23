@@ -127,7 +127,7 @@ public class GameWorld {
 		this.game = game;
 		this.worldType = worldType;
 		
-		// TODO Box2D stuff
+		// Box2D stuff
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
@@ -158,52 +158,6 @@ public class GameWorld {
 				g.createDef();
 			}
 		}
-		
-		
-		/*
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (j % 2 == 0) {					
-					Obstacle o = new SpaceRock(new Vector2(50 * i + 25, 2.5f + j * 10), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION, this, box2DWorld);
-					o.getBody().setLinearVelocity(SpaceRock.DEFAULT_VELOCITY);
-					level.obstacles.add(o);
-				}
-				else {
-					Obstacle o = new Asteroid(new Vector2(50 * i + 50, 2.5f + j * 10), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION, this, box2DWorld);
-					o.getBody().setLinearVelocity(Asteroid.DEFAULT_VELOCITY);
-					level.obstacles.add(o);
-				}
-			}
-		}
-		for (int i = 0; i < 10; i++){
-			for (int j = 0; j < 2; j++){
-				Powerup p = new PowerupSpeedOfLight(new Vector2(200 * i, 4 + 10 * j), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION, this, box2DWorld);
-				p.getBody().setLinearVelocity(PowerupSpeedOfLight.DEFAULT_VELOCITY);
-				level.powerups.add(p);
-				p = new PowerupHealthUp(new Vector2(100 * i - 10, 7 * j + 15), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION, this, box2DWorld);
-				p.getBody().setLinearVelocity(PowerupHealthUp.DEFAULT_VELOCITY);
-				level.powerups.add(p);
-			}
-		}
-		
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 3; j++) {
-				Enemy e = new EnemyType1(new Vector2(50 * (i + 1), 10 * (j + 1)), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION, this, box2DWorld);
-				e.getBody().setLinearVelocity(EnemyType1.DEFAULT_VELOCITY);
-				level.enemies.add(e);
-			}
-		}
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 1; j++) {
-				Planet p = new Planet(new Vector2(250 * i + 100, 40 + j * 50), Planet.DEFAULT_WIDTH, Planet.DEFAULT_HEIGHT, Planet.DEFAULT_ROTATION, this, box2DWorld);
-				p.getBody().setLinearVelocity(Planet.DEFAULT_VELOCITY);
-				level.gameChangers.add(p);
-			}
-		}
-		*/
-		
-		
-//		exportLevel(levelPath);
 		
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
@@ -331,6 +285,7 @@ public class GameWorld {
 	}
 	
 	/**
+	 * 
 	 * @return the bullets array
 	 */
 	public Array<Bullet> getBullets() {
@@ -343,6 +298,14 @@ public class GameWorld {
 	 */
 	public Array<Powerup> getPowerups() {
 		return level.powerups;
+	}
+	
+	/**
+	 * 
+	 * @return the gameChangers array
+	 */
+	public Array<Obstacle> getGameChangers() {
+		return level.gameChangers;
 	}
 	
 	/**

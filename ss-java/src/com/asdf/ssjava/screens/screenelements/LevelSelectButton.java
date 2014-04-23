@@ -41,7 +41,6 @@ public class LevelSelectButton extends TextButton {
 		
 		this.game = button.game;
 		this.text = button.text;
-		this.levelPath = levelPath;
 		
 		setWidth(button.getWidth());
 		setHeight(button.getHeight());
