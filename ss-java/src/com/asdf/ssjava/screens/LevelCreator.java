@@ -262,8 +262,11 @@ public class LevelCreator implements Screen {
 	 * @param selectedEntity
 	 */
 	public void removeEntity(AbstractEntity selectedEntity) {
-		if (selectedEntity instanceof Obstacle) {
+		if (selectedEntity instanceof SpaceRock || selectedEntity instanceof Asteroid) {
 			gameWorld.getObstacles().removeValue((Obstacle) selectedEntity, true);
+		}
+		if (selectedEntity instanceof Planet || selectedEntity instanceof Sun || selectedEntity instanceof MagneticObject) {
+			gameWorld.getGameChangers().removeValue((Obstacle) selectedEntity, true);
 		}
 		else if (selectedEntity instanceof Enemy) {
 			gameWorld.getEnemies().removeValue((Enemy) selectedEntity, true);
