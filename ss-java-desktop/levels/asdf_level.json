@@ -1,0 +1,108 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 142.29999,
+			y: 42.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 108.2,
+			y: -2.4500008
+		}
+	}
+],
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 39.4,
+			y: 29.55
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 63,
+			y: 23
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 63,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 63,
+			y: 13
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 63,
+			y: 28
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 71,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 71,
+			y: 23
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 71,
+			y: 13
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 71,
+			y: 28
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 71,
+			y: 8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 63,
+			y: 8
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 167.7,
+			y: 31.15
+		}
+	}
+]
+}
