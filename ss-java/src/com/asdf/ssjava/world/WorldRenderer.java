@@ -312,12 +312,10 @@ public class WorldRenderer {
 		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 			
 		}
-
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		
 		batch.begin();
-		
 		/* TODO simpler rendering
 		Array<Body> bodiesArray = new Array<Body>();
 		gameWorld.box2DWorld.getBodies(bodiesArray);
@@ -375,7 +373,6 @@ public class WorldRenderer {
 		if (ship.isVisible()) {
 			batch.draw(shipTexture, ship.getPosition().x - ship.getWidth() / 2, ship.getPosition().y - ship.getHeight() / 2, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 		}
-			
 		batch.end();
 		
 		// game HUD
@@ -558,6 +555,7 @@ public class WorldRenderer {
 			
 			if (selectedEntity != null) {
 				// TODO issue...
+				sr.setProjectionMatrix(cam.combined);
 				sr.begin(ShapeType.Line);
 				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
 				sr.end();
