@@ -28,12 +28,18 @@ import com.badlogic.gdx.utils.Timer.Task;
  */
 public class GameCollisionListener implements ContactListener {
 
+	/**
+	 * The world instance
+	 */
 	GameWorld gameWorld;
 	
+	/**
+	 * 
+	 * @param gameWorld
+	 */
 	public GameCollisionListener(GameWorld gameWorld) {
 		this.gameWorld = gameWorld;
 	}
-	
 	
 	/*
 	 * (non-Javadoc)
@@ -59,14 +65,16 @@ public class GameCollisionListener implements ContactListener {
 			Ship ship = (Ship) body1.getUserData();
 			if (body2.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
-				// TODO powerup sound
+				// TODO AudioPlayer.healthUp();
 			}
 			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
+				// TODO AudioPlayer.speedOfLight();
 			}
 			else {
-				if (((Ship) body1.getUserData()).isLightSpeedEnabled()) {
-					// TODO remove other
+				// Kill other entities in light speed
+				if (ship.isLightSpeedEnabled()) {
+					((AbstractEntity) body2.getUserData()).setHealth(0);
 				}
 				AudioPlayer.shipImpact();
 			}
@@ -76,17 +84,20 @@ public class GameCollisionListener implements ContactListener {
 			Ship ship = (Ship) body2.getUserData();
 			if (body1.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
+				// TODO AudioPlayer.healthUp();
 			}
 			else if (body1.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
+				// TODO AudioPlayer.speedOfLight();
 			}
 			else {
+				// Kill other entities in light speed
+				if (ship.isLightSpeedEnabled()) {
+					((AbstractEntity) body1.getUserData()).setHealth(0);
+				}
 				AudioPlayer.shipImpact();
 			}
-		}
-		
-		// TODO ship lightspeed mode
-			
+		}			
 	}
 	
 	/**
