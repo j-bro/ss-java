@@ -65,12 +65,17 @@ public class LevelCreator implements Screen {
 	SpriteBatch batch;
 	
 	/**
+	 * True if the level has been modified since it was last saved
+	 */
+	private boolean levelModified;
+	
+	/**
 	 * Default constructor
 	 * @param game the game instance
 	 */
-	public LevelCreator(SSJava game) {
+	public LevelCreator(SSJava game, String levelPath) {
 		this.game = game;
-		gameWorld = new GameWorld(game, GameWorld.CREATOR_TYPE, null);
+		gameWorld = new GameWorld(game, GameWorld.CREATOR_TYPE, levelPath, this);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new LevelCreatorInput());
@@ -92,6 +97,8 @@ public class LevelCreator implements Screen {
 		renderer.setEntityToAdd(entityTypes.get(0)); 
 		
 		batch = new SpriteBatch();
+		
+		levelModified = false;
 	}
 
 	/*
@@ -245,7 +252,8 @@ public class LevelCreator implements Screen {
 			setSelectedEntity(p);
 			gameWorld.getPowerups().add(p);
 		}
-		Gdx.app.log(SSJava.LOG, "Added new " + e.toString());
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Added new " + e.toString() + Integer.toHexString(e.hashCode()));
+		levelModified = true;
 	}
 	
 	/**
@@ -264,17 +272,23 @@ public class LevelCreator implements Screen {
 	public void removeEntity(AbstractEntity selectedEntity) {
 		if (selectedEntity instanceof SpaceRock || selectedEntity instanceof Asteroid) {
 			gameWorld.getObstacles().removeValue((Obstacle) selectedEntity, true);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Removed obstacle " + Integer.toHexString(selectedEntity.hashCode()));
 		}
 		if (selectedEntity instanceof Planet || selectedEntity instanceof Sun || selectedEntity instanceof MagneticObject) {
 			gameWorld.getGameChangers().removeValue((Obstacle) selectedEntity, true);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Removed game changer " + Integer.toHexString(selectedEntity.hashCode()));
 		}
 		else if (selectedEntity instanceof Enemy) {
 			gameWorld.getEnemies().removeValue((Enemy) selectedEntity, true);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Removed Enemy " + Integer.toHexString(selectedEntity.hashCode()));
 		}
 		else if (selectedEntity instanceof Powerup) {
 			gameWorld.getPowerups().removeValue((Powerup) selectedEntity, true);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Removed powerup " + Integer.toHexString(selectedEntity.hashCode()));
 		}
+		
 		selectedEntity = null;
+		levelModified = true;
 	}
 	
 	
@@ -284,6 +298,20 @@ public class LevelCreator implements Screen {
 	public GameWorld getGameWorld() {
 		return gameWorld;
 	}
+	
+	/**
+	 * @return the levelModified
+	 */
+	public boolean isLevelModified() {
+		return levelModified;
+	}
+	/**
+	 * @param levelModified the levelModified to set
+	 */
+	public void setLevelModified(boolean levelModified) {
+		this.levelModified = levelModified;
+	}
+
 
 	/**
 	 * Input manager for level creator
@@ -392,6 +420,7 @@ public class LevelCreator implements Screen {
 				Vector3 v = new Vector3(screenX, screenY, 0);
 				renderer.getCamera().unproject(v);
 				selectedEntity.setPosition(new Vector2(v.x, v.y));
+				levelModified = true;
 				return true;			
 			}
 			return false;
@@ -415,11 +444,13 @@ public class LevelCreator implements Screen {
 		 * @return
 		 */
 		public boolean isClickOnEntity(AbstractEntity e, float screenX, float screenY) {
-			Vector3 v = new Vector3(screenX, screenY, 0);
-			renderer.getCamera().unproject(v);
-			Vector2 op = e.getPosition();
-			if (v.x >= op.x - e.getWidth() / 2 && v.x <= op.x + e.getWidth() / 2 && v.y >= op.y - e.getHeight() / 2 && v.y <= op.y + e.getHeight() / 2) {
-				return true;
+			if (e != null) {				
+				Vector3 v = new Vector3(screenX, screenY, 0);
+				renderer.getCamera().unproject(v);
+				Vector2 op = e.getPosition();
+				if (v.x >= op.x - e.getWidth() / 2 && v.x <= op.x + e.getWidth() / 2 && v.y >= op.y - e.getHeight() / 2 && v.y <= op.y + e.getHeight() / 2) {
+					return true;
+				}
 			}
 			return false;
 		}

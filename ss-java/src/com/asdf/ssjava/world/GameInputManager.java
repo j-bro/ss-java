@@ -52,7 +52,7 @@ public class GameInputManager implements InputProcessor {
 				ship.fire();
 				break;
 			case Keys.ESCAPE:
-				gameWorld.pauseGame(); 
+				gameWorld.pauseGame();
 				break;
 			case Keys.ENTER: // for testing enemy firing
 				if (SSJava.DEBUG) {

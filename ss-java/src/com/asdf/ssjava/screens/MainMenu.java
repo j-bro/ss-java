@@ -39,7 +39,7 @@ public class MainMenu implements Screen {
 	MenuButton creditsButton;
 	MenuButton exitButton;
 	
-	MenuButton debugButton;
+	MenuButton creatorButton;
 	
 	Screen thisMainMenu = this;
 	
@@ -230,11 +230,10 @@ public class MainMenu implements Screen {
 		
 		// Level creator access button
 		if (SSJava.DEBUG) {
-			debugButton = new MenuButton("Level creator", 280, 65, game);
-			debugButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
-			debugButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 260);
-			
-			debugButton.addListener(new InputListener() {
+			creatorButton = new MenuButton("Level creator", 280, 65, game);
+			creatorButton.setX(Gdx.graphics.getWidth() / 2 - creatorButton.getWidth() / 2);
+			creatorButton.setY(Gdx.graphics.getHeight() / 2 - creatorButton.getHeight() / 2 - 260);
+			creatorButton.addListener(new InputListener() {
 				/*
 				 * (non-Javadoc)
 				 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
@@ -250,11 +249,11 @@ public class MainMenu implements Screen {
 				 */
 				public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 					Gdx.app.log(SSJava.LOG, "Level creator button up");
-					game.setScreen(new LevelCreator(game));
+					game.setScreen(new LevelCreator(game, null));
 				}
 			});
 			
-			stage.addActor(debugButton);
+			stage.addActor(creatorButton);
 		}
 	}
  

@@ -1,11 +1,16 @@
 package com.asdf.ssjava.screens;
 
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,10 +41,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 	/**
 	 * Buttons
 	 */
-	MenuButton backButton;
-	MenuButton testButton;
-	MenuButton saveButton;
-	MenuButton exitButton;
+	MenuButton backButton, testButton, saveButton, loadButton, exitButton;
 	
 	Label titleLabel;
 	
@@ -97,12 +99,12 @@ public class LevelCreatorOptionsMenu implements Screen {
 		// Return to creator button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
+		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 150);
 		
 		// Test level button
 		testButton = new MenuButton("Test level", 280, 65, game);
 		testButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-		testButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 50);
+		testButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
 		testButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -127,8 +129,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 		
 		// Save level button
 		saveButton = new MenuButton("Save level", 280, 65, game);
-		saveButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-		saveButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
+		saveButton.setX(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2);
+		saveButton.setY(Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 - 50);
 		saveButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -146,10 +148,44 @@ public class LevelCreatorOptionsMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Save button up");
 				game.setScreen(new LevelSaveMenu(game, thisLevelCreatorOptions));
-//				((LevelCreator) referrer).getGameWorld().exportLevel("");
 				}
 			});
 		
+		// Load level button
+		loadButton = new MenuButton("Load level", 280, 65, game);
+		loadButton.setX(Gdx.graphics.getWidth() / 2 - loadButton.getWidth() / 2);
+		loadButton.setY(Gdx.graphics.getHeight() / 2 - loadButton.getHeight() / 2 - 150);
+		loadButton.addListener(new InputListener() {
+					/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Load button down");
+				return true;
+			}
+			
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Load button up");
+				
+				// File selection
+				if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+					JFileChooser chooser = new JFileChooser("levels");
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON level files", "json");
+					chooser.setFileFilter(filter);
+					int returnVal = chooser.showOpenDialog(new JPanel());
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						String levelPath = chooser.getSelectedFile().getPath();
+						game.setScreen(new LevelCreator(game, levelPath));
+					}
+				}				
+			}
+		});
+
 		// Exit to main menu button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
@@ -185,6 +221,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 		stage.addActor(backButton);
 		stage.addActor(testButton);
 		stage.addActor(saveButton);
+		stage.addActor(loadButton);
 		stage.addActor(exitButton);
 		stage.addActor(titleLabel);
 	}

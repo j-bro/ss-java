@@ -285,6 +285,7 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
 			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
@@ -553,13 +554,13 @@ public class WorldRenderer {
 				pointsImage.setVisible(true);
 			}
 			
-			if (selectedEntity != null) {
+			sr.setProjectionMatrix(cam.combined);
 				// TODO issue...
-				sr.setProjectionMatrix(cam.combined);
+			if (selectedEntity != null) {
 				sr.begin(ShapeType.Line);
 				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
 				sr.end();
-			}		
+			}
 		}
 		
 		// Debug renderer
@@ -572,22 +573,24 @@ public class WorldRenderer {
 				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
 				
 				// Debug info
-				debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100 + 
-						"\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000 +
-						"\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 + 
-						"\nHealth: " + ship.getHealth() + " half hearts" + 
-						"\nLight speed enabled: " + ship.isLightSpeedEnabled() + 
-						"\nDEBUG TEXT HOLDER");	
+				debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100
+						+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
+						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
+						+ "\nHealth: " + ship.getHealth() + " half hearts"
+						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
+						+ "\nDEBUG TEXT HOLDER"	
+						+ "\nDEBUG TEXT HOLDER");	
 			}
 			
 			else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 				// Debug info
-				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 + 
-						"\nMove camera: A & D " + 
-						"\nCycle entities: X & C" +  
-						"\nAdd/remove entities: V & Z" + 
-						"\nMove entities: arrows & mouse" +
-						"\nOptions menu: ESC");
+				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 
+						+ "\nMove camera: A & D "
+						+ "\nCycle entities: X & C" 
+						+ "\nAdd/remove entities: V & Z" 
+						+ "\nMove entities: arrows & mouse"
+						+ "\nOptions menu: ESC"
+						+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());
 			}
 		}
 		

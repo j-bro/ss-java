@@ -169,7 +169,9 @@ public class LevelSaveMenu implements Screen {
 		if (!(name.substring(name.length() - 5).equalsIgnoreCase(".json"))) {
 			name += ".json";
 		}
-		((LevelCreator) ((LevelCreatorOptionsMenu) referrer).getReferrer()).gameWorld.exportLevel("levels/" + name);
+		LevelCreator creator = ((LevelCreator) ((LevelCreatorOptionsMenu) referrer).getReferrer());
+		creator.gameWorld.exportLevel("levels/" + name);
+		creator.setLevelModified(false);
 	}
 	
 	/*
