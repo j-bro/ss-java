@@ -158,10 +158,34 @@ public class Ship extends MoveableEntity {
 				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 			}
 			
-			Camera cam = gameWorld.getRenderer().getCamera();
 			// Edge of screen collision	
+			Camera cam = gameWorld.getRenderer().getCamera();
 			float screenTop = cam.position.y + cam.viewportHeight / 2;
 			float screenBottom = cam.position.y - cam.viewportHeight / 2;
+			float screenLeft = cam.position.x - cam.viewportWidth / 2;
+			float screenRight = cam.position.x + cam.viewportWidth / 2;
+			
+			if (getPosition().y + getHeight() / 2 >= (screenTop)) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
+				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+				getBody().getPosition().y = screenTop - getHeight() / 2;
+			}
+			else if (getPosition().y - getHeight() / 2 <= screenBottom) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
+				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+				getBody().getPosition().y = screenBottom + getHeight() / 2;
+			}
+			else if (getPosition().x + getWidth() / 2 >= screenRight) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+				getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
+				getBody().getPosition().x = screenRight - getWidth() / 2;
+			}
+			
+			else if (getPosition().x - getWidth() / 2 <= screenLeft) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+				getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
+				getBody().getPosition().x = screenRight + getWidth() / 2;
+			}	
 			
 			// Key input
 			if (Gdx.input.isKeyPressed(Keys.W)) {

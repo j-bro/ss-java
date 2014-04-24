@@ -201,16 +201,6 @@ public class GameWorld {
 			for (Body b: deadBodies) {
 				box2DWorld.destroyBody(b);
 			}
-			
-			
-			// Edge of screen collision
-			float screenLeft = renderer.cam.position.x - renderer.cam.viewportWidth / 2;
-			float screenRight = renderer.cam.position.x + renderer.cam.viewportWidth / 2;
-			
-			if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
-				Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
-				ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
-			}
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
