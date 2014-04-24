@@ -19,7 +19,7 @@ public class Planet extends Obstacle {
 	/**
 	 * The planet's default velocity (static)
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-3, -1);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-3, 0);
 	
 	/**
 	 * The entity's starting health
