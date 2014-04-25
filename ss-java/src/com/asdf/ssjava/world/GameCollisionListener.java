@@ -98,7 +98,7 @@ public class GameCollisionListener implements ContactListener {
 				AudioPlayer.shipImpact();
 			}
 		}			
-	}
+		}	
 	
 	/**
 	 * Called when a bullet collides with an entity

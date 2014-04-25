@@ -6,6 +6,7 @@ package com.asdf.ssjava.entities;
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
+import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
@@ -26,6 +27,11 @@ public class Ship extends MoveableEntity {
 	 * The ship's default starting health
 	 */
 	public static final int DEFAULT_HEALTH = 6;
+	
+	/**
+	 * The WorldRenderer instance
+	 */
+	WorldRenderer renderer;
 	
 	/**
 	 * The ship's default velocity
@@ -152,64 +158,70 @@ public class Ship extends MoveableEntity {
 	 */
 	@Override
 	public void update() { 
+		
 		if (!isDead()) {
-			// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity
-			// && if the level is not complete
-			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
-				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
-					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
-				}		
-			}
-			
 			// Edge of screen collision	
-			Camera cam = gameWorld.getRenderer().getCamera();
-			float screenTop = cam.position.y + cam.viewportHeight / 2;
-			float screenBottom = cam.position.y - cam.viewportHeight / 2;
-			float screenLeft = cam.position.x - cam.viewportWidth / 2;
-			float screenRight = cam.position.x + cam.viewportWidth / 2;
-			
-			if (getPosition().y + getHeight() / 2 >= (screenTop)) {
-				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
-				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
-				getBody().getPosition().y = screenTop - getHeight() / 2;
+			renderer = gameWorld.getRenderer();
+			float screenTop = renderer.getCamera().position.y + renderer.getCamera().viewportHeight / 2;
+			float screenBottom = renderer.getCamera().position.y - renderer.getCamera().viewportHeight / 2;
+			float screenLeft = renderer.getCamera().position.x - renderer.getCamera().viewportWidth / 2;
+			float screenRight = renderer.getCamera().position.x + renderer.getCamera().viewportWidth / 2;
+				
+			//Stop the ship from going off the top of the screen
+			if (getPosition().y + getHeight() / 2 >= (screenTop)) {				
+				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	
+				getBody().getPosition().y = screenTop - getHeight()/2;
+				getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);
+				Gdx.app.log(SSJava.LOG, "TOP: " + getBody().getPosition().y);
 			}
+			//Stop the ship from going off the bottom of the screen
 			else if (getPosition().y - getHeight() / 2 <= screenBottom) {
-				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
 				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
-				getBody().getPosition().y = screenBottom + getHeight() / 2;
-			}
-			else if (getPosition().x + getWidth() / 2 >= screenRight) {
-				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
-				getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
-				getBody().getPosition().x = screenRight - getWidth() / 2;
+				getBody().getPosition().y = screenBottom + getHeight()/2;
+				getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+				Gdx.app.log(SSJava.LOG, "BOT: " + getBody().getPosition().y);
 			}
 			
-			else if (getPosition().x - getWidth() / 2 <= screenLeft) {
-				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+			//Stop the ship from going off the right or left sides of the screen
+			if (getPosition().x + getWidth() / 2 >= screenRight || getPosition().x - getWidth() / 2 <= screenLeft) {
+				Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
 				getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
-				getBody().getPosition().x = screenRight + getWidth() / 2;
-			}	
-			
+			}
 			
 			// Key input && if level is not complete
 			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
+				// TODO FIX moveable up increments
+				// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity	
+				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
+					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
+				}		
 				if (Gdx.input.isKeyPressed(Keys.W)) {
-					if (!(getPosition().y + getHeight() / 2 >= (screenTop))) {
-						getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+					//Stop the ship from going off the top of the screen when W is continuously pressed 
+					if(getPosition().y + getHeight()/2 >= screenTop) {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	
+						getBody().getPosition().y = screenTop - getHeight()/2;	
 					}
 					else {
-						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+						getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
 					}
 				}
 				else if (Gdx.input.isKeyPressed(Keys.S)) {
-					if (!(getPosition().y - getHeight() / 2 <= screenBottom)) {					
-						getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
+					//Stop the ship from going off the bottom of the screen when S is continuously pressed 
+					if(getPosition().y - getHeight()/2 <= screenBottom) {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	
+						getBody().getPosition().y = screenBottom + getHeight()/2;
 					}
 					else {
-						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+						getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);
 					}
 				}
 				
+				else if (getPosition().x - getWidth() / 2 <= screenLeft) {
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+					getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
+					getBody().getPosition().x = screenRight + getWidth() / 2;
+				}	
+			}
 				
 				float shipAngle = getBody().getAngle();
 				float mod = (float) (2 * Math.PI);
@@ -229,7 +241,6 @@ public class Ship extends MoveableEntity {
 					getBody().setAngularVelocity(0.2f * diff);
 				}	
 			}
-		}
 			
 		super.update();
 	}
