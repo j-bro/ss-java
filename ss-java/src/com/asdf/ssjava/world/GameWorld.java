@@ -333,9 +333,6 @@ public class GameWorld {
 	/**
 	 * @return renderer the associated WorldRenderer instance
 	 */
-	public WorldRenderer getRenderer() {
-	 * Get the WorldRenderer from this class
-	 */
 	public WorldRenderer getRenderer(){
 		return renderer;
 	}

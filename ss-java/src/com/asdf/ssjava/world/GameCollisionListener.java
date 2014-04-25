@@ -99,7 +99,6 @@ public class GameCollisionListener implements ContactListener {
 			}
 		}			
 		}	
-	}
 	
 	/**
 	 * Called when a bullet collides with an entity
