@@ -142,10 +142,25 @@ public class EnemyType1 extends Enemy {
 	 */
 	@Override
 	public void update() {		
-		super.update();
-		fire();
-//		TODO enemy movement getBody().getPosition().lerp(gameWorld.getShip().getPosition(), Gdx.graphics.getDeltaTime());
 		
+		float shipAngle = (float) (getBody().getAngle() - Math.PI);
+		float mod = (float) (2 * Math.PI);
+		float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+		
+		// TODO fix ship rotation
+		if (angleMod < Math.PI) {
+			float diff = angleMod;
+			getBody().setAngularVelocity(-0.2f * diff);
+		}
+		else {
+			float diff = mod - angleMod;
+			getBody().setAngularVelocity(0.2f * diff);
+		}
+		
+		
+		fire();
+		
+		super.update();
 	}
 	
 	/*

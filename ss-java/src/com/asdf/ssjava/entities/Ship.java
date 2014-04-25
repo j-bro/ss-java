@@ -157,8 +157,7 @@ public class Ship extends MoveableEntity {
 	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
 	 */
 	@Override
-	public void update() { 
-		
+	public void update() {
 		if (!isDead()) {
 			// Edge of screen collision	
 			renderer = gameWorld.getRenderer();
@@ -190,11 +189,11 @@ public class Ship extends MoveableEntity {
 			
 			// Key input && if level is not complete
 			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
-				// TODO FIX moveable up increments
 				// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity	
 				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
-				}		
+				}	
+				
 				if (Gdx.input.isKeyPressed(Keys.W)) {
 					//Stop the ship from going off the top of the screen when W is continuously pressed 
 					if(getPosition().y + getHeight()/2 >= screenTop) {
@@ -223,24 +222,20 @@ public class Ship extends MoveableEntity {
 				}	
 			}
 				
-				float shipAngle = getBody().getAngle();
-				float mod = (float) (2 * Math.PI);
-				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
-				
-				// TODO fix ship rotation
-				if (angleMod < Math.PI) {
-					float diff = angleMod;
-//					Gdx.app.log(SSJava.LOG, "smaller");
-//					getBody().applyAngularImpulse(-3f * diff, true);
-					getBody().setAngularVelocity(-0.2f * diff);
-				}
-				else {
-					float diff = mod - angleMod;
-//					Gdx.app.log(SSJava.LOG, "greater");
-//					getBody().applyAngularImpulse(3f * diff, true);
-					getBody().setAngularVelocity(0.2f * diff);
-				}	
+			float shipAngle = getBody().getAngle();
+			float mod = (float) (2 * Math.PI);
+			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+			
+			// TODO fix ship rotation
+			if (angleMod < Math.PI) {
+				float diff = angleMod;
+				getBody().setAngularVelocity(-0.2f * diff);
 			}
+			else {
+				float diff = mod - angleMod;
+				getBody().setAngularVelocity(0.2f * diff);
+			}	
+		}
 			
 		super.update();
 	}
