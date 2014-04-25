@@ -142,6 +142,7 @@ public class GameCollisionListener implements ContactListener {
 		s.setLightSpeedEnabled(true);
 		s.getBody().getFixtureList().get(0).setSensor(true);
 		s.getBody().setLinearVelocity(Ship.SPEED_OF_LIGHT_VELOCITY);
+		AudioPlayer.speedOfLightOn();
 		new Timer().scheduleTask(new Task() {
 			@Override
 			public void run() {
@@ -151,6 +152,7 @@ public class GameCollisionListener implements ContactListener {
 					s.getBody().getFixtureList().get(0).setSensor(false);
 				}
 				s.setLightSpeedEnabled(false);
+				AudioPlayer.speedOfLightOff();
 			}
 		}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
 		p.setHealth(0);

@@ -22,14 +22,14 @@ public class AudioPlayer {
 	public static Sound bulletImpactSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3"));
 	public static Sound shipImpactSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/explosion.mp3"));
 //	public static Sound healthUpSound = Gdx.audio.newSound(Gdx.files.internal(""));
-//	public static Sound speedOfLightSound = Gdx.audio.newSound(Gdx.files.internal(""));
+	public static Sound speedOfLightOnSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/speed_on.mp3"));
+	public static Sound speedOfLightOffSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/speed_off.mp3"));
 	
 	/**
 	 * 
 	 * @param looping whether or not the game is to loop
 	 */
 	public static void playGameMusic(boolean looping) {
-		
 		gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume", 100) / 100f);
 		gameMusic.setLooping(looping);
 		gameMusic.play();
@@ -116,7 +116,7 @@ public class AudioPlayer {
 	/**
 	 * Plays the explosion sound for the ship impact
 	 */
-	public static void speedOfLight() {
+	public static void speedOfLightOn() {
 		new Thread(new Runnable() {
 			/*
 			 * (non-Javadoc)
@@ -124,7 +124,23 @@ public class AudioPlayer {
 			 */
 			@Override
 			public void run() {
-//				speedOfLightSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
+				speedOfLightOnSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
+			}
+		}).start();
+	}
+	
+	/**
+	 * Plays the explosion sound for the ship impact
+	 */
+	public static void speedOfLightOff() {
+		new Thread(new Runnable() {
+			/*
+			 * (non-Javadoc)
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
+			public void run() {
+				speedOfLightOffSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
 			}
 		}).start();
 	}
@@ -134,7 +150,8 @@ public class AudioPlayer {
 		shotSound.dispose();
 		bulletImpactSound.dispose();
 		shipImpactSound.dispose();
-//		healthUp.dispose();
-//		speedOfLight.dispose();
+//		healthUpSound.dispose();
+		speedOfLightOnSound.dispose();
+		speedOfLightOffSound.dispose();
 	}
 }
