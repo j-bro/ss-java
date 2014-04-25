@@ -40,6 +40,14 @@ public class Level {
 	 */
 	private float levelEnd;
 	
+	/**
+	 * The path to the level's background
+	 */
+	private String backgroundPath;
+	
+	/**
+	 * 
+	 */
 	public Level() {
 		obstacles = new Array<Obstacle>();
 		enemies = new Array<Enemy>();
@@ -47,6 +55,7 @@ public class Level {
 		gameChangers = new Array<Obstacle>();
 		
 		levelEnd = 1500; // TODO
+		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
 	}
 
 	/**
@@ -63,4 +72,17 @@ public class Level {
 		this.levelEnd = levelEnd;
 	}
 
+	/**
+	 * @return the backgroundPath
+	 */
+	public String getBackgroundPath() {
+		return backgroundPath;
+	}
+
+	/**
+	 * @param backgroundPath the backgroundPath to set
+	 */
+	public void setBackgroundPath(String backgroundPath) {
+		this.backgroundPath = backgroundPath;
+	}	
 }

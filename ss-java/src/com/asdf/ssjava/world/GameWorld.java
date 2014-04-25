@@ -91,7 +91,7 @@ public class GameWorld {
 	/**
 	 * ArrayList containing all the obstacles in the current level
 	 */
-	Level level;
+	private Level level;
 	
 	/**
 	 * Array containing all the bullets present in the level
@@ -245,13 +245,13 @@ public class GameWorld {
 		if (ship.getBody().getLinearVelocity().x < 0) {
 			ship.getBody().applyForceToCenter(30, 0, false);
 		}
-		
 		if (ship.getBody().getLinearVelocity().y > 0) {
 			ship.getBody().applyForceToCenter(0, -30, false);
 		}
 		else if (ship.getBody().getLinearVelocity().y < 0) {
 			ship.getBody().applyForceToCenter(0, 30, false);
 		}
+		
 		// Start rotating ship
 		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().x > -1) {
 			ship.getBody().applyAngularImpulse(30, true);

@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -95,6 +96,9 @@ public class WorldRenderer {
 	Texture speedOfLightTexture, healthUpTexture;
 	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture, pointsTexture;
 	Texture planetTexture, sunTexture, magneticObjectTexture;
+	
+	Texture bgTexture;
+	Sprite bgSprite;
 	
 	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, emptyHeartImage1, emptyHeartImage2, emptyHeartImage3, halfHeartImage;
 	Texture fullHeartTexture, emptyHeartTexture, halfHeartTexture;
@@ -179,6 +183,10 @@ public class WorldRenderer {
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
 		bulletType2Texture = bulletType0Texture;
+		
+		bgTexture = game.assetManager.get(gameWorld.getLevel().getBackgroundPath(), Texture.class);
+		bgTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
+		bgSprite = new Sprite(bgTexture);
 		
 		fullHeartTexture = game.assetManager.get("data/textures/heart_full.png", Texture.class);
 		fullHeartTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -336,15 +344,20 @@ public class WorldRenderer {
 		}
 		*/
 		
+		if (gameWorld.getLevel().getBackgroundPath() != null) {
+			bgSprite.setBounds(cam.position.x - cam.viewportWidth / 2, cam.position.y - cam.viewportHeight / 2, cam.viewportWidth, cam.viewportHeight);
+			bgSprite.draw(batch);
+		}
+		
 		// obstacles rendering
-		for (Obstacle o: gameWorld.level.obstacles) {
+		for (Obstacle o: gameWorld.getLevel().obstacles) {
 			if (o.isVisible()) {
 				Texture obstacleTexture = getTexture(o);
 				batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);					
 			}
 		}
 		// enemies rendering
-		for (Enemy e: gameWorld.level.enemies) {
+		for (Enemy e: gameWorld.getLevel().enemies) {
 			if (e.isVisible()) {					
 				Texture enemyTexture = getTexture(e);
 				batch.draw(enemyTexture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
@@ -358,13 +371,13 @@ public class WorldRenderer {
 			}
 		}
 		// game changer rendering
-		for (Obstacle g: gameWorld.level.gameChangers) {
+		for (Obstacle g: gameWorld.getLevel().gameChangers) {
 			if (g.isVisible()) {
 				Texture gameChangerTexture = getTexture(g);
 				batch.draw(gameChangerTexture, g.getPosition().x - g.getWidth() / 2, g.getPosition().y - g.getHeight() / 2, g.getWidth() / 2, g.getHeight() / 2 , g.getWidth(), g.getHeight(), 1, 1, g.getRotation(), 0, 0, gameChangerTexture.getWidth(), gameChangerTexture.getHeight(), false, false);
 			}
 		}
-		for (Powerup p: gameWorld.level.powerups) {
+		for (Powerup p: gameWorld.getLevel().powerups) {
 			if (p.isVisible()) {					
 				Texture powerupTexture = getTexture(p);
 				batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);

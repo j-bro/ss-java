@@ -8,12 +8,15 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 ####To do list
 
-- Enemy AI
 - High scores
 - Backgrounds
 - Menu graphics
 - Hitbox shapes
-- Extra powerups: bigger bullets
+- Optional
+	- Parallax backgrounds
+	- powerups: bigger bullets
+	- Multiple enemy types
+
 
 ####In Progress
 
@@ -22,6 +25,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level design
 - HUD: level progress
 - Sounds
+- Level backgrounds
 
 ####Complete
 - Ship movement (completed DD/MM)
@@ -37,6 +41,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Life display (hearts) (completed 22/04)
 - Level creator (completed 22/04)
 - Health & Speed of light powerups (completed 24/04)
+- Enemy AI (done 25/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
