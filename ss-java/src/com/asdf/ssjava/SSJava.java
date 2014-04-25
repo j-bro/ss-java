@@ -9,6 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author Jeremy Brown
@@ -46,6 +47,8 @@ public class SSJava extends Game {
 	 * A reference to the game screen
 	 */
 	public GameScreen gameScreen;
+	
+	public TextureRegion screenshot;
 	
 	public int width;
 	

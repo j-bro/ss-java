@@ -14,9 +14,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -44,6 +46,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 	MenuButton backButton, testButton, saveButton, loadButton, exitButton;
 	
 	Label titleLabel;
+	
+	Image bgImage;
 	
 	BitmapFont whiteFont;
 	
@@ -217,6 +221,12 @@ public class LevelCreatorOptionsMenu implements Screen {
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
+		
+		// Background
+		if (game.screenshot != null) {			
+			bgImage = new Image(game.screenshot);
+			stage.addActor(bgImage);
+		}
 		
 		stage.addActor(backButton);
 		stage.addActor(testButton);

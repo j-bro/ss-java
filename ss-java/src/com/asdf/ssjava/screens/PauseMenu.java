@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -43,6 +44,8 @@ public class PauseMenu implements Screen {
 	MenuButton exitButton;
 	
 	Label titleLabel;
+	
+	Image bgImage;
 	
 	/**
 	 * A reference to this menu object to pass to the anonymous listener classes
@@ -145,6 +148,12 @@ public class PauseMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
+		// Background
+		if (game.screenshot != null) {			
+			bgImage = new Image(game.screenshot);
+			stage.addActor(bgImage);
+		}
+				
 		stage.addActor(titleLabel);
 		stage.addActor(backButton);
 		stage.addActor(optionsButton);

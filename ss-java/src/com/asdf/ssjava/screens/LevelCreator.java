@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * 
@@ -181,6 +182,7 @@ public class LevelCreator implements Screen {
 	 * Allows saving/loading of a level
 	 */
 	public void showCreatorOptions() {
+		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new LevelCreatorOptionsMenu(game, this));
 	}
 	

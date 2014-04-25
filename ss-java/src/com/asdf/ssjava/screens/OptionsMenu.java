@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -46,6 +47,8 @@ public class OptionsMenu implements Screen {
 	TextField soundField;
 	
 	MenuButton backButton;
+	
+	Image bgImage;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -178,6 +181,12 @@ public class OptionsMenu implements Screen {
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
+		
+		// Background
+		if (game.screenshot != null) {			
+			bgImage = new Image(game.screenshot);
+			stage.addActor(bgImage);
+		}
 		
 		stage.addActor(titleLabel);
 		stage.addActor(volumeLabel);

@@ -28,6 +28,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /* Commented imports
@@ -281,6 +282,7 @@ public class GameWorld {
 	 * Calls the pause screen and stops rendering the game
 	 */
 	public void pauseGame() {
+		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new PauseMenu(game, game.gameScreen));
 		AudioPlayer.pauseGameMusic();
 	}
