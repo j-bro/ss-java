@@ -184,7 +184,8 @@ public class WorldRenderer {
 		bulletType1Texture = bulletType0Texture;
 		bulletType2Texture = bulletType0Texture;
 		
-		bgTexture = game.assetManager.get(gameWorld.getLevel().getBackgroundPath(), Texture.class);
+//		gameWorld.setBackground(gameWorld.getLevel().getBackgroundPath()); TODO fix
+		bgTexture = game.assetManager.get("data/textures/backgrounds/background_sparks.png", Texture.class);
 		bgTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		bgSprite = new Sprite(bgTexture);
 		
@@ -294,6 +295,7 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
+//					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
 			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
@@ -592,6 +594,7 @@ public class WorldRenderer {
 						+ "\nHealth: " + ship.getHealth() + " half hearts"
 						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
 						+ "\nDEBUG TEXT HOLDER"	
+//						+ "\nDEBUG TEXT HOLDER"	
 						+ "\nDEBUG TEXT HOLDER");	
 			}
 			
@@ -601,6 +604,7 @@ public class WorldRenderer {
 						+ "\nMove camera: A & D "
 						+ "\nCycle entities: X & C" 
 						+ "\nAdd/remove entities: V & Z" 
+//						+ "\nSet background: B"	
 						+ "\nMove entities: arrows & mouse"
 						+ "\nOptions menu: ESC"
 						+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());

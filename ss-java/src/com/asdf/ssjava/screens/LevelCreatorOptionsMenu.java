@@ -182,7 +182,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 						String levelPath = chooser.getSelectedFile().getPath();
 						game.setScreen(new LevelCreator(game, levelPath));
 					}
-				}				
+				}
 			}
 		});
 

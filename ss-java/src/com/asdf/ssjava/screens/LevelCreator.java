@@ -3,6 +3,10 @@
  */
 package com.asdf.ssjava.screens;
 
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
@@ -21,6 +25,7 @@ import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -291,6 +296,22 @@ public class LevelCreator implements Screen {
 		levelModified = true;
 	}
 	
+	/**
+	 * 
+	 */
+	public void chooseBackground() {
+		// File selection
+		if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG image files", "png");
+			chooser.setFileFilter(filter);
+			int returnVal = chooser.showOpenDialog(new JPanel());
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
+				String levelPath = chooser.getSelectedFile().getPath();
+				gameWorld.setBackground(Gdx.files.absolute(levelPath).path());
+			}
+		}
+	}
 	
 	/**
 	 * @return the gameWorld
@@ -356,6 +377,9 @@ public class LevelCreator implements Screen {
 				break;
 			case Keys.C:
 				renderer.setEntityToAdd(getNextEntityType());
+				break;
+			case Keys.B:
+//				chooseBackground();
 				break;
 			case Keys.X:
 				renderer.setEntityToAdd(getPrevEntityType());
