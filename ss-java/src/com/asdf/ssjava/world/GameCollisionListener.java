@@ -83,10 +83,7 @@ public class GameCollisionListener implements ContactListener {
 			else {
 				AudioPlayer.shipImpact();
 			}
-		}
-		
-		// TODO ship lightspeed mode
-			
+		}	
 	}
 	
 	/**

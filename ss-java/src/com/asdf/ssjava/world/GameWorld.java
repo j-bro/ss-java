@@ -247,30 +247,6 @@ public class GameWorld {
 			for (Body b: deadBodies) {
 				box2DWorld.destroyBody(b);
 			}
-			
-			
-			// Edge of screen collision	
-			float screenTop = renderer.cam.position.y + renderer.cam.viewportHeight / 2;
-			float screenBottom = renderer.cam.position.y - renderer.cam.viewportHeight / 2;
-			float screenLeft = renderer.cam.position.x - renderer.cam.viewportWidth / 2;
-			float screenRight = renderer.cam.position.x + renderer.cam.viewportWidth / 2;
-					
-			if (ship.getPosition().y + ship.getHeight() / 2 >= (screenTop) || ship.getPosition().y - ship.getHeight() / 2 <= screenBottom) {
-				Gdx.app.log(SSJava.LOG, "Ship hit top or bottom of screen");
-				// TODO FIX moveable up increments
-				/*if (ship.getAcceleration().y < 0 && ship.getPosition().y <= screenBottom) {
-					ship.getPosition().y = screenBottom;
-				}
-				else if (ship.getAcceleration().y > 0 && ship.getPosition().y + ship.getHeight() >= screenTop) {
-					ship.getPosition().y = screenTop - ship.getHeight();
-				}*/
-				ship.getBody().setLinearVelocity(ship.getBody().getLinearVelocity().x, 0);
-			}
-			
-			if (ship.getPosition().x + ship.getWidth() / 2 >= screenRight || ship.getPosition().x - ship.getWidth() / 2 <= screenLeft) {
-				Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
-				ship.getBody().setLinearVelocity(0, ship.getBody().getLinearVelocity().y);
-			}
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
@@ -350,6 +326,13 @@ public class GameWorld {
 	 */
 	public void setRenderer(WorldRenderer renderer){
 		this.renderer = renderer;
+	}
+	
+	/**
+	 * Get the WorldRenderer from this class
+	 */
+	public WorldRenderer getRenderer(){
+		return renderer;
 	}
 	
 	/**
