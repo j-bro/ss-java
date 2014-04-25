@@ -312,7 +312,8 @@ public class LevelCreator implements Screen {
 		this.levelModified = levelModified;
 	}
 
-
+	boolean clickDown = false;
+	
 	/**
 	 * Input manager for level creator
 	 * @author Jeremy Brown
@@ -384,24 +385,28 @@ public class LevelCreator implements Screen {
 			for (Obstacle o: gameWorld.getObstacles()) {
 				if (isClickOnEntity(o, screenX, screenY)) {
 					setSelectedEntity(o);
+					clickDown = true;
 					return true;
 				}
 			}
 			for (Enemy e: gameWorld.getEnemies()) {
 				if (isClickOnEntity(e, screenX, screenY)) {
 					setSelectedEntity(e);
+					clickDown = true;
 					return true;
 				}
 			}
 			for (Powerup p: gameWorld.getPowerups()) {
 				if (isClickOnEntity(p, screenX, screenY)) {
 					setSelectedEntity(p);
+					clickDown = true;
 					return true;
 				}
 			}
 			for (Obstacle g: gameWorld.getGameChangers()) {
 				if (isClickOnEntity(g, screenX, screenY)) {
 					setSelectedEntity(g);
+					clickDown = true;
 					return true;
 				}
 			}
@@ -410,13 +415,14 @@ public class LevelCreator implements Screen {
 
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+			clickDown = false;
 			return false;
 		}
 
 		@Override
 		public boolean touchDragged(int screenX, int screenY, int pointer) {
 			// TODO relative movement
-			if (isClickOnEntity(selectedEntity, screenX, screenY)) {
+			if (clickDown) {
 				Vector3 v = new Vector3(screenX, screenY, 0);
 				renderer.getCamera().unproject(v);
 				selectedEntity.setPosition(new Vector2(v.x, v.y));
