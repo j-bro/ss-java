@@ -97,12 +97,11 @@ public class PowerupSpeedOfLight extends Powerup {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
-		CircleShape circle = new CircleShape();
-		circle.setRadius(width / 2);
 		
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
 		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = circle;
+		fixtureDef.shape = rectangle;
 		fixtureDef.density = 0.5f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
