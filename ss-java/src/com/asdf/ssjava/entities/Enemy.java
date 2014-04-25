@@ -24,7 +24,15 @@ public abstract class Enemy extends MoveableEntity {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
 	}
 	
+	/**
+	 * Fires a bullet from the enemy ship
+	 * Shot interval specified by shotCooldown
+	 */
 	public abstract void fire();
+	
+	/**
+	 * @return type the type of enemy
+	 */
 	public abstract int getType();
 	
 	/* (non-Javadoc)

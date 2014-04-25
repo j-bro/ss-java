@@ -192,9 +192,9 @@ public class GameWorld {
 			    	}
 			    	else {
 			    		// Update the entity's position 
+			    		e.update();
 			    		e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
 			    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());		
-			    		e.update();
 			    	}
 			    }
 			}
@@ -257,7 +257,7 @@ public class GameWorld {
 			ship.getBody().applyAngularImpulse(30, true);
 		}
 		
-		// ship zoom off into distance
+		// TODO ship zoom off into distance
 		
 	}
 	

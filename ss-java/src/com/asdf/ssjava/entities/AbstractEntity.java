@@ -260,6 +260,7 @@ public abstract class AbstractEntity {
 	
 	/**
 	 * Called when the entity's health is 0
+	 * Usually removes the entity and it's display instance from the world
 	 */
 	public abstract void die();
 	

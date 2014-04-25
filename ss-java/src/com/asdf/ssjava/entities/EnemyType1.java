@@ -21,7 +21,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
 	
 	/**
 	 * The enemy's default width, in game coordinates
@@ -69,9 +69,9 @@ public class EnemyType1 extends Enemy {
 	public static final int bulletType = 1;
 	
 	/**
-	 * The cooldown, in milliseconds, of the enemy's fire
+	 * The shot cool down time, in milliseconds, of the enemy's fire
 	 */
-	private transient int shotCooldown;
+	private int shotCooldown;
 	
 	/**
 	 * The time since the last shot was taken
@@ -99,7 +99,7 @@ public class EnemyType1 extends Enemy {
 	}
 	
 	/**
-	 * TODO Constructor for serialization
+	 * Constructor for serialization
 	 */
 	public EnemyType1() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -117,6 +117,7 @@ public class EnemyType1 extends Enemy {
 	public EnemyType1(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
+		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 	}
 	
 	
@@ -135,31 +136,16 @@ public class EnemyType1 extends Enemy {
 			Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
 		}
 	}
-
-	public void advance(Ship ship) {
-		super.update();
-//		position.lerp(ship.getPosition(), Gdx.graphics.getDeltaTime());
-	}
-
+	
 	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Enemy#getType()
+	 * @see com.asdf.ssjava.entities.MoveableEntity#update()
 	 */
 	@Override
-	public int getType() {
-		return type;
-	}
-	/**
-	 * @return the shot cooldown time for the enemy, in milliseconds
-	 */
-	public int getShotCooldown() {
-		return shotCooldown;
-	}
-
-	/**
-	 * @param shotCooldown the shot cooldown time to set, in milliseconds
-	 */
-	public void setShotCooldown(int shotCooldown) {
-		this.shotCooldown = shotCooldown;
+	public void update() {		
+		super.update();
+		fire();
+//		TODO enemy movement getBody().getPosition().lerp(gameWorld.getShip().getPosition(), Gdx.graphics.getDeltaTime());
+		
 	}
 	
 	/*
@@ -186,7 +172,6 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
 		
@@ -198,6 +183,27 @@ public class EnemyType1 extends Enemy {
 		
 		body.createFixture(fixtureDef);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.Enemy#getType()
+	 */
+	@Override
+	public int getType() {
+		return type;
+	}
+	/**
+	 * @return the shot cooldown time for the enemy, in milliseconds
+	 */
+	public int getShotCooldown() {
+		return shotCooldown;
+	}
+
+	/**
+	 * @param shotCooldown the shot cooldown time to set, in milliseconds
+	 */
+	public void setShotCooldown(int shotCooldown) {
+		this.shotCooldown = shotCooldown;
 	}
 	
 	/*
