@@ -98,6 +98,7 @@ public class GameCollisionListener implements ContactListener {
 				AudioPlayer.shipImpact();
 			}
 		}			
+		}	
 	}
 	
 	/**
