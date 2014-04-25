@@ -108,6 +108,7 @@ public class GameWorld {
 	 */
 	public World box2DWorld;
 	
+	public boolean levelCompleted = false;
 	/**
 	 * Constructor for testing a level from the level creator
 	 * @param game
@@ -131,6 +132,7 @@ public class GameWorld {
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
+		// TODO position
 		
 		bullets = new Array<Bullet>();
 		
@@ -180,7 +182,7 @@ public class GameWorld {
 			for (Body b: bodiesArray) {
 				// Get the entity corresponding to the body
 			    AbstractEntity e = (AbstractEntity) b.getUserData();
-	
+			    
 			    if (e != null) {
 			    	// Check if the entity is dead and act accordingly
 			    	if (e.isDead()) {				
@@ -191,15 +193,20 @@ public class GameWorld {
 			    	else {
 			    		// Update the entity's position 
 			    		e.setPosition(new Vector2(b.getPosition().x, b.getPosition().y));
-			    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());
-			    		
+			    		e.setRotation(MathUtils.radiansToDegrees * b.getAngle());		
 			    		e.update();
 			    	}
 			    }
 			}
-			// Remove all dead bodies from Box2D
+			// Remove all dead bodies from Box2D world
 			for (Body b: deadBodies) {
 				box2DWorld.destroyBody(b);
+			}
+			
+			// Check if the level is completed
+			// TODO stop accelerating ship
+			if (isLevelComplete() || levelCompleted) {
+				levelCompleted();
 			}
 		}
 		
@@ -216,6 +223,45 @@ public class GameWorld {
 	}
 	
 	/**
+	 * 
+	 * @return true if the ship has completed the level
+	 */
+	public boolean isLevelComplete() {
+		if (ship.getBody().getPosition().x >= level.getLevelEnd()) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Ship behaviour when level completed
+	 */
+	public void levelCompleted() {
+		Gdx.app.log(SSJava.LOG, "Level completed");
+		// Decelerate ship
+		if (ship.getBody().getLinearVelocity().x > 0) {
+			ship.getBody().applyForceToCenter(-30, 0, false);
+		}
+		if (ship.getBody().getLinearVelocity().x < 0) {
+			ship.getBody().applyForceToCenter(30, 0, false);
+		}
+		
+		if (ship.getBody().getLinearVelocity().y > 0) {
+			ship.getBody().applyForceToCenter(0, -30, false);
+		}
+		else if (ship.getBody().getLinearVelocity().y < 0) {
+			ship.getBody().applyForceToCenter(0, 30, false);
+		}
+		// Start rotating ship
+		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().x > -1) {
+			ship.getBody().applyAngularImpulse(30, true);
+		}
+		
+		// ship zoom off into distance
+		
+	}
+	
+	/**
 	 * Calls the pause screen and stops rendering the game
 	 */
 	public void pauseGame() {
@@ -225,6 +271,7 @@ public class GameWorld {
 	
 	/**
 	 * Exports the current level to a file in JSON format
+	 * @param path the path at which to save the exported level
 	 */
 	public void exportLevel(String path) {
 		Gdx.files.local(path).writeString(new Json().prettyPrint(level), false);
@@ -232,6 +279,7 @@ public class GameWorld {
 	
 	/**
 	 * Loads a level from a JSON file into the level
+	 * @param path the path of the JSON level file to be loaded
 	 */
 	private void loadLevel(String path) {		
 		level = new Json().fromJson(Level.class, Gdx.files.local(path));
@@ -243,41 +291,31 @@ public class GameWorld {
 	public Ship getShip() {
 		return ship;
 	}
-	
 	/**
-	 * 
 	 * @return the obstacles array
 	 */
 	public Array<Obstacle> getObstacles() {
 		return level.obstacles;
 	}
-	
 	/**
-	 * 
 	 * @return the enemies array
 	 */
 	public Array<Enemy> getEnemies() {
 		return level.enemies;
 	}
-	
 	/**
-	 * 
 	 * @return the bullets array
 	 */
 	public Array<Bullet> getBullets() {
 		return bullets;
 	}
-	
 	/**
-	 * 
 	 * @return the powerups array
 	 */
 	public Array<Powerup> getPowerups() {
 		return level.powerups;
 	}
-	
 	/**
-	 * 
 	 * @return the gameChangers array
 	 */
 	public Array<Obstacle> getGameChangers() {
@@ -286,6 +324,7 @@ public class GameWorld {
 	
 	/**
 	 * Passes the WorldRenderer into this class
+	 * @param renderer the renderer to be set
 	 */
 	public void setRenderer(WorldRenderer renderer) {
 		this.renderer = renderer;
@@ -299,7 +338,6 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
 	 * @return the input processor
 	 */
 	public InputProcessor getManager() {
@@ -307,7 +345,6 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
 	 * @return the world's type (game or creator)
 	 */
 	public int getWorldType() {
@@ -315,7 +352,6 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
 	 * @return level the game world's level instance
 	 */
 	public Level getLevel() {
@@ -323,11 +359,25 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return the ScoreKeeper instance
 	 */
 	public ScoreKeeper getScoreKeeper() {
 		return scoreKeeper;
+	}
+
+	/**
+	 * Set the Input manager instance
+	 * @param manager the manager to set
+	 */
+	public void setManager(InputProcessor manager) {
+		this.manager = manager;		
+	}
+	
+	/**
+	 * @return the LevelCreator instance
+	 */
+	public LevelCreator getCreator() {
+		return creator;
 	}
 	
 	/**
@@ -335,20 +385,5 @@ public class GameWorld {
 	 */
 	public void dispose() {
 		
-	}
-
-	/**
-	 * 
-	 * @param manager
-	 */
-	public void setManager(InputProcessor manager) {
-		this.manager = manager;		
-	}
-	
-	/**
-	 * 
-	 */
-	public LevelCreator getCreator() {
-		return creator;
 	}
 }

@@ -154,8 +154,11 @@ public class Ship extends MoveableEntity {
 	public void update() { 
 		if (!isDead()) {
 			// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity
-			if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
-				getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
+			// && if the level is not complete
+			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
+				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
+					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
+				}		
 			}
 			
 			// Edge of screen collision	
@@ -187,45 +190,47 @@ public class Ship extends MoveableEntity {
 				getBody().getPosition().x = screenRight + getWidth() / 2;
 			}	
 			
-			// Key input
-			if (Gdx.input.isKeyPressed(Keys.W)) {
-				if (!(getPosition().y + getHeight() / 2 >= (screenTop))) {
-					getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+			
+			// Key input && if level is not complete
+			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
+				if (Gdx.input.isKeyPressed(Keys.W)) {
+					if (!(getPosition().y + getHeight() / 2 >= (screenTop))) {
+						getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
+					}
+					else {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+					}
+				}
+				else if (Gdx.input.isKeyPressed(Keys.S)) {
+					if (!(getPosition().y - getHeight() / 2 <= screenBottom)) {					
+						getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
+					}
+					else {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
+					}
+				}
+				
+				
+				float shipAngle = getBody().getAngle();
+				float mod = (float) (2 * Math.PI);
+				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+				
+				// TODO fix ship rotation
+				if (angleMod < Math.PI) {
+					float diff = angleMod;
+//					Gdx.app.log(SSJava.LOG, "smaller");
+//					getBody().applyAngularImpulse(-3f * diff, true);
+					getBody().setAngularVelocity(-0.2f * diff);
 				}
 				else {
-					getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
-				}
+					float diff = mod - angleMod;
+//					Gdx.app.log(SSJava.LOG, "greater");
+//					getBody().applyAngularImpulse(3f * diff, true);
+					getBody().setAngularVelocity(0.2f * diff);
+				}	
 			}
-			else if (Gdx.input.isKeyPressed(Keys.S)) {
-				if (!(getPosition().y - getHeight() / 2 <= screenBottom)) {					
-					getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);				
-				}
-				else {
-					getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
-				}
-			}
-			
-			
-			float shipAngle = getBody().getAngle();
-			float mod = (float) (2 * Math.PI);
-			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
-			
-			// TODO fix ship rotation
-			if (angleMod < Math.PI) {
-				float diff = angleMod;
-//				Gdx.app.log(SSJava.LOG, "smaller");
-//				getBody().applyAngularImpulse(-3f * diff, true);
-				getBody().setAngularVelocity(-0.2f * diff);
-			}
-			else {
-				float diff = mod - angleMod;
-//				Gdx.app.log(SSJava.LOG, "greater");
-//				getBody().applyAngularImpulse(3f * diff, true);
-				getBody().setAngularVelocity(0.2f * diff);
-			}
-			
 		}
-		
+			
 		super.update();
 	}
 

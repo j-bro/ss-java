@@ -89,9 +89,13 @@ public class SplashScreen implements Screen {
 		tweenManager = new TweenManager();
 		
 		TweenCallback cb = new TweenCallback() {
+			/*
+			 * (non-Javadoc)
+			 * @see aurelienribon.tweenengine.TweenCallback#onEvent(int, aurelienribon.tweenengine.BaseTween)
+			 */
 			@Override
 			public void onEvent(int type, BaseTween<?> source) {
-				tweenCompleted(); 
+				tweenCompleted();
 			}
 		};
 		

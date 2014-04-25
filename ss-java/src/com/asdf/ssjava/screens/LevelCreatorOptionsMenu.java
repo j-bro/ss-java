@@ -156,7 +156,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 		loadButton.setX(Gdx.graphics.getWidth() / 2 - loadButton.getWidth() / 2);
 		loadButton.setY(Gdx.graphics.getHeight() / 2 - loadButton.getHeight() / 2 - 150);
 		loadButton.addListener(new InputListener() {
-					/*
+			/*
 			 * (non-Javadoc)
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
