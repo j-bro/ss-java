@@ -48,7 +48,10 @@ public class LevelSaveMenu implements Screen {
 	
 	Label titleLabel;
 	
-	Image bgImage;
+	/**
+	 * Background images
+	 */
+	Image bgImage, opacityImage;
 	
 	BitmapFont whiteFont;
 	
@@ -157,9 +160,12 @@ public class LevelSaveMenu implements Screen {
 		titleLabel.setAlignment(Align.center);
 		
 		// Background
-		if (game.screenshot != null) {			
+		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
+			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
+			stage.addActor(opacityImage);
 		}
 		
 		stage.addActor(backButton);

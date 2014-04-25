@@ -137,6 +137,7 @@ public class SplashScreen implements Screen {
 		assetManager.load("data/textures/heart_half.png", Texture.class);
 		
 		assetManager.load("data/textures/backgrounds/background_sparks.png", Texture.class);
+		assetManager.load("data/textures/backgrounds/black_50-opacity.png", Texture.class);
 		
 		// Debug text
 		assetManager.load("data/fonts/debugFont-14.fnt", BitmapFont.class);

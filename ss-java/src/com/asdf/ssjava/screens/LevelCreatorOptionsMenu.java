@@ -13,6 +13,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -47,7 +48,10 @@ public class LevelCreatorOptionsMenu implements Screen {
 	
 	Label titleLabel;
 	
-	Image bgImage;
+	/**
+	 * Background images
+	 */
+	Image bgImage, opacityImage;
 	
 	BitmapFont whiteFont;
 	
@@ -223,9 +227,12 @@ public class LevelCreatorOptionsMenu implements Screen {
 		titleLabel.setAlignment(Align.center);
 		
 		// Background
-		if (game.screenshot != null) {			
+		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
+			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
+			stage.addActor(opacityImage);
 		}
 		
 		stage.addActor(backButton);
