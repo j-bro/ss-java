@@ -7,7 +7,6 @@ import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * @author Jeremy Brown
@@ -55,7 +54,7 @@ public class Level {
 		powerups = new Array<Powerup>();
 		gameChangers = new Array<Obstacle>();
 		
-		levelEnd = 1500; // TODO
+		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
 	}
 

@@ -37,9 +37,6 @@ public class LevelSelectMenu implements Screen {
 	
 	MenuButton backButton;
 	
-	ScrollPane levelSelectPane;
-	WidgetGroup levelWidgetGroup;
-	
 	LevelSelectButton level1Button;
 	LevelSelectButton level2Button;
 	LevelSelectButton level3Button;
@@ -85,6 +82,7 @@ public class LevelSelectMenu implements Screen {
 		        }
 			};
 		}
+		stage.getSpriteBatch().enableBlending(); // TODO
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -92,6 +90,52 @@ public class LevelSelectMenu implements Screen {
 		level1Button = new LevelSelectButton("Level 1", 280, 65, game, "levels/level1.json");
 		level1Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level1Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 150);
+		if (!SSJava.checkLevelCompletion(1 - 1)) {
+			level1Button.setEnabled(false);
+		}
+		else {
+			level1Button.setEnabled(true);
+		}
+		
+		level2Button = new LevelSelectButton("Level 2", 280, 65, game, "");
+		level2Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
+		level2Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 100);
+		if (!SSJava.checkLevelCompletion(2 - 1)) {
+			level2Button.setEnabled(false);
+		}
+		else {
+			level2Button.setEnabled(true);
+		}
+		
+		level3Button = new LevelSelectButton("Level 3", 280, 65, game, "");
+		level3Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
+		level3Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 50);
+		if (!SSJava.checkLevelCompletion(3 - 1)) {
+			level3Button.setEnabled(false);
+		}
+		else {
+			level3Button.setEnabled(true);
+		}
+		
+		level4Button = new LevelSelectButton("Level 4", 280, 65, game, "");
+		level4Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
+		level4Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2);
+		if (!SSJava.checkLevelCompletion(4 - 1)) {
+			level4Button.setEnabled(false);
+		}
+		else {
+			level4Button.setEnabled(true);
+		}
+		
+		level5Button = new LevelSelectButton("Level 5", 280, 65, game, "");
+		level5Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
+		level5Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 - 50);
+		if (!SSJava.checkLevelCompletion(5 - 1)) {
+			level5Button.setEnabled(false);
+		}
+		else {
+			level5Button.setEnabled(true);
+		}
 		
 		// exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
@@ -106,49 +150,11 @@ public class LevelSelectMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
-		// TODO for scrolling!
-		/*
-		levelWidgetGroup = new WidgetGroup();
-		levelWidgetGroup.setWidth(Gdx.graphics.getWidth() / 3);
-		levelWidgetGroup.setHeight(900);
-		levelWidgetGroup.addActor(level1Button);
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 100);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 50);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 100);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
-		}});
-		levelWidgetGroup.addActor(new LevelSelectButton(level1Button, game) {{
-			setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-			setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 200);
-		}});
-		
-		levelSelectPane = new ScrollPane(levelWidgetGroup);
-		levelSelectPane.setBounds(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 150, 200, 600);
-		Gdx.app.log(SSJava.LOG, levelSelectPane.getWidth() + ", " + levelSelectPane.getHeight());
-		
-		Gdx.app.log(SSJava.LOG, levelWidgetGroup.getWidth() + ", " + levelWidgetGroup.getHeight());
-		stage.addActor(levelSelectPane);*/
-		
 		stage.addActor(level1Button);
+		stage.addActor(level2Button);
+		stage.addActor(level3Button);
+		stage.addActor(level4Button);
+		stage.addActor(level5Button);
 		stage.addActor(titleLabel);
 		stage.addActor(backButton);
 		
@@ -164,26 +170,21 @@ public class LevelSelectMenu implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
-
 }

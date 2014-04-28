@@ -38,7 +38,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * 
  * @author Jeremy Brown
  */
-public class LevelCreator implements Screen {
+public class LevelCreatorScreen implements Screen {
 
 	/**
 	 * The game instance
@@ -79,7 +79,7 @@ public class LevelCreator implements Screen {
 	 * Default constructor
 	 * @param game the game instance
 	 */
-	public LevelCreator(SSJava game, String levelPath) {
+	public LevelCreatorScreen(SSJava game, String levelPath) {
 		this.game = game;
 		gameWorld = new GameWorld(game, GameWorld.CREATOR_TYPE, levelPath, this);
 		renderer = new WorldRenderer(gameWorld);
@@ -218,49 +218,69 @@ public class LevelCreator implements Screen {
 			Asteroid a = new Asteroid(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Asteroid.DEFAULT_WIDTH, Asteroid.DEFAULT_HEIGHT, Asteroid.DEFAULT_ROTATION);
 			setSelectedEntity(a);
 			gameWorld.getObstacles().add(a);
+			updateLevelEnd(a);
 		}
 		else if (e instanceof SpaceRock) {
 			SpaceRock s = new SpaceRock(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), SpaceRock.DEFAULT_WIDTH, SpaceRock.DEFAULT_HEIGHT, SpaceRock.DEFAULT_ROTATION);
 			setSelectedEntity(s);
 			gameWorld.getObstacles().add(s);
+			updateLevelEnd(s);
 		}
 		else if (e instanceof Planet) {
 			Planet p = new Planet(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Planet.DEFAULT_WIDTH, Planet.DEFAULT_HEIGHT, Planet.DEFAULT_ROTATION);
 			setSelectedEntity(p);
 			gameWorld.getGameChangers().add(p);
+			updateLevelEnd(p);
 		}
 		else if (e instanceof MagneticObject) {
 			MagneticObject m = new MagneticObject(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), MagneticObject.DEFAULT_WIDTH, MagneticObject.DEFAULT_HEIGHT, MagneticObject.DEFAULT_ROTATION);
 			setSelectedEntity(m);
 			gameWorld.getGameChangers().add(m);
+			updateLevelEnd(m);
 		}
 		else if (e instanceof Sun) {
 			Sun s = new Sun(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Sun.DEFAULT_WIDTH, Sun.DEFAULT_HEIGHT, Sun.DEFAULT_ROTATION);
 			setSelectedEntity(s);
 			gameWorld.getGameChangers().add(s);
+			updateLevelEnd(s);
 		}
 		else if (e instanceof EnemyType1) {
 			EnemyType1 e1 = new EnemyType1(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), EnemyType1.DEFAULT_WIDTH, EnemyType1.DEFAULT_HEIGHT, EnemyType1.DEFAULT_ROTATION);
 			setSelectedEntity(e1);
 			gameWorld.getEnemies().add(e1);
+			updateLevelEnd(e1);
 		}
 		else if (e instanceof PowerupHealthUp) {
 			PowerupHealthUp h = new PowerupHealthUp(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupHealthUp.DEFAULT_WIDTH, PowerupHealthUp.DEFAULT_HEIGHT, PowerupHealthUp.DEFAULT_ROTATION);
 			setSelectedEntity(h);
 			gameWorld.getPowerups().add(h);
+			updateLevelEnd(h);
 		}
 		else if (e instanceof PowerupSpeedOfLight) {
 			PowerupSpeedOfLight s = new PowerupSpeedOfLight(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
 			setSelectedEntity(s);
 			gameWorld.getPowerups().add(s);
+			updateLevelEnd(s);
 		}
 		else if (e instanceof Points) {
 			Points p = new Points(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
 			setSelectedEntity(p);
 			gameWorld.getPowerups().add(p);
+			updateLevelEnd(p);
 		}
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Added new " + e.toString() + Integer.toHexString(e.hashCode()));
 		levelModified = true;
+		
+	}
+	
+	/**
+	 * Moves the level end when a new entity is added
+	 * @param a
+	 */
+	public void updateLevelEnd(AbstractEntity a) {
+		if (a.getPosition().x > gameWorld.getLevel().getLevelEnd()) {
+			gameWorld.getLevel().setLevelEnd(a.getPosition().x + 30);
+		}
 	}
 	
 	/**
@@ -380,14 +400,21 @@ public class LevelCreator implements Screen {
 			case Keys.C:
 				renderer.setEntityToAdd(getNextEntityType());
 				break;
-			case Keys.B:
-//				chooseBackground();
-				break;
 			case Keys.X:
 				renderer.setEntityToAdd(getPrevEntityType());
 				break;
 			case Keys.Z:
 				removeEntity(selectedEntity);
+				break;
+				
+			// Setting the background
+			case Keys.B:
+//				chooseBackground();
+				break;
+				
+			// Set level end point
+			case Keys.E:
+				gameWorld.getLevel().setLevelEnd(renderer.getCamera().position.x);
 				break;
 			default: break;
 		}

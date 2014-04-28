@@ -13,12 +13,11 @@ import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.screens.LevelCreator;
+import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -75,7 +74,7 @@ public class GameWorld {
 	/**
 	 * The level creator instance
 	 */
-	LevelCreator creator;
+	LevelCreatorScreen creator;
 	
 	/**
 	 * World type constant definition
@@ -113,6 +112,11 @@ public class GameWorld {
 	 */
 	public World box2DWorld;
 	
+	/**
+	 * 
+	 */
+	float progress;
+	
 	public boolean levelCompleted = false;
 	/**
 	 * Constructor for testing a level from the level creator
@@ -121,7 +125,7 @@ public class GameWorld {
 	 * @param levelPath
 	 * @param creator
 	 */
-	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreator creator) {
+	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreatorScreen creator) {
 		this(game, worldType, levelPath);
 		this.creator = creator;
 	}
@@ -169,6 +173,7 @@ public class GameWorld {
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
 		
+		progress = 0;
 	}
 	
 	/**
@@ -225,6 +230,9 @@ public class GameWorld {
 				renderer.getCamera().translate(1, 0, 0);
 			}
 		}
+		
+		// Update level progress
+		progress = ship.getPosition().x / level.getLevelEnd();
 	}
 	
 	/**
@@ -259,7 +267,7 @@ public class GameWorld {
 		if (ship.getBody().getLinearVelocity().x > 0) {
 			ship.getBody().applyForceToCenter(-30, 0, false);
 		}
-		if (ship.getBody().getLinearVelocity().x < 0) {
+		else if (ship.getBody().getLinearVelocity().x < 0) {
 			ship.getBody().applyForceToCenter(30, 0, false);
 		}
 		if (ship.getBody().getLinearVelocity().y > 0) {
@@ -270,8 +278,8 @@ public class GameWorld {
 		}
 		
 		// Start rotating ship
-		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().x > -1) {
-			ship.getBody().applyAngularImpulse(30, true);
+		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
+			ship.getBody().applyAngularImpulse(700, true);
 		}
 		
 		// TODO ship zoom off into distance
@@ -394,7 +402,7 @@ public class GameWorld {
 	/**
 	 * @return the LevelCreator instance
 	 */
-	public LevelCreator getCreator() {
+	public LevelCreatorScreen getCreator() {
 		return creator;
 	}
 	

@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
 	/**
 	 * Constructor for testing levels
 	 */
-	public GameScreen(SSJava game, String levelPath, LevelCreator creator) {
+	public GameScreen(SSJava game, String levelPath, LevelCreatorScreen creator) {
 		this.game = game;
 		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath, creator);
 		renderer = new WorldRenderer(gameWorld);

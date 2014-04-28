@@ -90,4 +90,12 @@ public class SSJava extends Game {
 	public void resume() {
 		super.resume();
 	}
+	
+	// Game state methods
+	public static boolean checkLevelCompletion(int level) {
+		if (SSJava.prefs.getInteger("greatestCompletedLevel", 0) >= level) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -295,6 +295,7 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
 //					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
@@ -314,7 +315,7 @@ public class WorldRenderer {
 	 */
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		// camera follows ship if in game
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {			
@@ -346,6 +347,7 @@ public class WorldRenderer {
 		}
 		*/
 		
+		// Draw background
 		if (gameWorld.getLevel().getBackgroundPath() != null) {
 			bgSprite.setBounds(cam.position.x - cam.viewportWidth / 2, cam.position.y - cam.viewportHeight / 2, cam.viewportWidth, cam.viewportHeight);
 			bgSprite.draw(batch);
@@ -392,6 +394,64 @@ public class WorldRenderer {
 		batch.end();
 		
 		// game HUD
+		updateHUD();
+		
+		// Debug renderer
+		if (SSJava.DEBUG) { 
+			if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
+				debugRenderer.render(gameWorld.box2DWorld, cam.combined);
+
+				float shipAngle = ship.getBody().getAngle();
+				float mod = (float) (2 * Math.PI);
+				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+				
+				// Debug info
+				debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100
+						+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
+						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
+						+ "\nHealth: " + ship.getHealth() + " half hearts"
+						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
+						+ "\nProgress: " + (float) Math.round(gameWorld.progress * 1000) / 10 + "%"
+//						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER");	
+			}
+			
+			else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
+				// Debug info
+				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 
+						+ "\nMove camera: A & D "
+						+ "\nCycle entities: X & C" 
+						+ "\nAdd/remove entities: V & Z" 
+//						+ "\nSet background: B"	
+						+ "\nMove entities: arrows & mouse"
+						+ "\nShow options menu: ESC"
+						+ "\nSet level end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
+						+ "\nLevel modified since save: " + gameWorld.getCreator().isLevelModified());
+			}
+		}
+		
+		stage.act();
+		stage.draw();
+	}
+
+	/**
+	 * Dispose method
+	 */
+	public void dispose() {
+		batch.dispose();
+		if (sr != null)
+			sr.dispose();
+		if (debugRenderer != null)
+			debugRenderer.dispose();
+	}
+	
+	/**
+	 * Updates the HUD display.
+	 * Score, life and progress for the gameplay mode.
+	 * Entity list, position, and selected entity box for level creator mode. 
+	 */
+	public void updateHUD() {
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
 			// score
 			scoreLabel.setText("Score: " + new Integer(gameWorld.scoreKeeper.getScore()).toString());
@@ -570,62 +630,20 @@ public class WorldRenderer {
 			}
 			
 			sr.setProjectionMatrix(cam.combined);
+			sr.begin(ShapeType.Line);
 				// TODO issue...
 			if (selectedEntity != null) {
-				sr.begin(ShapeType.Line);
 				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
-				sr.end();
 			}
+			sr.line(gameWorld.getLevel().getLevelEnd(), cam.position.y - cam.viewportHeight / 2, gameWorld.getLevel().getLevelEnd(), cam.position.y + cam.viewportHeight / 2);
+			sr.end();
 		}
-		
-		// Debug renderer
-		if (SSJava.DEBUG) { 
-			if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
-				debugRenderer.render(gameWorld.box2DWorld, cam.combined);
-
-				float shipAngle = ship.getBody().getAngle();
-				float mod = (float) (2 * Math.PI);
-				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
-				
-				// Debug info
-				debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100
-						+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
-						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
-						+ "\nHealth: " + ship.getHealth() + " half hearts"
-						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
-						+ "\nDEBUG TEXT HOLDER"	
-//						+ "\nDEBUG TEXT HOLDER"	
-						+ "\nDEBUG TEXT HOLDER");	
-			}
-			
-			else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
-				// Debug info
-				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 
-						+ "\nMove camera: A & D "
-						+ "\nCycle entities: X & C" 
-						+ "\nAdd/remove entities: V & Z" 
-//						+ "\nSet background: B"	
-						+ "\nMove entities: arrows & mouse"
-						+ "\nOptions menu: ESC"
-						+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());
-			}
-		}
-		
-		stage.act();
-		stage.draw();
-	}
-
-	/**
-	 * Dispose method
-	 */
-	public void dispose() {
-		batch.dispose();
-		if (sr != null)
-			sr.dispose();
-		if (debugRenderer != null)
-			debugRenderer.dispose();
 	}
 	
+	/**
+	 * @param e the entity for which the texture is to be returned
+	 * @return the corresponding texture
+	 */
 	public Texture getTexture(AbstractEntity e) {
 		if (e instanceof SpaceRock) {
 			return spaceRockTexture;
