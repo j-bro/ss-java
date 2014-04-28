@@ -25,13 +25,29 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class CreditsMenu implements Screen {
 
+	/**
+	 * The stage instance
+	 */
 	SSJava game;
+	
+	/**
+	 * The stage instance
+	 */
 	Stage stage;
-	SpriteBatch batch;	
+	
+	/**
+	 * The title font
+	 */
 	BitmapFont whiteFont;
 	
-	Label titleLabel;
+	/**
+	 * The title label
+	 */
+	Label titleLabel, artistTitleLabel, artistLabel, coderTitleLabel, coderLabel, audioTitleLabel, audioLabel, miscTitleLabel, miscLabel;
 	
+	/**
+	 * The buttons
+	 */
 	MenuButton backButton;
 	
 	/**
@@ -78,7 +94,7 @@ public class CreditsMenu implements Screen {
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
-		
+				
 		// Title text
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("Credits", ls);
@@ -87,40 +103,105 @@ public class CreditsMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
+		// Coders
+		coderTitleLabel = new Label("Coders", ls);
+		coderTitleLabel.setX(Gdx.graphics.getWidth() / 4 - coderTitleLabel.getWidth() / 2);
+		coderTitleLabel.setY(Gdx.graphics.getHeight() / 2 + 120);
+		coderTitleLabel.setAlignment(Align.center);
+		
+		coderLabel = new Label("Jeremy Brown\nSimon Thompson", ls);
+		coderLabel.setX(Gdx.graphics.getWidth() / 4 - coderLabel.getWidth() / 2);
+		coderLabel.setY(Gdx.graphics.getHeight() / 2 + 50);
+		coderLabel.setAlignment(Align.center);
+		
+		// Artist
+		artistTitleLabel = new Label("Artist", ls);
+		artistTitleLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - artistTitleLabel.getWidth() / 2);
+		artistTitleLabel.setY(Gdx.graphics.getHeight() / 2 + 120);
+		artistTitleLabel.setAlignment(Align.center);
+		
+		artistLabel = new Label("Julie Brown", ls);
+		artistLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - artistLabel.getWidth() / 2);
+		artistLabel.setY(Gdx.graphics.getHeight() / 2 + 50);
+		artistLabel.setAlignment(Align.center);
+		
+		// Audio
+		audioTitleLabel = new Label("Audio", ls);
+		audioTitleLabel.setX(Gdx.graphics.getWidth() / 4 - audioTitleLabel.getWidth() / 2);
+		audioTitleLabel.setY(Gdx.graphics.getHeight() / 2 - 50);
+		audioTitleLabel.setAlignment(Align.center);
+		
+		audioLabel = new Label("freesound.org", ls);
+		audioLabel.setX(Gdx.graphics.getWidth() / 4 - audioLabel.getWidth() / 2);
+		audioLabel.setY(Gdx.graphics.getHeight() / 2 - 120);
+		audioLabel.setAlignment(Align.center);
+		
+		// Misc bits
+		miscTitleLabel = new Label("Misc", ls);
+		miscTitleLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - miscTitleLabel.getWidth() / 2);
+		miscTitleLabel.setY(Gdx.graphics.getHeight() / 2 - 50);
+		miscTitleLabel.setAlignment(Align.center);
+		
+		miscLabel = new Label("LibGDX\nBox2D", ls);
+		miscLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - miscLabel.getWidth() / 2);
+		miscLabel.setY(Gdx.graphics.getHeight() / 2 - 120);
+		miscLabel.setAlignment(Align.center);
+		
 		stage.addActor(titleLabel);
+		stage.addActor(artistTitleLabel);
+		stage.addActor(artistLabel);
+		stage.addActor(coderTitleLabel);
+		stage.addActor(coderLabel);
+		stage.addActor(audioTitleLabel);
+		stage.addActor(audioLabel);
+		stage.addActor(miscTitleLabel);
+		stage.addActor(miscLabel);
 		stage.addActor(backButton);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show credits");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
-
 }

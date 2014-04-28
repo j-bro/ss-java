@@ -33,7 +33,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-
 /**
  * @author Jeremy Brown
  *
@@ -259,7 +258,7 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
+	 * Checks whether or not the ship has died
 	 * @return true if the ship has completed the level
 	 */
 	public boolean isLevelComplete() {
@@ -270,7 +269,7 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
+	 * Called when the ship has died
 	 */
 	public void shipDied() {
 		if (!playEnded) {
