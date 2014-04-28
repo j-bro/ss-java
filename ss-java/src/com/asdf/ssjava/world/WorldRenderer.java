@@ -207,7 +207,7 @@ public class WorldRenderer {
 		stage.clear();
 		
 		// Game HUD
-		if (gameWorld.getWorldType() == 0) {
+		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
 			LabelStyle ls = new LabelStyle(game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
 			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
 			scoreLabel.setX(10);
@@ -242,7 +242,7 @@ public class WorldRenderer {
 			stage.addActor(halfHeartImage);
 		}
 		// Creator HUD
-		else {
+		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 			asteroidImage = new Image(asteroidTexture);
 			spaceRockImage = new Image(spaceRockTexture);
 			planetImage = new Image(planetTexture);
@@ -277,11 +277,8 @@ public class WorldRenderer {
 			stage.addActor(powerupSpeedOfLightImage);
 			stage.addActor(pointsImage);
 			
-			if (SSJava.DEBUG) {
-				// TODO To draw around selected entity
-				sr = new ShapeRenderer();
-				sr.setProjectionMatrix(cam.combined);
-			}
+			sr = new ShapeRenderer();
+			sr.setProjectionMatrix(cam.combined);
 		}
 		
 		// Debug display
@@ -397,40 +394,40 @@ public class WorldRenderer {
 		updateHUD();
 		
 		// Debug renderer
-		if (SSJava.DEBUG) { 
-			if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
+		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
+			if (SSJava.DEBUG) { 
 				debugRenderer.render(gameWorld.box2DWorld, cam.combined);
-
+				
 				float shipAngle = ship.getBody().getAngle();
 				float mod = (float) (2 * Math.PI);
 				float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
 				
 				// Debug info
 				debugLabel.setText("Position: " + (float) Math.round(ship.getBody().getPosition().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getPosition().y * 100) / 100
-						+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
-						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
-						+ "\nHealth: " + ship.getHealth() + " half hearts"
-						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
-						+ "\nProgress: " + (float) Math.round(gameWorld.progress * 1000) / 10 + "%"
-//						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER");	
-			}
-			
-			else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
-				// Debug info
-				debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 
-						+ "\nMove camera: A & D "
-						+ "\nCycle entities: X & C" 
-						+ "\nAdd/remove entities: V & Z" 
-//						+ "\nSet background: B"	
-						+ "\nMove entities: arrows & mouse"
-						+ "\nShow options menu: ESC"
-						+ "\nSet level end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
-						+ "\nLevel modified since save: " + gameWorld.getCreator().isLevelModified());
+					+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
+					+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
+					+ "\nHealth: " + ship.getHealth() + " half hearts"
+					+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
+					+ "\nProgress: " + (float) Math.round(gameWorld.progress * 1000) / 10 + "%"
+//					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER");
 			}
 		}
-		
+				
+		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
+			// Debug info
+			debugLabel.setText("Camera position: " + (float) Math.round(cam.position.x * 100) / 100 + " , " + (float) Math.round(cam.position.y * 100) / 100 
+			+ "\nMove camera: A & D "
+			+ "\nCycle entities: X & C" 
+			+ "\nAdd/remove entities: V & Z" 
+//			+ "\nSet background: B"	
+			+ "\nMove entities: arrows & mouse"
+			+ "\nShow options menu: ESC"
+			+ "\nSet level end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
+			+ "\nLevel modified since save: " + gameWorld.getCreator().isLevelModified());
+		}
+
 		stage.act();
 		stage.draw();
 	}

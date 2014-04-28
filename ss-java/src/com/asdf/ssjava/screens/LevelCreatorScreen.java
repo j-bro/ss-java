@@ -134,7 +134,7 @@ public class LevelCreatorScreen implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show level creator");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level creator");
 		if (gameWorld != null) {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 		}
@@ -289,7 +289,7 @@ public class LevelCreatorScreen implements Screen {
 	public void setSelectedEntity(AbstractEntity e) {
 		selectedEntity = e;
 		renderer.setSelectedEntity(e);
-		Gdx.app.log(SSJava.LOG, "Selected entity: " + e.toString() + " " + Integer.toHexString(e.hashCode()));
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Selected entity: " + e.toString() + " " + Integer.toHexString(e.hashCode()));
 	}
 	
 	/**
