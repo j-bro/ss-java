@@ -109,7 +109,7 @@ public class BulletType1 extends Bullet {
 		fixtureDef.shape = rectangle;
 		fixtureDef.density = 0.1f; 
 		fixtureDef.friction = 0.4f;
-		fixtureDef.restitution = 0.1f;
+		fixtureDef.restitution = 0f;
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);

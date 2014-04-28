@@ -55,7 +55,7 @@ public class Level {
 		powerups = new Array<Powerup>();
 		gameChangers = new Array<Obstacle>();
 		
-		levelEnd = 1500; // TODO
+		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
 	}
 

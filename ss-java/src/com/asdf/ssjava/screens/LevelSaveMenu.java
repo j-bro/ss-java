@@ -99,6 +99,10 @@ public class LevelSaveMenu implements Screen {
 		        }
 			};
 		}
+<<<<<<< .merge_file_a06776
+=======
+		stage.setViewport(width, height);
+>>>>>>> .merge_file_a07376
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -165,7 +169,11 @@ public class LevelSaveMenu implements Screen {
 			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
+<<<<<<< .merge_file_a06776
 			stage.addActor(opacityImage);
+=======
+			stage.addActor(opacityImage);	
+>>>>>>> .merge_file_a07376
 		}
 		
 		stage.addActor(backButton);
@@ -181,10 +189,21 @@ public class LevelSaveMenu implements Screen {
 	public void saveLevel(String name) {
 		// TODO format string name
 		// Append extension if not present
+<<<<<<< .merge_file_a06776
 		if (!(name.substring(name.length() - 5).equalsIgnoreCase(".json"))) {
 			name += ".json";
 		}
 		LevelCreator creator = ((LevelCreator) ((LevelCreatorOptionsMenu) referrer).getReferrer());
+=======
+		if (name.length() <= 5) {
+			name += ".json";
+		}
+		else if (!(name.substring(name.length() - 5).equalsIgnoreCase(".json"))) {
+			name += ".json";
+		}
+		
+		LevelCreatorScreen creator = ((LevelCreatorScreen) ((LevelCreatorOptionsMenu) referrer).getReferrer());
+>>>>>>> .merge_file_a07376
 		creator.gameWorld.exportLevel("levels/" + name);
 		creator.setLevelModified(false);
 	}

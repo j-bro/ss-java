@@ -58,6 +58,8 @@ public class HighScoresMenu implements Screen {
 		batch.begin();
 			stage.draw(); 
 		batch.end();
+
+		stage.draw(); 
 	}
 
 	@Override
@@ -73,6 +75,8 @@ public class HighScoresMenu implements Screen {
 		        }
 			};
 		}
+
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		

@@ -107,7 +107,7 @@ public class Planet extends Obstacle {
 	 * 
 	 * @param mass
 	 * @param distance
-	 * @return
+	 * @return force
 	 */
 //	public double gravitationnalPull(long mass, long distance){
 //		double force;

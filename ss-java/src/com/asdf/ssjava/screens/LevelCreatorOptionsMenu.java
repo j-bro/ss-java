@@ -45,6 +45,9 @@ public class LevelCreatorOptionsMenu implements Screen {
 	 */
 	MenuButton backButton, testButton, saveButton, loadButton, exitButton;
 	
+	/**
+	 * Menu display title
+	 */
 	Label titleLabel;
 	
 	/**
@@ -100,6 +103,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 		        }
 			};
 		}
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -128,8 +132,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Test button up");
-				((LevelCreator) referrer).getGameWorld().exportLevel("levels/temp.json");
-				game.gameScreen = new GameScreen(game, "levels/temp.json", (LevelCreator) referrer);
+				((LevelCreatorScreen) referrer).getGameWorld().exportLevel("levels/temp.json");
+				game.gameScreen = new GameScreen(game, "levels/temp.json", (LevelCreatorScreen) referrer);
 				game.setScreen(game.gameScreen);
 				}
 			});
@@ -187,7 +191,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 					int returnVal = chooser.showOpenDialog(new JPanel());
 					if(returnVal == JFileChooser.APPROVE_OPTION) {
 						String levelPath = chooser.getSelectedFile().getPath();
-						game.setScreen(new LevelCreator(game, levelPath));
+						game.setScreen(new LevelCreatorScreen(game, levelPath));
 					}
 				}
 			}

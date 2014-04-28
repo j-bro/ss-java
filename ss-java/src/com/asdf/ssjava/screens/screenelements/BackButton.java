@@ -15,10 +15,17 @@ public class BackButton extends MenuButton {
 	Screen referrer;
 	
 	/**
+<<<<<<< .merge_file_a07352
 	 * 
 	 * @param text
 	 * @param width
 	 * @param height
+=======
+	 * @param width
+	 * @param height
+	 * @param game
+	 * @param referrer
+>>>>>>> .merge_file_a07976
 	 */
 	public BackButton(float width, float height, SSJava game, Screen referrer) {
 		super("Back", width, height, game);
@@ -45,4 +52,21 @@ public class BackButton extends MenuButton {
 			}
 		});
 	}
+<<<<<<< .merge_file_a07352
+=======
+
+	/**
+	 * @return the referrer
+	 */
+	public Screen getReferrer() {
+		return referrer;
+	}
+
+	/**
+	 * @param referrer the referrer to set
+	 */
+	public void setReferrer(Screen referrer) {
+		this.referrer = referrer;
+	}
+>>>>>>> .merge_file_a07976
 }

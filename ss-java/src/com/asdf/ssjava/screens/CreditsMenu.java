@@ -54,10 +54,13 @@ public class CreditsMenu implements Screen {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 
 		stage.act(delta);
+
 		
 		batch.begin();
 			stage.draw(); 
 		batch.end();
+
+		stage.draw(); 
 	}
 
 	@Override
@@ -73,6 +76,8 @@ public class CreditsMenu implements Screen {
 		        }
 			};
 		}
+
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		

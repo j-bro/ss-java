@@ -13,7 +13,9 @@ import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.screens.LevelCreator;
+import com.asdf.ssjava.screens.LevelCompletedMenu;
+import com.asdf.ssjava.screens.LevelCreatorScreen;
+import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -28,22 +30,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-/* Commented imports
-import com.asdf.ssjava.entities.Asteroid;
-import com.asdf.ssjava.entities.EnemyType1;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
-import com.asdf.ssjava.entities.SpaceRock;
-import com.badlogic.gdx.files.FileHandle;
- */
 
 /**
  * @author Jeremy Brown
  *
  */
-
 public class GameWorld {
 
 	/**
@@ -74,7 +68,7 @@ public class GameWorld {
 	/**
 	 * The level creator instance
 	 */
-	LevelCreator creator;
+	LevelCreatorScreen creator;
 	
 	/**
 	 * World type constant definition
@@ -86,6 +80,10 @@ public class GameWorld {
 	 */
 	public static final int CREATOR_TYPE = 1;
 	
+	/**
+	 * Reference to this screen
+	 */
+//	Screen thisScreen = this;
 	
 	/**
 	 * The ScoreKeeper instance
@@ -112,7 +110,21 @@ public class GameWorld {
 	 */
 	public World box2DWorld;
 	
-	public boolean levelCompleted = false;
+	/**
+	 * The path of the current level
+	 */
+	String levelPath;
+	
+	/**
+	 * The ship's current progress in the level
+	 */
+	float progress;
+	
+	/**
+	 * 
+	 */
+	private boolean playEnded = false;
+	
 	/**
 	 * Constructor for testing a level from the level creator
 	 * @param game
@@ -120,7 +132,7 @@ public class GameWorld {
 	 * @param levelPath
 	 * @param creator
 	 */
-	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreator creator) {
+	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreatorScreen creator) {
 		this(game, worldType, levelPath);
 		this.creator = creator;
 	}
@@ -131,12 +143,12 @@ public class GameWorld {
 	public GameWorld(SSJava game, int worldType, String levelPath) {
 		this.game = game;
 		this.worldType = worldType;
+		this.levelPath = levelPath;
 		
 		// Box2D stuff
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
-		// TODO position
 		
 		bullets = new Array<Bullet>();
 		
@@ -168,6 +180,7 @@ public class GameWorld {
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
 		
+		progress = 0;
 	}
 	
 	/**
@@ -191,7 +204,7 @@ public class GameWorld {
 			    	// Check if the entity is dead and act accordingly
 			    	if (e.isDead()) {				
 						e.die();
-						Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
+						if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
 						deadBodies.add(b);
 			    	}
 			    	else {
@@ -207,9 +220,13 @@ public class GameWorld {
 				box2DWorld.destroyBody(b);
 			}
 			
+			// Check if the ship is dead
+			if (ship.isDead()) {
+				shipDied();
+			}
+			
 			// Check if the level is completed
-			// TODO stop accelerating ship
-			if (isLevelComplete() || levelCompleted) {
+			if (isLevelComplete()) {
 				levelCompleted();
 			}
 		}
@@ -224,6 +241,9 @@ public class GameWorld {
 				renderer.getCamera().translate(1, 0, 0);
 			}
 		}
+		
+		// Update level progress
+		progress = ship.getPosition().x / level.getLevelEnd();
 	}
 	
 	/**
@@ -250,15 +270,35 @@ public class GameWorld {
 	}
 	
 	/**
+	 * 
+	 */
+	public void shipDied() {
+		if (!playEnded) {
+			new Timer().scheduleTask(new Task() {
+				/*
+				 * (non-Javadoc)
+				 * @see com.badlogic.gdx.utils.Timer.Task#run()
+				 */
+				@Override
+				public void run() {
+					game.screenshot = ScreenUtils.getFrameBufferTexture();
+					game.setScreen(new LevelRetryMenu(game, game.gameScreen));
+				}
+			}, 2);
+			playEnded = true;
+		}
+	}
+	
+	/**
 	 * Ship behaviour when level completed
 	 */
 	public void levelCompleted() {
-		Gdx.app.log(SSJava.LOG, "Level completed");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
 		// Decelerate ship
 		if (ship.getBody().getLinearVelocity().x > 0) {
 			ship.getBody().applyForceToCenter(-30, 0, false);
 		}
-		if (ship.getBody().getLinearVelocity().x < 0) {
+		else if (ship.getBody().getLinearVelocity().x < 0) {
 			ship.getBody().applyForceToCenter(30, 0, false);
 		}
 		if (ship.getBody().getLinearVelocity().y > 0) {
@@ -269,8 +309,23 @@ public class GameWorld {
 		}
 		
 		// Start rotating ship
-		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().x > -1) {
-			ship.getBody().applyAngularImpulse(30, true);
+		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
+			ship.getBody().applyAngularImpulse(1000, true);
+			
+			if (!playEnded) {
+				new Timer().scheduleTask(new Task() {
+					/*
+					 * (non-Javadoc)
+					 * @see com.badlogic.gdx.utils.Timer.Task#run()
+					 */
+					@Override
+					public void run() {
+						game.screenshot = ScreenUtils.getFrameBufferTexture();
+						game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+					}
+				}, 4);
+				playEnded = true;
+			}
 		}
 		
 		// TODO ship zoom off into distance
@@ -393,8 +448,21 @@ public class GameWorld {
 	/**
 	 * @return the LevelCreator instance
 	 */
-	public LevelCreator getCreator() {
+	public LevelCreatorScreen getCreator() {
 		return creator;
+	}
+	
+	/**
+	 * @return the levelPath
+	 */
+	public String getLevelPath() {
+		return levelPath;
+	}
+	/**
+	 * @param levelPath the levelPath to set
+	 */
+	public void setLevelPath(String levelPath) {
+		this.levelPath = levelPath;
 	}
 	
 	/**

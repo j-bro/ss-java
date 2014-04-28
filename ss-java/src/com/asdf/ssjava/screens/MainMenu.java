@@ -76,6 +76,10 @@ public class MainMenu implements Screen {
 		if (stage == null) {
 			stage = new Stage(width, height, true);
 		}
+<<<<<<< .merge_file_a02988
+=======
+		stage.setViewport(width, height);
+>>>>>>> .merge_file_a07060
 		stage.clear();
 		 
 		Gdx.input.setInputProcessor(stage);
@@ -249,7 +253,11 @@ public class MainMenu implements Screen {
 				 */
 				public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 					Gdx.app.log(SSJava.LOG, "Level creator button up");
+<<<<<<< .merge_file_a02988
 					game.setScreen(new LevelCreator(game, null));
+=======
+					game.setScreen(new LevelCreatorScreen(game, null));
+>>>>>>> .merge_file_a07060
 				}
 			});
 			

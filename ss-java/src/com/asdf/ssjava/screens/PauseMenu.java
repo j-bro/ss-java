@@ -54,7 +54,11 @@ public class PauseMenu implements Screen {
 	/**
 	 * A reference to this menu object to pass to the anonymous listener classes
 	 */
+
 	Screen thisPauseMenu = this;
+
+	Screen thisMenu = this;
+
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -64,7 +68,11 @@ public class PauseMenu implements Screen {
 	/**
 	 * 
 	 * @param game The game instance of type SSJava
+<<<<<<< .merge_file_a02008
 	 * @param referer The screen object that called this screen
+=======
+	 * @param referrer The screen object that called this screen
+>>>>>>> .merge_file_a07664
 	 */
 	public PauseMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -97,7 +105,8 @@ public class PauseMenu implements Screen {
 		        }
 			};
 		}
-		
+
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -118,7 +127,11 @@ public class PauseMenu implements Screen {
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+
 				game.setScreen(new OptionsMenu(game, thisPauseMenu));
+
+				game.setScreen(new OptionsMenu(game, thisMenu));
+
 				Gdx.app.log(SSJava.LOG, "Options button up");
 			}
 		});
@@ -166,7 +179,6 @@ public class PauseMenu implements Screen {
 		stage.addActor(backButton);
 		stage.addActor(optionsButton);
 		stage.addActor(exitButton);
-		
 	}
 
 	@Override

@@ -61,7 +61,11 @@ public class OptionsMenu implements Screen {
 	/**
 	 * 
 	 * @param game The game instance of type SSJava
+<<<<<<< .merge_file_a02216
 	 * @param referer The screen object that called this screen
+=======
+	 * @param referrer The screen object that called this screen
+>>>>>>> .merge_file_a06848
 	 */
 	public OptionsMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -93,6 +97,10 @@ public class OptionsMenu implements Screen {
 		        }
 			};
 		}
+
+
+		stage.setViewport(width, height);
+
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
