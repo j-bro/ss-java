@@ -37,12 +37,19 @@ public class LevelRetryMenu implements Screen {
 	 */
 	Stage stage;	
 	
+	/**
+	 * 
+	 */
 	BitmapFont whiteFont;
 	
-	MenuButton backButton;
-	MenuButton optionsButton;
-	MenuButton exitButton;
+	/**
+	 * 
+	 */
+	MenuButton exitButton, retryButton, selectLevelButton;
 	
+	/**
+	 * 
+	 */
 	Label titleLabel;
 	
 	/**
@@ -94,21 +101,69 @@ public class LevelRetryMenu implements Screen {
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 				
+		// Replay the level
+		retryButton = new MenuButton("Replay", 280, 65, game);
+		retryButton.setX(Gdx.graphics.getWidth() / 2 - retryButton.getWidth() / 2);
+		retryButton.setY(Gdx.graphics.getHeight() / 2 - retryButton.getHeight() / 2 - 50);
+		retryButton.addListener(new InputListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button down");
+				return true;
+			}
 		
+			/*
+			 * (non-Javadoc)
+ 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button up");
+				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath();
+				game.gameScreen = new GameScreen(game, levelPath);
+				game.setScreen(game.gameScreen);
+			}
+		});
+		
+		// Go to level selection screen
+		selectLevelButton = new MenuButton("Select Level", 280, 65, game);
+		selectLevelButton.setX(Gdx.graphics.getWidth() / 2 - selectLevelButton.getWidth() / 2);
+		selectLevelButton.setY(Gdx.graphics.getHeight() / 2 - selectLevelButton.getHeight() / 2 - 150);
+		selectLevelButton.addListener(new InputListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Select level button down");
+				return true;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Select level button up");
+				game.setScreen(new LevelSelectMenu(game, new MainMenu(game)));
+			}
+		});
 		
 		// exit to main menu button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
-		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 150);
+		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 250);
 		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				// TODO potential bug??
 				if (((GameScreen) referrer).getGameWorld().getCreator() != null) {
 					game.setScreen(game.gameScreen.gameWorld.getCreator());
@@ -136,8 +191,8 @@ public class LevelRetryMenu implements Screen {
 		}
 				
 		stage.addActor(titleLabel);
-		stage.addActor(backButton);
-		stage.addActor(optionsButton);
+		stage.addActor(retryButton);
+		stage.addActor(selectLevelButton);
 		stage.addActor(exitButton);
 	}
 
@@ -147,7 +202,8 @@ public class LevelRetryMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show creator options");
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

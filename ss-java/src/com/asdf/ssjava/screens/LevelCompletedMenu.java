@@ -48,7 +48,7 @@ public class LevelCompletedMenu implements Screen {
 	/**
 	 * Buttons
 	 */
-	MenuButton replayButton, selectLevelButton, exitButton;
+	MenuButton retryButton, selectLevelButton, exitButton;
 	
 	/**
 	 * Menu display title
@@ -99,33 +99,33 @@ public class LevelCompletedMenu implements Screen {
 		
 		// TODO score text
 		
-		// Exit to main menu button
-		replayButton = new MenuButton("Replay", 280, 65, game);
-		replayButton.setX(Gdx.graphics.getWidth() / 2 - replayButton.getWidth() / 2);
-		replayButton.setY(Gdx.graphics.getHeight() / 2 - replayButton.getHeight() / 2 - 50);
-		replayButton.addListener(new InputListener() {
-					/*
+		// Replay the level
+		retryButton = new MenuButton("Retry", 280, 65, game);
+		retryButton.setX(Gdx.graphics.getWidth() / 2 - retryButton.getWidth() / 2);
+		retryButton.setY(Gdx.graphics.getHeight() / 2 - retryButton.getHeight() / 2 - 50);
+		retryButton.addListener(new InputListener() {
+			/*
 			 * (non-Javadoc)
-					 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
-					 */
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Replay button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button down");
 				return true;
 			}
 			
-					/*
+			/*
 			 * (non-Javadoc)
-					 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
-					 */
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Replay button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button up");
 				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath();
 				game.gameScreen = new GameScreen(game, levelPath);
 				game.setScreen(game.gameScreen);
 			}
 		});
 		
-		// Exit to main menu button
+		// Go to level selection screen
 		selectLevelButton = new MenuButton("Select Level", 280, 65, game);
 		selectLevelButton.setX(Gdx.graphics.getWidth() / 2 - selectLevelButton.getWidth() / 2);
 		selectLevelButton.setY(Gdx.graphics.getHeight() / 2 - selectLevelButton.getHeight() / 2 - 150);
@@ -159,7 +159,7 @@ public class LevelCompletedMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
@@ -168,7 +168,7 @@ public class LevelCompletedMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				game.setScreen(new MainMenu(game));
 			}
 		});
@@ -190,7 +190,7 @@ public class LevelCompletedMenu implements Screen {
 			stage.addActor(opacityImage);
 		}
 		
-		stage.addActor(replayButton);
+		stage.addActor(retryButton);
 		stage.addActor(selectLevelButton);
 		stage.addActor(exitButton);
 		stage.addActor(titleLabel);
@@ -202,7 +202,7 @@ public class LevelCompletedMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show creator options");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show creator options");
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 

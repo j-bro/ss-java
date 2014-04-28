@@ -284,7 +284,7 @@ public class GameWorld {
 					game.screenshot = ScreenUtils.getFrameBufferTexture();
 					game.setScreen(new LevelRetryMenu(game, game.gameScreen));
 				}
-			}, 4);
+			}, 2);
 			playEnded = true;
 		}
 	}
