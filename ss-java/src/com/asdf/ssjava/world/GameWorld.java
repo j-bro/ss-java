@@ -280,8 +280,13 @@ public class GameWorld {
 				 */
 				@Override
 				public void run() {
-					game.screenshot = ScreenUtils.getFrameBufferTexture();
-					game.setScreen(new LevelRetryMenu(game, game.gameScreen));
+					if (getCreator() == null) {						
+						game.screenshot = ScreenUtils.getFrameBufferTexture();
+						game.setScreen(new LevelRetryMenu(game, game.gameScreen));
+					}
+					else {
+						game.setScreen(creator);
+					}
 				}
 			}, 2);
 			playEnded = true;
@@ -319,8 +324,13 @@ public class GameWorld {
 					 */
 					@Override
 					public void run() {
-						game.screenshot = ScreenUtils.getFrameBufferTexture();
-						game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+						if (getCreator() == null) {							
+							game.screenshot = ScreenUtils.getFrameBufferTexture();
+							game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+						}
+						else {
+							game.setScreen(creator);
+						}
 					}
 				}, 4);
 				playEnded = true;

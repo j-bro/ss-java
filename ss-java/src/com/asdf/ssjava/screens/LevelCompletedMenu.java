@@ -112,14 +112,13 @@ public class LevelCompletedMenu implements Screen {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button down");
 				return true;
 			}
-			
 			/*
 			 * (non-Javadoc)
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button up");
-				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath();
+				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath(); // TODO retry referrer
 				game.gameScreen = new GameScreen(game, levelPath);
 				game.setScreen(game.gameScreen);
 			}
@@ -138,7 +137,6 @@ public class LevelCompletedMenu implements Screen {
 				Gdx.app.log(SSJava.LOG, "Select level button down");
 				return true;
 			}
-
 			/*
 			 * (non-Javadoc)
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
@@ -162,7 +160,6 @@ public class LevelCompletedMenu implements Screen {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
-			
 			/*
 			 * (non-Javadoc)
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
