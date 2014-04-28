@@ -12,13 +12,12 @@ import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
+import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +26,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -35,20 +33,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-/* Commented imports
-import com.asdf.ssjava.entities.Asteroid;
-import com.asdf.ssjava.entities.EnemyType1;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
-import com.asdf.ssjava.entities.SpaceRock;
-import com.badlogic.gdx.files.FileHandle;
- */
 
 /**
  * @author Jeremy Brown
  *
  */
-
 public class GameWorld {
 
 	/**
@@ -127,9 +116,14 @@ public class GameWorld {
 	String levelPath;
 	
 	/**
-	 * 
+	 * The ship's current progress in the level
 	 */
 	float progress;
+	
+	/**
+	 * 
+	 */
+	private boolean playEnded = false;
 	
 	/**
 	 * Constructor for testing a level from the level creator
@@ -155,7 +149,6 @@ public class GameWorld {
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
 		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
-		// TODO position
 		
 		bullets = new Array<Bullet>();
 		
@@ -211,7 +204,7 @@ public class GameWorld {
 			    	// Check if the entity is dead and act accordingly
 			    	if (e.isDead()) {				
 						e.die();
-						Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
+						if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, e.toString() + " " + Integer.toHexString(e.hashCode()) + " died.");
 						deadBodies.add(b);
 			    	}
 			    	else {
@@ -227,8 +220,12 @@ public class GameWorld {
 				box2DWorld.destroyBody(b);
 			}
 			
+			// Check if the ship is dead
+			if (ship.isDead()) {
+				shipDied();
+			}
+			
 			// Check if the level is completed
-			// TODO stop accelerating ship
 			if (isLevelComplete()) {
 				levelCompleted();
 			}
@@ -272,13 +269,31 @@ public class GameWorld {
 		return false;
 	}
 	
-	private boolean timerStarted = false;
+	/**
+	 * 
+	 */
+	public void shipDied() {
+		if (!playEnded) {
+			new Timer().scheduleTask(new Task() {
+				/*
+				 * (non-Javadoc)
+				 * @see com.badlogic.gdx.utils.Timer.Task#run()
+				 */
+				@Override
+				public void run() {
+					game.screenshot = ScreenUtils.getFrameBufferTexture();
+					game.setScreen(new LevelRetryMenu(game, game.gameScreen));
+				}
+			}, 4);
+			playEnded = true;
+		}
+	}
 	
 	/**
 	 * Ship behaviour when level completed
 	 */
 	public void levelCompleted() {
-		Gdx.app.log(SSJava.LOG, "Level completed");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
 		// Decelerate ship
 		if (ship.getBody().getLinearVelocity().x > 0) {
 			ship.getBody().applyForceToCenter(-30, 0, false);
@@ -297,7 +312,7 @@ public class GameWorld {
 		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
 			ship.getBody().applyAngularImpulse(1000, true);
 			
-			if (!timerStarted) {
+			if (!playEnded) {
 				new Timer().scheduleTask(new Task() {
 					/*
 					 * (non-Javadoc)
@@ -309,7 +324,7 @@ public class GameWorld {
 						game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
 					}
 				}, 4);
-				timerStarted = true;
+				playEnded = true;
 			}
 		}
 		

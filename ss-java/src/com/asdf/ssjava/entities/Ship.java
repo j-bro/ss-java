@@ -148,7 +148,7 @@ public class Ship extends MoveableEntity {
 	 * Is called when the ship's health reaches zero (or lower)
 	 */
 	public void die() {
-		Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
 	}
 
 	/*
@@ -187,7 +187,7 @@ public class Ship extends MoveableEntity {
 			}
 			
 			// Key input && if level is not complete
-			if (!(gameWorld.isLevelComplete() || gameWorld.levelCompleted)) {
+			if (!(gameWorld.isLevelComplete())) {
 				// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity	
 				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);

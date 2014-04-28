@@ -3,10 +3,15 @@
  */
 package com.asdf.ssjava.screens;
 
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.LevelSelectButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -14,11 +19,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
@@ -35,13 +40,9 @@ public class LevelSelectMenu implements Screen {
 	
 	Label titleLabel;
 	
-	MenuButton backButton;
+	MenuButton loadButton, backButton;
 	
-	LevelSelectButton level1Button;
-	LevelSelectButton level2Button;
-	LevelSelectButton level3Button;
-	LevelSelectButton level4Button;
-	LevelSelectButton level5Button;
+	LevelSelectButton level1Button, level2Button, level3Button, level4Button, level5Button;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -137,6 +138,42 @@ public class LevelSelectMenu implements Screen {
 			level5Button.setEnabled(true);
 		}
 		
+		// Load level button
+		loadButton = new MenuButton("Load level", 280, 65, game);
+		loadButton.setX(Gdx.graphics.getWidth() / 2 - loadButton.getWidth() / 2);
+		loadButton.setY(Gdx.graphics.getHeight() / 2 - loadButton.getHeight() / 2 - 150);
+		loadButton.addListener(new InputListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Load button down");
+				return true;
+			}
+	
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Load button up");
+				
+				// File selection
+				if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+					JFileChooser chooser = new JFileChooser("levels");
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON level files", "json");
+					chooser.setFileFilter(filter);
+					int returnVal = chooser.showOpenDialog(new JPanel());
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						String levelPath = chooser.getSelectedFile().getPath();
+						game.gameScreen = new GameScreen(game, levelPath);
+						game.setScreen(game.gameScreen);
+					}
+				}
+			}
+		});
+		
 		// exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
@@ -155,14 +192,15 @@ public class LevelSelectMenu implements Screen {
 		stage.addActor(level3Button);
 		stage.addActor(level4Button);
 		stage.addActor(level5Button);
-		stage.addActor(titleLabel);
+		stage.addActor(loadButton);
 		stage.addActor(backButton);
+		stage.addActor(titleLabel);
 		
 	}
 
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show level selection");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level selection");
 		
 		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
