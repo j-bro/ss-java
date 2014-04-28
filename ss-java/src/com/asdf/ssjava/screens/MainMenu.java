@@ -76,6 +76,7 @@ public class MainMenu implements Screen {
 		if (stage == null) {
 			stage = new Stage(width, height, true);
 		}
+		stage.setViewport(width, height);
 		stage.clear();
 		 
 		Gdx.input.setInputProcessor(stage);

@@ -7,8 +7,8 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,10 +23,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
  * @author Jeremy Brown
- *
+ * 
  */
-
-public class PauseMenu implements Screen {
+public class LevelRetryMenu implements Screen {
 
 	/**
 	 * The game instance
@@ -63,14 +62,16 @@ public class PauseMenu implements Screen {
 	
 	/**
 	 * 
-	 * @param game The game instance of type SSJava
-	 * @param referrer The screen object that called this screen
 	 */
-	public PauseMenu(SSJava game, Screen referrer) {
+	public LevelRetryMenu(SSJava game, Screen referrer) {
 		this.game = game;
 		this.referrer = referrer;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -80,48 +81,20 @@ public class PauseMenu implements Screen {
 		stage.draw();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
-			stage = new Stage(width, height, true) {
-				/*
-				 * (non-Javadoc)
-				 * @see com.badlogic.gdx.scenes.scene2d.Stage#keyDown(int)
-				 */
-				@Override
-		        public boolean keyDown(int keyCode) {
-		            if (keyCode == Keys.ESCAPE) {
-		                game.setScreen(referrer);
-		            }
-		            return super.keyDown(keyCode);
-		        }
-			};
+			stage = new Stage(width, height, true);
 		}
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
+				
 		
-		// return to game button
-		backButton = new BackButton(280, 65, game, referrer);
-		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
-		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
-		
-		// options button
-		optionsButton = new MenuButton("Options", 280, 65, game);
-		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
-		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
-		
-		optionsButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button down");
-				return true;
-			}
-			
-			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				game.setScreen(new OptionsMenu(game, thisMenu));
-				Gdx.app.log(SSJava.LOG, "Options button up");
-			}
-		});
 		
 		// exit to main menu button
 		exitButton = new MenuButton("Exit", 280, 65, game);
@@ -147,7 +120,7 @@ public class PauseMenu implements Screen {
 		});
 		
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
-		titleLabel = new Label("Paused", ls);
+		titleLabel = new Label("You died!", ls);
 		titleLabel.setX(0);
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
@@ -168,32 +141,48 @@ public class PauseMenu implements Screen {
 		stage.addActor(exitButton);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show pause menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
+
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
-	}
 
+	}
 }

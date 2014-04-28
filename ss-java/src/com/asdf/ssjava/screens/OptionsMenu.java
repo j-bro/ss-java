@@ -93,6 +93,7 @@ public class OptionsMenu implements Screen {
 		        }
 			};
 		}
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		

@@ -99,6 +99,7 @@ public class LevelSaveMenu implements Screen {
 		        }
 			};
 		}
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -165,7 +166,7 @@ public class LevelSaveMenu implements Screen {
 			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
-			stage.addActor(opacityImage);
+			stage.addActor(opacityImage);	
 		}
 		
 		stage.addActor(backButton);

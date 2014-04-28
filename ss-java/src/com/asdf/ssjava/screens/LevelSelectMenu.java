@@ -82,7 +82,7 @@ public class LevelSelectMenu implements Screen {
 		        }
 			};
 		}
-		stage.getSpriteBatch().enableBlending(); // TODO
+		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
