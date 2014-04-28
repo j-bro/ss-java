@@ -26,7 +26,7 @@ public class Points extends Powerup {
 	/**
 	 * The score given for killing this entity
 	 */
-	public static final int KILL_SCORE = 100; 
+	public static final int SCORE = 100; 
 	
 	/**
 	 * The planet's default width, in game coordinates
@@ -91,8 +91,9 @@ public class Points extends Powerup {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f; 
-		fixtureDef.friction = 1.0f;
+		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
+		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
@@ -115,6 +116,6 @@ public class Points extends Powerup {
 	@Override
 	public int getKillScore() {
 		// TODO Auto-generated method stub
-		return KILL_SCORE;
+		return SCORE;
 	}
 }

@@ -119,6 +119,7 @@ public class BulletType0 extends Bullet {
 		fixtureDef.density = 0.1f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
+		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
 		body.setLinearVelocity(DEFAULT_VELOCITY);

@@ -1,5 +1,7 @@
 package com.asdf.ssjava.entities;
 
+import java.math.BigInteger;
+
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -12,39 +14,34 @@ public class Sun extends Obstacle{
 	 * @param args
 	 */
 	/**
-	 * The planet's default velocity (static)
+	 * The sun's default velocity (static)
 	 */
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
-	 * The entity's starting health
+	 * The sun's default health
 	 */
-	public static final int DEFAULT_HEALTH = 1000000;
+	public static final  int DEFAULT_HEALTH = 100000;
 	
 	/**
-	 * The score given for hitting this entity
-	 */
-	public static final int HIT_SCORE = 100;
-	
-	/**
-	 * The score given for killing this entity
-	 */
-	public static final int KILL_SCORE = 1000; 
-	
-	/**
-	 * The planet's default width, in game coordinates
+	 * The sun's default width, in game coordinates
 	 */
 	public static final float DEFAULT_WIDTH = 48;
 	
 	/**
-	 * The planet's default height, in game coordinates
+	 * The sun's default height, in game coordinates
 	 */
 	public static final float DEFAULT_HEIGHT = 48;
 	
 	/**
-	 * The planet's default rotation, in degrees
+	 * The sun's default rotation, in degrees
 	 */
 	public static final float DEFAULT_ROTATION = 0;
+	
+	/**
+	 * The sun's weight, in kg
+	 */
+	public static final BigInteger SUN_WEIGHT = new BigInteger("1989000000000000000000000000000"); 
 	
 	
 	/**
@@ -58,8 +55,8 @@ public class Sun extends Obstacle{
 	 */
 	public Sun(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
-		setHealth(DEFAULT_HEALTH);
 		createDef();
+		setHealth(DEFAULT_HEALTH);
 	}
 	
 	/**
@@ -94,9 +91,21 @@ public class Sun extends Obstacle{
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
-		fixtureDef.density = 0.5f; 
+		fixtureDef.density = 1000000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
+		
+		body.createFixture(fixtureDef);
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		
+		CircleShape circle2 = new CircleShape();
+		circle2.setRadius(width / 2);
+		
+		FixtureDef fixtureDef2 = new FixtureDef();
+		fixtureDef2.shape = circle;
+		fixtureDef2.density = 1000000f; 
+		fixtureDef2.friction = 1.0f;
+		fixtureDef2.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
@@ -112,12 +121,14 @@ public class Sun extends Obstacle{
 
 	@Override
 	public int getHitScore() {
-		return HIT_SCORE;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int getKillScore() {
-		return KILL_SCORE;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

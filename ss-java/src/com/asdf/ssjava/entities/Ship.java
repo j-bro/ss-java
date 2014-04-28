@@ -3,6 +3,8 @@
  */
 package com.asdf.ssjava.entities;
 
+import java.math.BigInteger;
+
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
@@ -108,6 +110,11 @@ public class Ship extends MoveableEntity {
 	 */
 	public boolean maxUpSpeedReached = false;
 	public boolean maxDownSpeedReached = false;
+	
+	/**
+	 * Weight of the ship, in kg 
+	 */
+	public static final BigInteger SHIP_WEIGHT = new BigInteger("907185"); 
 	
 	/**
 	 * Creates a ship with a position, dimensions and rotation.

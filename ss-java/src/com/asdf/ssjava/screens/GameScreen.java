@@ -13,8 +13,6 @@ import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author Jeremy Brown
