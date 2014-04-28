@@ -25,21 +25,30 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
  */
 public class MainMenu implements Screen {
 	
+	/**
+	 * 
+	 */
 	SSJava game;
+	
+	/**
+	 * 
+	 */
 	Stage stage;
-	SpriteBatch batch;
+	
+	/**
+	 * 
+	 */
 	BitmapFont whiteFont;
 	
-	Label titleLabel;
-	Label creditsLabel;
+	/**
+	 * 
+	 */
+	Label titleLabel, creditsLabel;
 	
-	TextButton playButton;
-	MenuButton optionsButton;
-	MenuButton highScoresButton;
-	MenuButton creditsButton;
-	MenuButton exitButton;
-	
-	MenuButton creatorButton;
+	/**
+	 * 
+	 */
+	MenuButton playButton, optionsButton, highScoresButton, creditsButton, exitButton, creatorButton;
 	
 	Screen thisMainMenu = this;
 	
@@ -61,10 +70,7 @@ public class MainMenu implements Screen {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 		
 		stage.act(delta);
-		
-		batch.begin();
-			stage.draw(); 
-		batch.end();
+		stage.draw(); 
 	}
 
 	/*
@@ -88,7 +94,6 @@ public class MainMenu implements Screen {
 		playButton = new MenuButton("Play", 280, 65, game);		
 		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
 		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 140);
-		
 		playButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -114,7 +119,6 @@ public class MainMenu implements Screen {
 		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 60);
-		
 		optionsButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -139,7 +143,6 @@ public class MainMenu implements Screen {
 		highScoresButton = new MenuButton("High Scores", 280, 65, game);
 		highScoresButton.setX(Gdx.graphics.getWidth() / 2 - highScoresButton.getWidth() / 2);
 		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 20);
-		
 		highScoresButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -160,11 +163,34 @@ public class MainMenu implements Screen {
 			}
 		});
 		
+		// Level creator button
+		creatorButton = new MenuButton("Level creator", 280, 65, game);
+		creatorButton.setX(Gdx.graphics.getWidth() / 2 - creatorButton.getWidth() / 2);
+		creatorButton.setY(Gdx.graphics.getHeight() / 2 - creatorButton.getHeight() / 2 - 100);
+		creatorButton.addListener(new InputListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Level creator button down");
+				return true;
+			}
+			
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
+			 */
+			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
+				Gdx.app.log(SSJava.LOG, "Level creator button up");
+				game.setScreen(new LevelCreatorScreen(game, null));
+			}
+		});
+		
 		// credits button
 		creditsButton = new MenuButton("Credits", 280, 65, game);
 		creditsButton.setX(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2);
-		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 100);
-		
+		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 180);
 		creditsButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -188,8 +214,7 @@ public class MainMenu implements Screen {
 		// exit button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
-		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 180);
-		
+		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 260);
 		exitButton.addListener(new InputListener() {
 			/*
 			 * (non-Javadoc)
@@ -229,9 +254,11 @@ public class MainMenu implements Screen {
 		stage.addActor(playButton);
 		stage.addActor(optionsButton);
 		stage.addActor(highScoresButton);
+		stage.addActor(creatorButton);
 		stage.addActor(creditsButton);
 		stage.addActor(exitButton);
 		
+<<<<<<< HEAD
 		// Level creator access button
 		if (SSJava.DEBUG) {
 			creatorButton = new MenuButton("Level creator", 280, 65, game);
@@ -263,6 +290,8 @@ public class MainMenu implements Screen {
 			
 			stage.addActor(creatorButton);
 		}
+=======
+>>>>>>> 325b97903872abb3c64d706fe1ba43b864e02fcf
 	}
  
 	/*
@@ -272,8 +301,6 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
@@ -310,7 +337,7 @@ public class MainMenu implements Screen {
 	 */
 	@Override
 	public void dispose() {
-		batch.dispose();
+		
 	}
 
 }
