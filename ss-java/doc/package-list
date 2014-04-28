@@ -1,5 +1,6 @@
 com.asdf.ssjava
 com.asdf.ssjava.entities
 com.asdf.ssjava.screens
+com.asdf.ssjava.screens.screenelements
 com.asdf.ssjava.tweenaccessors
 com.asdf.ssjava.world
