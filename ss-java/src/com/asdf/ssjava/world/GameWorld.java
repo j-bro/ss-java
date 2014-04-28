@@ -12,10 +12,13 @@ import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,10 +27,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /* Commented imports
@@ -86,6 +91,10 @@ public class GameWorld {
 	 */
 	public static final int CREATOR_TYPE = 1;
 	
+	/**
+	 * Reference to this screen
+	 */
+//	Screen thisScreen = this;
 	
 	/**
 	 * The ScoreKeeper instance
@@ -113,11 +122,15 @@ public class GameWorld {
 	public World box2DWorld;
 	
 	/**
+	 * The path of the current level
+	 */
+	String levelPath;
+	
+	/**
 	 * 
 	 */
 	float progress;
 	
-	public boolean levelCompleted = false;
 	/**
 	 * Constructor for testing a level from the level creator
 	 * @param game
@@ -136,6 +149,7 @@ public class GameWorld {
 	public GameWorld(SSJava game, int worldType, String levelPath) {
 		this.game = game;
 		this.worldType = worldType;
+		this.levelPath = levelPath;
 		
 		// Box2D stuff
 		box2DWorld = new World(new Vector2(0, 0), true);
@@ -215,7 +229,7 @@ public class GameWorld {
 			
 			// Check if the level is completed
 			// TODO stop accelerating ship
-			if (isLevelComplete() || levelCompleted) {
+			if (isLevelComplete()) {
 				levelCompleted();
 			}
 		}
@@ -258,6 +272,8 @@ public class GameWorld {
 		return false;
 	}
 	
+	private boolean timerStarted = false;
+	
 	/**
 	 * Ship behaviour when level completed
 	 */
@@ -279,7 +295,22 @@ public class GameWorld {
 		
 		// Start rotating ship
 		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
-			ship.getBody().applyAngularImpulse(700, true);
+			ship.getBody().applyAngularImpulse(1000, true);
+			
+			if (!timerStarted) {
+				new Timer().scheduleTask(new Task() {
+					/*
+					 * (non-Javadoc)
+					 * @see com.badlogic.gdx.utils.Timer.Task#run()
+					 */
+					@Override
+					public void run() {
+						game.screenshot = ScreenUtils.getFrameBufferTexture();
+						game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+					}
+				}, 4);
+				timerStarted = true;
+			}
 		}
 		
 		// TODO ship zoom off into distance
@@ -404,6 +435,19 @@ public class GameWorld {
 	 */
 	public LevelCreatorScreen getCreator() {
 		return creator;
+	}
+	
+	/**
+	 * @return the levelPath
+	 */
+	public String getLevelPath() {
+		return levelPath;
+	}
+	/**
+	 * @param levelPath the levelPath to set
+	 */
+	public void setLevelPath(String levelPath) {
+		this.levelPath = levelPath;
 	}
 	
 	/**

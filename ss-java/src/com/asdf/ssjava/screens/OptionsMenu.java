@@ -61,7 +61,7 @@ public class OptionsMenu implements Screen {
 	/**
 	 * 
 	 * @param game The game instance of type SSJava
-	 * @param referer The screen object that called this screen
+	 * @param referrer The screen object that called this screen
 	 */
 	public OptionsMenu(SSJava game, Screen referrer) {
 		this.game = game;

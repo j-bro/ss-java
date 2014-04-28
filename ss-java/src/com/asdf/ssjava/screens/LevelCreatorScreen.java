@@ -496,11 +496,10 @@ public class LevelCreatorScreen implements Screen {
 		}
 		
 		/**
-		 * Checks whether or not the click is on the selected entity
 		 * @param e the entity to be checked
 		 * @param screenX the x coordinate of the pointer 
 		 * @param screenY the y coordinate of the pointer
-		 * @return
+		 * @return whether or not the click is on the selected entity
 		 */
 		public boolean isClickOnEntity(AbstractEntity e, float screenX, float screenY) {
 			if (e != null) {				
