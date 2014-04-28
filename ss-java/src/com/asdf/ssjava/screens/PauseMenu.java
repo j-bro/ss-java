@@ -38,12 +38,19 @@ public class PauseMenu implements Screen {
 	 */
 	Stage stage;	
 	
+	/**
+	 * 
+	 */
 	BitmapFont whiteFont;
 	
-	MenuButton backButton;
-	MenuButton optionsButton;
-	MenuButton exitButton;
+	/**
+	 * 
+	 */
+	MenuButton backButton, optionsButton, exitButton;
 	
+	/**
+	 * 
+	 */
 	Label titleLabel;
 	
 	/**

@@ -33,19 +33,39 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class OptionsMenu implements Screen {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
+	
+	/**
+	 * The stage instance
+	 */
 	Stage stage;
-	SpriteBatch batch;	
+	
+	/**
+	 * 
+	 */
 	BitmapFont whiteFont;
 	
+	/**
+	 * 
+	 */
 	Label titleLabel;
 	
-	Label volumeLabel;
-	Label musicLabel;
-	Label soundLabel;
-	TextField musicField;
-	TextField soundField;
+	/**
+	 * 
+	 */
+	Label volumeLabel, musicLabel, soundLabel;
 	
+	/**
+	 * 
+	 */
+	TextField musicField, soundField;
+	
+	/**
+	 * 
+	 */
 	MenuButton backButton;
 	
 	/**
@@ -74,10 +94,7 @@ public class OptionsMenu implements Screen {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 		
 		stage.act(delta);
-		
-		batch.begin();
-			stage.draw(); 
-		batch.end();
+		stage.draw();
 	}
 
 	@Override
@@ -207,8 +224,6 @@ public class OptionsMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show Options menu");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 

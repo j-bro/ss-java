@@ -25,13 +25,29 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class HighScoresMenu implements Screen {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
+	
+	/**
+	 * 
+	 */
 	Stage stage;
-	SpriteBatch batch;	
+	
+	/**
+	 * 
+	 */
 	BitmapFont whiteFont;
 	
+	/**
+	 * 
+	 */
 	Label titleLabel;
 	
+	/**
+	 * 
+	 */
 	MenuButton backButton;
 	
 	/**
@@ -48,6 +64,10 @@ public class HighScoresMenu implements Screen {
 		this.referrer = referrer;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -57,6 +77,10 @@ public class HighScoresMenu implements Screen {
 		stage.draw(); 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
@@ -91,36 +115,49 @@ public class HighScoresMenu implements Screen {
 		stage.addActor(backButton);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show High Scores menu");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
-
 }
