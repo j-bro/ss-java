@@ -7,8 +7,8 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -118,6 +118,7 @@ public class HighScoresMenu implements Screen {
 		titleLabel.setAlignment(Align.center);
 		stage.addActor(titleLabel);
 		
+		
 		namesLabel = new Label("Name"
 				+ "\n"
 				+ "\nn01"
@@ -170,8 +171,28 @@ public class HighScoresMenu implements Screen {
 		scoresLabel.setAlignment(Align.left);
 		stage.addActor(scoresLabel);
 		
+		// Update names
+		String newNames = "Name\n";
+		for (int i = 0; i < game.highScores.size(); i++) {
+			newNames += "\n" + game.highScores.get(i).getName();
+		}
+		namesLabel.setText(newNames);
+		
+		// Update scores
+		String newScores = "Score\n";
+		for (int i = 0; i < game.highScores.size(); i++) {
+			newScores += "\n" + game.highScores.get(i).getScore();
+		}
+		scoresLabel.setText(newScores);
 	}
 
+	/**
+	 * Read the high scores from the file
+	 */
+	public void readScores() {
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.badlogic.gdx.Screen#show()
@@ -179,7 +200,7 @@ public class HighScoresMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show High Scores menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*
