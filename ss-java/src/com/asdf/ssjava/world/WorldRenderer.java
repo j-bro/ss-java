@@ -292,10 +292,7 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
-<<<<<<< .merge_file_a07960
-=======
 					+ "\nDEBUG TEXT HOLDER"
->>>>>>> .merge_file_a02216
 //					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
@@ -315,11 +312,8 @@ public class WorldRenderer {
 	 */
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-<<<<<<< .merge_file_a07960
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
-=======
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
->>>>>>> .merge_file_a02216
 		
 		// camera follows ship if in game
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {			
@@ -351,10 +345,7 @@ public class WorldRenderer {
 		}
 		*/
 		
-<<<<<<< .merge_file_a07960
-=======
 		// Draw background
->>>>>>> .merge_file_a02216
 		if (gameWorld.getLevel().getBackgroundPath() != null) {
 			bgSprite.setBounds(cam.position.x - cam.viewportWidth / 2, cam.position.y - cam.viewportHeight / 2, cam.viewportWidth, cam.viewportHeight);
 			bgSprite.draw(batch);
@@ -401,8 +392,6 @@ public class WorldRenderer {
 		batch.end();
 		
 		// game HUD
-<<<<<<< .merge_file_a07960
-=======
 		updateHUD();
 		
 		// Debug renderer
@@ -443,17 +432,6 @@ public class WorldRenderer {
 		stage.act();
 		stage.draw();
 	}
-
-	/**
-	 * Dispose method
-	 */
-	public void dispose() {
-		batch.dispose();
-		if (sr != null)
-			sr.dispose();
-		if (debugRenderer != null)
-			debugRenderer.dispose();
-	}
 	
 	/**
 	 * Updates the HUD display.
@@ -461,7 +439,6 @@ public class WorldRenderer {
 	 * Entity list, position, and selected entity box for level creator mode. 
 	 */
 	public void updateHUD() {
->>>>>>> .merge_file_a02216
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
 			// score
 			scoreLabel.setText("Score: " + new Integer(gameWorld.scoreKeeper.getScore()).toString());
@@ -640,7 +617,6 @@ public class WorldRenderer {
 			}
 			
 			sr.setProjectionMatrix(cam.combined);
-<<<<<<< .merge_file_a07960
 				// TODO issue...
 			if (selectedEntity != null) {
 				sr.begin(ShapeType.Line);
@@ -695,9 +671,6 @@ public class WorldRenderer {
 			sr.dispose();
 		if (debugRenderer != null)
 			debugRenderer.dispose();
-	}
-	
-=======
 			sr.begin(ShapeType.Line);
 				// TODO issue...
 			if (selectedEntity != null) {
@@ -706,13 +679,12 @@ public class WorldRenderer {
 			sr.line(gameWorld.getLevel().getLevelEnd(), cam.position.y - cam.viewportHeight / 2, gameWorld.getLevel().getLevelEnd(), cam.position.y + cam.viewportHeight / 2);
 			sr.end();
 		}
-	}
+
 	
 	/**
 	 * @param e the entity for which the texture is to be returned
 	 * @return the corresponding texture
 	 */
->>>>>>> .merge_file_a02216
 	public Texture getTexture(AbstractEntity e) {
 		if (e instanceof SpaceRock) {
 			return spaceRockTexture;

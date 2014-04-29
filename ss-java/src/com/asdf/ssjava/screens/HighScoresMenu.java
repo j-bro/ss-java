@@ -74,10 +74,9 @@ public class HighScoresMenu implements Screen {
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 		
 		stage.act(delta);
-		
-		batch.begin();
-			stage.draw(); 
-		batch.end();
+
+		stage.draw(); 
+
 
 		stage.draw(); 
 	}

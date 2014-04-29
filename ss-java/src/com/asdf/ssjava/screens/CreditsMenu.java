@@ -72,9 +72,7 @@ public class CreditsMenu implements Screen {
 		stage.act(delta);
 
 		
-		batch.begin();
-			stage.draw(); 
-		batch.end();
+		stage.draw(); 
 
 		stage.draw(); 
 	}

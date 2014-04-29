@@ -52,8 +52,6 @@ public class BackButton extends MenuButton {
 			}
 		});
 	}
-<<<<<<< .merge_file_a07352
-=======
 
 	/**
 	 * @return the referrer
@@ -68,5 +66,4 @@ public class BackButton extends MenuButton {
 	public void setReferrer(Screen referrer) {
 		this.referrer = referrer;
 	}
->>>>>>> .merge_file_a07976
 }

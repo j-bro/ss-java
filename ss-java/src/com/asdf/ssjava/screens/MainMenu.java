@@ -82,10 +82,8 @@ public class MainMenu implements Screen {
 		if (stage == null) {
 			stage = new Stage(width, height, true);
 		}
-<<<<<<< .merge_file_a02988
-=======
+		
 		stage.setViewport(width, height);
->>>>>>> .merge_file_a07060
 		stage.clear();
 		 
 		Gdx.input.setInputProcessor(stage);
@@ -257,41 +255,6 @@ public class MainMenu implements Screen {
 		stage.addActor(creatorButton);
 		stage.addActor(creditsButton);
 		stage.addActor(exitButton);
-		
-<<<<<<< HEAD
-		// Level creator access button
-		if (SSJava.DEBUG) {
-			creatorButton = new MenuButton("Level creator", 280, 65, game);
-			creatorButton.setX(Gdx.graphics.getWidth() / 2 - creatorButton.getWidth() / 2);
-			creatorButton.setY(Gdx.graphics.getHeight() / 2 - creatorButton.getHeight() / 2 - 260);
-			creatorButton.addListener(new InputListener() {
-				/*
-				 * (non-Javadoc)
-				 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
-				 */
-				public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-					Gdx.app.log(SSJava.LOG, "Level creator button down");
-					return true;
-				}
-				
-				/*
-				 * (non-Javadoc)
-				 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
-				 */
-				public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-					Gdx.app.log(SSJava.LOG, "Level creator button up");
-<<<<<<< .merge_file_a02988
-					game.setScreen(new LevelCreator(game, null));
-=======
-					game.setScreen(new LevelCreatorScreen(game, null));
->>>>>>> .merge_file_a07060
-				}
-			});
-			
-			stage.addActor(creatorButton);
-		}
-=======
->>>>>>> 325b97903872abb3c64d706fe1ba43b864e02fcf
 	}
  
 	/*
