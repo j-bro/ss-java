@@ -115,8 +115,6 @@ public class LevelCreatorScreen implements Screen {
 	public void render(float delta) {
 		renderer.render();
 		gameWorld.update();
-		
-		// TODO outline selectedEntity	
 	}
 
 	/*

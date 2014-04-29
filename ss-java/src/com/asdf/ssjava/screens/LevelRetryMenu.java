@@ -4,11 +4,9 @@
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -140,7 +138,6 @@ public class LevelRetryMenu implements Screen {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Select level button down");
 				return true;
 			}
-
 			/*
 			 * (non-Javadoc)
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)

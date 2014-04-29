@@ -21,7 +21,7 @@ public class Sun extends Obstacle{
 	/**
 	 * The sun's default health
 	 */
-	public static final  int DEFAULT_HEALTH = 100000;
+	public static final int DEFAULT_HEALTH = 100000;
 	
 	/**
 	 * The sun's default width, in game coordinates

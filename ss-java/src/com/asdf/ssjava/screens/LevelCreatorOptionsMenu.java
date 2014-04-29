@@ -135,8 +135,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 				((LevelCreatorScreen) referrer).getGameWorld().exportLevel("levels/temp.json");
 				game.gameScreen = new GameScreen(game, "levels/temp.json", (LevelCreatorScreen) referrer);
 				game.setScreen(game.gameScreen);
-				}
-			});
+			}
+		});
 		
 		// Save level button
 		saveButton = new MenuButton("Save level", 280, 65, game);
