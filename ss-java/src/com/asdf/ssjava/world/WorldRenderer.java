@@ -290,7 +290,6 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
 //					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
@@ -488,6 +487,7 @@ public class WorldRenderer {
 						+ "\nHealth: " + ship.getHealth() + " half hearts"
 						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
 						+ "\nDEBUG TEXT HOLDER"	
+						+ "\nDEBUG TEXT HOLDER"	
 //						+ "\nDEBUG TEXT HOLDER"	
 						+ "\nDEBUG TEXT HOLDER");	
 			}
@@ -613,6 +613,7 @@ public class WorldRenderer {
 //					+ "\nSet background: B"	
 					+ "\nMove entities: arrows & mouse"
 					+ "\nOptions menu: ESC"
+					+ "\nLevel end: E (" + gameWorld.getLevel().getLevelEnd()
 					+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());
 		}
 		
