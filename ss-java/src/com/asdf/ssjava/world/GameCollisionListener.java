@@ -61,11 +61,17 @@ public class GameCollisionListener implements ContactListener {
 		else if (body2.getUserData() instanceof BulletType0) {
 			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
 		}
-		else if (body1.getUserData() instanceof BulletType1 && body2.getUserData() instanceof Ship) {			
-			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
+		else if (body1.getUserData() instanceof BulletType1 && body2.getUserData() instanceof Ship) {
+			Ship ship = (Ship) body2.getUserData();
+			if (!ship.isLightSpeedEnabled()) {				
+				bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
+			}
 		}
 		else if (body2.getUserData() instanceof BulletType1 && body1.getUserData() instanceof Ship) {
-			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
+			Ship ship = (Ship) body1.getUserData();
+			if (!ship.isLightSpeedEnabled()) {				
+				bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
+			}
 		}
 		
 		// Ship collision
@@ -78,7 +84,7 @@ public class GameCollisionListener implements ContactListener {
 			}
 			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
-				// TODO AudioPlayer.speedOfLight();
+				 AudioPlayer.speedOfLightOn();
 			}
 			else if (body2.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
@@ -100,7 +106,7 @@ public class GameCollisionListener implements ContactListener {
 			}
 			else if (body1.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
-				// TODO AudioPlayer.speedOfLight();
+				AudioPlayer.speedOfLightOn();
 			}
 			else if (body1.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	

@@ -159,7 +159,7 @@ public class WorldRenderer {
 		enemyType1Texture = game.assetManager.get("data/textures/enemy_1.png", Texture.class);
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bulletType0Texture = game.assetManager.get("data/textures/bullet_strip.png", Texture.class);
+		bulletType0Texture = game.assetManager.get("data/textures/good_bullet.png", Texture.class);
 		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		powerupHealthUpTexture = game.assetManager.get("data/textures/health_up.png", Texture.class);
@@ -182,7 +182,6 @@ public class WorldRenderer {
 		
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
-		bulletType2Texture = bulletType0Texture;
 		
 //		gameWorld.setBackground(gameWorld.getLevel().getBackgroundPath()); TODO fix
 		bgTexture = game.assetManager.get("data/textures/backgrounds/background_sparks.png", Texture.class);

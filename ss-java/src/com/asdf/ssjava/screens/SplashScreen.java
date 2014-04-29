@@ -124,7 +124,7 @@ public class SplashScreen implements Screen {
 		assetManager.load("data/textures/space_rock.png", Texture.class);
 		assetManager.load("data/textures/asteroid.png", Texture.class);
 		assetManager.load("data/textures/enemy_1.png", Texture.class);
-		assetManager.load("data/textures/bullet_strip.png", Texture.class);
+		assetManager.load("data/textures/good_bullet.png", Texture.class);
 		assetManager.load("data/textures/health_up.png", Texture.class);
 		assetManager.load("data/textures/speed_of_light.png", Texture.class);
 		assetManager.load("data/textures/points.png", Texture.class);

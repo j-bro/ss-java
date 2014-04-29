@@ -147,7 +147,7 @@ public class GameWorld {
 		// Box2D stuff
 		box2DWorld = new World(new Vector2(0, 0), true);
 		
-		ship = new Ship(new Vector2(5, Gdx.graphics.getHeight() / 40), 6, 3, 0, this, box2DWorld);
+		ship = new Ship(new Vector2(5, 18), 6, 3, 0, this, box2DWorld);
 		
 		bullets = new Array<Bullet>();
 		
