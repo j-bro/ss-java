@@ -24,6 +24,11 @@ public class Sun extends Obstacle{
 	public static final int DEFAULT_HEALTH = 100000;
 	
 	/**
+	 * Kill score for killing the sun
+	 */
+	public static final int KILL_SCORE = 1000000;
+	
+	/**
 	 * The sun's default width, in game coordinates
 	 */
 	public static final float DEFAULT_WIDTH = 48;
@@ -99,16 +104,16 @@ public class Sun extends Obstacle{
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 		
 		CircleShape circle2 = new CircleShape();
-		circle2.setRadius(width / 2);
+		circle2.setRadius(width / 2 + 10);
 		
 		FixtureDef fixtureDef2 = new FixtureDef();
-		fixtureDef2.shape = circle;
-		fixtureDef2.density = 1000000f; 
+		fixtureDef2.shape = circle2;
+		fixtureDef2.density = 0.5f; 
 		fixtureDef2.friction = 1.0f;
 		fixtureDef2.restitution = 0.1f;
 		fixtureDef2.isSensor = true;
 		
-		body.createFixture(fixtureDef);
+		body.createFixture(fixtureDef2);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
@@ -129,7 +134,7 @@ public class Sun extends Obstacle{
 	@Override
 	public int getKillScore() {
 		// TODO Auto-generated method stub
-		return 0;
+		return KILL_SCORE;
 	}
 
 }
