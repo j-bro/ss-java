@@ -9,7 +9,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Json;
 
 /**
  * @author Jeremy Brown
@@ -31,12 +33,17 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	
 	/**
 	 * 
 	 */
 	public static Preferences prefs;
+	
+	/**
+	 * 
+	 */
+	public HighScores highScores;
 	
 	/**
 	 * 
@@ -57,6 +64,9 @@ public class SSJava extends Game {
 	@Override
 	public void create() {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
+		
+		highScores = loadHighScores("highScores.json");
+		
 		assetManager = new AssetManager();
 		
 		setScreen(new SplashScreen(this));			
@@ -97,5 +107,26 @@ public class SSJava extends Game {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Load the high scores
+	 * @param filePath the path where the high scores file is located
+	 * @return the HighScores object containing all the high scores
+	 */
+	public static HighScores loadHighScores(String filePath) {
+		FileHandle file = Gdx.files.local(filePath);
+		if (file.exists()) {			
+			Json json = new Json();
+			return json.fromJson(HighScores.class, Gdx.files.local(filePath)); 
+		}
+		// In case high scores file is not found, create a new instance filled with zeros
+		else {
+			return new HighScores() {{
+				for (int i = 0; i < 10; i++) {					
+					add(new Score("AAA", 0));
+				}
+			}};
+		}
 	}
 }

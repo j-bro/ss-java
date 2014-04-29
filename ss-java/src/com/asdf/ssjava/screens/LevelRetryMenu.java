@@ -5,6 +5,7 @@ package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
+import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -46,9 +47,9 @@ public class LevelRetryMenu implements Screen {
 	MenuButton exitButton, retryButton, selectLevelButton;
 	
 	/**
-	 * 
+	 * Display labels
 	 */
-	Label titleLabel;
+	Label titleLabel, scoreLabel;
 	
 	/**
 	 * Background images
@@ -66,11 +67,17 @@ public class LevelRetryMenu implements Screen {
 	Screen referrer;
 	
 	/**
+	 * The game world instance
+	 */
+	GameWorld gameWorld;
+	
+	/**
 	 * 
 	 */
 	public LevelRetryMenu(SSJava game, Screen referrer) {
 		this.game = game;
 		this.referrer = referrer;
+		gameWorld = (GameWorld) ((GameScreen) referrer).getGameWorld();
 	}
 
 	/*
@@ -98,6 +105,12 @@ public class LevelRetryMenu implements Screen {
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
+		
+		// Score display
+		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
+		scoreLabel = new Label("Score: " + gameWorld.getScoreKeeper().getScore(), ls);
+		scoreLabel.setX(width / 2 - scoreLabel.getWidth() / 2);
+		scoreLabel.setY(height / 2 + 180);
 				
 		// Replay the level
 		retryButton = new MenuButton("Replay", 280, 65, game);
@@ -152,7 +165,6 @@ public class LevelRetryMenu implements Screen {
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 250);
-		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
@@ -171,7 +183,6 @@ public class LevelRetryMenu implements Screen {
 			}
 		});
 		
-		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("You died!", ls);
 		titleLabel.setX(0);
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
@@ -186,11 +197,13 @@ public class LevelRetryMenu implements Screen {
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
 		}
-				
-		stage.addActor(titleLabel);
+		
+		stage.addActor(scoreLabel);
 		stage.addActor(retryButton);
 		stage.addActor(selectLevelButton);
 		stage.addActor(exitButton);
+		stage.addActor(titleLabel);
+		
 	}
 
 	/*
@@ -199,7 +212,7 @@ public class LevelRetryMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show creator options");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level retry menu");
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
