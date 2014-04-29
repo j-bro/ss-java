@@ -30,24 +30,29 @@ public class HighScoresMenu implements Screen {
 	SSJava game;
 	
 	/**
-	 * 
+	 * The stage instance
 	 */
 	Stage stage;
 	
 	/**
-	 * 
+	 * The font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
+	 * The title label
 	 */
 	Label titleLabel;
 	
 	/**
-	 * 
+	 * Buttons
 	 */
 	MenuButton backButton;
+	
+	/**
+	 * The score labels 
+	 */
+	Label positionsLabel, namesLabel, scoresLabel;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -102,6 +107,7 @@ public class HighScoresMenu implements Screen {
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
+		stage.addActor(backButton);
 		
 		// Title text
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
@@ -110,9 +116,60 @@ public class HighScoresMenu implements Screen {
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
-		
 		stage.addActor(titleLabel);
-		stage.addActor(backButton);
+		
+		namesLabel = new Label("Name"
+				+ "\n"
+				+ "\nn01"
+				+ "\nn02"
+				+ "\nn03"
+				+ "\nn04"
+				+ "\nn05"
+				+ "\nn06"
+				+ "\nn07"
+				+ "\nn08"
+				+ "\nn09"
+				+ "\nn10", ls);
+		namesLabel.setX(width / 2 - namesLabel.getWidth() / 2);
+		namesLabel.setY(height / 2 - namesLabel.getHeight() / 2);
+		namesLabel.setAlignment(Align.center);
+		stage.addActor(namesLabel);
+		
+		
+		positionsLabel = new Label("Pos"
+				+ "\n"
+				+ "\n1."
+				+ "\n2."
+				+ "\n3."
+				+ "\n4."
+				+ "\n5."
+				+ "\n6."
+				+ "\n7."
+				+ "\n8."
+				+ "\n9."
+				+ "\n10.", ls);
+		positionsLabel.setX(width / 2 - namesLabel.getWidth() / 2 - width / 10);
+		positionsLabel.setY(height / 2 - positionsLabel.getHeight() / 2);
+		positionsLabel.setAlignment(Align.right);
+		stage.addActor(positionsLabel);
+		
+		scoresLabel = new Label("Score"
+				+ "\n"
+				+ "\nscore1"
+				+ "\nscore2"
+				+ "\nscore3"
+				+ "\nscore4"
+				+ "\nscore5"
+				+ "\nscore6"
+				+ "\nscore7"
+				+ "\nscore8"
+				+ "\nscore9"
+				+ "\nscore10", ls);
+		scoresLabel.setX(width / 2 + namesLabel.getWidth() / 2 + width / 20);
+		scoresLabel.setY(height / 2 - scoresLabel.getHeight() / 2);
+		scoresLabel.setAlignment(Align.left);
+		stage.addActor(scoresLabel);
+		
 	}
 
 	/*
@@ -131,7 +188,7 @@ public class HighScoresMenu implements Screen {
 	 */
 	@Override
 	public void hide() {
-
+		
 	}
 
 	/*
@@ -140,7 +197,7 @@ public class HighScoresMenu implements Screen {
 	 */
 	@Override
 	public void pause() {
-
+		
 	}
 
 	/*
@@ -149,7 +206,7 @@ public class HighScoresMenu implements Screen {
 	 */
 	@Override
 	public void resume() {
-
+		
 	}
 
 	/*
@@ -158,6 +215,6 @@ public class HighScoresMenu implements Screen {
 	 */
 	@Override
 	public void dispose() {
-
+		
 	}
 }

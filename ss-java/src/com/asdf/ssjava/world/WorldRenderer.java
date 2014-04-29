@@ -243,6 +243,24 @@ public class WorldRenderer {
 			stage.addActor(fullHeartImage2);
 			stage.addActor(fullHeartImage3);
 			stage.addActor(halfHeartImage);
+			
+			// Debug display
+			if (SSJava.DEBUG) {
+				// Debug text
+				LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+				debugLabel = new Label("DEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+//						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER", dbls);
+				debugLabel.setX(10);
+				debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
+				stage.addActor(debugLabel);
+			}
 		}
 		// Creator HUD
 		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
@@ -280,12 +298,6 @@ public class WorldRenderer {
 			stage.addActor(powerupSpeedOfLightImage);
 			stage.addActor(pointsImage);
 			
-			sr = new ShapeRenderer();
-			sr.setProjectionMatrix(cam.combined);
-		}
-		
-		// Debug display
-		if (SSJava.DEBUG) {
 			// Debug text
 			LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
 			debugLabel = new Label("DEBUG TEXT HOLDER"
@@ -301,9 +313,12 @@ public class WorldRenderer {
 			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
 			stage.addActor(debugLabel);
 			
-			// Shape (hitbox) renderer
-			debugRenderer = new Box2DDebugRenderer();
+			sr = new ShapeRenderer();
+			sr.setProjectionMatrix(cam.combined);
 		}
+			
+		// Shape (hitbox) renderer
+		debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	
