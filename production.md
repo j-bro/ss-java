@@ -24,6 +24,11 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level design
 - HUD: level progress
 - Sounds
+- Pass through obstacle after collision
+- Dead ship texture
+- Audio: ship dies, level complete, health up, ship-obstacle collision
+- level save file name bug ??
+
 
 ####Complete
 - Ship movement (completed DD/MM)
