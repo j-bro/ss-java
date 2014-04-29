@@ -82,6 +82,7 @@ public class MainMenu implements Screen {
 		if (stage == null) {
 			stage = new Stage(width, height, true);
 		}
+		
 		stage.setViewport(width, height);
 		stage.clear();
 		 
@@ -254,7 +255,6 @@ public class MainMenu implements Screen {
 		stage.addActor(creatorButton);
 		stage.addActor(creditsButton);
 		stage.addActor(exitButton);
-		
 	}
  
 	/*

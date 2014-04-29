@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -8,13 +11,26 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+/**
+ * 
+ * @author Jeremy Brown
+ *
+ */
 public class BackButton extends MenuButton {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
 	
+	/**
+	 * The referring screen
+	 */
 	Screen referrer;
 	
 	/**
+	 * 
+	 * @param text
 	 * @param width
 	 * @param height
 	 * @param game
@@ -29,6 +45,10 @@ public class BackButton extends MenuButton {
 		addBackButtonListener();
 	}
 	
+	/**
+	 * Adds an action listener to this button.
+	 * Listener has the default behaviour of setting the screen to the referring screen
+	 */
 	public void addBackButtonListener() {
 		addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {

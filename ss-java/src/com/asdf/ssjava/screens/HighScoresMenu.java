@@ -56,8 +56,8 @@ public class HighScoresMenu implements Screen {
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param game The game instance of type SSJava
+	 * @param game the game instance of type SSJava
+	 * @param referrer the referring screen
 	 */
 	public HighScoresMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -94,6 +94,7 @@ public class HighScoresMenu implements Screen {
 		        }
 			};
 		}
+
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);

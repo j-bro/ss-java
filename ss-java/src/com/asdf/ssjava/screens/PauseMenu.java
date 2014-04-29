@@ -62,6 +62,7 @@ public class PauseMenu implements Screen {
 	 * A reference to this menu object to pass to the anonymous listener classes
 	 */
 	Screen thisMenu = this;
+
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -78,6 +79,10 @@ public class PauseMenu implements Screen {
 		this.referrer = referrer;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -87,6 +92,10 @@ public class PauseMenu implements Screen {
 		stage.draw();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
@@ -104,6 +113,7 @@ public class PauseMenu implements Screen {
 		        }
 			};
 		}
+
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
@@ -117,16 +127,15 @@ public class PauseMenu implements Screen {
 		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
-		
 		optionsButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Options button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				game.setScreen(new OptionsMenu(game, thisMenu));
-				Gdx.app.log(SSJava.LOG, "Options button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Options button up");
 			}
 		});
 		
@@ -134,15 +143,14 @@ public class PauseMenu implements Screen {
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 150);
-		
 		exitButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				// TODO potential bug??
 				if (((GameScreen) referrer).getGameWorld().getCreator() != null) {
 					game.setScreen(game.gameScreen.gameWorld.getCreator());
@@ -175,30 +183,47 @@ public class PauseMenu implements Screen {
 		stage.addActor(exitButton);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show pause menu");
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
 	}

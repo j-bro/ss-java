@@ -47,6 +47,11 @@ public class MagneticObject extends Obstacle{
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
+	 * Weight mod of a magnetic object, in kg
+	 */
+	public static final double MAG_OBJECT_WEIGHT_MOD = 0.0000000107185;
+	
+	/**
 	 * 
 	 * @param position
 	 * @param width

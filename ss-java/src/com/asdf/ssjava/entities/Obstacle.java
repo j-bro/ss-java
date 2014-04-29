@@ -3,9 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
-import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 

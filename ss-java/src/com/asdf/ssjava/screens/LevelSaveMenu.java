@@ -99,6 +99,7 @@ public class LevelSaveMenu implements Screen {
 		        }
 			};
 		}
+		
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
@@ -166,7 +167,7 @@ public class LevelSaveMenu implements Screen {
 			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
-			stage.addActor(opacityImage);	
+			stage.addActor(opacityImage);
 		}
 		
 		stage.addActor(backButton);
@@ -182,6 +183,7 @@ public class LevelSaveMenu implements Screen {
 	public void saveLevel(String name) {
 		// TODO format string name
 		// Append extension if not present
+		LevelCreatorScreen creator = ((LevelCreatorScreen) ((LevelCreatorOptionsMenu) referrer).getReferrer());
 		if (name.length() <= 5) {
 			name += ".json";
 		}
@@ -189,7 +191,6 @@ public class LevelSaveMenu implements Screen {
 			name += ".json";
 		}
 		
-		LevelCreatorScreen creator = ((LevelCreatorScreen) ((LevelCreatorOptionsMenu) referrer).getReferrer());
 		creator.gameWorld.exportLevel("levels/" + name);
 		creator.setLevelModified(false);
 	}

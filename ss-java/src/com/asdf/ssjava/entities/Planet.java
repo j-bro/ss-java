@@ -3,6 +3,8 @@
  */
 package com.asdf.ssjava.entities;
 
+import java.math.BigInteger;
+
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -57,9 +59,9 @@ public class Planet extends Obstacle {
 	public static final double GRAVITATIONNAL_CONSTANT = 6.67;
 
 	/**
-	 * The planet's weight modifier
+	 * The planet's weight in kg
 	 */
-	public static final long PLANET_WEIGHT_MOD = 59720000000000L;
+	public static final BigInteger PLANET_WEIGHT = new BigInteger("5972000000000000000000000"); 
 	
 	/**
 	 * The planet's radius
@@ -107,11 +109,11 @@ public class Planet extends Obstacle {
 	 * @param distance
 	 * @return force
 	 */
-	public double gravitationnalPull(long mass, long distance){
-		double force;
-		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT_MOD * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
-		return force;
-	}
+//	public double gravitationnalPull(long mass, long distance){
+//		double force;
+//		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
+//		return force;
+//	}
 	
 	/*
 	 * (non-Javadoc)
@@ -142,7 +144,7 @@ public class Planet extends Obstacle {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
-		fixtureDef.density = 0.5f; 
+		fixtureDef.density = 1000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
 		

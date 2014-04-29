@@ -3,6 +3,8 @@
  */
 package com.asdf.ssjava.entities;
 
+import java.math.BigInteger;
+
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -47,6 +49,11 @@ public class Asteroid extends Obstacle {
 	 * The asteroid's default rotation, in degrees
 	 */
 	public static final float DEFAULT_ROTATION = 0;
+	
+	/**
+	 * Weight mod of an asteroid, in kg
+	 */
+	public static final BigInteger ASTEROID_WEIGHT = new BigInteger("453542"); 
 	
 	/**
 	 * 

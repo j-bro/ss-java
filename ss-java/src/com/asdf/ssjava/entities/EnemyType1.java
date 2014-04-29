@@ -91,8 +91,10 @@ public class EnemyType1 extends Enemy {
 	 * @param gameWorld the world instance
 	 * @param box2DWorld 
 	 */
+
 	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
+
 		setHealth(DEFAULT_HEALTH);
 		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 		createDef();

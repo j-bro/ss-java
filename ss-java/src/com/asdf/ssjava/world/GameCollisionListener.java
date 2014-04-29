@@ -7,9 +7,12 @@ import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Bullet;
+import com.asdf.ssjava.entities.BulletType0;
+import com.asdf.ssjava.entities.BulletType1;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
+import com.asdf.ssjava.entities.Points;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -52,10 +55,16 @@ public class GameCollisionListener implements ContactListener {
 		Body body2 = contact.getFixtureB().getBody();
 		
 		// Bullet collision
-		if (body1.getUserData() instanceof Bullet) {			
+		if (body1.getUserData() instanceof BulletType0) {			
 			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
 		}
-		else if (body2.getUserData() instanceof Bullet) {
+		else if (body2.getUserData() instanceof BulletType0) {
+			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
+		}
+		else if (body1.getUserData() instanceof BulletType1 && body2.getUserData() instanceof Ship) {			
+			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
+		}
+		else if (body2.getUserData() instanceof BulletType1 && body1.getUserData() instanceof Ship) {
 			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
 		}
 		
@@ -70,6 +79,9 @@ public class GameCollisionListener implements ContactListener {
 			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
 				// TODO AudioPlayer.speedOfLight();
+			}
+			else if (body2.getUserData() instanceof Points) {
+				pointsCollected((Points) body2.getUserData(), ship);	
 			}
 			else {
 				// Kill other entities in light speed
@@ -90,6 +102,9 @@ public class GameCollisionListener implements ContactListener {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
 				// TODO AudioPlayer.speedOfLight();
 			}
+			else if (body1.getUserData() instanceof Points) {
+				pointsCollected((Points) body2.getUserData(), ship);	
+			}
 			else {
 				// Kill other entities in light speed
 				if (ship.isLightSpeedEnabled()) {
@@ -98,7 +113,7 @@ public class GameCollisionListener implements ContactListener {
 				AudioPlayer.shipImpact();
 			}
 		}			
-		}	
+	}	
 	
 	/**
 	 * Called when a bullet collides with an entity
@@ -107,7 +122,7 @@ public class GameCollisionListener implements ContactListener {
 	 * @param e the entity that collided
 	 */
 	public void bulletImpact(Bullet b, AbstractEntity e) {
-		if (!(e instanceof Powerup)) {
+		if (!(e instanceof Powerup || e instanceof Bullet)) {
 			Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " collided with " + e.toString() + " " + Integer.toHexString(e.hashCode()));
 			e.healthChange((-1) * b.getDamage()); 
 			b.setHealth(0);
@@ -116,6 +131,18 @@ public class GameCollisionListener implements ContactListener {
 			// Hit score
 			gameWorld.getScoreKeeper().add(e.getHitScore());
 		}
+	}
+	
+	/**
+	 * Called when the "points" object is picked up
+	 * Removes the object and adds score to the ScoreKeeper
+	 * @param p the object picked up
+	 * @param s the ship
+	 */
+	public void pointsCollected(Points p, Ship s) {
+		Gdx.app.log(SSJava.LOG, "Points collected: " + Integer.toHexString(p.hashCode()) + " Amount: " + Points.SCORE + " points added");
+		gameWorld.getScoreKeeper().add(Points.SCORE);
+		p.setHealth(0);
 	}
 	
 	/**

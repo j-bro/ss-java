@@ -10,8 +10,6 @@ package com.asdf.ssjava.entities;
  *
  */
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
-
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;

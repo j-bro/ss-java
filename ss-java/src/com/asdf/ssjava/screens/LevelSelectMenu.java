@@ -6,7 +6,6 @@ package com.asdf.ssjava.screens;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.LevelSelectButton;
@@ -19,6 +18,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,15 +37,30 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class LevelSelectMenu implements Screen {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
+	
+	/**
+	 * The stage instance
+	 */
 	Stage stage;
-	SpriteBatch batch;	
+	
+	/**
+	 * The title font
+	 */
 	BitmapFont whiteFont;
 	
+	/**
+	 * The title label
+	 */
 	Label titleLabel;
 	
+	/**
+	 * The buttons
+	 */
 	MenuButton loadButton, backButton;
-	
 	LevelSelectButton level1Button, level2Button, level3Button, level4Button, level5Button;
 	
 	/**
@@ -50,26 +69,31 @@ public class LevelSelectMenu implements Screen {
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param game The game instance of type SSJava
+	 * @param game the game instance of type SSJava
+	 * @param referrer the referring screen
 	 */
 	public LevelSelectMenu(SSJava game, Screen referrer) {
 		this.game = game;
 		this.referrer = referrer;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);
 
 		stage.act(delta);
-		
-		batch.begin();
-			stage.draw();
-		batch.end();
+		stage.draw();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
@@ -83,14 +107,16 @@ public class LevelSelectMenu implements Screen {
 		        }
 			};
 		}
+
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
-		// level buttons
+		// Level buttons
 		level1Button = new LevelSelectButton("Level 1", 280, 65, game, "levels/level1.json");
 		level1Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level1Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 150);
+		
 		if (!SSJava.checkLevelCompletion(1 - 1)) {
 			level1Button.setEnabled(false);
 		}
@@ -174,7 +200,7 @@ public class LevelSelectMenu implements Screen {
 			}
 		});
 		
-		// exit to main menu button
+		// Exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
@@ -188,6 +214,9 @@ public class LevelSelectMenu implements Screen {
 		titleLabel.setAlignment(Align.center);
 		
 		stage.addActor(level1Button);
+		stage.addActor(titleLabel);
+		stage.addActor(backButton);
+		stage.addActor(level1Button);
 		stage.addActor(level2Button);
 		stage.addActor(level3Button);
 		stage.addActor(level4Button);
@@ -195,32 +224,49 @@ public class LevelSelectMenu implements Screen {
 		stage.addActor(loadButton);
 		stage.addActor(backButton);
 		stage.addActor(titleLabel);
-		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level selection");
-		
-		batch = new SpriteBatch();
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
 

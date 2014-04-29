@@ -1,6 +1,7 @@
 /**
  * Level selection button base class 
  */
+
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.SSJava;
@@ -12,21 +13,37 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+
 /**
  * 
  * @author Jeremy Brown
  *
  */
+
 public class LevelSelectButton extends TextButton {
 
+	/**
+	 * The game instance
+	 */
 	SSJava game;
+	
+	/**
+	 * The display text of this button
+	 */
 	String text;
+	
+	/**
+	 * The path of the level to be loaded when this button is clicked 
+	 */
 	String levelPath;
 	
+	/**
+	 * Whether or not the button is enabled
+	 */
 	boolean enabled = true;
 	
 	/**
-	 * TODO
+	 * 
 	 * @param text
 	 * @param width
 	 * @param height
@@ -49,6 +66,7 @@ public class LevelSelectButton extends TextButton {
 		addLevelButtonListener();
 	}
 	
+
 	/**
 	 * TODO
 	 * @param button
@@ -67,9 +85,10 @@ public class LevelSelectButton extends TextButton {
 		
 		addLevelButtonListener();
 	}
-	
+
 	/**
-	 * TODO
+	 * Adds an action listener to this button.
+	 * Listener has the default behaviour of setting the screen to a game screen that loads the specified level
 	 */
 	public void addLevelButtonListener() {
 		addListener(new InputListener() {

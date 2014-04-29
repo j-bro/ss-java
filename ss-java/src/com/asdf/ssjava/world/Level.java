@@ -4,6 +4,7 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.entities.Enemy;
+
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
 import com.badlogic.gdx.utils.Array;

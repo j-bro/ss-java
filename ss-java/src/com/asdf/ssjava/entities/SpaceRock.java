@@ -1,5 +1,7 @@
 package com.asdf.ssjava.entities;
 
+import java.math.BigInteger;
+
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -40,6 +42,11 @@ public class SpaceRock extends Obstacle {
 	 * The space rock's default rotation, in degrees
 	 */
 	public static final float DEFAULT_ROTATION = 0;
+	
+	/**
+	 * Weight mod of a space rock, in kg
+	 */
+	public static final BigInteger SPACEROCK_WEIGHT = new BigInteger("453542"); 
 	
 	/**
 	 * @param position

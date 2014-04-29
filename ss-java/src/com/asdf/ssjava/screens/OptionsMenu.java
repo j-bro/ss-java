@@ -30,7 +30,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  * @author Jeremy Brown
  *
  */
-
 public class OptionsMenu implements Screen {
 
 	/**
@@ -88,6 +87,10 @@ public class OptionsMenu implements Screen {
 		this.referrer = referrer;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -97,6 +100,10 @@ public class OptionsMenu implements Screen {
 		stage.draw();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
@@ -221,27 +228,47 @@ public class OptionsMenu implements Screen {
 		stage.addActor(backButton);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show Options menu");
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
 
