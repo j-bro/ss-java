@@ -117,10 +117,10 @@ public class GameWorld {
 	/**
 	 * The ship's current progress in the level
 	 */
-	float progress;
+	private int progress;
 	
 	/**
-	 * 
+	 * If the current level has stopped being played (either ship died or end of level reached)
 	 */
 	private boolean playEnded = false;
 	
@@ -179,7 +179,7 @@ public class GameWorld {
 		// Score keeper
 		scoreKeeper = new ScoreKeeper();
 		
-		progress = 0;
+		setProgress(0);
 	}
 	
 	/**
@@ -242,7 +242,8 @@ public class GameWorld {
 		}
 		
 		// Update level progress
-		progress = ship.getPosition().x / level.getLevelEnd();
+		int newProgress = (int) (Math.round(ship.getPosition().x / level.getLevelEnd() * 100) / 1);		
+		setProgress(newProgress);
 	}
 	
 	/**
@@ -332,7 +333,7 @@ public class GameWorld {
 							game.setScreen(creator);
 						}
 					}
-				}, 4);
+				}, 2);
 				playEnded = true;
 			}
 		}
@@ -472,6 +473,23 @@ public class GameWorld {
 	 */
 	public void setLevelPath(String levelPath) {
 		this.levelPath = levelPath;
+	}
+	/**
+	 * @return the progress
+	 */
+	public int getProgress() {
+		return progress;
+	}
+	/**
+	 * @param progress the progress to set
+	 */
+	private void setProgress(int progress) {
+		if (progress <= 100) {			
+			this.progress = progress;
+		}
+		else {
+			this.progress = 100;
+		}
 	}
 	
 	/**

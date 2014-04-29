@@ -46,6 +46,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Health & Speed of light powerups (completed 24/04)
 - Enemy AI (completed 25/04)
 - Level backgrounds (completed 25/04)
+- Progress % display (completed 29/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro

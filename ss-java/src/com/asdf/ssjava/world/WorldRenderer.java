@@ -39,6 +39,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
  * @author Jeremy Brown
@@ -64,7 +65,7 @@ public class WorldRenderer {
 	 * The stage for drawing the score, life hearts and level progress
 	 */
 	Stage stage;
-	Label scoreLabel;
+	Label scoreLabel, progressLabel;
 	
 	/**
 	 * Shape renderer for debugging
@@ -209,8 +210,13 @@ public class WorldRenderer {
 			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
 			scoreLabel.setX(10);
 			scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
-			
 			stage.addActor(scoreLabel);
+			
+			progressLabel = new Label(gameWorld.getProgress() + "%", ls);
+			progressLabel.setAlignment(Align.right);
+			progressLabel.setX(Gdx.graphics.getWidth() - 10 - progressLabel.getWidth());
+			progressLabel.setY(Gdx.graphics.getHeight() - 10 - progressLabel.getHeight());
+			stage.addActor(progressLabel);
 			
 			fullHeartImage1 = new Image(fullHeartTexture);
 			fullHeartImage2 = new Image(fullHeartTexture);
@@ -293,8 +299,6 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
 			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
-			
-			
 			stage.addActor(debugLabel);
 			
 			// Shape (hitbox) renderer
@@ -319,8 +323,8 @@ public class WorldRenderer {
 			
 		}
 		cam.update();
-		batch.setProjectionMatrix(cam.combined);
 		
+		batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		/* TODO simpler rendering
 		Array<Body> bodiesArray = new Array<Body>();
@@ -400,6 +404,9 @@ public class WorldRenderer {
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
 			// Score display
 			scoreLabel.setText("Score: " + new Integer(gameWorld.scoreKeeper.getScore()).toString());
+			
+			// Progress display
+			progressLabel.setText(gameWorld.getProgress() + "%");
 			
 			// Health (hearts) display
 			switch(ship.getHealth()) {
@@ -485,7 +492,7 @@ public class WorldRenderer {
 						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
 						+ "\nHealth: " + ship.getHealth() + " half hearts"
 						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
-						+ "\nDEBUG TEXT HOLDER"	
+						+ "\nLevel progress: " + gameWorld.getProgress() + "%"
 						+ "\nDEBUG TEXT HOLDER"	
 //						+ "\nDEBUG TEXT HOLDER"	
 						+ "\nDEBUG TEXT HOLDER");	
@@ -596,8 +603,8 @@ public class WorldRenderer {
 			
 			sr.setProjectionMatrix(cam.combined);
 			sr.begin(ShapeType.Line);
+			// Draw box around selected entity
 			if (selectedEntity != null) { // TODO issue...
-				// Draw box around selected entity
 				sr.rect(selectedEntity.getPosition().x - selectedEntity.getWidth() / 2, selectedEntity.getPosition().y - selectedEntity.getHeight() / 2, selectedEntity.getWidth(), selectedEntity.getHeight());
 			}
 			// Draw line at level end point
