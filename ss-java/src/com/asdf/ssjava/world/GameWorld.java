@@ -335,6 +335,7 @@ public class GameWorld {
 				 */
 				@Override
 				public void run() {
+					AudioPlayer.stopGameMusic();
 					if (getCreator() == null) {						
 						game.screenshot = ScreenUtils.getFrameBufferTexture();
 						game.setScreen(new LevelRetryMenu(game, game.gameScreen));
@@ -379,7 +380,8 @@ public class GameWorld {
 					 */
 					@Override
 					public void run() {
-						if (getCreator() == null) {							
+						AudioPlayer.stopGameMusic();
+						if (getCreator() == null) {	
 							game.screenshot = ScreenUtils.getFrameBufferTexture();
 							game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
 						}

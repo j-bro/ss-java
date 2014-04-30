@@ -4,6 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
@@ -55,9 +56,15 @@ public class LevelCreatorOptionsMenu implements Screen {
 	 */
 	Image bgImage, opacityImage;
 	
+	/**
+	 * The title font
+	 */
 	BitmapFont whiteFont;
 	
-	Screen thisLevelCreatorOptions = this;
+	/**
+	 * A concrete reference to this instance
+	 */
+	Screen thisMenu = this;
 	
 	/**
 	 * 
@@ -131,7 +138,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Test button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Test button up");
+				AudioPlayer.stopCreatorMusic();
 				((LevelCreatorScreen) referrer).getGameWorld().exportLevel("levels/temp.json");
 				game.gameScreen = new GameScreen(game, "levels/temp.json", (LevelCreatorScreen) referrer);
 				game.setScreen(game.gameScreen);
@@ -158,7 +166,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				Gdx.app.log(SSJava.LOG, "Save button up");
-				game.setScreen(new LevelSaveMenu(game, thisLevelCreatorOptions));
+				game.setScreen(new LevelSaveMenu(game, thisMenu));
 				}
 			});
 		
@@ -172,7 +180,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Load button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Load button down");
 				return true;
 			}
 			
@@ -181,7 +189,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Load button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Load button up");
 				
 				// File selection
 				if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
@@ -190,6 +198,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 					chooser.setFileFilter(filter);
 					int returnVal = chooser.showOpenDialog(new JPanel());
 					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						AudioPlayer.stopCreatorMusic();
 						String levelPath = chooser.getSelectedFile().getPath();
 						game.setScreen(new LevelCreatorScreen(game, levelPath));
 					}
@@ -207,7 +216,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
@@ -216,7 +225,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
+				AudioPlayer.stopCreatorMusic();
 				game.setScreen(new MainMenu(game));
 				}
 			});

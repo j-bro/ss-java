@@ -148,7 +148,6 @@ public class LevelCreatorScreen implements Screen {
 	 */
 	@Override
 	public void hide() {
-		AudioPlayer.pauseCreatorMusic();
 	}
 
 	/*
@@ -184,6 +183,7 @@ public class LevelCreatorScreen implements Screen {
 	 * Allows saving/loading of a level
 	 */
 	public void showCreatorOptions() {
+		AudioPlayer.pauseCreatorMusic();
 		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new LevelCreatorOptionsMenu(game, this));
 	}
@@ -357,6 +357,7 @@ public class LevelCreatorScreen implements Screen {
 		this.levelModified = levelModified;
 	}
 
+	
 	boolean clickDown = false;
 	
 	/**

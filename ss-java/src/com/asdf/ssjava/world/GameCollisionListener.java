@@ -92,7 +92,7 @@ public class GameCollisionListener implements ContactListener {
 			else if (body2.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
 			}
-			//Game changers collection
+			// Game changers collection
 			else if (body2.getUserData() instanceof Sun) {
 				if (contact.getFixtureB().isSensor()) {
 					sunActivate((Sun) body2.getUserData(), ship);
@@ -118,10 +118,12 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (ship.isLightSpeedEnabled() && !contact.getFixtureB().isSensor()) {
-				((AbstractEntity) body2.getUserData()).setHealth(0);
+			if (!contact.getFixtureB().isSensor()) {				
+				if (ship.isLightSpeedEnabled()) {
+					((AbstractEntity) body2.getUserData()).setHealth(0);
+				}
+				AudioPlayer.shipImpact();
 			}
-			AudioPlayer.shipImpact();
 		}
 		else if (body2.getUserData() instanceof Ship) {
 			// Powerup collection
@@ -137,7 +139,7 @@ public class GameCollisionListener implements ContactListener {
 			else if (body1.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
 			}
-			//Game changers collection
+			// Game changers collection
 			else if (body1.getUserData() instanceof Sun) {
 				if (contact.getFixtureA().isSensor()) {
 					sunActivate((Sun) body1.getUserData(), ship);
@@ -163,10 +165,12 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (ship.isLightSpeedEnabled() && !contact.getFixtureA().isSensor()) {
-				((AbstractEntity) body1.getUserData()).setHealth(0);
+			if (!contact.getFixtureA().isSensor()) {				
+				if (ship.isLightSpeedEnabled()) {
+					((AbstractEntity) body1.getUserData()).setHealth(0);
+				}
+				AudioPlayer.shipImpact();
 			}
-			AudioPlayer.shipImpact();
 		}			
 	}	
 

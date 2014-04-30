@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.screens;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
@@ -152,6 +153,7 @@ public class PauseMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				// TODO potential bug??
+				AudioPlayer.stopGameMusic();
 				if (((GameScreen) referrer).getGameWorld().getCreator() != null) {
 					game.setScreen(game.gameScreen.gameWorld.getCreator());
 				}
