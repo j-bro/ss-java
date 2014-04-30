@@ -21,7 +21,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Menu GUI
 - Game changers (planet, sun, magnetic object)
 - Level design
-- High scores
 - Pass through obstacle after collision
 - Dead ship texture
 
@@ -43,6 +42,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level backgrounds (completed 25/04)
 - Progress % display (completed 29/04)
 - Audio player sounds (completed 30/04)
+- High scores (completed 30/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro

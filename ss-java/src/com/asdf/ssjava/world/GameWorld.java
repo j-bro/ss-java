@@ -327,7 +327,7 @@ public class GameWorld {
 	 * Called when the ship has died
 	 */
 	public void shipDied() {
-		if (!playEnded) {
+		if (!isPlayEnded()) {
 			new Timer().scheduleTask(new Task() {
 				/*
 				 * (non-Javadoc)
@@ -345,7 +345,7 @@ public class GameWorld {
 					}
 				}
 			}, 2);
-			playEnded = true;
+			setPlayEnded(true);
 		}
 	}
 	
@@ -372,7 +372,7 @@ public class GameWorld {
 		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
 			ship.getBody().applyAngularImpulse(1000, true);
 			
-			if (!playEnded) {
+			if (!isPlayEnded()) {
 				new Timer().scheduleTask(new Task() {
 					/*
 					 * (non-Javadoc)
@@ -391,7 +391,7 @@ public class GameWorld {
 					}
 				}, 2);
 				AudioPlayer.levelComplete();
-				playEnded = true;
+				setPlayEnded(true);
 			}
 		}
 	}
@@ -592,6 +592,19 @@ public class GameWorld {
 		else {
 			this.progress = 100;
 		}
+	}
+	
+	/**
+	 * @return true if the play is ended
+	 */
+	public boolean isPlayEnded() {
+		return playEnded;
+	}
+	/**
+	 * @param playEnded the playEnded to set
+	 */
+	private void setPlayEnded(boolean playEnded) {
+		this.playEnded = playEnded;
 	}
 	
 	/**

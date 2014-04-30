@@ -6,7 +6,6 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.Enemy;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -47,23 +46,19 @@ public class GameInputManager implements InputProcessor {
 		 * Ship movement controls moved to com.asdf.ssjava.entities.ship#update()
 		 * The change to polling was required for Box2D implementation of force application
 		 */
-		switch (keycode) {
-			case Keys.SPACE: 
-				ship.fire();
-				break;
-			case Keys.ESCAPE:
-				gameWorld.pauseGame();
-				break;
-			case Keys.ENTER: // for testing enemy firing
-				if (SSJava.DEBUG) {
-					for (Enemy e: gameWorld.getEnemies()) {
-						e.fire();
-					}
-				}
-				break;
-			default: break;
+		if (!gameWorld.isPlayEnded()) {
+			switch (keycode) {
+				case Keys.SPACE: 
+					ship.fire();
+					break;
+				case Keys.ESCAPE:
+					gameWorld.pauseGame();
+					break;
+				default: break;
+			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/* (non-Javadoc)
