@@ -129,6 +129,7 @@ public class LevelCompletedMenu implements Screen {
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
 					nameField.setCursorPosition(nameField.getText().length());
+					// TODO Enter pressed on key
 				}
 			}
 		});
@@ -136,7 +137,7 @@ public class LevelCompletedMenu implements Screen {
 		nameField.setX(width / 2 - nameField.getWidth() / 2);
 		nameField.setY(height / 2 + 60);
 		
-		// Replay the level
+		// Retry the level
 		retryButton = new MenuButton("Retry", 280, 65, game);
 		retryButton.setX(Gdx.graphics.getWidth() / 2 - retryButton.getWidth() / 2);
 		retryButton.setY(Gdx.graphics.getHeight() / 2 - retryButton.getHeight() / 2 - 50);

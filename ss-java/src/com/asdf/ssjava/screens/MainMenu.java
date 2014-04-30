@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.screens;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
@@ -262,7 +263,10 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
+		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		
+		AudioPlayer.stopGameMusic();
+		AudioPlayer.playMenuMusic(true);
 	}
 
 	/*

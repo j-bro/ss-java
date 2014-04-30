@@ -248,6 +248,7 @@ public class GameWorld {
 	
 	/**
 	 * Sets the level background
+	 * Currently not fully implemented
 	 */
 	public void setBackground(String path) {
 		getLevel().setBackgroundPath(Gdx.files.absolute(path).path());
@@ -334,6 +335,7 @@ public class GameWorld {
 						}
 					}
 				}, 2);
+				AudioPlayer.levelComplete();
 				playEnded = true;
 			}
 		}
@@ -360,7 +362,7 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Loads a level from a JSON file into the level
+	 * Loads a level from a JSON file into the level instance
 	 * @param path the path of the JSON level file to be loaded
 	 */
 	private void loadLevel(String path) {		

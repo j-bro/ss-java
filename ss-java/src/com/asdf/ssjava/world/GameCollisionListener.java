@@ -80,7 +80,7 @@ public class GameCollisionListener implements ContactListener {
 			Ship ship = (Ship) body1.getUserData();
 			if (body2.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
-				// TODO AudioPlayer.healthUp();
+				 AudioPlayer.healthUp();
 			}
 			else if (body2.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
@@ -102,7 +102,7 @@ public class GameCollisionListener implements ContactListener {
 			Ship ship = (Ship) body2.getUserData();
 			if (body1.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
-				// TODO AudioPlayer.healthUp();
+				 AudioPlayer.healthUp();
 			}
 			else if (body1.getUserData() instanceof PowerupSpeedOfLight) {
 				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);

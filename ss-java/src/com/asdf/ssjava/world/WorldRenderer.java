@@ -634,7 +634,7 @@ public class WorldRenderer {
 //					+ "\nSet background: B"	
 					+ "\nMove entities: arrows & mouse"
 					+ "\nOptions menu: ESC"
-					+ "\nLevel end: E (" + gameWorld.getLevel().getLevelEnd()
+					+ "\nLevel end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
 					+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());
 		}
 		

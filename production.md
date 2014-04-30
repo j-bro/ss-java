@@ -22,10 +22,8 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Game changers (planet, sun, magnetic object)
 - Level design
 - High scores
-- Sounds
 - Pass through obstacle after collision
 - Dead ship texture
-- Audio: ship dies, level complete, health up, ship-obstacle collision
 
 ####Complete
 - Ship movement (completed DD/MM)
@@ -44,6 +42,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Enemy AI (completed 25/04)
 - Level backgrounds (completed 25/04)
 - Progress % display (completed 29/04)
+- Audio player sounds (completed 30/04)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro

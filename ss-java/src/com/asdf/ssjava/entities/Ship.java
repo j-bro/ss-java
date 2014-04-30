@@ -156,6 +156,7 @@ public class Ship extends MoveableEntity {
 	 */
 	public void die() {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "SHIP DIES!!!");
+		AudioPlayer.shipDeath();
 	}
 
 	/*

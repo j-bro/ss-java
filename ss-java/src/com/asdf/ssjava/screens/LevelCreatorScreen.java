@@ -7,6 +7,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Asteroid;
@@ -136,6 +137,9 @@ public class LevelCreatorScreen implements Screen {
 		if (gameWorld != null) {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 		}
+		
+		AudioPlayer.stopMenuMusic();
+		AudioPlayer.playCreatorMusic(true);
 	}
 
 	/*
@@ -144,7 +148,7 @@ public class LevelCreatorScreen implements Screen {
 	 */
 	@Override
 	public void hide() {
-		
+		AudioPlayer.pauseCreatorMusic();
 	}
 
 	/*

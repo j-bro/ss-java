@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.entities;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -179,6 +180,7 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public void die() {
 		gameWorld.getScoreKeeper().add(KILL_SCORE);
+		AudioPlayer.enemyDeath();
 		super.die();
 	}
 	

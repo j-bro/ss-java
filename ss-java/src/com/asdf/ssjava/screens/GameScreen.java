@@ -91,8 +91,9 @@ public class GameScreen implements Screen {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
 		}
+		AudioPlayer.stopMenuMusic();
 		AudioPlayer.playGameMusic(true);
-
+		AudioPlayer.levelStart();
 	}
 	
 	/**
@@ -108,7 +109,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void hide() {
-		
+		AudioPlayer.pauseGameMusic();
 	}
 
 	/*
