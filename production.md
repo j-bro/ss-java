@@ -13,7 +13,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Optional
 	- Parallax backgrounds
 	- powerups: bigger bullets
-	- Multiple enemy types
+	- Multiple enemy & bullet types
 
 
 ####In Progress

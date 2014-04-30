@@ -61,11 +61,13 @@ public class SSJava extends Game {
 	
 	public int height;
 	
+	static String highScoresPath = "hs.json";
+	
 	@Override
 	public void create() {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
 		
-		highScores = loadHighScores("highScores.json");
+		highScores = loadHighScores(highScoresPath);
 		
 		assetManager = new AssetManager();
 		

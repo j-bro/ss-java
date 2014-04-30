@@ -96,7 +96,7 @@ public class HighScores {
 	 * @return true if the scores were saved
 	 */
 	public boolean exportScores() {
-		Gdx.files.local("highScores.json").writeString(new Json().prettyPrint(this), false);
+		Gdx.files.local(SSJava.highScoresPath).writeString(new Json().prettyPrint(this), false);
 		return true;
 	}
 }
