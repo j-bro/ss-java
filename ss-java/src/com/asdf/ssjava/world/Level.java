@@ -47,6 +47,11 @@ public class Level {
 	private String backgroundPath;
 	
 	/**
+	 * The level code for distinguishing different game levels
+	 */
+	private int levelCode;
+	
+	/**
 	 * 
 	 */
 	public Level() {
@@ -57,6 +62,7 @@ public class Level {
 		
 		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
+		levelCode = 000;
 	}
 
 	/**
@@ -85,5 +91,19 @@ public class Level {
 	 */
 	public void setBackgroundPath(String backgroundPath) {
 		this.backgroundPath = backgroundPath;
-	}	
+	}
+
+	/**
+	 * @return the levelCode
+	 */
+	public int getLevelCode() {
+		return levelCode;
+	}
+
+	/**
+	 * @param levelCode the levelCode to set
+	 */
+	public void setLevelCode(int levelCode) {
+		this.levelCode = levelCode;
+	}
 }
