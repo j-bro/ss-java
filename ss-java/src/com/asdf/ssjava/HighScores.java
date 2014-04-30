@@ -34,6 +34,7 @@ public class HighScores {
 		if (isHighScore(s)) {
 			scores.add(s);
 			scores.sort();
+			scores.reverse();
 			scores.truncate(10);
 			return true;
 		}
@@ -51,6 +52,14 @@ public class HighScores {
 	
 	/**
 	 * 
+	 * @return the base score array
+	 */
+	public Array<Score> getScoreArray() {
+		return scores;
+	}
+	
+	/**
+	 * 
 	 * @return the size of the scores array
 	 */
 	public int size() {
@@ -63,13 +72,14 @@ public class HighScores {
 	 * @return whether or not the score will go into the high scores list
 	 */
 	public boolean isHighScore(Score s) {
-		if (scores.size == 0) {
+		if (scores.size < 10) {
 			return true;
 		}
-		else if (s.compareTo(scores.get(scores.size - 1)) >= 0) {			
+		else if (s.compareTo(scores.get(scores.size - 1)) > 0) {			
 			return true;
 		}
 		return false;
+		// TODO if all scores 0 (new)
 	}
 	
 	/**
@@ -80,8 +90,13 @@ public class HighScores {
 		scores.sort();
 	}
 	
-	public boolean saveHighScores(SSJava game) {
-		Gdx.files.local("highScores.json").writeString(new Json().prettyPrint(game.highScores), false);
+	/**
+	 * Saves the high scores entries to disk
+	 * Important: must be called every time a score is added. Scores are not saved to disk automatically.
+	 * @return true if the scores were saved
+	 */
+	public boolean exportScores() {
+		Gdx.files.local("highScores.json").writeString(new Json().prettyPrint(this), false);
 		return true;
 	}
 }

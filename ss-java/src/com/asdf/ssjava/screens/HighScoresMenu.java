@@ -173,14 +173,14 @@ public class HighScoresMenu implements Screen {
 		
 		// Update names
 		String newNames = "Name\n";
-		for (int i = 0; i < game.highScores.size(); i++) {
+		for (int i = 0; i < Math.min(10, game.highScores.size()); i++) {
 			newNames += "\n" + game.highScores.get(i).getName();
 		}
 		namesLabel.setText(newNames);
 		
 		// Update scores
 		String newScores = "Score\n";
-		for (int i = 0; i < game.highScores.size(); i++) {
+		for (int i = 0; i < Math.min(10, game.highScores.size()); i++) {
 			newScores += "\n" + game.highScores.get(i).getScore();
 		}
 		scoresLabel.setText(newScores);

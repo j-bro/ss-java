@@ -1,6 +1,7 @@
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.Score;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Application;
@@ -71,6 +72,17 @@ public class LevelCompletedMenu implements Screen {
 	 */
 	BitmapFont whiteFont;
 	
+	
+	/**
+	 * Whether or not the new score is a high score
+	 */
+	boolean newHighScore;
+	
+	/**
+	 * The player's score
+	 */
+	Score playerScore;
+	
 	/**
 	 * 
 	 * @param game
@@ -114,14 +126,22 @@ public class LevelCompletedMenu implements Screen {
 		scoreLabel.setX(width / 2 - scoreLabel.getWidth() / 2);
 		scoreLabel.setY(height / 2 + 180);
 		
+		// High score check
+		playerScore = new Score("", gameWorld.getScoreKeeper().getScore());
+		if (game.highScores.isHighScore(playerScore)) {
+			newHighScore = true;
+		}
+			
+		nameLabel = new Label("New high score!\nEnter your name: ", ls);
+		nameLabel.setAlignment(Align.center);
+		nameLabel.setX(width / 2 - nameLabel.getWidth() / 2);
+		nameLabel.setY(height / 2 + 100);
+		nameLabel.setVisible(newHighScore);
+		
+		// Name entry field
 		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
 		TextFieldStyle fieldStyle = new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null);
 		
-		nameLabel = new Label("Enter your name: ", ls);
-		nameLabel.setX(width / 2 - nameLabel.getWidth() / 2);
-		nameLabel.setY(height / 2 + 100);
-		
-		// Name entry field
 		nameField = new TextField("AAA", fieldStyle);
 		nameField.setMaxLength(3);
 		nameField.setTextFieldListener(new TextField.TextFieldListener() {
@@ -129,13 +149,14 @@ public class LevelCompletedMenu implements Screen {
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
 					nameField.setCursorPosition(nameField.getText().length());
-					// TODO Enter pressed on key
+					playerScore.setName(nameField.getText());
 				}
 			}
 		});
 		nameField.setWidth(100);
 		nameField.setX(width / 2 - nameField.getWidth() / 2);
 		nameField.setY(height / 2 + 60);
+		nameField.setVisible(newHighScore);
 		
 		// Retry the level
 		retryButton = new MenuButton("Retry", 280, 65, game);
@@ -156,6 +177,9 @@ public class LevelCompletedMenu implements Screen {
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button up");
+				if (newHighScore) {					
+					saveScore(playerScore);
+				}
 				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath(); // TODO retry referrer
 				game.gameScreen = new GameScreen(game, levelPath);
 				game.setScreen(game.gameScreen);
@@ -172,7 +196,7 @@ public class LevelCompletedMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Select level button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Select level button down");
 				return true;
 			}
 			/*
@@ -180,7 +204,10 @@ public class LevelCompletedMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Select level button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Select level button up");
+				if (newHighScore) {					
+					saveScore(playerScore);
+				}
 				game.setScreen(new LevelSelectMenu(game, new MainMenu(game)));
 			}
 		});
@@ -204,6 +231,9 @@ public class LevelCompletedMenu implements Screen {
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (newHighScore) {					
+					saveScore(playerScore);
+				}
 				game.setScreen(new MainMenu(game));
 			}
 		});
@@ -236,16 +266,10 @@ public class LevelCompletedMenu implements Screen {
 	/**
 	 * Save the user's score
 	 */
-	public void saveScore() {
-		
-	}
-	
-	/**
-	 * 
-	 * @return whether or not the user's score has made it to the high scores
-	 */
-	public boolean isHighScore() {
-		return false;
+	public void saveScore(Score s) {
+		s.setName(nameField.getText());
+		game.highScores.add(s);
+		game.highScores.exportScores();
 	}
 	
 	/*
