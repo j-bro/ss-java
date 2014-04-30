@@ -21,7 +21,7 @@ public class Planet extends Obstacle {
 	/**
 	 * The planet's default velocity (static)
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-3, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
 	/**
 	 * The entity's starting health
@@ -149,6 +149,19 @@ public class Planet extends Obstacle {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		
+		CircleShape circle2 = new CircleShape();
+		circle2.setRadius(width / 2 + 6);
+		
+		FixtureDef fixtureDef2 = new FixtureDef();
+		fixtureDef2.shape = circle2;
+		fixtureDef2.density = 0.5f; 
+		fixtureDef2.friction = 1.0f;
+		fixtureDef2.restitution = 0.1f;
+		fixtureDef2.isSensor = true;
+		
+		body.createFixture(fixtureDef2);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	

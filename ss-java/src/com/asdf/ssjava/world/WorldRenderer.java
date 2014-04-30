@@ -78,6 +78,11 @@ public class WorldRenderer {
 	Label debugLabel;
 	
 	/**
+	 * The ship's heat indicator
+	 */
+	Label shipHeatIndicatorLabel;
+	
+	/**
 	 * The camera 
 	 */
 	OrthographicCamera cam;
@@ -217,6 +222,12 @@ public class WorldRenderer {
 			progressLabel.setX(Gdx.graphics.getWidth() - 10 - progressLabel.getWidth());
 			progressLabel.setY(Gdx.graphics.getHeight() - 10 - progressLabel.getHeight());
 			stage.addActor(progressLabel);
+			
+			shipHeatIndicatorLabel = new Label("Stable", ls);
+			shipHeatIndicatorLabel.setAlignment(Align.right);
+			shipHeatIndicatorLabel.setX(Gdx.graphics.getWidth() - 10 - shipHeatIndicatorLabel.getWidth());
+			shipHeatIndicatorLabel.setY(Gdx.graphics.getHeight() - 10 - shipHeatIndicatorLabel.getHeight());
+			stage.addActor(shipHeatIndicatorLabel);
 			
 			fullHeartImage1 = new Image(fullHeartTexture);
 			fullHeartImage2 = new Image(fullHeartTexture);

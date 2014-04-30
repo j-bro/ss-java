@@ -104,6 +104,19 @@ public class MagneticObject extends Obstacle{
 		
 		body.createFixture(fixtureDef);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
+		
+		CircleShape circle2 = new CircleShape();
+		circle2.setRadius(width / 2 + 10);
+		
+		FixtureDef fixtureDef2 = new FixtureDef();
+		fixtureDef2.shape = circle2;
+		fixtureDef2.density = 0.5f; 
+		fixtureDef2.friction = 1.0f;
+		fixtureDef2.restitution = 0.1f;
+		fixtureDef2.isSensor = true;
+		
+		body.createFixture(fixtureDef2);
+		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*

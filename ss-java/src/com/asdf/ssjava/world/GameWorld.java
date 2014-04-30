@@ -10,9 +10,12 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.Enemy;
+import com.asdf.ssjava.entities.MagneticObject;
 import com.asdf.ssjava.entities.Obstacle;
+import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.entities.Sun;
 import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.LevelRetryMenu;
@@ -115,6 +118,11 @@ public class GameWorld {
 	String levelPath;
 	
 	/**
+	 * The ship's heat indicator
+	 */
+	private double shipHeatIndicator;
+	
+	/**
 	 * The ship's current progress in the level
 	 */
 	private int progress;
@@ -123,6 +131,36 @@ public class GameWorld {
 	 * If the current level has stopped being played (either ship died or end of level reached)
 	 */
 	private boolean playEnded = false;
+	
+	/**
+	 * If the ship is within range of the sun
+	 */
+	public boolean sunActivated = false;
+	
+	/**
+	 * The Sun instance
+	 */
+	public Sun sun;
+	
+	/**
+	 * If the ship is within range of a planet
+	 */
+	public boolean gravityActivated = false;
+	
+	/**
+	 * The Planet instance
+	 */
+	public Planet planet;
+	
+	/**
+	 * If the ship is within range of a magnetic object
+	 */
+	public boolean magnetActivated = false;
+	
+	/**
+	 * The MagneticObject instance
+	 */
+	public MagneticObject magnet;
 	
 	/**
 	 * Constructor for testing a level from the level creator
@@ -228,6 +266,21 @@ public class GameWorld {
 			if (isLevelComplete()) {
 				levelCompleted();
 			}
+			
+			// Check if ship is within range of sun
+			if (sunActivated) {
+				sunActivate();
+			}
+			
+			// Check if ship is within range of planet
+			if (gravityActivated) {
+				gravityActivate();
+			}
+			
+			// Check if ship is within range of magnetic object 
+			if (magnetActivated) {
+				magnetActivate();
+			}
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
@@ -245,7 +298,7 @@ public class GameWorld {
 		int newProgress = (int) (Math.round(ship.getPosition().x / level.getLevelEnd() * 100) / 1);		
 		setProgress(newProgress);
 	}
-	
+
 	/**
 	 * Sets the level background
 	 * Currently not fully implemented
@@ -339,9 +392,54 @@ public class GameWorld {
 				playEnded = true;
 			}
 		}
+	}
+	
+	/**
+	 * Causes the ship to be attracted/repelled from the magnetic object
+	 */
+	public void magnetActivate() {
 		
-		// TODO ship zoom off into distance
+	}
+	
+	public void setMagneticObject(MagneticObject m) {
+		magnet = m;
+	}
+	
+	public MagneticObject getMagneticObject() {
+		return magnet;
+	}
+	
+	/**
+	 * Causes the ship to be attracted to the planet
+	 */
+	public void gravityActivate() {
 		
+	}
+	
+	public void setPlanet(Planet p) {
+		planet = p;
+	}
+	
+	public Planet getPlanet() {
+		return planet;
+	}
+	
+	/**
+	 * Causes the ship to be burned by the sun
+	 */
+	public void sunActivate() {
+		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime() * 1);
+		if (shipHeatIndicator >= 3) {
+			
+		}
+	}
+	
+	public void setSun(Sun s) {
+		sun = s;
+	}
+	
+	public Sun getSun() {
+		return sun;
 	}
 	
 	/**

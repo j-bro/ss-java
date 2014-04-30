@@ -9,11 +9,14 @@ import com.asdf.ssjava.entities.AbstractEntity;
 import com.asdf.ssjava.entities.Bullet;
 import com.asdf.ssjava.entities.BulletType0;
 import com.asdf.ssjava.entities.BulletType1;
+import com.asdf.ssjava.entities.MagneticObject;
+import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Points;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.entities.Sun;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -51,14 +54,14 @@ public class GameCollisionListener implements ContactListener {
 	@Override
 	public void beginContact(Contact contact) {
 		// Get colliding bodies from contact points
-		Body body1 = contact.getFixtureA().getBody();
+		Body body1 = contact.getFixtureA().getBody(); 
 		Body body2 = contact.getFixtureB().getBody();
 		
 		// Bullet collision
-		if (body1.getUserData() instanceof BulletType0) {			
+		if (body1.getUserData() instanceof BulletType0 && !contact.getFixtureB().isSensor()) {			
 			bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
 		}
-		else if (body2.getUserData() instanceof BulletType0) {
+		else if (body2.getUserData() instanceof BulletType0 && !contact.getFixtureA().isSensor()) {
 			bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
 		}
 		else if (body1.getUserData() instanceof BulletType1 && body2.getUserData() instanceof Ship) {
@@ -89,13 +92,36 @@ public class GameCollisionListener implements ContactListener {
 			else if (body2.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
 			}
-			else {
-				// Kill other entities in light speed
-				if (ship.isLightSpeedEnabled()) {
-					((AbstractEntity) body2.getUserData()).setHealth(0);
+			//Game changers collection
+			else if (body2.getUserData() instanceof Sun) {
+				if (contact.getFixtureB().isSensor()) {
+					sunActivate((Sun) body2.getUserData(), ship);
 				}
-				AudioPlayer.shipImpact();
+				else {
+					ship.healthChange(-2);
+				}	
 			}
+			else if (body2.getUserData() instanceof Planet) {
+				if (contact.getFixtureB().isSensor()) {
+					gravityActivate((Planet) body2.getUserData(), ship);
+				}
+				else {
+					ship.healthChange(-1);
+				}	
+			}
+			else if (body2.getUserData() instanceof MagneticObject) {
+				if (contact.getFixtureB().isSensor()) {
+					magnetActivate((MagneticObject) body2.getUserData(), ship);
+				}
+				else {
+					ship.healthChange(-1);
+				}	
+			}
+			// Kill other entities in light speed
+			if (ship.isLightSpeedEnabled() && !contact.getFixtureB().isSensor()) {
+				((AbstractEntity) body2.getUserData()).setHealth(0);
+			}
+			AudioPlayer.shipImpact();
 		}
 		else if (body2.getUserData() instanceof Ship) {
 			// Powerup collection
@@ -111,16 +137,39 @@ public class GameCollisionListener implements ContactListener {
 			else if (body1.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
 			}
-			else {
-				// Kill other entities in light speed
-				if (ship.isLightSpeedEnabled()) {
-					((AbstractEntity) body1.getUserData()).setHealth(0);
+			//Game changers collection
+			else if (body1.getUserData() instanceof Sun) {
+				if (contact.getFixtureA().isSensor()) {
+					sunActivate((Sun) body1.getUserData(), ship);
 				}
-				AudioPlayer.shipImpact();
+				else {
+					ship.healthChange(-2);
+				}	
 			}
+			else if (body1.getUserData() instanceof Planet) {
+				if (contact.getFixtureA().isSensor()) {
+					gravityActivate((Planet) body1.getUserData(), ship);
+				}
+				else {
+					ship.healthChange(-1);
+				}	
+			}
+			else if (body1.getUserData() instanceof MagneticObject) {
+				if (contact.getFixtureA().isSensor()) {
+					magnetActivate((MagneticObject) body1.getUserData(), ship);
+				}
+				else {
+					ship.healthChange(-1);
+				}	
+			}
+			// Kill other entities in light speed
+			if (ship.isLightSpeedEnabled() && !contact.getFixtureA().isSensor()) {
+				((AbstractEntity) body1.getUserData()).setHealth(0);
+			}
+			AudioPlayer.shipImpact();
 		}			
 	}	
-	
+
 	/**
 	 * Called when a bullet collides with an entity
 	 * Removes the bullet and deals damage to the entity
@@ -191,14 +240,103 @@ public class GameCollisionListener implements ContactListener {
 		p.setHealth(0);
 	}
 	
+	/**
+	 * Called when the ship enters the sun's zone of heat
+	 * Sets the sunActivated boolean variable in GameWorld to "true"
+	 * Sends the instance of Sun over to GameWorld
+	 * @param b
+	 * @param e
+	 */
+	public void sunActivate(Sun b, Ship e) {
+		gameWorld.setSun(b);
+		gameWorld.sunActivated = true;
+	}
+	
+	public void sunDisactivate() {
+		gameWorld.sunActivated = false;
+	}
+	
+	/**
+	 * Called when the ship enters a planet's gravitational pull
+	 * Sets the gravityActivated boolean variable in GameWorld to "true"
+	 * Sends the instance of Planet over to GameWorld
+	 * @param b
+	 * @param e
+	 */
+	public void gravityActivate(Planet b, Ship e) {
+		gameWorld.setPlanet(b);
+		gameWorld.gravityActivated = true;
+	}
+	
+	public void gravityDisactivate() {
+		gameWorld.gravityActivated = false;
+	}
+	
+	/**
+	 * Called when the ship enters a magnetic object's magnetic field
+	 * Sets the magnetActivated boolean variable in GameWorld to "true"
+	 * Sends the instance of MagneticObject over to GameWorld
+	 * @param b
+	 * @param e
+	 */
+	public void magnetActivate(MagneticObject b, Ship e) {
+		gameWorld.setMagneticObject(b);
+		gameWorld.magnetActivated = true;
+	}
+	
+	public void magnetDisactivate() {
+		gameWorld.magnetActivated = false;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.badlogic.gdx.physics.box2d.ContactListener#endContact(com.badlogic.gdx.physics.box2d.Contact)
 	 */
 	@Override
 	public void endContact(Contact contact) {
-		// TODO Auto-generated method stub
-		
+		if (contact.getFixtureA() != null && contact.getFixtureB() != null) {
+			// Get colliding bodies from contact points
+			Body body1 = contact.getFixtureA().getBody(); 
+			Body body2 = contact.getFixtureB().getBody();
+			
+			// Ship collision
+			if (body1.getUserData() instanceof Ship) {	
+				// Game Changers collection
+				if (body2.getUserData() instanceof Sun) {
+					if (contact.getFixtureB().isSensor()) {
+						sunDisactivate();
+					}
+				}
+				else if (body2.getUserData() instanceof Planet) {
+					if (contact.getFixtureB().isSensor()) {
+						gravityDisactivate();
+					}	
+				}
+				else if (body2.getUserData() instanceof MagneticObject) {
+					if (contact.getFixtureB().isSensor()) {
+						magnetDisactivate();
+					}	
+				}
+			}
+			else if (body2.getUserData() instanceof Ship) {
+				// Game Changers collection
+				if (body1.getUserData() instanceof Sun) {
+					if (contact.getFixtureA().isSensor()) {
+						sunDisactivate();
+					}
+				}
+				else if (body1.getUserData() instanceof Planet) {
+					if (contact.getFixtureA().isSensor()) {
+						gravityDisactivate();
+					}	
+				}
+				else if (body1.getUserData() instanceof MagneticObject) {
+					if (contact.getFixtureA().isSensor()) {
+						magnetDisactivate();
+					}
+				}
+			}
+		}
 	}
 
 	/*
