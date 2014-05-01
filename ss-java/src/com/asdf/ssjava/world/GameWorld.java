@@ -136,27 +136,22 @@ public class GameWorld {
 	 * If the ship is within range of the sun
 	 */
 	public boolean sunActivated = false;
-	
 	/**
 	 * The Sun instance
 	 */
 	public Sun sun;
-	
 	/**
 	 * If the ship is within range of a planet
 	 */
 	public boolean gravityActivated = false;
-	
 	/**
 	 * The Planet instance
 	 */
 	public Planet planet;
-	
 	/**
 	 * If the ship is within range of a magnetic object
 	 */
 	public boolean magnetActivated = false;
-	
 	/**
 	 * The MagneticObject instance
 	 */
@@ -218,6 +213,8 @@ public class GameWorld {
 		scoreKeeper = new ScoreKeeper();
 		
 		setProgress(0);
+		
+		AudioPlayer.levelStart();
 	}
 	
 	/**
@@ -336,6 +333,7 @@ public class GameWorld {
 				@Override
 				public void run() {
 					AudioPlayer.stopGameMusic();
+					AudioPlayer.pauseGameSounds();
 					if (getCreator() == null) {						
 						game.screenshot = ScreenUtils.getFrameBufferTexture();
 						game.setScreen(new LevelRetryMenu(game, game.gameScreen));
@@ -451,6 +449,7 @@ public class GameWorld {
 		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new PauseMenu(game, game.gameScreen));
 		AudioPlayer.pauseGameMusic();
+		AudioPlayer.pauseGameSounds();
 	}
 	
 	/**

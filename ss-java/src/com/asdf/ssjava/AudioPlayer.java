@@ -279,6 +279,36 @@ public class AudioPlayer {
 		}).start();
 	}
 	
+	/**
+	 * Pauses all the game sounds
+	 */
+	public static void pauseGameSounds() {
+		levelStartSound.pause();
+		shotSound.pause();
+		bulletImpactSound.pause();
+		shipImpactSound.pause();
+		healthUpSound.pause();
+		speedOfLightOnSound.pause();
+		speedOfLightOffSound.pause();
+		shipDeathSound.pause();
+		enemyDeathSound.pause();
+	}
+	
+	/**
+	 * Resumes all the game sounds
+	 */
+	public static void resumeGameSounds() {
+		levelStartSound.resume();
+		shotSound.resume();
+		bulletImpactSound.resume();
+		shipImpactSound.resume();
+		healthUpSound.resume();
+		speedOfLightOnSound.resume();
+		speedOfLightOffSound.resume();
+		shipDeathSound.resume();
+		enemyDeathSound.resume();
+	}
+	
 	public static void dispose() {
 		gameMusic.dispose();
 		menuMusic.dispose();
