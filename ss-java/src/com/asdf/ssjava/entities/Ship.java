@@ -40,7 +40,7 @@ public class Ship extends MoveableEntity {
 	 * The y velocity also limits the ship's vertical motion, which is controlled by the player.
 	 * This is not automatically set by the constructor!
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(10, 10);  
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(10, 30);  
 	
 	/**
 	 * The velocity of the ship when the speed of light powerup is activated
@@ -52,7 +52,7 @@ public class Ship extends MoveableEntity {
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public static Vector2 DEFAULT_ACCELERATION = new Vector2(18, 300);
+	public static Vector2 DEFAULT_ACCELERATION = new Vector2(25, 500);
 	
 	/**
 	 * 
@@ -199,7 +199,12 @@ public class Ship extends MoveableEntity {
 				// Accelerate ship if it is going slower than default velocity & limit speed at maximum velocity	
 				if (getBody().getLinearVelocity().x < DEFAULT_VELOCITY.x) {
 					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
-				}	
+				}
+				
+				// Limit y velocity
+				if (getBody().getLinearVelocity().y > DEFAULT_VELOCITY.y) {
+					getBody().setLinearVelocity(getBody().getLinearVelocity().x, DEFAULT_VELOCITY.y);
+				}
 				
 				if (Gdx.input.isKeyPressed(Keys.W)) {
 					//Stop the ship from going off the top of the screen when W is continuously pressed 
