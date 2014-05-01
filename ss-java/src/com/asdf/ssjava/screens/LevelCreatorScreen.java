@@ -138,8 +138,14 @@ public class LevelCreatorScreen implements Screen {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 		}
 		
-		AudioPlayer.stopMenuMusic();
-		AudioPlayer.playCreatorMusic(true);
+		// Music
+		if (AudioPlayer.menuMusic.isPlaying()) {			
+			AudioPlayer.stopMenuMusic();
+		}
+		
+		if (!AudioPlayer.creatorMusic.isPlaying()) {			
+			AudioPlayer.playCreatorMusic(true);
+		}
 	}
 
 	/*
@@ -183,7 +189,7 @@ public class LevelCreatorScreen implements Screen {
 	 * Allows saving/loading of a level
 	 */
 	public void showCreatorOptions() {
-		AudioPlayer.pauseCreatorMusic();
+//		AudioPlayer.pauseCreatorMusic();
 		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new LevelCreatorOptionsMenu(game, this));
 	}

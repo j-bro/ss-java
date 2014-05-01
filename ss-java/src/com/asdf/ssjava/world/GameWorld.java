@@ -344,7 +344,7 @@ public class GameWorld {
 						game.setScreen(creator);
 					}
 				}
-			}, 2);
+			}, 4);
 			setPlayEnded(true);
 		}
 	}

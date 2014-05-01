@@ -20,7 +20,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 - Menu GUI
 - Game changers (planet, sun, magnetic object)
-- Level design
+- Level design (levels 1-5)
 - Pass through obstacle after collision
 - Dead ship texture
 - Save game level progress

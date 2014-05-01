@@ -91,8 +91,15 @@ public class GameScreen implements Screen {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
 		}
-		AudioPlayer.stopMenuMusic();
-		AudioPlayer.playGameMusic(true);
+		
+		// Music
+		if (AudioPlayer.menuMusic.isPlaying()) {			
+			AudioPlayer.stopMenuMusic();
+		}
+		
+		if (!AudioPlayer.gameMusic.isPlaying()) {			
+			AudioPlayer.playGameMusic(true);
+		}
 		AudioPlayer.levelStart();
 	}
 	

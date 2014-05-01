@@ -105,46 +105,46 @@ public class CreditsMenu implements Screen {
 		
 		// Coders
 		coderTitleLabel = new Label("Coders", ls);
-		coderTitleLabel.setX(Gdx.graphics.getWidth() / 4 - coderTitleLabel.getWidth() / 2);
-		coderTitleLabel.setY(Gdx.graphics.getHeight() / 2 + 120);
+		coderTitleLabel.setX(Gdx.graphics.getWidth() / 3 - coderTitleLabel.getWidth() / 2);
+		coderTitleLabel.setY(Gdx.graphics.getHeight() / 2 - coderTitleLabel.getHeight() / 2 + 120);
 		coderTitleLabel.setAlignment(Align.center);
 		
 		coderLabel = new Label("Jeremy Brown\nSimon Thompson", ls);
-		coderLabel.setX(Gdx.graphics.getWidth() / 4 - coderLabel.getWidth() / 2);
-		coderLabel.setY(Gdx.graphics.getHeight() / 2 + 50);
+		coderLabel.setX(Gdx.graphics.getWidth() / 3 - coderLabel.getWidth() / 2);
+		coderLabel.setY(Gdx.graphics.getHeight() / 2 - coderLabel.getHeight() / 2 + 50);
 		coderLabel.setAlignment(Align.center);
 		
 		// Artist
 		artistTitleLabel = new Label("Artist", ls);
-		artistTitleLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - artistTitleLabel.getWidth() / 2);
-		artistTitleLabel.setY(Gdx.graphics.getHeight() / 2 + 120);
+		artistTitleLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - artistTitleLabel.getWidth() / 2);
+		artistTitleLabel.setY(Gdx.graphics.getHeight() / 2 - artistTitleLabel.getHeight() / 2 + 120);
 		artistTitleLabel.setAlignment(Align.center);
 		
 		artistLabel = new Label("Julie Brown", ls);
-		artistLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - artistLabel.getWidth() / 2);
-		artistLabel.setY(Gdx.graphics.getHeight() / 2 + 50);
+		artistLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - artistLabel.getWidth() / 2);
+		artistLabel.setY(Gdx.graphics.getHeight() / 2 - artistLabel.getHeight() / 2 + 50);
 		artistLabel.setAlignment(Align.center);
 		
 		// Audio
 		audioTitleLabel = new Label("Audio", ls);
-		audioTitleLabel.setX(Gdx.graphics.getWidth() / 4 - audioTitleLabel.getWidth() / 2);
-		audioTitleLabel.setY(Gdx.graphics.getHeight() / 2 - 50);
+		audioTitleLabel.setX(Gdx.graphics.getWidth() / 3 - audioTitleLabel.getWidth() / 2);
+		audioTitleLabel.setY(Gdx.graphics.getHeight() / 2 - audioTitleLabel.getHeight() / 2 - 50);
 		audioTitleLabel.setAlignment(Align.center);
 		
 		audioLabel = new Label("freesound.org", ls);
-		audioLabel.setX(Gdx.graphics.getWidth() / 4 - audioLabel.getWidth() / 2);
-		audioLabel.setY(Gdx.graphics.getHeight() / 2 - 120);
+		audioLabel.setX(Gdx.graphics.getWidth() / 3 - audioLabel.getWidth() / 2);
+		audioLabel.setY(Gdx.graphics.getHeight() / 2 - audioLabel.getHeight() / 2 - 120);
 		audioLabel.setAlignment(Align.center);
 		
 		// Misc bits
 		miscTitleLabel = new Label("Misc", ls);
-		miscTitleLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - miscTitleLabel.getWidth() / 2);
-		miscTitleLabel.setY(Gdx.graphics.getHeight() / 2 - 50);
+		miscTitleLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - miscTitleLabel.getWidth() / 2);
+		miscTitleLabel.setY(Gdx.graphics.getHeight() / 2 - miscTitleLabel.getHeight() / 2 - 50);
 		miscTitleLabel.setAlignment(Align.center);
 		
 		miscLabel = new Label("LibGDX\nBox2D", ls);
-		miscLabel.setX(Gdx.graphics.getWidth() * 3 / 4 - miscLabel.getWidth() / 2);
-		miscLabel.setY(Gdx.graphics.getHeight() / 2 - 120);
+		miscLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - miscLabel.getWidth() / 2);
+		miscLabel.setY(Gdx.graphics.getHeight() / 2 - miscLabel.getHeight() / 2 - 120);
 		miscLabel.setAlignment(Align.center);
 		
 		stage.addActor(titleLabel);

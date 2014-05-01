@@ -266,7 +266,10 @@ public class MainMenu implements Screen {
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		
 		AudioPlayer.stopGameMusic();
-		AudioPlayer.playMenuMusic(true);
+		
+		if (!AudioPlayer.menuMusic.isPlaying()) {			
+			AudioPlayer.playMenuMusic(true);
+		}
 	}
 
 	/*
@@ -275,7 +278,7 @@ public class MainMenu implements Screen {
 	 */
 	@Override 
 	public void hide() {
-		dispose();
+		
 	}
 
 	/*
