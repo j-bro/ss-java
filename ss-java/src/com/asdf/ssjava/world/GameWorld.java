@@ -23,6 +23,7 @@ import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -113,9 +114,9 @@ public class GameWorld {
 	public World box2DWorld;
 	
 	/**
-	 * The path of the current level
+	 * The file containing the current level
 	 */
-	String levelPath;
+	FileHandle levelFile;
 	
 	/**
 	 * The ship's heat indicator
@@ -164,18 +165,18 @@ public class GameWorld {
 	 * @param levelPath
 	 * @param creator
 	 */
-	public GameWorld(SSJava game, int worldType, String levelPath, LevelCreatorScreen creator) {
-		this(game, worldType, levelPath);
+	public GameWorld(SSJava game, int worldType, FileHandle levelFile, LevelCreatorScreen creator) {
+		this(game, worldType, levelFile);
 		this.creator = creator;
 	}
 	/**
 	 * Creates a world for an instance of SSJava
 	 * @param game the instance of the game
 	 */
-	public GameWorld(SSJava game, int worldType, String levelPath) {
+	public GameWorld(SSJava game, int worldType, FileHandle levelFile) {
 		this.game = game;
 		this.worldType = worldType;
-		this.levelPath = levelPath;
+		this.levelFile = levelFile;
 		
 		// Box2D stuff
 		box2DWorld = new World(new Vector2(0, 0), true);
@@ -187,8 +188,8 @@ public class GameWorld {
 		level = new Level();
 		
 		// Level Loading
-		if (levelPath != null) {
-			loadLevel(levelPath);
+		if (levelFile != null) {
+			loadLevel(levelFile);
 			
 			// Initialize loaded level elements 
 			for (Obstacle o: level.obstacles) {
@@ -214,7 +215,9 @@ public class GameWorld {
 		
 		setProgress(0);
 		
-		AudioPlayer.levelStart();
+		if (worldType == GameWorld.GAME_TYPE) {	
+			AudioPlayer.levelStart();
+		}
 	}
 	
 	/**
@@ -456,16 +459,16 @@ public class GameWorld {
 	 * Exports the current level to a file in JSON format
 	 * @param path the path at which to save the exported level
 	 */
-	public void exportLevel(String path) {
-		Gdx.files.local(path).writeString(new Json().prettyPrint(level), false);
+	public void exportLevel(FileHandle levelFile) {
+		levelFile.writeString(new Json().prettyPrint(level), false);
 	}
 	
 	/**
 	 * Loads a level from a JSON file into the level instance
 	 * @param path the path of the JSON level file to be loaded
 	 */
-	private void loadLevel(String path) {		
-		level = new Json().fromJson(Level.class, Gdx.files.local(path));
+	private void loadLevel(FileHandle levelFile) {		
+		level = new Json().fromJson(Level.class, levelFile);
 	}
 	
 	/**
@@ -564,16 +567,16 @@ public class GameWorld {
 	}
 	
 	/**
-	 * @return the levelPath
+	 * @return the levelFile
 	 */
-	public String getLevelPath() {
-		return levelPath;
+	public FileHandle getLevelFile() {
+		return levelFile;
 	}
 	/**
-	 * @param levelPath the levelPath to set
+	 * @param levelFile the levelFile to set
 	 */
-	public void setLevelPath(String levelPath) {
-		this.levelPath = levelPath;
+	public void setLevelFile(FileHandle levelFile) {
+		this.levelFile = levelFile;
 	}
 	/**
 	 * @return the progress

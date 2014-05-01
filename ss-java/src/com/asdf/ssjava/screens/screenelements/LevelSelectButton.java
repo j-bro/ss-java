@@ -7,6 +7,7 @@ package com.asdf.ssjava.screens.screenelements;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.GameScreen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -35,7 +36,7 @@ public class LevelSelectButton extends TextButton {
 	/**
 	 * The path of the level to be loaded when this button is clicked 
 	 */
-	String levelPath;
+	FileHandle levelFile;
 	
 	/**
 	 * Whether or not the button is enabled
@@ -50,7 +51,7 @@ public class LevelSelectButton extends TextButton {
 	 * @param game
 	 * @param levelPath
 	 */
-	public LevelSelectButton(String text, float width, float height, final SSJava game, String levelPath) {
+	public LevelSelectButton(String text, float width, float height, final SSJava game, FileHandle levelFile) {
 		super(text, new TextButtonStyle() {{
 			font = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 			font.setColor(Color.WHITE);
@@ -58,7 +59,7 @@ public class LevelSelectButton extends TextButton {
 		
 		this.game = game;
 		this.text = text;
-		this.levelPath = levelPath;
+		this.levelFile = levelFile;
 		
 		setWidth(width);
 		setHeight(height);
@@ -102,7 +103,7 @@ public class LevelSelectButton extends TextButton {
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (enabled) {					
-					game.gameScreen = new GameScreen(game, levelPath);
+					game.gameScreen = new GameScreen(game, levelFile);
 					game.setScreen(game.gameScreen);
 					Gdx.app.log(SSJava.LOG, text + " button up");
 				}

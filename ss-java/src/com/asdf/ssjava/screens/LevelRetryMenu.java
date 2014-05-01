@@ -8,6 +8,7 @@ import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -132,8 +133,8 @@ public class LevelRetryMenu implements Screen {
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Replay button up");
-				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath();
-				game.gameScreen = new GameScreen(game, levelPath);
+				FileHandle levelFile = ((GameScreen) referrer).gameWorld.getLevelFile();
+				game.gameScreen = new GameScreen(game, levelFile);
 				game.setScreen(game.gameScreen);
 			}
 		});

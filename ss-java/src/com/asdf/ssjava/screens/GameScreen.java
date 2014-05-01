@@ -13,6 +13,7 @@ import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 
 /**
  * @author Jeremy Brown
@@ -38,9 +39,9 @@ public class GameScreen implements Screen {
 	/**
 	 * Constructor for testing levels
 	 */
-	public GameScreen(SSJava game, String levelPath, LevelCreatorScreen creator) {
+	public GameScreen(SSJava game, FileHandle levelFile, LevelCreatorScreen creator) {
 		this.game = game;
-		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath, creator);
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelFile, creator);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new GameInputManager(game, gameWorld));
@@ -51,9 +52,9 @@ public class GameScreen implements Screen {
 	 * Constructor of the Game Screen which takes 
 	 * @param game The game instance of type SSJava
 	 */
-	public GameScreen(SSJava game, String levelPath) {
+	public GameScreen(SSJava game, FileHandle levelFile) {
 		this.game = game;
-		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelPath);
+		gameWorld = new GameWorld(game, GameWorld.GAME_TYPE, levelFile);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new GameInputManager(game, gameWorld));

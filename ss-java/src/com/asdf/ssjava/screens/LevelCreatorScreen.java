@@ -6,29 +6,17 @@ package com.asdf.ssjava.screens;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Asteroid;
-import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.EnemyType1;
-import com.asdf.ssjava.entities.MagneticObject;
-import com.asdf.ssjava.entities.Obstacle;
-import com.asdf.ssjava.entities.Planet;
-import com.asdf.ssjava.entities.Points;
-import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
-import com.asdf.ssjava.entities.SpaceRock;
-import com.asdf.ssjava.entities.Sun;
+import com.asdf.ssjava.entities.*;
 import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -80,9 +68,9 @@ public class LevelCreatorScreen implements Screen {
 	 * Default constructor
 	 * @param game the game instance
 	 */
-	public LevelCreatorScreen(SSJava game, String levelPath) {
+	public LevelCreatorScreen(SSJava game, FileHandle levelFile) {
 		this.game = game;
-		gameWorld = new GameWorld(game, GameWorld.CREATOR_TYPE, levelPath, this);
+		gameWorld = new GameWorld(game, GameWorld.CREATOR_TYPE, levelFile, this);
 		renderer = new WorldRenderer(gameWorld);
 		gameWorld.setRenderer(renderer);
 		gameWorld.setManager(new LevelCreatorInput());

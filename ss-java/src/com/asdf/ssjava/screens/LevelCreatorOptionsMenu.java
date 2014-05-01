@@ -12,6 +12,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -140,8 +141,9 @@ public class LevelCreatorOptionsMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Test button up");
 				AudioPlayer.stopCreatorMusic();
-				((LevelCreatorScreen) referrer).getGameWorld().exportLevel("levels/temp.json");
-				game.gameScreen = new GameScreen(game, "levels/temp.json", (LevelCreatorScreen) referrer);
+				FileHandle tempLevel = Gdx.files.local("levels/temp.json");
+				((LevelCreatorScreen) referrer).getGameWorld().exportLevel(tempLevel);
+				game.gameScreen = new GameScreen(game, tempLevel, (LevelCreatorScreen) referrer);
 				game.setScreen(game.gameScreen);
 			}
 		});
@@ -199,8 +201,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 					int returnVal = chooser.showOpenDialog(new JPanel());
 					if(returnVal == JFileChooser.APPROVE_OPTION) {
 						AudioPlayer.stopCreatorMusic();
-						String levelPath = chooser.getSelectedFile().getPath();
-						game.setScreen(new LevelCreatorScreen(game, levelPath));
+						FileHandle levelFile = Gdx.files.local(chooser.getSelectedFile().getPath());
+						game.setScreen(new LevelCreatorScreen(game, levelFile));
 					}
 				}
 			}

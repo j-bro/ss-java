@@ -7,6 +7,7 @@ import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -180,8 +181,8 @@ public class LevelCompletedMenu implements Screen {
 				if (newHighScore) {					
 					saveScore(playerScore);
 				}
-				String levelPath = ((GameScreen) referrer).gameWorld.getLevelPath(); // TODO retry referrer
-				game.gameScreen = new GameScreen(game, levelPath);
+				FileHandle levelFile = ((GameScreen) referrer).gameWorld.getLevelFile(); // TODO retry referrer
+				game.gameScreen = new GameScreen(game, levelFile);
 				game.setScreen(game.gameScreen);
 			}
 		});
