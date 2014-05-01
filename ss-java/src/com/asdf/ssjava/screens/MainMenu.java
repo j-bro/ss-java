@@ -97,7 +97,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Play button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Play button down");
 				return true;
 			}
 			
@@ -106,7 +106,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Play button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Play button up");
 				game.setScreen(new LevelSelectMenu(game, thisMainMenu));
 //				TODO dispose();
 			}
@@ -122,7 +122,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Options button down");
 				return true;
 			}
 			
@@ -131,7 +131,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Options button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Options button up");
 				game.setScreen(new OptionsMenu(game, thisMainMenu));
 			}
 		});
@@ -146,7 +146,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "High scores button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "High scores button down");
 				return true;
 			}
 			
@@ -155,7 +155,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "High scores button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "High scores button up");
 				game.setScreen(new HighScoresMenu(game, thisMainMenu));
 			}
 		});
@@ -170,7 +170,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Level creator button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level creator button down");
 				return true;
 			}
 			
@@ -179,7 +179,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Level creator button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level creator button up");
 				game.setScreen(new LevelCreatorScreen(game, null));
 			}
 		});
@@ -194,7 +194,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Credits button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Credits button down");
 				return true;
 			}
 			
@@ -203,7 +203,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Credits button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Credits button up");
 				game.setScreen(new CreditsMenu(game, thisMainMenu));
 			}
 		});
@@ -218,7 +218,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button down");
 				return true;
 			}
 			
@@ -227,7 +227,7 @@ public class MainMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Exit button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				Gdx.app.exit();
 			}
 		});
@@ -265,9 +265,12 @@ public class MainMenu implements Screen {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
 		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		
-		AudioPlayer.stopGameMusic();
+		if (AudioPlayer.gameMusic.isPlaying()) {			
+			AudioPlayer.stopGameMusic();
+		}
 		
-		if (!AudioPlayer.menuMusic.isPlaying()) {			
+		if (!AudioPlayer.menuMusic.isPlaying()) {
+			// TODO delay (screen waits for audio to start before showing)
 			AudioPlayer.playMenuMusic(true);
 		}
 	}

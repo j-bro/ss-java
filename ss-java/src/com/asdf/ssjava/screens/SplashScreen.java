@@ -102,7 +102,7 @@ public class SplashScreen implements Screen {
 		// LOAD ASSETS
 		loadAssets();
 		
-		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1.5f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(tweenManager);
+		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(tweenManager);
 	}
 
 	private void tweenCompleted() {
