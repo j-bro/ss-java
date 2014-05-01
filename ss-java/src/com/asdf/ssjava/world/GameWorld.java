@@ -356,6 +356,11 @@ public class GameWorld {
 	 */
 	public void levelCompleted() {		
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
+		
+		if (ship.isSpeedOfLightEnabled()) {
+			ship.disableSpeedOfLight();
+		}
+		
 		// Decelerate ship
 		if (ship.getBody().getLinearVelocity().x > 0) {
 			ship.getBody().applyForceToCenter(-30, 0, false);
@@ -384,7 +389,6 @@ public class GameWorld {
 					public void run() {
 						AudioPlayer.stopGameMusic();
 						
-						Gdx.app.log(SSJava.LOG, "code: " + getLevel().levelCode);
 						// Update player progress if level is game-integrated level
 						if (levelFile.type() == FileType.Internal) {
 							SSJava.writeCompletedLevel(getLevel().levelCode);
@@ -621,6 +625,6 @@ public class GameWorld {
 	 * Dispose method
 	 */
 	public void dispose() {
-		
+		box2DWorld.dispose();
 	}
 }

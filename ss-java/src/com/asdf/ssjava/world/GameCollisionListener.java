@@ -66,13 +66,13 @@ public class GameCollisionListener implements ContactListener {
 		}
 		else if (body1.getUserData() instanceof BulletType1 && body2.getUserData() instanceof Ship) {
 			Ship ship = (Ship) body2.getUserData();
-			if (!ship.isLightSpeedEnabled()) {				
+			if (!ship.isSpeedOfLightEnabled()) {				
 				bulletImpact((Bullet) body1.getUserData(), (AbstractEntity) body2.getUserData());
 			}
 		}
 		else if (body2.getUserData() instanceof BulletType1 && body1.getUserData() instanceof Ship) {
 			Ship ship = (Ship) body1.getUserData();
-			if (!ship.isLightSpeedEnabled()) {				
+			if (!ship.isSpeedOfLightEnabled()) {				
 				bulletImpact((Bullet) body2.getUserData(), (AbstractEntity) body1.getUserData());
 			}
 		}
@@ -119,7 +119,7 @@ public class GameCollisionListener implements ContactListener {
 			}
 			// Kill other entities in light speed
 			if (!contact.getFixtureB().isSensor()) {				
-				if (ship.isLightSpeedEnabled()) {
+				if (ship.isSpeedOfLightEnabled()) {
 					((AbstractEntity) body2.getUserData()).setHealth(0);
 				}
 				AudioPlayer.shipImpact();
@@ -166,7 +166,7 @@ public class GameCollisionListener implements ContactListener {
 			}
 			// Kill other entities in light speed
 			if (!contact.getFixtureA().isSensor()) {				
-				if (ship.isLightSpeedEnabled()) {
+				if (ship.isSpeedOfLightEnabled()) {
 					((AbstractEntity) body1.getUserData()).setHealth(0);
 				}
 				AudioPlayer.shipImpact();
@@ -182,7 +182,7 @@ public class GameCollisionListener implements ContactListener {
 	 */
 	public void bulletImpact(Bullet b, AbstractEntity e) {
 		if (!(e instanceof Powerup || e instanceof Bullet)) {
-			Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " collided with " + e.toString() + " " + Integer.toHexString(e.hashCode()));
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Bullet " + Integer.toHexString(b.hashCode()) + " collided with " + e.toString() + " " + Integer.toHexString(e.hashCode()));
 			e.healthChange((-1) * b.getDamage()); 
 			b.setHealth(0);
 			AudioPlayer.bulletImpact();
@@ -199,7 +199,7 @@ public class GameCollisionListener implements ContactListener {
 	 * @param s the ship
 	 */
 	public void pointsCollected(Points p, Ship s) {
-		Gdx.app.log(SSJava.LOG, "Points collected: " + Integer.toHexString(p.hashCode()) + " Amount: " + Points.SCORE + " points added");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Points collected: " + Integer.toHexString(p.hashCode()) + " Amount: " + Points.SCORE + " points added");
 		gameWorld.getScoreKeeper().add(Points.SCORE);
 		p.setHealth(0);
 	}
@@ -211,7 +211,7 @@ public class GameCollisionListener implements ContactListener {
 	 * @param s the ship
 	 */
 	public void healthUpActivate(PowerupHealthUp p, Ship s) {
-		Gdx.app.log(SSJava.LOG, "Health up " + Integer.toHexString(p.hashCode()) + " activated: " + PowerupHealthUp.HEALTH_GIVEN + " health points restored");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Health up " + Integer.toHexString(p.hashCode()) + " activated: " + PowerupHealthUp.HEALTH_GIVEN + " health points restored");
 		s.healthChange(PowerupHealthUp.HEALTH_GIVEN);
 		p.setHealth(0);
 	}
@@ -224,21 +224,12 @@ public class GameCollisionListener implements ContactListener {
 	 * @param s the ship
 	 */
 	public void speedOfLightActivate(PowerupSpeedOfLight p, final Ship s) {
-		Gdx.app.log(SSJava.LOG, "Speed of light " + Integer.toHexString(p.hashCode()) + " activated");
-		s.setLightSpeedEnabled(true);
-		s.getBody().getFixtureList().get(0).setSensor(true);
-		s.getBody().setLinearVelocity(Ship.SPEED_OF_LIGHT_VELOCITY);
-		AudioPlayer.speedOfLightOn();
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Speed of light " + Integer.toHexString(p.hashCode()) + " activated");
+		s.enableSpeedOfLight();
 		new Timer().scheduleTask(new Task() {
 			@Override
 			public void run() {
-				s.getBody().setLinearVelocity(Ship.DEFAULT_VELOCITY.x, 0);
-				Fixture f = s.getBody().getFixtureList().get(0);
-				if (f != null) { 					
-					s.getBody().getFixtureList().get(0).setSensor(false);
-				}
-				s.setLightSpeedEnabled(false);
-				AudioPlayer.speedOfLightOff();
+				s.disableSpeedOfLight();
 			}
 		}, PowerupSpeedOfLight.COOLDOWN_SECONDS);
 		p.setHealth(0);
@@ -256,7 +247,7 @@ public class GameCollisionListener implements ContactListener {
 		gameWorld.sunActivated = true;
 	}
 	
-	public void sunDisactivate() {
+	public void sunDeactivate() {
 		gameWorld.sunActivated = false;
 	}
 	
@@ -272,7 +263,7 @@ public class GameCollisionListener implements ContactListener {
 		gameWorld.gravityActivated = true;
 	}
 	
-	public void gravityDisactivate() {
+	public void gravityDeactivate() {
 		gameWorld.gravityActivated = false;
 	}
 	
@@ -288,7 +279,7 @@ public class GameCollisionListener implements ContactListener {
 		gameWorld.magnetActivated = true;
 	}
 	
-	public void magnetDisactivate() {
+	public void magnetDeactivate() {
 		gameWorld.magnetActivated = false;
 	}
 	
@@ -308,17 +299,17 @@ public class GameCollisionListener implements ContactListener {
 				// Game Changers collection
 				if (body2.getUserData() instanceof Sun) {
 					if (contact.getFixtureB().isSensor()) {
-						sunDisactivate();
+						sunDeactivate();
 					}
 				}
 				else if (body2.getUserData() instanceof Planet) {
 					if (contact.getFixtureB().isSensor()) {
-						gravityDisactivate();
+						gravityDeactivate();
 					}	
 				}
 				else if (body2.getUserData() instanceof MagneticObject) {
 					if (contact.getFixtureB().isSensor()) {
-						magnetDisactivate();
+						magnetDeactivate();
 					}	
 				}
 			}
@@ -326,17 +317,17 @@ public class GameCollisionListener implements ContactListener {
 				// Game Changers collection
 				if (body1.getUserData() instanceof Sun) {
 					if (contact.getFixtureA().isSensor()) {
-						sunDisactivate();
+						sunDeactivate();
 					}
 				}
 				else if (body1.getUserData() instanceof Planet) {
 					if (contact.getFixtureA().isSensor()) {
-						gravityDisactivate();
+						gravityDeactivate();
 					}	
 				}
 				else if (body1.getUserData() instanceof MagneticObject) {
 					if (contact.getFixtureA().isSensor()) {
-						magnetDisactivate();
+						magnetDeactivate();
 					}
 				}
 			}

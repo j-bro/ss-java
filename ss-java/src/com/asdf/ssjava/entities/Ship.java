@@ -12,6 +12,7 @@ import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -103,7 +104,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The ship cannot lose health from collisions as long as this is true
 	 */
-	private boolean lightSpeedEnabled = false;
+	private boolean speedOfLightEnabled = false;
 	
 	/**
 	 * Indicates whether or not the ship is currently at its maximum speed 
@@ -277,15 +278,43 @@ public class Ship extends MoveableEntity {
 	/**
 	 * @return true if light speed mode is enabled
 	 */
-	public boolean isLightSpeedEnabled() {
-		return lightSpeedEnabled;
+	public boolean isSpeedOfLightEnabled() {
+		return speedOfLightEnabled;
 	}
 
 	/**
 	 * @param lightSpeedMode the lightSpeedMode to set
 	 */
-	public void setLightSpeedEnabled(boolean lightSpeedMode) {
-		this.lightSpeedEnabled = lightSpeedMode;
+	public void setSpeedOfLightEnabled(boolean enabled) {
+		this.speedOfLightEnabled = enabled;
+	}
+	
+	/**
+	 * Enables the speed of light of the ship
+	 */
+	public void enableSpeedOfLight() {
+		if (!isSpeedOfLightEnabled()) {			
+			getBody().setLinearVelocity(Ship.SPEED_OF_LIGHT_VELOCITY);
+			Fixture f = getBody().getFixtureList().get(0);
+			if (f != null) { 					
+				f.setSensor(true);
+			}
+			setSpeedOfLightEnabled(true);
+			AudioPlayer.speedOfLightOn();
+		}
+	}
+	
+	/**
+	 * Disables the speed of light of the ship
+	 */
+	public void disableSpeedOfLight() {
+		getBody().setLinearVelocity(Ship.DEFAULT_VELOCITY.x, 0);
+		Fixture f = getBody().getFixtureList().get(0);
+		if (f != null) { 					
+			f.setSensor(false);
+		}
+		setSpeedOfLightEnabled(false);
+		AudioPlayer.speedOfLightOff();
 	}
 
 	/*

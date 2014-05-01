@@ -6,10 +6,13 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
+import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -53,6 +56,17 @@ public class GameInputManager implements InputProcessor {
 					break;
 				case Keys.ESCAPE:
 					gameWorld.pauseGame();
+					break;
+					
+				case Keys.L:
+					if (SSJava.DEBUG) { // speed of light testing
+						if (!ship.isSpeedOfLightEnabled()) {
+							ship.enableSpeedOfLight();
+						}
+						else {
+							ship.disableSpeedOfLight();	
+						}
+					}
 					break;
 				default: break;
 			}

@@ -133,8 +133,9 @@ public class SSJava extends Game {
 	 */
 	public static void writeCompletedLevel(int level) {
 		if (level > SSJava.prefs.getInteger(highestCompletedLevelKey, 0)) {
-			SSJava.prefs.putInteger(highestCompletedLevelKey, level);
-			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "wrote new level completed");
+			prefs.putInteger(highestCompletedLevelKey, level);
+			prefs.flush();
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Updated game completion: " + level);
 		}
 	}
 	

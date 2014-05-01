@@ -517,7 +517,7 @@ public class WorldRenderer {
 						+ "\nAngle (rad): " + (float) Math.round(angleMod * 10000) / 10000
 						+ "\nVelocity: " + (float) Math.round(ship.getBody().getLinearVelocity().x * 100) / 100 + " , " + (float) Math.round(ship.getBody().getLinearVelocity().y * 100) / 100 
 						+ "\nHealth: " + ship.getHealth() + " half hearts"
-						+ "\nLight speed enabled: " + ship.isLightSpeedEnabled() 
+						+ "\nLight speed enabled: " + ship.isSpeedOfLightEnabled() 
 						+ "\nLevel progress: " + gameWorld.getProgress() + "%"
 						+ "\nDEBUG TEXT HOLDER"	
 //						+ "\nDEBUG TEXT HOLDER"	
