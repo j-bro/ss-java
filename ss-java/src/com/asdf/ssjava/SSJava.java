@@ -36,17 +36,17 @@ public class SSJava extends Game {
 	public static final boolean DEBUG = true;
 	
 	/**
-	 * 
+	 * The preferences instance
 	 */
 	public static Preferences prefs;
 	
 	/**
-	 * 
+	 * The high scores instance
 	 */
 	public HighScores highScores;
 	
 	/**
-	 * 
+	 * The asset manager instance
 	 */
 	public AssetManager assetManager;
 	
@@ -55,13 +55,24 @@ public class SSJava extends Game {
 	 */
 	public GameScreen gameScreen;
 	
+	/**
+	 * The reference to the most recent screenshot
+	 */
 	public TextureRegion screenshot;
 	
 	public int width;
 	
 	public int height;
 	
+	/**
+	 * The path to the high scores file
+	 */
 	static String highScoresPath = "hs.json";
+	
+	/**
+	 * The preferences key for the highest completed level
+	 */
+	static String highestCompletedLevelKey = "highestCompletedLevel";
 	
 	@Override
 	public void create() {
@@ -104,11 +115,27 @@ public class SSJava extends Game {
 	}
 	
 	// Game state methods
+	/**
+	 * 
+	 * @param level the specified level
+	 * @return true if the highest completed level is greater than the specified level
+	 */
 	public static boolean checkLevelCompletion(int level) {
-		if (SSJava.prefs.getInteger("greatestCompletedLevel", 0) >= level) {
+		if (SSJava.prefs.getInteger(highestCompletedLevelKey, 0) >= level) {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Save the highest level completed by the player
+	 * @param level the level completed
+	 */
+	public static void writeCompletedLevel(int level) {
+		if (level > SSJava.prefs.getInteger(highestCompletedLevelKey, 0)) {
+			SSJava.prefs.putInteger(highestCompletedLevelKey, level);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "wrote new level completed");
+		}
 	}
 	
 	/**

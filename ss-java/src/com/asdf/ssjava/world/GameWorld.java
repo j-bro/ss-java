@@ -21,6 +21,7 @@ import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
@@ -353,7 +354,7 @@ public class GameWorld {
 	/**
 	 * Ship behaviour when level completed
 	 */
-	public void levelCompleted() {
+	public void levelCompleted() {		
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
 		// Decelerate ship
 		if (ship.getBody().getLinearVelocity().x > 0) {
@@ -382,6 +383,13 @@ public class GameWorld {
 					@Override
 					public void run() {
 						AudioPlayer.stopGameMusic();
+						
+						Gdx.app.log(SSJava.LOG, "code: " + getLevel().levelCode);
+						// Update player progress if level is game-integrated level
+						if (levelFile.type() == FileType.Internal) {
+							SSJava.writeCompletedLevel(getLevel().levelCode);
+						}
+						
 						if (getCreator() == null) {	
 							game.screenshot = ScreenUtils.getFrameBufferTexture();
 							game.setScreen(new LevelCompletedMenu(game, game.gameScreen));

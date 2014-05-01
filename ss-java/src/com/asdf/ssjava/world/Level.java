@@ -49,7 +49,7 @@ public class Level {
 	/**
 	 * The level code for distinguishing different game levels
 	 */
-	private int levelCode;
+	int levelCode;
 	
 	/**
 	 * 
@@ -62,7 +62,7 @@ public class Level {
 		
 		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
-		levelCode = 000;
+		levelCode = 0;
 	}
 
 	/**

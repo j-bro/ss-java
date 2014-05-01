@@ -15,7 +15,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 	- powerups: bigger bullets
 	- Multiple enemy & bullet types
 
-
 ####In Progress
 
 - Menu GUI
@@ -23,7 +22,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Level design (levels 1-5)
 - Pass through obstacle after collision
 - Dead ship texture
-- Save game level progress
 
 ####Complete
 - Ship movement (completed DD/MM)
@@ -44,6 +42,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - Progress % display (completed 29/04)
 - Audio player sounds (completed 30/04)
 - High scores (completed 30/04)
+- Save progress of game levels (completed 01/05)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro
