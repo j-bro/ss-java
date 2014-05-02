@@ -244,7 +244,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -265,7 +265,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show creator options");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

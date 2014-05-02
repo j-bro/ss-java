@@ -53,7 +53,7 @@ public class LevelSelectButton extends TextButton {
 	 */
 	public LevelSelectButton(String text, float width, float height, final SSJava game, FileHandle levelFile) {
 		super(text, new TextButtonStyle() {{
-			font = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+			font = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 			font.setColor(Color.WHITE);
 		}});
 		
@@ -75,7 +75,7 @@ public class LevelSelectButton extends TextButton {
 	 */
 	public LevelSelectButton(LevelSelectButton button, final SSJava game) {
 		super(button.text, new TextButtonStyle() {{
-			font = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+			font = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		}});
 		
 		this.game = button.game;

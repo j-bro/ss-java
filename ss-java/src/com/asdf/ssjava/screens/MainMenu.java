@@ -263,7 +263,7 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show main menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		
 		if (AudioPlayer.gameMusic.isPlaying()) {			
 			AudioPlayer.stopGameMusic();

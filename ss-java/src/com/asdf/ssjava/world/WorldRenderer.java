@@ -152,53 +152,53 @@ public class WorldRenderer {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 		
-		shipTexture = game.assetManager.get("data/textures/shipA.png", Texture.class);
+		shipTexture = SSJava.assetManager.get("data/textures/shipA.png", Texture.class);
 		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 //		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		spaceRockTexture = game.assetManager.get("data/textures/space_rock.png", Texture.class);
+		spaceRockTexture = SSJava.assetManager.get("data/textures/space_rock.png", Texture.class);
 		spaceRockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		asteroidTexture = game.assetManager.get("data/textures/asteroid.png", Texture.class);
+		asteroidTexture = SSJava.assetManager.get("data/textures/asteroid.png", Texture.class);
 		asteroidTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		enemyType1Texture = game.assetManager.get("data/textures/enemy_1.png", Texture.class);
+		enemyType1Texture = SSJava.assetManager.get("data/textures/enemy_1.png", Texture.class);
 		enemyType1Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bulletType0Texture = game.assetManager.get("data/textures/good_bullet.png", Texture.class);
+		bulletType0Texture = SSJava.assetManager.get("data/textures/good_bullet.png", Texture.class);
 		bulletType0Texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		powerupHealthUpTexture = game.assetManager.get("data/textures/health_up.png", Texture.class);
+		powerupHealthUpTexture = SSJava.assetManager.get("data/textures/health_up.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		powerupSpeedOfLightTexture = game.assetManager.get("data/textures/speed_of_light.png", Texture.class);
+		powerupSpeedOfLightTexture = SSJava.assetManager.get("data/textures/speed_of_light.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		pointsTexture = game.assetManager.get("data/textures/points.png", Texture.class);
+		pointsTexture = SSJava.assetManager.get("data/textures/points.png", Texture.class);
 		pointsTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		planetTexture = game.assetManager.get("data/textures/planet.png", Texture.class);
+		planetTexture = SSJava.assetManager.get("data/textures/planet.png", Texture.class);
 		planetTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		sunTexture = game.assetManager.get("data/textures/sun.png", Texture.class);
+		sunTexture = SSJava.assetManager.get("data/textures/sun.png", Texture.class);
 		sunTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		magneticObjectTexture = game.assetManager.get("data/textures/magnetic_object.png", Texture.class);
+		magneticObjectTexture = SSJava.assetManager.get("data/textures/magnetic_object.png", Texture.class);
 		magneticObjectTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
 		
 //		gameWorld.setBackground(gameWorld.getLevel().getBackgroundPath()); TODO fix
-		bgTexture = game.assetManager.get("data/textures/backgrounds/background_sparks.png", Texture.class);
+		bgTexture = SSJava.assetManager.get("data/textures/backgrounds/background_sparks.png", Texture.class);
 		bgTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		bgSprite = new Sprite(bgTexture);
 		
-		fullHeartTexture = game.assetManager.get("data/textures/heart_full.png", Texture.class);
+		fullHeartTexture = SSJava.assetManager.get("data/textures/heart_full.png", Texture.class);
 		fullHeartTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		emptyHeartTexture = game.assetManager.get("data/textures/heart_empty.png", Texture.class);
+		emptyHeartTexture = SSJava.assetManager.get("data/textures/heart_empty.png", Texture.class);
 		emptyHeartTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		halfHeartTexture = game.assetManager.get("data/textures/heart_half.png", Texture.class);
+		halfHeartTexture = SSJava.assetManager.get("data/textures/heart_half.png", Texture.class);
 		halfHeartTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		ship = gameWorld.getShip();
@@ -211,7 +211,7 @@ public class WorldRenderer {
 		
 		// Game HUD
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
-			LabelStyle ls = new LabelStyle(game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
+			LabelStyle ls = new LabelStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
 			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
 			scoreLabel.setX(10);
 			scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
@@ -258,7 +258,7 @@ public class WorldRenderer {
 			// Debug display
 			if (SSJava.DEBUG) {
 				// Debug text
-				LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+				LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
 				debugLabel = new Label("DEBUG TEXT HOLDER"
 						+ "\nDEBUG TEXT HOLDER"
 						+ "\nDEBUG TEXT HOLDER"
@@ -310,7 +310,7 @@ public class WorldRenderer {
 			stage.addActor(pointsImage);
 			
 			// Debug text
-			LabelStyle dbls = new LabelStyle(game.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+			LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
 			debugLabel = new Label("DEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"

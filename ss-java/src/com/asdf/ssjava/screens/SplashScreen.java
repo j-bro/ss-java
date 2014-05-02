@@ -73,7 +73,7 @@ public class SplashScreen implements Screen {
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show splash screen"); // LOG
 		
-		assetManager = game.assetManager;
+		assetManager = SSJava.assetManager;
 		
 		splashTexture = new Texture("data/SplashScreen_black.png");
 		splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);

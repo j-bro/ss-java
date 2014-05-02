@@ -200,7 +200,7 @@ public class HighScoresMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show High Scores menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

@@ -140,7 +140,7 @@ public class LevelCompletedMenu implements Screen {
 		nameLabel.setVisible(newHighScore);
 		
 		// Name entry field
-		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
+		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(SSJava.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
 		TextFieldStyle fieldStyle = new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null);
 		
 		nameField = new TextField("AAA", fieldStyle);
@@ -249,7 +249,7 @@ public class LevelCompletedMenu implements Screen {
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -280,7 +280,7 @@ public class LevelCompletedMenu implements Screen {
 	@Override
 	public void show() {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level completed menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

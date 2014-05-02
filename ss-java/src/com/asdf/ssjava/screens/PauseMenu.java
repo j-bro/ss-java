@@ -154,6 +154,7 @@ public class PauseMenu implements Screen {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Exit button up");
 				// TODO potential bug??
 				AudioPlayer.stopGameMusic();
+				AudioPlayer.stopGameSounds();
 				if (((GameScreen) referrer).getGameWorld().getCreator() != null) {
 					game.setScreen(game.gameScreen.gameWorld.getCreator());
 				}
@@ -173,7 +174,7 @@ public class PauseMenu implements Screen {
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -192,7 +193,7 @@ public class PauseMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show pause menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
 	}
 
 	/*

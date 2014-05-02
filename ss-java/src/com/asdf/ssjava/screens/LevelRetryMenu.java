@@ -193,7 +193,7 @@ public class LevelRetryMenu implements Screen {
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -214,7 +214,7 @@ public class LevelRetryMenu implements Screen {
 	@Override
 	public void show() {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level retry menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

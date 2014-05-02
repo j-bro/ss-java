@@ -110,7 +110,7 @@ public class LevelSaveMenu implements Screen {
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
 		
-		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
+		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(SSJava.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
 		fileNameField = new TextField("Name", new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
 		fileNameField.setSelection(0, fileNameField.getText().length() - 1);
 		// TODO make drawable background grey for textfield distinction
@@ -164,7 +164,7 @@ public class LevelSaveMenu implements Screen {
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -202,7 +202,7 @@ public class LevelSaveMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show level save menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 
 	/*

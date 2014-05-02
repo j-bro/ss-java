@@ -33,7 +33,7 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
 	/**
 	 * The preferences instance
@@ -48,7 +48,7 @@ public class SSJava extends Game {
 	/**
 	 * The asset manager instance
 	 */
-	public AssetManager assetManager;
+	public static AssetManager assetManager;
 	
 	/**
 	 * A reference to the game screen
@@ -88,33 +88,52 @@ public class SSJava extends Game {
 		height = Gdx.graphics.getHeight();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#dispose()
+	 */
 	@Override
 	public void dispose() { 
 		super.dispose();
 		AudioPlayer.dispose();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#render()
+	 */
 	@Override
 	public void render() {		
 		super.render();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#pause()
+	 */
 	@Override
 	public void pause() {
 		super.pause();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#resume()
+	 */
 	@Override
 	public void resume() {
 		super.resume();
 	}
 	
-	// Game state methods
 	/**
 	 * 
 	 * @param level the specified level
