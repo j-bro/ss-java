@@ -98,11 +98,10 @@ public class GameScreen implements Screen {
 			AudioPlayer.stopMenuMusic();
 		}
 		
-		if (!AudioPlayer.gameMusic.isPlaying()) {			
+		if (!gameWorld.isLevelComplete()) {			
 			AudioPlayer.playGameMusic(true);
+			AudioPlayer.resumeGameSounds();
 		}
-		
-		AudioPlayer.resumeGameSounds();
 	}
 	
 	/**

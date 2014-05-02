@@ -380,6 +380,7 @@ public class GameWorld {
 			ship.getBody().applyAngularImpulse(1000, true);
 			
 			if (!isPlayEnded()) {
+				// TODO try a Thread
 				new Timer().scheduleTask(new Task() {
 					/*
 					 * (non-Javadoc)
@@ -388,13 +389,14 @@ public class GameWorld {
 					@Override
 					public void run() {
 						AudioPlayer.stopGameMusic();
-						
-						// Update player progress if level is game-integrated level
-						if (levelFile.type() == FileType.Internal) {
-							SSJava.writeCompletedLevel(getLevel().levelCode);
-						}
+						AudioPlayer.pauseGameSounds();
 						
 						if (getCreator() == null) {	
+							// Update player progress if level is game-integrated level
+							if (levelFile.type() == FileType.Internal) {
+								SSJava.writeCompletedLevel(getLevel().levelCode);
+							}
+							
 							game.screenshot = ScreenUtils.getFrameBufferTexture();
 							game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
 						}
