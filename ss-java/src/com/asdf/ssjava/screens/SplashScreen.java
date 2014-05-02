@@ -118,6 +118,7 @@ public class SplashScreen implements Screen {
 		assetManager.load("data/fonts/whitefont.fnt", BitmapFont.class);
 		assetManager.load("data/menu/button.pack", TextureAtlas.class);
 		assetManager.load("data/textures/textfieldcursor.png", Texture.class);
+		assetManager.load("data/textures/backgrounds/menu_bg.png", Texture.class);
 		
 		// Gameplay assets
 		assetManager.load("data/textures/shipA.png", Texture.class);

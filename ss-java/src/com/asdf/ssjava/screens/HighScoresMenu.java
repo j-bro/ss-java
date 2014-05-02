@@ -11,8 +11,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -53,6 +55,11 @@ public class HighScoresMenu implements Screen {
 	 * The score labels 
 	 */
 	Label positionsLabel, namesLabel, scoresLabel;
+	
+	/**
+	 * The background image
+	 */
+	Image bgImage;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -102,6 +109,11 @@ public class HighScoresMenu implements Screen {
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
+		
+		// Background image
+		bgImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/menu_bg.png", Texture.class));
+		bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage.addActor(bgImage);
 		
 		// exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
@@ -184,13 +196,6 @@ public class HighScoresMenu implements Screen {
 			newScores += "\n" + game.highScores.get(i).getScore();
 		}
 		scoresLabel.setText(newScores);
-	}
-
-	/**
-	 * Read the high scores from the file
-	 */
-	public void readScores() {
-		
 	}
 	
 	/*

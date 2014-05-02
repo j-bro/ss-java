@@ -40,13 +40,13 @@ public class LevelSaveMenu implements Screen {
 	Stage stage;
 	
 	/**
-	 * Buttons
+	 * The Buttons
 	 */
-	MenuButton backButton;
-	MenuButton saveButton;
+	MenuButton backButton, saveButton;
+	
 	TextField fileNameField;
 	
-	Label titleLabel;
+	Label titleLabel, textLabel;
 	
 	/**
 	 * Background images
@@ -111,7 +111,7 @@ public class LevelSaveMenu implements Screen {
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
 		
 		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(SSJava.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
-		fileNameField = new TextField("Name", new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
+		fileNameField = new TextField("LevelName", new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
 		fileNameField.setSelection(0, fileNameField.getText().length() - 1);
 		// TODO make drawable background grey for textfield distinction
 		fileNameField.setTextFieldListener(new TextField.TextFieldListener() {
@@ -161,6 +161,13 @@ public class LevelSaveMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
+		// Text label
+		textLabel = new Label("Enter a name:", ls);
+		textLabel.setX(0);
+		textLabel.setY(Gdx.graphics.getHeight() / 2 + 60);
+		textLabel.setWidth(width);
+		textLabel.setAlignment(Align.center);
+		
 		// Background
 		if (game.screenshot != null) {
 			bgImage = new Image(game.screenshot);
@@ -174,6 +181,7 @@ public class LevelSaveMenu implements Screen {
 		stage.addActor(fileNameField);
 		stage.addActor(saveButton);
 		stage.addActor(titleLabel);
+		stage.addActor(textLabel);
 		
 	}
 

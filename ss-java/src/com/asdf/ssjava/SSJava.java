@@ -33,7 +33,7 @@ public class SSJava extends Game {
 	/**
 	 * Debugging switch
 	 */
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	
 	/**
 	 * The preferences instance

@@ -221,6 +221,11 @@ public class OptionsMenu implements Screen {
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
 		}
+		else {
+			bgImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/menu_bg.png", Texture.class));
+			bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			stage.addActor(bgImage);
+		}
 		
 		stage.addActor(titleLabel);
 		stage.addActor(volumeLabel);

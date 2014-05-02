@@ -17,10 +17,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -57,6 +59,11 @@ public class LevelSelectMenu implements Screen {
 	 */
 	MenuButton loadButton, backButton;
 	LevelSelectButton level1Button, level2Button, level3Button, level4Button, level5Button;
+	
+	/**
+	 * The background image
+	 */
+	Image bgImage;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -207,6 +214,11 @@ public class LevelSelectMenu implements Screen {
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
+		
+		// Background image
+		bgImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/menu_bg.png", Texture.class));
+		bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage.addActor(bgImage);
 		
 		stage.addActor(titleLabel);
 		stage.addActor(backButton);

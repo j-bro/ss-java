@@ -154,7 +154,6 @@ public class WorldRenderer {
 		
 		shipTexture = SSJava.assetManager.get("data/textures/shipA.png", Texture.class);
 		shipTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-//		shipTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		spaceRockTexture = SSJava.assetManager.get("data/textures/space_rock.png", Texture.class);
 		spaceRockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -223,10 +222,10 @@ public class WorldRenderer {
 			progressLabel.setY(Gdx.graphics.getHeight() - 10 - progressLabel.getHeight());
 			stage.addActor(progressLabel);
 			
-			shipHeatIndicatorLabel = new Label("Stable", ls);
+			shipHeatIndicatorLabel = new Label("Heat: Stable", ls);
 			shipHeatIndicatorLabel.setAlignment(Align.right);
-			shipHeatIndicatorLabel.setX(Gdx.graphics.getWidth() - 10 - shipHeatIndicatorLabel.getWidth());
-			shipHeatIndicatorLabel.setY(Gdx.graphics.getHeight() - 10 - shipHeatIndicatorLabel.getHeight());
+			shipHeatIndicatorLabel.setX(15);
+			shipHeatIndicatorLabel.setY(15 + 50 + 10);
 			stage.addActor(shipHeatIndicatorLabel);
 			
 			fullHeartImage1 = new Image(fullHeartTexture);
@@ -239,16 +238,16 @@ public class WorldRenderer {
 			
 			int heartScale = 50;
 			
-			fullHeartImage1.setBounds(10, 10, heartScale, heartScale);
-			fullHeartImage2.setBounds(10, 10, heartScale, heartScale);
-			fullHeartImage3.setBounds(10, 10, heartScale, heartScale);
-			emptyHeartImage1.setBounds(10, 10, heartScale, heartScale);
-			emptyHeartImage2.setBounds(10, 10, heartScale, heartScale);
-			emptyHeartImage3.setBounds(10, 10, heartScale, heartScale);
-			halfHeartImage.setBounds(10, 10, heartScale, heartScale);
+			fullHeartImage1.setBounds(15, 15, heartScale, heartScale);
+			fullHeartImage2.setBounds(15, 15, heartScale, heartScale);
+			fullHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage1.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage2.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			halfHeartImage.setBounds(15, 15, heartScale, heartScale);
 			
-			fullHeartImage2.setX(10 + fullHeartImage1.getWidth());
-			fullHeartImage3.setX(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+			fullHeartImage2.setX(15 + fullHeartImage1.getWidth());
+			fullHeartImage3.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
 			
 			stage.addActor(fullHeartImage1);
 			stage.addActor(fullHeartImage2);
@@ -352,6 +351,7 @@ public class WorldRenderer {
 		
 		batch.setProjectionMatrix(cam.combined);
 		batch.begin();
+		
 		/* TODO simpler rendering
 		Array<Body> bodiesArray = new Array<Body>();
 		gameWorld.box2DWorld.getBodies(bodiesArray);
@@ -452,7 +452,7 @@ public class WorldRenderer {
 				fullHeartImage1.setVisible(false);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
-				halfHeartImage.setX(10);
+				halfHeartImage.setX(15);
 				halfHeartImage.setVisible(true);
 				break;
 			case 2: 
@@ -471,7 +471,7 @@ public class WorldRenderer {
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
-				halfHeartImage.setX(10 + fullHeartImage1.getWidth());
+				halfHeartImage.setX(15 + fullHeartImage1.getWidth());
 				halfHeartImage.setVisible(true);
 				break;
 			case 4: 
@@ -490,7 +490,7 @@ public class WorldRenderer {
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(true);
 				fullHeartImage3.setVisible(false);
-				halfHeartImage.setX(10 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+				halfHeartImage.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
 				halfHeartImage.setVisible(true);
 				break;
 			case 6: 
@@ -645,8 +645,8 @@ public class WorldRenderer {
 //					+ "\nSet background: B"	
 					+ "\nMove entities: arrows & mouse"
 					+ "\nOptions menu: ESC"
-					+ "\nLevel end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
-					+ "\nLevel modified: " + gameWorld.getCreator().isLevelModified());
+					+ "\nSet Level end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
+					+ "\nLevel modified since last save: " + gameWorld.getCreator().isLevelModified());
 		}
 		
 		stage.act();
@@ -741,6 +741,4 @@ public class WorldRenderer {
 	public void setSelectedEntity(AbstractEntity selectedEntity) {
 		this.selectedEntity = selectedEntity;
 	}
-	
-	
 }

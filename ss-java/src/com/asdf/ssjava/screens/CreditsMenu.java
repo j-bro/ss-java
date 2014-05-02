@@ -7,12 +7,14 @@ import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -48,6 +50,11 @@ public class CreditsMenu implements Screen {
 	 * The buttons
 	 */
 	MenuButton backButton;
+	
+	/**
+	 * The background image
+	 */
+	Image bgImage;
 	
 	/**
 	 * The screen which to switch to when the back button is clicked
@@ -146,6 +153,11 @@ public class CreditsMenu implements Screen {
 		miscLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - miscLabel.getWidth() / 2);
 		miscLabel.setY(Gdx.graphics.getHeight() / 2 - miscLabel.getHeight() / 2 - 120);
 		miscLabel.setAlignment(Align.center);
+		
+		// Background image
+		bgImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/menu_bg.png", Texture.class));
+		bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage.addActor(bgImage);
 		
 		stage.addActor(titleLabel);
 		stage.addActor(artistTitleLabel);

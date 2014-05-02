@@ -10,10 +10,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -45,9 +47,14 @@ public class MainMenu implements Screen {
 	Label titleLabel, creditsLabel;
 	
 	/**
-	 * 
+	 * The buttons
 	 */
 	MenuButton playButton, optionsButton, highScoresButton, creditsButton, exitButton, creatorButton;
+	
+	/**
+	 * The background image
+	 */
+	Image bgImage;
 	
 	Screen thisMainMenu = this;
 	
@@ -245,6 +252,11 @@ public class MainMenu implements Screen {
 		creditsLabel = new Label("(C) 2014 ASDF", ls);
 		creditsLabel.setX(width - creditsLabel.getWidth() - 10);
 		creditsLabel.setY(10);
+		
+		// Background image
+		bgImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/menu_bg.png", Texture.class));
+		bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage.addActor(bgImage);
 		
 		stage.addActor(titleLabel);	
 		stage.addActor(creditsLabel);
