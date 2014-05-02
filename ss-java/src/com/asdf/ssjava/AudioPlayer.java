@@ -121,7 +121,8 @@ public class AudioPlayer {
 			 */
 			@Override
 			public void run() {
-				levelStartSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
+				float volume = SSJava.prefs.getInteger("soundVolume", 100) / 100f;
+				levelStartSound.play(volume - volume / 20);
 			}
 		}).start();
 	}
@@ -155,7 +156,8 @@ public class AudioPlayer {
 			 */
 			@Override
 			public void run() {
-				shotSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
+				float volume = SSJava.prefs.getInteger("soundVolume", 100) / 100f;
+				shotSound.play(volume - volume / 20);
 			}
 		}).start();
 	}
@@ -292,6 +294,21 @@ public class AudioPlayer {
 		speedOfLightOffSound.pause();
 		shipDeathSound.pause();
 		enemyDeathSound.pause();
+	}
+	
+	/**
+	 * Stops all the game sounds
+	 */
+	public static void stopGameSounds() {
+		levelStartSound.stop();
+		shotSound.stop();
+		bulletImpactSound.stop();
+		shipImpactSound.stop();
+		healthUpSound.stop();
+		speedOfLightOnSound.stop();
+		speedOfLightOffSound.stop();
+		shipDeathSound.stop();
+		enemyDeathSound.stop();
 	}
 	
 	/**

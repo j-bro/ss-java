@@ -3,6 +3,7 @@
  */
 package com.asdf.ssjava.screens;
 
+import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.screens.screenelements.BackButton;
 import com.asdf.ssjava.screens.screenelements.MenuButton;
@@ -133,7 +134,7 @@ public class OptionsMenu implements Screen {
 		musicLabel.setY(Gdx.graphics.getHeight() / 2 + 20);
 		musicLabel.setAlignment(Align.center);
 		
-		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(game.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
+		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(SSJava.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
 		TextFieldStyle fieldStyle = new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null);
 		
 		musicField = new TextField(new Integer(SSJava.prefs.getInteger("musicVolume", 100)).toString(), fieldStyle);
@@ -156,6 +157,9 @@ public class OptionsMenu implements Screen {
 						SSJava.prefs.flush();
 						Gdx.app.log(SSJava.LOG, "Music volume saved");
 					}
+					AudioPlayer.menuMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
+					AudioPlayer.gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
+					AudioPlayer.creatorMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
 				}
 			}
 		});
@@ -212,7 +216,7 @@ public class OptionsMenu implements Screen {
 		// Background
 		if (game.screenshot != null && referrer instanceof PauseMenu) {
 			bgImage = new Image(game.screenshot);
-			opacityImage = new Image(game.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
+			opacityImage = new Image(SSJava.assetManager.get("data/textures/backgrounds/black_50-opacity.png", Texture.class));
 			opacityImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			stage.addActor(bgImage);
 			stage.addActor(opacityImage);
@@ -234,7 +238,7 @@ public class OptionsMenu implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(SSJava.LOG, "Show Options menu");
-		whiteFont = game.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
+		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
 	/*
