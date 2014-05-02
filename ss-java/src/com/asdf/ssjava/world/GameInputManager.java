@@ -6,13 +6,11 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -66,6 +64,14 @@ public class GameInputManager implements InputProcessor {
 						else {
 							ship.disableSpeedOfLight();	
 						}
+					}
+					break;
+					
+					
+				case Keys.T:
+					if (SSJava.DEBUG) { // Toast test						
+						Gdx.app.log(SSJava.LOG, "t pressed");
+						gameWorld.renderer.getStage().addActor(ToastMessage.create("test toast", 5));
 					}
 					break;
 				default: break;

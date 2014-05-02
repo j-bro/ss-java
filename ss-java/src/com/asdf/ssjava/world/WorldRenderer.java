@@ -707,6 +707,14 @@ public class WorldRenderer {
 		}
 	}
 	
+	
+	/**
+	 * @return the stage
+	 */
+	public Stage getStage() {
+		return stage;
+	}
+	
 	/**
 	 * 
 	 * @return the renderer's camera
