@@ -7,6 +7,7 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.screens.screenelements.Toast;
 import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -71,7 +72,7 @@ public class GameInputManager implements InputProcessor {
 				case Keys.T:
 					if (SSJava.DEBUG) { // Toast test						
 						Gdx.app.log(SSJava.LOG, "t pressed");
-						gameWorld.renderer.getStage().addActor(ToastMessage.create("test toast", 5));
+						gameWorld.renderer.getStage().addActor(Toast.create(new ToastMessage("test toast", 5, 75)));
 					}
 					break;
 				default: break;

@@ -4,9 +4,9 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.entities.Enemy;
-
 import com.asdf.ssjava.entities.Obstacle;
 import com.asdf.ssjava.entities.Powerup;
+import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -52,6 +52,11 @@ public class Level {
 	int levelCode;
 	
 	/**
+	 * The list of messages for this level
+	 */
+	public Array<ToastMessage> messages;
+	
+	/**
 	 * 
 	 */
 	public Level() {
@@ -63,6 +68,7 @@ public class Level {
 		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
 		levelCode = 0;
+		messages = new Array<ToastMessage>();
 	}
 
 	/**

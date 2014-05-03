@@ -811,5 +811,17 @@ powerups: [
 	}
 ],
 levelEnd: 1651,
-levelCode: 1
+levelCode: 1,
+messages: [
+	{
+		message: t1,
+		duration: 5,
+		progress: 75
+	},
+	{
+		message: t2,
+		duration: 5,
+		progress: 150
+	}
+]
 }

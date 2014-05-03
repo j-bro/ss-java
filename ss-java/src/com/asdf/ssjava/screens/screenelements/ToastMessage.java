@@ -1,66 +1,48 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.screens.screenelements;
 
-import com.asdf.ssjava.SSJava;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
-
+/**
+ * 
+ * @author Jeremy Brown
+ *
+ */
 public class ToastMessage {
 	
-	public static Actor create(final String text, final float time) {
-		final Window window = new Window("", new Window.WindowStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE, null));
-
-		window.setMovable(false);
-
-		window.defaults().spaceBottom(5);
-
-		BitmapFont whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
-		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
-		Label toastLabel = new Label(text, ls);
-		toastLabel.setAlignment(Align.center);
-		toastLabel.setWrap(true);
-
-		window.row().fillX().expandX();
-		window.add(toastLabel).fillX().padLeft(10);
-
-		window.invalidate();
-
-		window.setWidth(Gdx.graphics.getWidth() * 0.95f);
-		window.setHeight(toastLabel.getTextBounds().height + 20 + window.getStyle().titleFont.getLineHeight());
-
-		window.setX(Gdx.graphics.getWidth() * 0.5f - window.getWidth() * 0.5f);
-		window.setY(window.getHeight());
-		
-		final Timer t = new Timer();
-		t.scheduleTask(new Task() {
-			@Override
-			public void run() {
-				window.remove();
-			}
-		}, time);
-		
-		window.addAction(new Action(){ 
-			/*
-			 * (non-Javadoc)
-			 * @see com.badlogic.gdx.scenes.scene2d.Action#act(float)
-			 */
-			@Override
-			public boolean act(float delta) {
-				t.start();
-				return true;
-			}
-		});
-		
-		return window;
-		
+	/**
+	 * The level progress at which to show the message
+	 */
+	public float progress;
+	
+	/**
+	 * The message to be shown
+	 */
+	public String message;
+	
+	/**
+	 * The duration of the message, in seconds
+	 */
+	public float duration;
+	
+	/**
+	 * 
+	 * @param message
+	 * @param progress
+	 * @param duration
+	 */
+	public ToastMessage(String message, float duration, float progress) {
+		this.message = message;
+		this.duration = duration;
+		this.progress = progress;
 	}
-
+	
+	/**
+	 * Serialization
+	 */
+	public ToastMessage() {
+		this.message = null;
+		this.duration = 0;
+		this.progress = 0;
+	}
 }

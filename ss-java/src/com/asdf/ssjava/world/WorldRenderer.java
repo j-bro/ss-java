@@ -5,23 +5,8 @@
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Asteroid;
-import com.asdf.ssjava.entities.Bullet;
-import com.asdf.ssjava.entities.BulletType0;
-import com.asdf.ssjava.entities.BulletType1;
-import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.EnemyType1;
-import com.asdf.ssjava.entities.MagneticObject;
-import com.asdf.ssjava.entities.Obstacle;
-import com.asdf.ssjava.entities.Planet;
-import com.asdf.ssjava.entities.Points;
-import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
-import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.entities.SpaceRock;
-import com.asdf.ssjava.entities.Sun;
+import com.asdf.ssjava.entities.*;
+import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -137,7 +122,7 @@ public class WorldRenderer {
 	 * Creates the world instance
 	 * @param gameWorld
 	 */
-	public WorldRenderer(GameWorld gameWorld) {
+	public WorldRenderer(final GameWorld gameWorld) {
 		this.gameWorld = gameWorld;
 		game = gameWorld.game;
 		

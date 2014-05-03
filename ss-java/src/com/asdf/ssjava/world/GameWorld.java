@@ -20,8 +20,10 @@ import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
-import com.badlogic.gdx.Gdx;
+import com.asdf.ssjava.screens.screenelements.Toast;
+import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
@@ -281,6 +283,16 @@ public class GameWorld {
 			// Check if ship is within range of magnetic object 
 			if (magnetActivated) {
 				magnetActivate();
+			}
+			
+			
+			//  Check toasts
+			for (ToastMessage m: getLevel().messages) {
+				// Not the best way to check but will do for this purpose
+				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.1 >= ship.getBody().getPosition().x) {
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "toast: " + m.message + " at " + m.progress + " for " + m.duration + "s");
+					renderer.getStage().addActor(Toast.create(m));
+				}
 			}
 		}
 		
