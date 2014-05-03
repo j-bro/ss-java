@@ -95,7 +95,7 @@ public class LevelSelectButton extends TextButton {
 		addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
 				if (enabled) {					
-					Gdx.app.log(SSJava.LOG, text + " button down");
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, text + " button down");
 					return true;
 				}
 				return false;
@@ -105,7 +105,7 @@ public class LevelSelectButton extends TextButton {
 				if (enabled) {					
 					game.gameScreen = new GameScreen(game, levelFile);
 					game.setScreen(game.gameScreen);
-					Gdx.app.log(SSJava.LOG, text + " button up");
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, text + " button up");
 				}
 			}
 		});
@@ -118,11 +118,11 @@ public class LevelSelectButton extends TextButton {
 		this.enabled = enabled;
 		if (this.enabled) {
 			getStyle().font.setColor(Color.WHITE);
-			Gdx.app.log(SSJava.LOG, "enabled");
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button enabled");
 		}
 		else {			
 			getStyle().font.setColor(Color.GRAY);
-			Gdx.app.log(SSJava.LOG, "disabled");
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button disabled");
 		}
 	}
 }

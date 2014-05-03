@@ -1,0 +1,305 @@
+{
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 349.25,
+			y: 28.150002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 360.25,
+			y: 24.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 369.8,
+			y: 6.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 380.4,
+			y: 13.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 384,
+			y: 30.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 400.55,
+			y: 31.400002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 395.6,
+			y: 6.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 941.25,
+			y: 25.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 931.85,
+			y: 11.799999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 929.95,
+			y: 31.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 956.24994,
+			y: 4.3500004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 954.05,
+			y: 19.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 972,
+			y: 30.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 986.1,
+			y: 10.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 994.2,
+			y: 29.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1009.85,
+			y: 23.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1013.65,
+			y: 11.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 995.35,
+			y: 4.299999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1044.2999,
+			y: 31.400002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1025.8,
+			y: 15.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1030.25,
+			y: 8.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1011.60004,
+			y: 5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 977.69995,
+			y: 21.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 972.7999,
+			y: 6.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1011.7,
+			y: 30.900002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1026.65,
+			y: 31.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 999.55,
+			y: 13.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 994.75,
+			y: 20.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1030.8,
+			y: 23.599998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1043.7,
+			y: 4
+		}
+	}
+],
+messages: [
+	{
+		message: "Welcome to SS-Java!
+ ",
+		progress: 15,
+		duration: 3
+	},
+	{
+		message: "Let's get familiar
+with some of the basics",
+		progress: 55,
+		duration: 3
+	},
+	{
+		message: "Use the W and S keys
+to move up and down",
+		progress: 90,
+		duration: 10
+	},
+	{
+		message: "There are some space
+rocks up ahead",
+		progress: 200,
+		duration: 3
+	},
+	{
+		message: "Try to avoid them all!
+ ",
+		progress: 240,
+		duration: 3
+	},
+	{
+		message: "Not too shabby!
+ ",
+		progress: 415,
+		duration: 3
+	},
+	{
+		message: "Now it won't always be possible
+ to just dance around obstacles",
+		progress: 455,
+		duration: 3
+	},
+	{
+		message: "You can press space
+ to fire bullets from your ship",
+		progress: 495,
+		duration: 3
+	},
+	{
+		message: "Try shooting your way
+ through this wave",
+		progress: 535,
+		duration: 3
+	},
+	{
+		message: "Phew! Looks like you
+ made it out alive!",
+		progress: 710,
+		duration: 3
+	},
+	{
+		message: "You see those 3 hearts
+ in the bottom left corner?",
+		progress: 750,
+		duration: 3
+	},
+	{
+		message: "That's your health.\nDon't let it get to zero!
+ ",
+		progress: 790,
+		duration: 3
+	},
+	{
+		message: "You might have also noticed\n your score went up!",
+		progress: 830,
+		duration: 3
+	},
+	{
+		message: "You get points for killing obstacles,\n but also for collecting points",
+		progress: 870,
+		duration: 3
+	},
+	{
+		message: "Try to collct as many as possible!\n ",
+		progress: 910,
+		duration: 3
+	}
+],
+levelCode: 0,
+levelEnd: 1500
+}

@@ -67,7 +67,7 @@ public class Level {
 		
 		levelEnd = 100;
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
-		levelCode = 0;
+		levelCode = -1;
 		messages = new Array<ToastMessage>();
 	}
 

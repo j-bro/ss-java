@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.SSJava;
@@ -13,8 +16,30 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-public class ToastMessage {
+/**
+ * 
+ * @author Jeremy Brown
+ *
+ */
+public class Toast {
 	
+	private Toast() { }
+	
+	/**
+	 * Toasts a message from a ToastMessage object
+	 * @param tm
+	 * @return
+	 */
+	public static Actor create(ToastMessage tm) {
+		return create(tm.message, tm.duration);
+	}
+	
+	/**
+	 * 
+	 * @param text
+	 * @param time
+	 * @return
+	 */
 	public static Actor create(final String text, final float time) {
 		final Window window = new Window("", new Window.WindowStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE, null));
 
@@ -60,7 +85,5 @@ public class ToastMessage {
 		});
 		
 		return window;
-		
 	}
-
 }

@@ -166,8 +166,7 @@ public class SSJava extends Game {
 	public static HighScores loadHighScores(String filePath) {
 		FileHandle file = Gdx.files.local(filePath);
 		if (file.exists()) {			
-			Json json = new Json();
-			return json.fromJson(HighScores.class, Gdx.files.local(filePath)); 
+			return new Json().fromJson(HighScores.class, Gdx.files.local(filePath)); 
 		}
 		// In case high scores file is not found, create a new instance filled with zeros
 		else {
