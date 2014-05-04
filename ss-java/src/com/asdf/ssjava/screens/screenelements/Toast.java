@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-public class ToastMessage {
+public class Toast {
 	
 	public static Actor create(final String text, final float time) {
 		final Window window = new Window("", new Window.WindowStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE, null));
