@@ -22,8 +22,6 @@ import com.asdf.ssjava.entities.PowerupHealthUp;
 import com.asdf.ssjava.entities.PowerupSpeedOfLight;
 import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.entities.Sun;
-import com.asdf.ssjava.screens.screenelements.Toast;
-import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
 import com.badlogic.gdx.Application;

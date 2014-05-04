@@ -279,8 +279,7 @@ rocks up ahead",
 		duration: 3
 	},
 	{
-		message: "That's your health.\nDon't let it get to zero!
- ",
+		message: "That's your health.\nDon't let it get to zero!",
 		progress: 790,
 		duration: 3
 	},
