@@ -482,9 +482,13 @@ public class GameWorld {
 	 * Causes the ship to be burned by the sun
 	 */
 	public void sunActivate() {
-		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime() * 1);
-		if (shipHeatIndicator >= 3) {
-			
+		Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
+		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());
+		if (shipHeatIndicator >= 3.5) {
+			ship.setHealth(0);
+		}
+		else if (shipHeatIndicator >= 2) {
+			renderer.shipHeatIndicatorLabel.setText("Heat: DANGER!");
 		}
 	}
 	
