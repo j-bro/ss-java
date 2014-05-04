@@ -440,11 +440,11 @@ public class GameWorld {
 		double yLine = ship.getPosition().y - magnet.getPosition().y;
 		double distance = Math.sqrt(Math.pow(xLine, 2) 
 				+ Math.pow(yLine, 2));
-		double force = Planet.GRAVITATIONNAL_CONSTANT * 10 * 1 / Math.pow(distance, 2);
+		double force = Planet.GRAVITATIONNAL_CONSTANT * 1500 * 1 / Math.pow(distance, 2);
 		Gdx.app.log(SSJava.LOG, "Force: " + force);
 		float xForce = (float) (force / distance * xLine);
 		float yForce = (float) (force / distance * yLine);
-		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
+		ship.getBody().applyForceToCenter(xForce, yForce, true);
 	}
 	
 	public void setMagneticObject(MagneticObject m) {
@@ -463,7 +463,7 @@ public class GameWorld {
 		double yLine = ship.getPosition().y - planet.getPosition().y;
 		double distance = Math.sqrt(Math.pow(xLine, 2) 
 				+ Math.pow(yLine, 2));
-		double force = Planet.GRAVITATIONNAL_CONSTANT * 10 * 1 / Math.pow(distance, 2);
+		double force = Planet.GRAVITATIONNAL_CONSTANT * 5000 * 1 / Math.pow(distance, 2);
 		Gdx.app.log(SSJava.LOG, "Force: " + force);
 		float xForce = (float) (force / distance * xLine);
 		float yForce = (float) (force / distance * yLine);
