@@ -3,8 +3,6 @@
  */
 package com.asdf.ssjava.entities;
 
-import java.math.BigInteger;
-
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -62,9 +60,6 @@ public class Planet extends Obstacle {
 	 * The planet's weight modifier
 	 */
 	public static final long PLANET_WEIGHT_MOD = 59720000000000L;
-	 * The planet's weight in kg
-	 */
-	public static final BigInteger PLANET_WEIGHT = new BigInteger("5972000000000000000000000"); 
 	
 	/**
 	 * The planet's radius
@@ -117,13 +112,6 @@ public class Planet extends Obstacle {
 		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT_MOD * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
 		return force;
 	}
-	 * @return force
-	 */
-//	public double gravitationnalPull(long mass, long distance){
-//		double force;
-//		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
-//		return force;
-//	}
 	
 	/*
 	 * (non-Javadoc)
@@ -155,24 +143,10 @@ public class Planet extends Obstacle {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f; 
-		fixtureDef.density = 1000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
-		
-		CircleShape circle2 = new CircleShape();
-		circle2.setRadius(width / 2 + 6);
-		
-		FixtureDef fixtureDef2 = new FixtureDef();
-		fixtureDef2.shape = circle2;
-		fixtureDef2.density = 0.5f; 
-		fixtureDef2.friction = 1.0f;
-		fixtureDef2.restitution = 0.1f;
-		fixtureDef2.isSensor = true;
-		
-		body.createFixture(fixtureDef2);
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
