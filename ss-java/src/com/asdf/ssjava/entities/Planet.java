@@ -117,6 +117,13 @@ public class Planet extends Obstacle {
 		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT_MOD * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
 		return force;
 	}
+	 * @return force
+	 */
+//	public double gravitationnalPull(long mass, long distance){
+//		double force;
+//		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
+//		return force;
+//	}
 	
 	/*
 	 * (non-Javadoc)
