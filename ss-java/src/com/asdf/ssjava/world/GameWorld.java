@@ -20,7 +20,11 @@ import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
+<<<<<<< HEAD
 //import com.asdf.ssjava.screens.screenelements.Toast;
+=======
+import com.asdf.ssjava.screens.screenelements.Toast;
+>>>>>>> b4e8e7c7243dfa2f2cc6c418e970495791a83dba
 import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -286,6 +290,7 @@ public class GameWorld {
 			}
 			
 			
+<<<<<<< HEAD
 //			//  Check toasts
 //			for (ToastMessage m: getLevel().messages) {
 //				// Not the best way to check but will do for this purpose
@@ -294,6 +299,16 @@ public class GameWorld {
 //					renderer.getStage().addActor(Toast.create(m));
 //				}
 //			}
+=======
+			//  Check toasts
+			for (ToastMessage m: getLevel().messages) {
+				// Not the best way to check but will do for this purpose
+				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.1 >= ship.getBody().getPosition().x) {
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "toast: " + m.message + " at " + m.progress + " for " + m.duration + "s");
+					renderer.getStage().addActor(Toast.create(m));
+				}
+			}
+>>>>>>> b4e8e7c7243dfa2f2cc6c418e970495791a83dba
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
