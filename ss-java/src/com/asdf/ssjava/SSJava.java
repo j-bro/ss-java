@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Json;
  * @author Jeremy Brown
  * 
  */
-
 public class SSJava extends Game {
 
 	/**

@@ -286,7 +286,6 @@ public class GameWorld {
 				magnetActivate();
 			}
 			
-			
 			//  Check toasts
 			for (ToastMessage m: getLevel().messages) {
 				// Not the best way to check but will do for this purpose
@@ -295,6 +294,7 @@ public class GameWorld {
 					renderer.getStage().addActor(Toast.create(m));
 				}
 			}
+			
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
@@ -436,7 +436,15 @@ public class GameWorld {
 	 * Causes the ship to be attracted/repelled from the magnetic object
 	 */
 	public void magnetActivate() {
-		
+		double xLine = ship.getPosition().x - magnet.getPosition().x;
+		double yLine = ship.getPosition().y - magnet.getPosition().y;
+		double distance = Math.sqrt(Math.pow(xLine, 2) 
+				+ Math.pow(yLine, 2));
+		double force = Planet.GRAVITATIONNAL_CONSTANT * 10 * 1 / Math.pow(distance, 2);
+		Gdx.app.log(SSJava.LOG, "Force: " + force);
+		float xForce = (float) (force / distance * xLine);
+		float yForce = (float) (force / distance * yLine);
+		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
 	}
 	
 	public void setMagneticObject(MagneticObject m) {
@@ -451,7 +459,15 @@ public class GameWorld {
 	 * Causes the ship to be attracted to the planet
 	 */
 	public void gravityActivate() {
-		
+		double xLine = ship.getPosition().x - planet.getPosition().x;
+		double yLine = ship.getPosition().y - planet.getPosition().y;
+		double distance = Math.sqrt(Math.pow(xLine, 2) 
+				+ Math.pow(yLine, 2));
+		double force = Planet.GRAVITATIONNAL_CONSTANT * 10 * 1 / Math.pow(distance, 2);
+		Gdx.app.log(SSJava.LOG, "Force: " + force);
+		float xForce = (float) (force / distance * xLine);
+		float yForce = (float) (force / distance * yLine);
+		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
 	}
 	
 	public void setPlanet(Planet p) {
