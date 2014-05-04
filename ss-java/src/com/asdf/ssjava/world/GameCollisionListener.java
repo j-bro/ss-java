@@ -244,10 +244,12 @@ public class GameCollisionListener implements ContactListener {
 	public void sunActivate(Sun b, Ship e) {
 		gameWorld.setSun(b);
 		gameWorld.sunActivated = true;
+		gameWorld.renderer.shipHeatIndicatorLabel.setText("Heat: Rising!");
 	}
 	
 	public void sunDeactivate() {
 		gameWorld.sunActivated = false;
+		gameWorld.renderer.shipHeatIndicatorLabel.setText("Heat: Stable");
 	}
 	
 	/**

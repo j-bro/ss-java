@@ -104,7 +104,7 @@ public class Sun extends Obstacle{
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 		
 		CircleShape circle2 = new CircleShape();
-		circle2.setRadius(width / 2 + 10);
+		circle2.setRadius(width / 2 + 13);
 		
 		FixtureDef fixtureDef2 = new FixtureDef();
 		fixtureDef2.shape = circle2;

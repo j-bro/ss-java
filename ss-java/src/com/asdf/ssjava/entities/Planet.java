@@ -102,12 +102,17 @@ public class Planet extends Obstacle {
 		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
+//	public double gravitationnalPull(long mass, long distance){
+//		double force;
+//		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
+//		return force;
+//	}
 	
 	/**
 	 * 
 	 * @param mass
 	 * @param distance
-	 * @return force
+	 * @return
 	 */
 //	public double gravitationnalPull(long mass, long distance){
 //		double force;
@@ -144,6 +149,7 @@ public class Planet extends Obstacle {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
+		fixtureDef.density = 0.5f; 
 		fixtureDef.density = 1000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
@@ -152,7 +158,7 @@ public class Planet extends Obstacle {
 		body.setLinearVelocity(DEFAULT_VELOCITY);
 		
 		CircleShape circle2 = new CircleShape();
-		circle2.setRadius(width / 2 + 6);
+		circle2.setRadius(width / 2 + 8);
 		
 		FixtureDef fixtureDef2 = new FixtureDef();
 		fixtureDef2.shape = circle2;
