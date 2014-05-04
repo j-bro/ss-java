@@ -16,15 +16,12 @@ import com.asdf.ssjava.entities.Planet;
 import com.asdf.ssjava.entities.Powerup;
 import com.asdf.ssjava.entities.Ship;
 import com.asdf.ssjava.entities.Sun;
+import com.asdf.ssjava.screens.GameScreen;
 import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
 import com.asdf.ssjava.screens.LevelRetryMenu;
 import com.asdf.ssjava.screens.PauseMenu;
-<<<<<<< HEAD
-//import com.asdf.ssjava.screens.screenelements.Toast;
-=======
 import com.asdf.ssjava.screens.screenelements.Toast;
->>>>>>> b4e8e7c7243dfa2f2cc6c418e970495791a83dba
 import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -289,26 +286,15 @@ public class GameWorld {
 				magnetActivate();
 			}
 			
-			
-<<<<<<< HEAD
-//			//  Check toasts
-//			for (ToastMessage m: getLevel().messages) {
-//				// Not the best way to check but will do for this purpose
-//				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.1 >= ship.getBody().getPosition().x) {
-//					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "toast: " + m.message + " at " + m.progress + " for " + m.duration + "s");
-//					renderer.getStage().addActor(Toast.create(m));
-//				}
-//			}
-=======
 			//  Check toasts
 			for (ToastMessage m: getLevel().messages) {
 				// Not the best way to check but will do for this purpose
-				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.1 >= ship.getBody().getPosition().x) {
-					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "toast: " + m.message + " at " + m.progress + " for " + m.duration + "s");
+				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.3 >= ship.getBody().getPosition().x) {
+					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Toast: " + m.message + " at " + m.progress + " for " + m.duration + "s");
 					renderer.getStage().addActor(Toast.create(m));
 				}
 			}
->>>>>>> b4e8e7c7243dfa2f2cc6c418e970495791a83dba
+			
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
@@ -421,11 +407,19 @@ public class GameWorld {
 						if (getCreator() == null) {	
 							// Update player progress if level is game-integrated level
 							if (levelFile.type() == FileType.Internal) {
-								SSJava.writeCompletedLevel(getLevel().levelCode);
+								SSJava.writeCompletedLevel(getLevel().getLevelCode());
 							}
 							
-							game.screenshot = ScreenUtils.getFrameBufferTexture();
-							game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+							// Auto-continue after tutorial level (0)
+							if (levelFile.type() == FileType.Internal && getLevel().getLevelCode() == 0) {
+								game.gameScreen = new GameScreen(game, Gdx.files.internal("data/levels/level1.json"));
+								game.setScreen(game.gameScreen);
+							}
+							else {								
+								game.screenshot = ScreenUtils.getFrameBufferTexture();
+								game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+							}
+							
 						}
 						else {
 							game.setScreen(creator);
