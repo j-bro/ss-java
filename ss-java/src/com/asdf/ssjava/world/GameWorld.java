@@ -411,9 +411,19 @@ public class GameWorld {
 							}
 							
 							// Auto-continue after tutorial level (0)
-							if (levelFile.type() == FileType.Internal && getLevel().getLevelCode() == 0) {
-								game.gameScreen = new GameScreen(game, Gdx.files.internal("data/levels/level1.json"));
-								game.setScreen(game.gameScreen);
+							if (getLevel().getLevelCode() == 0) {
+								new Timer().scheduleTask(new Task() {
+									/*
+									 * (non-Javadoc)
+									 * @see com.badlogic.gdx.utils.Timer.Task#run()
+									 */
+									@Override
+									public void run() {
+										game.gameScreen = new GameScreen(game, Gdx.files.internal("data/levels/level1.json"));
+										game.setScreen(game.gameScreen);
+									}
+								}, 3);
+								
 							}
 							else {								
 								game.screenshot = ScreenUtils.getFrameBufferTexture();

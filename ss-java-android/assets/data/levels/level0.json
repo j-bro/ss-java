@@ -136,22 +136,15 @@ obstacles: [
 	{
 		class: com.asdf.ssjava.entities.Asteroid,
 		position: {
-			x: 1025.8,
-			y: 15.75
+			x: 1027.4,
+			y: 16.6
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.Asteroid,
 		position: {
-			x: 1030.25,
-			y: 8.75
-		}
-	},
-	{
-		class: com.asdf.ssjava.entities.Asteroid,
-		position: {
-			x: 1011.60004,
-			y: 5
+			x: 1009.2999,
+			y: 5.05
 		}
 	},
 	{
@@ -204,10 +197,196 @@ obstacles: [
 		}
 	},
 	{
-		class: com.asdf.ssjava.entities.Asteroid,
+		class: com.asdf.ssjava.entities.SpaceRock,
 		position: {
-			x: 1043.7,
-			y: 4
+			x: 357.25,
+			y: 5.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 368.95,
+			y: 30.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 341.15,
+			y: 14.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 403.05,
+			y: 8.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 407,
+			y: 26.599998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 419.15,
+			y: 27
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 421.05,
+			y: 6.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 413.75,
+			y: 13.450001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 392.85004,
+			y: 14.95
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1061,
+			y: 21
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1069.6499,
+			y: 19.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1076.5499,
+			y: 13.450001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1086.0499,
+			y: 11.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1095.55,
+			y: 15.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1105.25,
+			y: 17.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1114.85,
+			y: 14.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1134.35,
+			y: 6.1500006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1124.7,
+			y: 9.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1143.95,
+			y: 10.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1153.1,
+			y: 13.549999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1044,
+			y: 15.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1052.4,
+			y: 19.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1035.85,
+			y: 10.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1027.7,
+			y: 7.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		width: 6,
+		position: {
+			x: 1019.3,
+			y: 3.5999994
 		}
 	}
 ],
@@ -232,7 +411,7 @@ to move up and down",
 	},
 	{
 		message: "There are some space
-rocks up ahead",
+rocks up ahead!",
 		progress: 200,
 		duration: 3
 	},
@@ -249,8 +428,8 @@ rocks up ahead",
 		duration: 3
 	},
 	{
-		message: "Now it won't always be possible
- to just dance around obstacles",
+		message: "You won't always be able
+ to dance around obstacles that easily!",
 		progress: 455,
 		duration: 3
 	},
@@ -279,27 +458,48 @@ rocks up ahead",
 		duration: 3
 	},
 	{
-		message: "That's your health.\nDon't let it get to zero!
- ",
+		message: "That's your health.
+Don't let it get to zero!",
 		progress: 790,
 		duration: 3
 	},
 	{
-		message: "You might have also noticed\n your score went up!",
+		message: "You might have also noticed
+ your score went up!",
 		progress: 830,
 		duration: 3
 	},
 	{
-		message: "You get points for killing obstacles,\n but also for collecting points",
+		message: "You get points for killing obstacles,
+ but also for collecting points",
 		progress: 870,
 		duration: 3
 	},
 	{
-		message: "Try to collct as many as possible!\n ",
+		message: "Try to collect as many as possible!
+ ",
 		progress: 910,
+		duration: 3
+	},
+	{
+		message: "Excellent!
+ ",
+		progress: 1170,
+		duration: 3
+	},
+	{
+		message: "You're now ready to move on to level 1!
+ ",
+		progress: 1210,
+		duration: 3
+	},
+	{
+		message: "Safe travels aboard SS-Java!
+ ",
+		progress: 1250,
 		duration: 3
 	}
 ],
 levelCode: 0,
-levelEnd: 1500
+levelEnd: 1300
 }

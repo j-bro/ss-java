@@ -58,7 +58,7 @@ public class LevelSelectMenu implements Screen {
 	 * The buttons
 	 */
 	MenuButton loadButton, backButton;
-	LevelSelectButton level1Button, level2Button, level3Button, level4Button, level5Button;
+	LevelSelectButton tutorialButton, level1Button, level2Button, level3Button, level4Button, level5Button;
 	
 	/**
 	 * The background image
@@ -113,6 +113,11 @@ public class LevelSelectMenu implements Screen {
 		stage.setViewport(width, height);
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
+		
+		// Level buttons
+		tutorialButton = new LevelSelectButton("Tutorial", 280, 65, game, Gdx.files.internal("data/levels/level0.json"));
+		tutorialButton.setX(Gdx.graphics.getWidth() / 2 - tutorialButton.getWidth() / 2);
+		tutorialButton.setY(Gdx.graphics.getHeight() / 2 - tutorialButton.getHeight() / 2 + 200);
 		
 		// Level buttons
 		level1Button = new LevelSelectButton("Level 1", 280, 65, game, Gdx.files.internal("data/levels/level1.json"));
@@ -222,6 +227,7 @@ public class LevelSelectMenu implements Screen {
 		
 		stage.addActor(titleLabel);
 		stage.addActor(backButton);
+		stage.addActor(tutorialButton);
 		stage.addActor(level1Button);
 		stage.addActor(level2Button);
 		stage.addActor(level3Button);
