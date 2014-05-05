@@ -121,6 +121,9 @@ public class GameCollisionListener implements ContactListener {
 				if (ship.isSpeedOfLightEnabled()) {
 					((AbstractEntity) body2.getUserData()).setHealth(0);
 				}
+			else {
+				ship.healthChange(-1);
+			}
 				AudioPlayer.shipImpact();
 			}
 		}

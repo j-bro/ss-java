@@ -128,6 +128,11 @@ public class GameWorld {
 	private double shipHeatIndicator;
 	
 	/**
+	 * The time in seconds
+	 */
+	private double time = 1;
+	
+	/**
 	 * The ship's current progress in the level
 	 */
 	private int progress;
@@ -473,7 +478,7 @@ public class GameWorld {
 		double yLine = ship.getPosition().y - planet.getPosition().y;
 		double distance = Math.sqrt(Math.pow(xLine, 2) 
 				+ Math.pow(yLine, 2));
-		double force = Planet.GRAVITATIONNAL_CONSTANT * 5000 * 1 / Math.pow(distance, 2);
+		double force = Planet.GRAVITATIONNAL_CONSTANT * 3000 * 1 / Math.pow(distance, 2);
 		Gdx.app.log(SSJava.LOG, "Force: " + force);
 		float xForce = (float) (force / distance * xLine);
 		float yForce = (float) (force / distance * yLine);
@@ -494,8 +499,12 @@ public class GameWorld {
 	public void sunActivate() {
 		Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
 		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());
-		if (shipHeatIndicator >= 3.5) {
-			ship.setHealth(0);
+		if (shipHeatIndicator >= 3) {
+			time += (double)(Gdx.graphics.getDeltaTime());
+			if (time >= 1) {
+				ship.healthChange(-2);
+				time--;
+			}
 		}
 		else if (shipHeatIndicator >= 2) {
 			renderer.shipHeatIndicatorLabel.setText("Heat: DANGER!");

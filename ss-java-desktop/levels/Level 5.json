@@ -1,0 +1,324 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 120.75001,
+			y: 5
+		}
+	}
+],
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 61.199993,
+			y: 30.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 78.74999,
+			y: 34.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 98.649994,
+			y: 35.449997
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 55.84999,
+			y: 5.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 74.59999,
+			y: 3.4000006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 100.59999,
+			y: 1.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 70.649994,
+			y: 20.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 98.79999,
+			y: 20.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 76.45,
+			y: 13.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 80.49999,
+			y: 22.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 66.95,
+			y: 21.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 91.399994,
+			y: 16.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 69.99999,
+			y: 18.099998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 94.24999,
+			y: 23.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 75.79999,
+			y: 17.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 94.74999,
+			y: 13.549999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 94.2,
+			y: 22.400002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 78.49999,
+			y: 14.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 87.899994,
+			y: 21.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 79.99999,
+			y: 9.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 93.49999,
+			y: 11.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 102.09999,
+			y: 19.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 87.79999,
+			y: 12.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 71.24999,
+			y: 13
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 72.84999,
+			y: 23.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 102.95,
+			y: 16.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 83.84999,
+			y: 11.799999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 94.74999,
+			y: 16.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 77.29999,
+			y: 18.550001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 96.95,
+			y: 22.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 79.74999,
+			y: 19.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 90.24999,
+			y: 16.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 83.649994,
+			y: 24.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 72.45,
+			y: 14.349999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 90.04999,
+			y: 6.6499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 84,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 84,
+			y: 18
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 132.34999,
+			y: 11.799999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 127.74999,
+			y: 21.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 140.2,
+			y: 11.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 127.59999,
+			y: 31.400002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 133.84999,
+			y: 26.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 122.45,
+			y: 27
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 133.4,
+			y: 2.3000011
+		}
+	}
+],
+levelEnd: 2000
+}
