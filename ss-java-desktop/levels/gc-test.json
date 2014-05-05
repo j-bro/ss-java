@@ -1,0 +1,26 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 59.5,
+			y: 34.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 118.649994,
+			y: 45.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 171.9,
+			y: 25.4
+		}
+	}
+],
+levelEnd: 200
+}
