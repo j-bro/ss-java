@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 
 /**
@@ -93,12 +95,9 @@ public class LevelSelectButton extends TextButton {
 	 */
 	public void addLevelButtonListener() {
 		addListener(new InputListener() {
-			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				if (enabled) {					
-					if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, text + " button down");
-					return true;
-				}
-				return false;
+			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {				
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, text + " button down");
+				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
@@ -117,11 +116,12 @@ public class LevelSelectButton extends TextButton {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 		if (this.enabled) {
-			getStyle().font.setColor(Color.WHITE);
+//			getStyle().font.setColor(Color.WHITE);
 			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button enabled");
 		}
 		else {			
-			getStyle().font.setColor(Color.GRAY);
+//			getStyle().font.setColor(Color.GRAY);
+			setText("Locked");
 			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button disabled");
 		}
 	}
