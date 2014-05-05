@@ -368,78 +368,84 @@ public class GameWorld {
 	/**
 	 * Ship behaviour when level completed
 	 */
-	public void levelCompleted() {		
-		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
-		
-		if (ship.isSpeedOfLightEnabled()) {
-			ship.disableSpeedOfLight();
-		}
-		
-		// Decelerate ship
-		if (ship.getBody().getLinearVelocity().x > 0) {
-			ship.getBody().applyForceToCenter(-30, 0, false);
-		}
-		else if (ship.getBody().getLinearVelocity().x < 0) {
-			ship.getBody().applyForceToCenter(30, 0, false);
-		}
-		if (ship.getBody().getLinearVelocity().y > 0) {
-			ship.getBody().applyForceToCenter(0, -30, false);
-		}
-		else if (ship.getBody().getLinearVelocity().y < 0) {
-			ship.getBody().applyForceToCenter(0, 30, false);
-		}
-		
-		// Start rotating ship
-		if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
-			ship.getBody().applyAngularImpulse(1000, true);
+	public void levelCompleted() {	
+		if (getLevel().nextLevelPath == null) {
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Level completed");
 			
-			if (!isPlayEnded()) {
-				// TODO try a Thread
-				new Timer().scheduleTask(new Task() {
-					/*
-					 * (non-Javadoc)
-					 * @see com.badlogic.gdx.utils.Timer.Task#run()
-					 */
-					@Override
-					public void run() {
-						AudioPlayer.stopGameMusic();
-						AudioPlayer.pauseGameSounds();
-						
-						if (getCreator() == null) {	
-							// Update player progress if level is game-integrated level
-							if (levelFile.type() == FileType.Internal) {
-								SSJava.writeCompletedLevel(getLevel().getLevelCode());
-							}
+			if (ship.isSpeedOfLightEnabled()) {
+				ship.disableSpeedOfLight();
+			}
+			
+			// Decelerate ship
+			if (ship.getBody().getLinearVelocity().x > 0) {
+				ship.getBody().applyForceToCenter(-30, 0, false);
+			}
+			else if (ship.getBody().getLinearVelocity().x < 0) {
+				ship.getBody().applyForceToCenter(30, 0, false);
+			}
+			if (ship.getBody().getLinearVelocity().y > 0) {
+				ship.getBody().applyForceToCenter(0, -30, false);
+			}
+			else if (ship.getBody().getLinearVelocity().y < 0) {
+				ship.getBody().applyForceToCenter(0, 30, false);
+			}
+			
+			// Start rotating ship
+			if (ship.getBody().getLinearVelocity().x < 1 && ship.getBody().getLinearVelocity().x > -1 && ship.getBody().getLinearVelocity().y < 1 && ship.getBody().getLinearVelocity().y > -1) {
+				ship.getBody().applyAngularImpulse(1000, true);
+				
+				if (!isPlayEnded()) {
+					// TODO try a Thread
+					new Timer().scheduleTask(new Task() {
+						/*
+						 * (non-Javadoc)
+						 * @see com.badlogic.gdx.utils.Timer.Task#run()
+						 */
+						@Override
+						public void run() {
+							AudioPlayer.stopGameMusic();
+							AudioPlayer.pauseGameSounds();
 							
-							// Auto-continue after tutorial level (0)
-							if (getLevel().getLevelCode() == 0) {
-								new Timer().scheduleTask(new Task() {
-									/*
-									 * (non-Javadoc)
-									 * @see com.badlogic.gdx.utils.Timer.Task#run()
-									 */
-									@Override
-									public void run() {
-										game.gameScreen = new GameScreen(game, Gdx.files.internal("data/levels/level1.json"));
-										game.setScreen(game.gameScreen);
-									}
-								}, 3);
+							if (getCreator() == null) {	
+								// Update player progress if level is game-integrated level
+								if (levelFile.type() == FileType.Internal) {
+									SSJava.writeCompletedLevel(getLevel().getLevelCode());
+								}
+								
+								// Auto-continue after tutorial level (0)
+								if (getLevel().getLevelCode() == 0) {
+									new Timer().scheduleTask(new Task() {
+										/*
+										 * (non-Javadoc)
+										 * @see com.badlogic.gdx.utils.Timer.Task#run()
+										 */
+										@Override
+										public void run() {
+											game.gameScreen = new GameScreen(game, Gdx.files.internal("data/levels/level1-intro.json"));
+											game.setScreen(game.gameScreen);
+										}
+									}, 3);
+									
+								}
+								else {								
+									game.screenshot = ScreenUtils.getFrameBufferTexture();
+									game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+								}
 								
 							}
-							else {								
-								game.screenshot = ScreenUtils.getFrameBufferTexture();
-								game.setScreen(new LevelCompletedMenu(game, game.gameScreen));
+							else {
+								game.setScreen(creator);
 							}
-							
 						}
-						else {
-							game.setScreen(creator);
-						}
-					}
-				}, 2);
-				AudioPlayer.levelComplete();
-				setPlayEnded(true);
+					}, 2);
+					AudioPlayer.levelComplete();
+					setPlayEnded(true);
+				}
 			}
+		}
+		else {
+			game.gameScreen = new GameScreen(game, Gdx.files.internal(getLevel().nextLevelPath));
+			game.setScreen(game.gameScreen);
 		}
 	}
 	

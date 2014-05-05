@@ -7,6 +7,7 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.Ship;
+import com.asdf.ssjava.screens.GameScreen;
 import com.asdf.ssjava.screens.screenelements.Toast;
 import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Application;
@@ -19,6 +20,11 @@ import com.badlogic.gdx.InputProcessor;
  * 
  */
 public class GameInputManager implements InputProcessor {
+	
+	/**
+	 * The game instance
+	 */
+	SSJava game;
 	
 	/**
 	 * The world's instance
@@ -35,6 +41,7 @@ public class GameInputManager implements InputProcessor {
 	 * @param gameWorld 
 	 */
 	public GameInputManager(SSJava game, GameWorld gameWorld) {
+		this.game = game;
 		this.gameWorld = gameWorld;
 		ship = gameWorld.getShip();
 	}
@@ -57,8 +64,15 @@ public class GameInputManager implements InputProcessor {
 					gameWorld.pauseGame();
 					break;
 					
+				case Keys.I: // Skip intro level
+					if (gameWorld.getLevel().nextLevelPath != null) {
+						game.gameScreen = new GameScreen(game, Gdx.files.internal(gameWorld.getLevel().nextLevelPath));
+						game.setScreen(game.gameScreen);
+					}
+					break;
+					
 				case Keys.L:
-					if (SSJava.DEBUG) { // speed of light testing
+					if (SSJava.DEBUG) { // DEBUG: Speed of light testing
 						if (!ship.isSpeedOfLightEnabled()) {
 							ship.enableSpeedOfLight();
 						}
@@ -67,10 +81,8 @@ public class GameInputManager implements InputProcessor {
 						}
 					}
 					break;
-					
-					
 				case Keys.T:
-					if (SSJava.DEBUG) { // Toast test						
+					if (SSJava.DEBUG) { // DEBUG: Toast test						
 						Gdx.app.log(SSJava.LOG, "t pressed");
 						gameWorld.renderer.getStage().addActor(Toast.create(new ToastMessage("test toast", 5, 75)));
 					}
