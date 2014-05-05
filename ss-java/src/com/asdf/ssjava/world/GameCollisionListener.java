@@ -112,8 +112,13 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (!contact.getFixtureB().isSensor() && ship.isSpeedOfLightEnabled()) {				
-				((AbstractEntity) body2.getUserData()).setHealth(0);
+			if (!contact.getFixtureB().isSensor()) {				
+				if (ship.isSpeedOfLightEnabled()) {
+					((AbstractEntity) body2.getUserData()).setHealth(0);
+				}
+			else {
+				ship.healthChange(-1);
+			}
 				AudioPlayer.shipImpact();
 			}
 		}

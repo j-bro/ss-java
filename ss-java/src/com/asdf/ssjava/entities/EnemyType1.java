@@ -22,7 +22,7 @@ public class EnemyType1 extends Enemy {
 	/**
 	 * Default velocity for the Type 1 Enemy
 	 */
-	public static final Vector2 DEFAULT_VELOCITY = new Vector2(2, 0);
+	public static final Vector2 DEFAULT_VELOCITY = new Vector2(-2, 0);
 	
 	/**
 	 * The enemy's default width, in game coordinates
