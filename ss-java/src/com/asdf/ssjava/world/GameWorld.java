@@ -38,6 +38,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -480,10 +481,18 @@ public class GameWorld {
 		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void setPlanet(Planet p) {
 		planet = p;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Planet getPlanet() {
 		return planet;
 	}

@@ -53,7 +53,7 @@ public class Ship extends MoveableEntity {
 	 * The ship does not initially have a horizontal (x) acceleration, as it moves at a constant speed, which varies only from hitting obstacles and enemies.
 	 * The y acceleration controls how fast the player is able to move the ship up and down.
 	 */
-	public static Vector2 DEFAULT_ACCELERATION = new Vector2(25, 500);
+	public static Vector2 DEFAULT_ACCELERATION = new Vector2(35, 500);
 	
 	/**
 	 * 
@@ -202,12 +202,12 @@ public class Ship extends MoveableEntity {
 					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 				}
 				
-				// Limit y velocity
-				if (getBody().getLinearVelocity().y > DEFAULT_VELOCITY.y) {
-					getBody().setLinearVelocity(getBody().getLinearVelocity().x, DEFAULT_VELOCITY.y);
-				}
 				
 				if (Gdx.input.isKeyPressed(Keys.W)) {
+					// Limit y velocity
+					if (getBody().getLinearVelocity().y > DEFAULT_VELOCITY.y) {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, DEFAULT_VELOCITY.y);
+					}
 					//Stop the ship from going off the top of the screen when W is continuously pressed 
 					if(getPosition().y + getHeight()/2 >= screenTop) {
 						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	
@@ -216,8 +216,14 @@ public class Ship extends MoveableEntity {
 					else {
 						getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
 					}
+					
+
 				}
 				else if (Gdx.input.isKeyPressed(Keys.S)) {
+					// Limit y velocity
+					if (getBody().getLinearVelocity().y < -DEFAULT_VELOCITY.y) {
+						getBody().setLinearVelocity(getBody().getLinearVelocity().x, -DEFAULT_VELOCITY.y);
+					}
 					//Stop the ship from going off the bottom of the screen when S is continuously pressed 
 					if(getPosition().y - getHeight()/2 <= screenBottom) {
 						getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	

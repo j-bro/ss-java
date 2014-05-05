@@ -21,7 +21,7 @@ public class PowerupHealthUp extends Powerup {
 	/**
 	 * The health points given to the ship when it picks up this power up
 	 */
-	public static final int HEALTH_GIVEN = 2;
+	public static final int HEALTH_GIVEN = 4;
 	
 	/**
 	 * The powerup's default width, in game coordinates
