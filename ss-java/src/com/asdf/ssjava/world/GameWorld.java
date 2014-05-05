@@ -38,6 +38,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -456,7 +457,7 @@ public class GameWorld {
 		double distance = Math.sqrt(Math.pow(xLine, 2) 
 				+ Math.pow(yLine, 2));
 		double force = Planet.GRAVITATIONNAL_CONSTANT * 1500 * 1 / Math.pow(distance, 2);
-		Gdx.app.log(SSJava.LOG, "Force: " + force);
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Force: " + force);
 		float xForce = (float) (force / distance * xLine);
 		float yForce = (float) (force / distance * yLine);
 		ship.getBody().applyForceToCenter(xForce, yForce, true);
@@ -485,10 +486,18 @@ public class GameWorld {
 		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void setPlanet(Planet p) {
 		planet = p;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Planet getPlanet() {
 		return planet;
 	}
@@ -497,7 +506,7 @@ public class GameWorld {
 	 * Causes the ship to be burned by the sun
 	 */
 	public void sunActivate() {
-		Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
 		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());
 		if (shipHeatIndicator >= 3) {
 			time += (double)(Gdx.graphics.getDeltaTime());

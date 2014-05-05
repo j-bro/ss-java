@@ -5,24 +5,14 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Bullet;
-import com.asdf.ssjava.entities.BulletType0;
-import com.asdf.ssjava.entities.BulletType1;
-import com.asdf.ssjava.entities.MagneticObject;
-import com.asdf.ssjava.entities.Planet;
-import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.PowerupHealthUp;
-import com.asdf.ssjava.entities.PowerupSpeedOfLight;
-import com.asdf.ssjava.entities.Points;
-import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.entities.Sun;
+import com.asdf.ssjava.entities.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -91,6 +81,7 @@ public class GameCollisionListener implements ContactListener {
 			else if (body2.getUserData() instanceof Points) {
 				pointsCollected((Points) body2.getUserData(), ship);	
 			}
+			
 			// Game changers collection
 			else if (body2.getUserData() instanceof Sun) {
 				if (contact.getFixtureB().isSensor()) {
@@ -101,11 +92,15 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			else if (body2.getUserData() instanceof Planet) {
+				Planet p = (Planet) body2.getUserData();
 				if (contact.getFixtureB().isSensor()) {
-					gravityActivate((Planet) body2.getUserData(), ship);
+					gravityActivate((Planet) p, ship);
 				}
 				else {
-					ship.healthChange(-1);
+					if (TimeUtils.millis() - p.lastContactTime >= 500) {
+						ship.healthChange(-1);						
+						p.lastContactTime = TimeUtils.millis();
+					}
 				}	
 			}
 			else if (body2.getUserData() instanceof MagneticObject) {
@@ -127,19 +122,20 @@ public class GameCollisionListener implements ContactListener {
 				AudioPlayer.shipImpact();
 			}
 		}
+		
 		else if (body2.getUserData() instanceof Ship) {
 			// Powerup collection
 			Ship ship = (Ship) body2.getUserData();
 			if (body1.getUserData() instanceof PowerupHealthUp) {
-				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
+				healthUpActivate((PowerupHealthUp) body1.getUserData(), ship);
 				 AudioPlayer.healthUp();
 			}
 			else if (body1.getUserData() instanceof PowerupSpeedOfLight) {
-				speedOfLightActivate((PowerupSpeedOfLight) body2.getUserData(), ship);
+				speedOfLightActivate((PowerupSpeedOfLight) body1.getUserData(), ship);
 				AudioPlayer.speedOfLightOn();
 			}
 			else if (body1.getUserData() instanceof Points) {
-				pointsCollected((Points) body2.getUserData(), ship);	
+				pointsCollected((Points) body1.getUserData(), ship);	
 			}
 			// Game changers collection
 			else if (body1.getUserData() instanceof Sun) {
@@ -167,10 +163,8 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (!contact.getFixtureA().isSensor()) {				
-				if (ship.isSpeedOfLightEnabled()) {
-					((AbstractEntity) body1.getUserData()).setHealth(0);
-				}
+			if (!contact.getFixtureA().isSensor() && ship.isSpeedOfLightEnabled()) {				
+				((AbstractEntity) body1.getUserData()).setHealth(0);
 				AudioPlayer.shipImpact();
 			}
 		}			
