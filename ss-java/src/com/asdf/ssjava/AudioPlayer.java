@@ -29,6 +29,7 @@ public class AudioPlayer {
 	public static Sound healthUpSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/health_up.mp3"));
 	public static Sound speedOfLightOnSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/speed_on.mp3"));
 	public static Sound speedOfLightOffSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/speed_off.mp3"));
+	public static Sound pointsSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/coin.mp3"));
 	public static Sound shipDeathSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/ship_death.mp3"));
 	public static Sound enemyDeathSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/ratdeath.mp3"));
 	
@@ -248,6 +249,23 @@ public class AudioPlayer {
 	}
 	
 	/**
+	 * Plays the points picked up sound
+	 */
+	public static void pointsPickedUp() {
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Play points picked up sound");
+		new Thread(new Runnable() {
+			/*
+			 * (non-Javadoc)
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
+			public void run() {
+				pointsSound.play(SSJava.prefs.getInteger("soundVolume", 100) / 100f);
+			}
+		}).start();
+	}
+	
+	/**
 	 * Plays the ship death sound
 	 */
 	public static void shipDeath() {
@@ -292,6 +310,7 @@ public class AudioPlayer {
 		healthUpSound.pause();
 		speedOfLightOnSound.pause();
 		speedOfLightOffSound.pause();
+		pointsSound.pause();
 		shipDeathSound.pause();
 		enemyDeathSound.pause();
 	}
@@ -307,6 +326,7 @@ public class AudioPlayer {
 		healthUpSound.stop();
 		speedOfLightOnSound.stop();
 		speedOfLightOffSound.stop();
+		pointsSound.stop();
 		shipDeathSound.stop();
 		enemyDeathSound.stop();
 	}
@@ -322,6 +342,7 @@ public class AudioPlayer {
 		healthUpSound.resume();
 		speedOfLightOnSound.resume();
 		speedOfLightOffSound.resume();
+		pointsSound.resume();
 		shipDeathSound.resume();
 		enemyDeathSound.resume();
 	}
@@ -339,6 +360,7 @@ public class AudioPlayer {
 		healthUpSound.dispose();
 		speedOfLightOnSound.dispose();
 		speedOfLightOffSound.dispose();
+		pointsSound.dispose();
 		shipDeathSound.dispose();
 		enemyDeathSound.dispose();
 	}

@@ -200,6 +200,7 @@ public class GameCollisionListener implements ContactListener {
 	public void pointsCollected(Points p, Ship s) {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Points collected: " + Integer.toHexString(p.hashCode()) + " Amount: " + Points.SCORE + " points added");
 		gameWorld.getScoreKeeper().add(Points.SCORE);
+		AudioPlayer.pointsPickedUp();
 		p.setHealth(0);
 	}
 	
@@ -212,6 +213,7 @@ public class GameCollisionListener implements ContactListener {
 	public void healthUpActivate(PowerupHealthUp p, Ship s) {
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Health up " + Integer.toHexString(p.hashCode()) + " activated: " + PowerupHealthUp.HEALTH_GIVEN + " health points restored");
 		s.healthChange(PowerupHealthUp.HEALTH_GIVEN);
+		AudioPlayer.healthUp();
 		p.setHealth(0);
 	}
 	
