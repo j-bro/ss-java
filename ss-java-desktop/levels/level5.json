@@ -220,22 +220,22 @@ gameChangers: [
 	{
 		class: com.asdf.ssjava.entities.Sun,
 		position: {
-			x: 1604.15,
-			y: 42.550003
+			x: 1630.25,
+			y: 46.35
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.Sun,
 		position: {
-			x: 1638.55,
-			y: 17.95
+			x: 1669.1,
+			y: 18.9
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.Sun,
 		position: {
-			x: 1604.45,
-			y: -5.450001
+			x: 1630.75,
+			y: -7.199999
 		}
 	}
 ],
@@ -1766,8 +1766,8 @@ powerups: [
 	{
 		class: com.asdf.ssjava.entities.PowerupHealthUp,
 		position: {
-			x: 1300.9,
-			y: 33.699997
+			x: 1277.2,
+			y: 16.9
 		}
 	},
 	{
