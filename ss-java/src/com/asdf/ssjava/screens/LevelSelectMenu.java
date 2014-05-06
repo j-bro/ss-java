@@ -131,7 +131,7 @@ public class LevelSelectMenu implements Screen {
 			level1Button.setEnabled(true);
 		}
 		
-		level2Button = new LevelSelectButton("Level 2", 280, 65, game, null);
+		level2Button = new LevelSelectButton("Level 2", 280, 65, game, Gdx.files.internal("data/levels/level2-intro.json"));
 		level2Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level2Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 100);
 		if (!SSJava.checkLevelCompletion(2 - 1)) {
@@ -141,7 +141,7 @@ public class LevelSelectMenu implements Screen {
 			level2Button.setEnabled(true);
 		}
 		
-		level3Button = new LevelSelectButton("Level 3", 280, 65, game, null);
+		level3Button = new LevelSelectButton("Level 3", 280, 65, game, Gdx.files.internal("data/levels/level3"));
 		level3Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level3Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 50);
 		if (!SSJava.checkLevelCompletion(3 - 1)) {
@@ -151,7 +151,7 @@ public class LevelSelectMenu implements Screen {
 			level3Button.setEnabled(true);
 		}
 		
-		level4Button = new LevelSelectButton("Level 4", 280, 65, game, null);
+		level4Button = new LevelSelectButton("Level 4", 280, 65, game, Gdx.files.internal("data/levels/4.json"));
 		level4Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level4Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2);
 		if (!SSJava.checkLevelCompletion(4 - 1)) {

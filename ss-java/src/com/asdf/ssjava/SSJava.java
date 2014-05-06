@@ -153,7 +153,7 @@ public class SSJava extends Game {
 		if (level > SSJava.prefs.getInteger(highestCompletedLevelKey, 0)) {
 			prefs.putInteger(highestCompletedLevelKey, level);
 			prefs.flush();
-			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Updated game completion: " + level);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Updated game level completion: " + level);
 		}
 	}
 	

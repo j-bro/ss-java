@@ -343,7 +343,6 @@ to level 1!
 		duration: 3
 	}
 ],
-levelCode: 0,
 powerups: [
 	{
 		class: com.asdf.ssjava.entities.Points,
@@ -458,5 +457,6 @@ powerups: [
 		}
 	}
 ],
+levelCode: 0,
 levelEnd: 1300
 }
