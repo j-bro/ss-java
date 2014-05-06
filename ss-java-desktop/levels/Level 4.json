@@ -1,0 +1,2615 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 150.15,
+			y: 16.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 134.05,
+			y: 16.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 201.4,
+			y: 31.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 201.99998,
+			y: 2.6499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 275.2,
+			y: 46.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 73.05,
+			y: 16.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 225,
+			y: 8.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 279.1,
+			y: 11.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 266.9,
+			y: 5.3500004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 233.44998,
+			y: 31.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 324.2,
+			y: 24.150002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 312.1,
+			y: 5.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 431.45,
+			y: 29.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 402.4,
+			y: 6.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 468,
+			y: 5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 505.65002,
+			y: 29.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 548.65,
+			y: 46.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 528.15,
+			y: 8.250001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 539.95,
+			y: 3.1500006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 553.4,
+			y: 9.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 564.69995,
+			y: 2.8999996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 574.64996,
+			y: 9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 621.89996,
+			y: -14.550003
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 621.85,
+			y: 52.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 679.99994,
+			y: -13.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 675.99994,
+			y: 52.550003
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 727.1,
+			y: -14.699997
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 725.65,
+			y: 50.399998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 798.3,
+			y: 24.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 799.25,
+			y: 10.099999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 809.49994,
+			y: 17.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 787.2,
+			y: 31.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 809.55,
+			y: 30.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 787.6,
+			y: 3.9499998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 810.05,
+			y: 3.5500002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 788,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 842.7999,
+			y: 34.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 875.1,
+			y: 16.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 842.44995,
+			y: 15.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 917.35,
+			y: 24.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 917.64996,
+			y: 9.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 970.9,
+			y: 10.099999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 971.65,
+			y: 25.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 1019.19995,
+			y: 24.150002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 1071.8,
+			y: -7.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1122.75,
+			y: 30.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1138.8,
+			y: 17.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1122.9,
+			y: 5.0999994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1154.5,
+			y: 28.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1154.75,
+			y: 5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1173,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1199,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1187.1998,
+			y: 4.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1185.9498,
+			y: 30.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1215.45,
+			y: 4.6000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1215,
+			y: 30.900002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1227.05,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1238.75,
+			y: 30.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 1241.4,
+			y: 4.05
+		}
+	}
+],
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 89.95,
+			y: 31.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 119.25,
+			y: 30.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 119.65,
+			y: 3.0500002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 119,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 134.85,
+			y: 30.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 167.2,
+			y: 17.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 134.85,
+			y: 3.5999994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 150,
+			y: 31.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 150.49998,
+			y: 3.6999998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 168.05,
+			y: 3.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 167,
+			y: 30.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 126.95001,
+			y: 23.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 124.05,
+			y: 10.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 143.95,
+			y: 23.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 141.65,
+			y: 10.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 159.9,
+			y: 24.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 158.45,
+			y: 9.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 234.69998,
+			y: 17.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 235.2,
+			y: 5.4000006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 287.75,
+			y: 18.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 296.6,
+			y: 0.54999924
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 295.65,
+			y: 9.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 267.19998,
+			y: 17.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 234.49998,
+			y: 24.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 241.99998,
+			y: 26.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 250.04999,
+			y: 31.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 225.85,
+			y: 30.900002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 357.05,
+			y: 27.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 343.5,
+			y: 2.6499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 359.7,
+			y: 21.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 359.4,
+			y: 9.849999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 351.15002,
+			y: 22.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 349.84998,
+			y: 15.799999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 351.05002,
+			y: 8.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 351.55002,
+			y: 1.9500008
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 343.9,
+			y: 9.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 358.15,
+			y: 3.8500004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 365.2,
+			y: 14.900001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 366.95,
+			y: 22.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 364.95,
+			y: 4.200001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 371.5,
+			y: 8.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 401.85,
+			y: 29.849998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 410,
+			y: 21.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 419.35,
+			y: 13.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 431.9,
+			y: 5.8499994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 444.5,
+			y: 13.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 454.79996,
+			y: 20.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 467.75,
+			y: 28.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 482.5,
+			y: 21.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 489.95,
+			y: 12.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 500.75,
+			y: 5.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 891.95,
+			y: 32.050003
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 897.3,
+			y: 24.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 904.75,
+			y: 17.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 909.75,
+			y: 9.900001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 918,
+			y: 3.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 925.4,
+			y: 9.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 932.15,
+			y: 16.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 934.2,
+			y: 24.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 940.3,
+			y: 31.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 902.15,
+			y: 32.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 911.55,
+			y: 31.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 920.75,
+			y: 31.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 930.15,
+			y: 31.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 908.25,
+			y: 24.349998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 925.25,
+			y: 24.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 912.1,
+			y: 16.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 922.5499,
+			y: 16.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 950.44995,
+			y: 3.6499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 958.4,
+			y: 3.9499998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 955.8499,
+			y: 10.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 966.0499,
+			y: 4.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 963.14996,
+			y: 10.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 960.3499,
+			y: 17.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 962.89996,
+			y: 26.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 974.2999,
+			y: 3.6999998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 982.25,
+			y: 3.8000002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 989.7,
+			y: 3.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 979.74994,
+			y: 10.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 986.7,
+			y: 9.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 971.8,
+			y: 32.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 976.2999,
+			y: 18.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 983.2999,
+			y: 17.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 980.99994,
+			y: 25.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 967.85,
+			y: 18.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1035.95,
+			y: 2.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1039.85,
+			y: 9.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 1091.45,
+			y: 20.849998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1124.05,
+			y: 17.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1131.8,
+			y: 25.300001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1130.9,
+			y: 9.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1141.3,
+			y: 5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1150.05,
+			y: 17.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1144.2,
+			y: 27.599998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1169.7,
+			y: 8.099999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1169.65,
+			y: 26.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1161.8,
+			y: 16.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1183.45,
+			y: 17.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1178.55,
+			y: 24.9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1179.2,
+			y: 10.099999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1164,
+			y: 1.8500004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1164.4,
+			y: 34.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1136.5,
+			y: 35.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1131.95,
+			y: 1.5500011
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1192.2499,
+			y: 17.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1195.7999,
+			y: 9.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1195.4498,
+			y: 26.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1200.3,
+			y: 34.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1205.95,
+			y: 24.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1209.35,
+			y: 16.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1204.25,
+			y: 9.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1200.05,
+			y: 1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1218.25,
+			y: 16
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1221.4,
+			y: 23.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1225.15,
+			y: 35.449997
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1226.3,
+			y: 9.200001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1231.2999,
+			y: 24.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1236.1998,
+			y: 17.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1234.4498,
+			y: 9.299999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1227.8999,
+			y: 0.29999924
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1247.55,
+			y: 34.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1244.7,
+			y: 22.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 1245.1,
+			y: 13.1
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 53.399994,
+			y: 28.650002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 53.999996,
+			y: 16.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 54.049995,
+			y: 3.9499998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 177.79999,
+			y: 9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 178.19998,
+			y: 23.599998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 177.9,
+			y: 16.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 304.55,
+			y: 4.550001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 364.1,
+			y: 32.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 385.6,
+			y: 17.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 390.7,
+			y: 7.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 178.95,
+			y: 31.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 179.15,
+			y: 2.6499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 451.55,
+			y: 33.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 485.95004,
+			y: 1.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 797.7,
+			y: 31.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 799,
+			y: 2.8499994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 798.85,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 788.1,
+			y: 10.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 788.45,
+			y: 25.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 809.85,
+			y: 24.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 809.85,
+			y: 10.150001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 908.9,
+			y: 2.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 927.6,
+			y: 2.8999996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 964.15,
+			y: 32.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 980.4,
+			y: 32.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 1059.95,
+			y: 31.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 1068.85,
+			y: 27.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 1079.25,
+			y: 31.7
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 53.449997,
+			y: 22.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 54.049995,
+			y: 9.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 69.2,
+			y: 25.349998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 73.799995,
+			y: 25.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 78.7,
+			y: 24.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 83.2,
+			y: 21.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 85.65,
+			y: 16.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 185.39998,
+			y: 16.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 159.4,
+			y: 16.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 141.8,
+			y: 16.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 126.25,
+			y: 17.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 126.9,
+			y: 3.6999998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 142.3,
+			y: 3.4499998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 126.05,
+			y: 30.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 141.95,
+			y: 30.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 159.2,
+			y: 31.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 159.6,
+			y: 3.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 192.74998,
+			y: 17.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 198.15,
+			y: 17.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 203.54999,
+			y: 17.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 209.1,
+			y: 17.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 252.2,
+			y: 18.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 257.45,
+			y: 12.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 252.3,
+			y: 12.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 257.4,
+			y: 18.400002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 252.45,
+			y: 7.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 257.45,
+			y: 7.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 277.9,
+			y: 18.050001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 242.6,
+			y: 31.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 356.75,
+			y: 15.549999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 418.95,
+			y: 6.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 408,
+			y: 14.049999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 398.5,
+			y: 21.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 390.2,
+			y: 30.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 443.85,
+			y: 5.8499994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 455.1,
+			y: 13.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 464.89996,
+			y: 20.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 476.99997,
+			y: 28.150002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 493.2,
+			y: 21.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 501.9,
+			y: 12.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 511.65002,
+			y: 5.4000006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 423.90002,
+			y: 29.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 426.60004,
+			y: 24.150002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 432.05002,
+			y: 21.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 438.05002,
+			y: 23.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 440.10004,
+			y: 29.300001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 460.2,
+			y: 4.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 463.6,
+			y: 9.7
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 468.15,
+			y: 12.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 472.65,
+			y: 9.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 475.6,
+			y: 5.1499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 540.35,
+			y: 10.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 528.25,
+			y: 2.3999996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 553.4,
+			y: 2.3500004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 564.8,
+			y: 9.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 575.19995,
+			y: 2.3999996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 505.15,
+			y: 19.800001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 589.30005,
+			y: 17.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 597.25006,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 603.35004,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 607.7,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 611.65,
+			y: 17.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 627,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 619.2,
+			y: 17.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 623,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 615.4,
+			y: 17.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 632,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 636,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 641,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 647,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 652,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 657,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 662,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 667,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 672,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 691.05,
+			y: 18.050001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 679.4,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 675.65,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 683,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 687,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 742.2,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 708.64996,
+			y: 18.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 704,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 700.10004,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 696,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 713.15,
+			y: 18.099998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 717.39996,
+			y: 18.050001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 721.89996,
+			y: 18.099998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 726.3,
+			y: 17.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 730.35,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 734,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 738,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 821.95,
+			y: 30.900002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 821.9,
+			y: 24.3
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 821.95,
+			y: 17.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 821.95,
+			y: 10.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 822.05,
+			y: 3.8000002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 833.95,
+			y: 19.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 866.05,
+			y: 2.1499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 874,
+			y: 2.0499992
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 883.24994,
+			y: 2.2000008
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 878.55,
+			y: 2.1000004
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 870.15,
+			y: 2.1499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 917.7,
+			y: 18.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 972.24994,
+			y: 15.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 1069.1,
+			y: 31.900002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1080,
+			y: 20.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1068.3,
+			y: 20.849998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1053.9,
+			y: 20.800001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1041.1,
+			y: 20.699999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1024.75,
+			y: 8.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1017.6,
+			y: 8.35
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1010.85,
+			y: 8.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 1187.75,
+			y: 22
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 1266,
+			y: 16.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1277.7499,
+			y: 29.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1282.9501,
+			y: 23.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1284.3501,
+			y: 17.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1286.2001,
+			y: 12.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1288.4501,
+			y: 8.400001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1293.1501,
+			y: 10.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1296.7001,
+			y: 14.349999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1299.8002,
+			y: 18.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1302.6998,
+			y: 14.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1304.6501,
+			y: 10.2
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1308.4001,
+			y: 8.099999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1311.9,
+			y: 12.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1313.8,
+			y: 17.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1314.8,
+			y: 22.95
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1321.1499,
+			y: 29.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1328.9,
+			y: 29.300001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1334.7,
+			y: 29.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.5,
+			y: 29.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1346.25,
+			y: 29.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1351.35,
+			y: 29.1
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.6,
+			y: 24
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.65,
+			y: 18.599998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.6,
+			y: 13.549999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.85,
+			y: 9
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1340.85,
+			y: 3.9499998
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1335.1,
+			y: 4.1499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1329.25,
+			y: 4.200001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1346.65,
+			y: 4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1351.6499,
+			y: 4.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1359.5,
+			y: 28.45
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1359.85,
+			y: 23.55
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1359.85,
+			y: 18.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1359.95,
+			y: 13.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1360.05,
+			y: 7.8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1360.1,
+			y: 3.1500006
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1364.25,
+			y: 24.199999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1367.25,
+			y: 19.699999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1369.55,
+			y: 15.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1371.75,
+			y: 12
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1374.85,
+			y: 8.299999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1377.3,
+			y: 4.1499996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1379.2,
+			y: 7.8499994
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1379.1,
+			y: 12.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1378.7,
+			y: 16.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1378,
+			y: 20.650002
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1378.25,
+			y: 25.25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 1379.05,
+			y: 29.4
+		}
+	}
+],
+levelEnd: 1385
+}
