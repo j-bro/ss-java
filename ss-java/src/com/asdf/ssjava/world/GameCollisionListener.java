@@ -131,7 +131,7 @@ public class GameCollisionListener implements ContactListener {
 				AbstractEntity e = (AbstractEntity) body1.getUserData();
 				if (ship.isSpeedOfLightEnabled()) {	
 					if (!(e instanceof Sun || e instanceof Planet)){
-						e.setHealth(0);
+						e.setHealth(0); 
 						AudioPlayer.shipImpact();
 					}
 				}
