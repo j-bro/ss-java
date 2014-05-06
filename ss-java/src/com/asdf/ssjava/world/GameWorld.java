@@ -452,15 +452,17 @@ public class GameWorld {
 	 * Causes the ship to be attracted/repelled from the magnetic object
 	 */
 	public void magnetActivate() {
-		double xLine = ship.getPosition().x - magnet.getPosition().x;
-		double yLine = ship.getPosition().y - magnet.getPosition().y;
-		double distance = Math.sqrt(Math.pow(xLine, 2) 
-				+ Math.pow(yLine, 2));
-		double force = Planet.GRAVITATIONNAL_CONSTANT * 1500 * 1 / Math.pow(distance, 2);
-		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Force: " + force);
-		float xForce = (float) (force / distance * xLine);
-		float yForce = (float) (force / distance * yLine);
-		ship.getBody().applyForceToCenter(xForce, yForce, true);
+		if (!ship.isSpeedOfLightEnabled()) {
+			double xLine = ship.getPosition().x - magnet.getPosition().x;
+			double yLine = ship.getPosition().y - magnet.getPosition().y;
+			double distance = Math.sqrt(Math.pow(xLine, 2) 
+					+ Math.pow(yLine, 2));
+			double force = Planet.GRAVITATIONNAL_CONSTANT * 1500 * 1 / Math.pow(distance, 2);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Force: " + force);
+			float xForce = (float) (force / distance * xLine);
+			float yForce = (float) (force / distance * yLine);
+			ship.getBody().applyForceToCenter(xForce, yForce, true);
+		}
 	}
 	
 	public void setMagneticObject(MagneticObject m) {
@@ -475,15 +477,17 @@ public class GameWorld {
 	 * Causes the ship to be attracted to the planet
 	 */
 	public void gravityActivate() {
-		double xLine = ship.getPosition().x - planet.getPosition().x;
-		double yLine = ship.getPosition().y - planet.getPosition().y;
-		double distance = Math.sqrt(Math.pow(xLine, 2) 
-				+ Math.pow(yLine, 2));
-		double force = Planet.GRAVITATIONNAL_CONSTANT * 3000 * 1 / Math.pow(distance, 2);
-		Gdx.app.log(SSJava.LOG, "Force: " + force);
-		float xForce = (float) (force / distance * xLine);
-		float yForce = (float) (force / distance * yLine);
-		ship.getBody().applyForceToCenter(-xForce, -yForce, true);
+		if (!ship.isSpeedOfLightEnabled()) {
+			double xLine = ship.getPosition().x - planet.getPosition().x;
+			double yLine = ship.getPosition().y - planet.getPosition().y;
+			double distance = Math.sqrt(Math.pow(xLine, 2) 
+					+ Math.pow(yLine, 2));
+			double force = Planet.GRAVITATIONNAL_CONSTANT * 3000 * 1 / Math.pow(distance, 2);
+			Gdx.app.log(SSJava.LOG, "Force: " + force);
+			float xForce = (float) (force / distance * xLine);
+			float yForce = (float) (force / distance * yLine);
+			ship.getBody().applyForceToCenter(-xForce, -yForce, true);
+		}
 	}
 	
 	/**
@@ -505,18 +509,20 @@ public class GameWorld {
 	/**
 	 * Causes the ship to be burned by the sun
 	 */
-	public void sunActivate() {
+	public void sunActivate() {Gdx.app.log(SSJava.LOG, "Speed of Light: " + ship.isSpeedOfLightEnabled());
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
-		shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());
-		if (shipHeatIndicator >= 3) {
-			time += (double)(Gdx.graphics.getDeltaTime());
-			if (time >= 1) {
-				ship.healthChange(-2);
-				time--;
+		if (!ship.isSpeedOfLightEnabled()) {
+			shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());
+			if (shipHeatIndicator >= 3) {
+				time += (double)(Gdx.graphics.getDeltaTime());
+				if (time >= 1) {
+					ship.healthChange(-2);
+					time--;
+				}
 			}
-		}
-		else if (shipHeatIndicator >= 2) {
-			renderer.shipHeatIndicatorLabel.setText("Heat: DANGER!");
+			else if (shipHeatIndicator >= 2) {
+				renderer.shipHeatIndicatorLabel.setText("Heat: DANGER!");
+			}
 		}
 	}
 	

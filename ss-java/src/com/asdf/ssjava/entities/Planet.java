@@ -26,7 +26,7 @@ public class Planet extends Obstacle {
 	/**
 	 * The entity's starting health
 	 */
-	public static final int DEFAULT_HEALTH = 6;
+	public static final int DEFAULT_HEALTH = 100000;
 	
 	/**
 	 * The score given for hitting this entity
