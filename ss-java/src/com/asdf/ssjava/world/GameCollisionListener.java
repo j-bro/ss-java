@@ -70,6 +70,24 @@ public class GameCollisionListener implements ContactListener {
 		else if (body1.getUserData() instanceof Ship) {	
 			// Powerup collection
 			Ship ship = (Ship) body1.getUserData();
+			boolean	notCollide = false;
+			// Kill other entities in light speed
+			if (!contact.getFixtureB().isSensor()) {
+				AbstractEntity e = (AbstractEntity) body2.getUserData();
+				if (ship.isSpeedOfLightEnabled()) {	
+					if (!(e instanceof Sun || e instanceof Planet)){
+						e.setHealth(0);
+					}
+				}
+				else {
+					long currentTime = TimeUtils.millis();
+					if (currentTime - e.lastContactTime >= 500) {
+						ship.healthChange(-1);						
+						e.lastContactTime = currentTime;
+						AudioPlayer.shipImpact();
+					}
+				}
+			}
 			if (body2.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body2.getUserData(), ship);
 				 AudioPlayer.healthUp();
@@ -83,7 +101,7 @@ public class GameCollisionListener implements ContactListener {
 			}
 			
 			// Game changers collection
-			else if (body2.getUserData() instanceof Sun) {
+			else if (body2.getUserData() instanceof Sun && !notCollide) {
 				if (contact.getFixtureB().isSensor()) {
 					sunActivate((Sun) body2.getUserData(), ship);
 				}
@@ -91,12 +109,12 @@ public class GameCollisionListener implements ContactListener {
 					ship.healthChange(-2);
 				}	
 			}
-			else if (body2.getUserData() instanceof Planet) {
+			else if (body2.getUserData() instanceof Planet && !notCollide) {
 				if (contact.getFixtureB().isSensor()) {
 					gravityActivate((Planet) body2.getUserData(), ship);
 				}
 			}
-			else if (body2.getUserData() instanceof MagneticObject) {
+			else if (body2.getUserData() instanceof MagneticObject && !notCollide) {
 				if (contact.getFixtureB().isSensor()) {
 					magnetActivate((MagneticObject) body2.getUserData(), ship);
 				}
@@ -104,11 +122,18 @@ public class GameCollisionListener implements ContactListener {
 					ship.healthChange(-1);
 				}	
 			}
+		}
+		
+		else if (body2.getUserData() instanceof Ship) {
+			// Powerup collection
+			Ship ship = (Ship) body2.getUserData();
 			// Kill other entities in light speed
-			if (!contact.getFixtureB().isSensor()) {
-				AbstractEntity e = (AbstractEntity) body2.getUserData();
-				if (ship.isSpeedOfLightEnabled()) {
-					e.setHealth(0);
+			if (!contact.getFixtureA().isSensor()) {
+				AbstractEntity e = (AbstractEntity) body1.getUserData();
+				if (ship.isSpeedOfLightEnabled()) {	
+					if (!(e instanceof Sun || e instanceof Planet)){
+						e.setHealth(0);
+					}
 				}
 				else {
 					long currentTime = TimeUtils.millis();
@@ -119,12 +144,7 @@ public class GameCollisionListener implements ContactListener {
 					}
 				}
 			}
-		}
-		
-		else if (body2.getUserData() instanceof Ship) {
-			// Powerup collection
-			Ship ship = (Ship) body2.getUserData();
-			if (body1.getUserData() instanceof PowerupHealthUp) {
+			else if (body1.getUserData() instanceof PowerupHealthUp) {
 				healthUpActivate((PowerupHealthUp) body1.getUserData(), ship);
 				 AudioPlayer.healthUp();
 			}
@@ -145,16 +165,8 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			else if (body1.getUserData() instanceof Planet) {
-				Planet p = (Planet) body1.getUserData();
 				if (contact.getFixtureA().isSensor()) {
 					gravityActivate((Planet) body1.getUserData(), ship);
-				}
-				else {
-					if (TimeUtils.millis() - p.lastContactTime >= 500) {
-						ship.healthChange(-1);	
-						p.lastContactTime = TimeUtils.millis();
-						if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "asdf");
-					}
 				}	
 			}
 			else if (body1.getUserData() instanceof MagneticObject) {
@@ -164,21 +176,6 @@ public class GameCollisionListener implements ContactListener {
 				else {
 					ship.healthChange(-1);
 				}	
-			}
-			// Kill other entities in light speed
-			if (!contact.getFixtureA().isSensor()) {
-				AbstractEntity e = (AbstractEntity) body1.getUserData();
-				if (ship.isSpeedOfLightEnabled()) {
-					e.setHealth(0);
-				}
-				else {
-					long currentTime = TimeUtils.millis();
-					if (currentTime - e.lastContactTime >= 500) {
-						ship.healthChange(-1);						
-						e.lastContactTime = currentTime;
-						AudioPlayer.shipImpact();
-					}
-				}
 			}
 		}			
 	}	
@@ -256,6 +253,7 @@ public class GameCollisionListener implements ContactListener {
 	public void sunActivate(Sun b, Ship e) {
 		gameWorld.setSun(b);
 		gameWorld.sunActivated = true;
+		if (!gameWorld.ship.isSpeedOfLightEnabled())
 		gameWorld.renderer.shipHeatIndicatorLabel.setText("Heat: Rising!");
 	}
 	

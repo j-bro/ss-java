@@ -29,7 +29,11 @@ public abstract class Obstacle extends MoveableEntity {
 	 */
 	@Override
 	public void die() {
-		if (this instanceof Planet || this instanceof MagneticObject || this instanceof Sun) {			
+		if (this instanceof Planet || this instanceof MagneticObject || this instanceof Sun) {		
+//			if (this instanceof MagneticObject){
+//				gameWorld.magnet = null;
+//				gameWorld.magnetActivated = false;
+//			}
 			gameWorld.getLevel().gameChangers.removeValue(this, true);
 		}
 		else {
