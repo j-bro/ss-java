@@ -91,7 +91,7 @@ public class WorldRenderer {
 	Texture bgTexture;
 	Sprite bgSprite;
 	
-	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, emptyHeartImage1, emptyHeartImage2, emptyHeartImage3, halfHeartImage;
+	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, fullHeartImage4, emptyHeartImage1, emptyHeartImage2, emptyHeartImage3, emptyHeartImage4, halfHeartImage;
 	Texture fullHeartTexture, emptyHeartTexture, halfHeartTexture;
 	
 	Image asteroidImage, spaceRockImage;
@@ -315,9 +315,11 @@ public class WorldRenderer {
 			fullHeartImage1 = new Image(fullHeartTexture);
 			fullHeartImage2 = new Image(fullHeartTexture);
 			fullHeartImage3 = new Image(fullHeartTexture);
+			fullHeartImage4 = new Image(fullHeartTexture);
 			emptyHeartImage1 = new Image(emptyHeartTexture);
 			emptyHeartImage2 = new Image(emptyHeartTexture);
 			emptyHeartImage3 = new Image(emptyHeartTexture);
+			emptyHeartImage4 = new Image(emptyHeartTexture);
 			halfHeartImage = new Image(halfHeartTexture);
 			
 			int heartScale = 50;
@@ -325,17 +327,29 @@ public class WorldRenderer {
 			fullHeartImage1.setBounds(15, 15, heartScale, heartScale);
 			fullHeartImage2.setBounds(15, 15, heartScale, heartScale);
 			fullHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			fullHeartImage4.setBounds(15, 15, heartScale, heartScale);
 			emptyHeartImage1.setBounds(15, 15, heartScale, heartScale);
 			emptyHeartImage2.setBounds(15, 15, heartScale, heartScale);
 			emptyHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage4.setBounds(15, 15, heartScale, heartScale);
 			halfHeartImage.setBounds(15, 15, heartScale, heartScale);
 			
 			fullHeartImage2.setX(15 + fullHeartImage1.getWidth());
 			fullHeartImage3.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+			fullHeartImage4.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth() + fullHeartImage3.getWidth());
+			
+			emptyHeartImage2.setX(15 + emptyHeartImage1.getWidth());
+			emptyHeartImage3.setX(15 + emptyHeartImage1.getWidth() + emptyHeartImage2.getWidth());
+			emptyHeartImage4.setX(15 + emptyHeartImage1.getWidth() + emptyHeartImage2.getWidth() + emptyHeartImage3.getWidth());
 			
 			stage.addActor(fullHeartImage1);
 			stage.addActor(fullHeartImage2);
 			stage.addActor(fullHeartImage3);
+			stage.addActor(fullHeartImage4);
+			stage.addActor(emptyHeartImage1);
+			stage.addActor(emptyHeartImage2);
+			stage.addActor(emptyHeartImage3);
+			stage.addActor(emptyHeartImage4);
 			stage.addActor(halfHeartImage);
 			
 			// Debug display
@@ -431,18 +445,22 @@ public class WorldRenderer {
 				emptyHeartImage1.setVisible(true);
 				emptyHeartImage2.setVisible(true);
 				emptyHeartImage3.setVisible(true);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(false);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setVisible(false);
 				break;
 			case 1: 
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(true);
 				emptyHeartImage3.setVisible(true);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(false);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setX(15);
 				halfHeartImage.setVisible(true);
 				break;
@@ -450,18 +468,22 @@ public class WorldRenderer {
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(true);
 				emptyHeartImage3.setVisible(true);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setVisible(false);
 				break;
 			case 3: 
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(false);
 				emptyHeartImage3.setVisible(true);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(false);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setX(15 + fullHeartImage1.getWidth());
 				halfHeartImage.setVisible(true);
 				break;
@@ -469,18 +491,22 @@ public class WorldRenderer {
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(false);
 				emptyHeartImage3.setVisible(true);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(true);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setVisible(false);
 				break;
 			case 5: 
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(false);
 				emptyHeartImage3.setVisible(false);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(true);
 				fullHeartImage3.setVisible(false);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
 				halfHeartImage.setVisible(true);
 				break;
@@ -488,11 +514,37 @@ public class WorldRenderer {
 				emptyHeartImage1.setVisible(false);
 				emptyHeartImage2.setVisible(false);
 				emptyHeartImage3.setVisible(false);
+				emptyHeartImage4.setVisible(true);
 				fullHeartImage1.setVisible(true);
 				fullHeartImage2.setVisible(true);
 				fullHeartImage3.setVisible(true);
+				fullHeartImage4.setVisible(false);
 				halfHeartImage.setVisible(false);
 				break;
+			case 7:
+				emptyHeartImage1.setVisible(false);
+				emptyHeartImage2.setVisible(false);
+				emptyHeartImage3.setVisible(false);
+				emptyHeartImage4.setVisible(false);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(true);
+				fullHeartImage3.setVisible(true);
+				fullHeartImage4.setVisible(false);
+				halfHeartImage.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth() + fullHeartImage3.getWidth());
+				halfHeartImage.setVisible(true);
+				break;
+			case 8:
+				emptyHeartImage1.setVisible(false);
+				emptyHeartImage2.setVisible(false);
+				emptyHeartImage3.setVisible(false);
+				emptyHeartImage4.setVisible(false);
+				fullHeartImage1.setVisible(true);
+				fullHeartImage2.setVisible(true);
+				fullHeartImage3.setVisible(true);
+				fullHeartImage4.setVisible(true);
+				halfHeartImage.setVisible(false);
+				break;
+			default: break;
 			}
 			
 			// Debug text

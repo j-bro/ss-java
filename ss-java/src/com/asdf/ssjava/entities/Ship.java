@@ -28,7 +28,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The ship's default starting health
 	 */
-	public static final int DEFAULT_HEALTH = 6;
+	public static final int DEFAULT_HEALTH = 8;
 	
 	/**
 	 * The WorldRenderer instance
