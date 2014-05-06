@@ -144,19 +144,12 @@ public class OptionsMenu implements Screen {
 			@Override
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
-					int newVolume = Integer.parseInt(musicField.getText()); 
-					if (newVolume > 100) {
+					int newVolume = Integer.parseInt(musicField.getText());
+					if (saveVolume(newVolume, "musicVolume") == 100) {						
 						musicField.setText(new Integer(100).toString());
 						musicField.setCursorPosition(musicField.getText().length());
-						SSJava.prefs.putInteger("musicVolume", 100);
-						SSJava.prefs.flush();
-						Gdx.app.log(SSJava.LOG, "Music volume saved");
 					}
-					else {
-						SSJava.prefs.putInteger("musicVolume", newVolume);
-						SSJava.prefs.flush();
-						Gdx.app.log(SSJava.LOG, "Music volume saved");
-					}
+					
 					AudioPlayer.menuMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
 					AudioPlayer.gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
 					AudioPlayer.creatorMusic.setVolume(SSJava.prefs.getInteger("musicVolume") / 100f);
@@ -180,18 +173,11 @@ public class OptionsMenu implements Screen {
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
 					int newVolume = Integer.parseInt(soundField.getText()); 
-					if (newVolume > 100) {
+					if (saveVolume(newVolume, "soundVolume") == 100) {						
 						soundField.setText(new Integer(100).toString());
-						soundField.setCursorPosition(musicField.getText().length());
-						SSJava.prefs.putInteger("soundVolume", 100);
-						SSJava.prefs.flush();
-						Gdx.app.log(SSJava.LOG, "Sound volume saved");
+						soundField.setCursorPosition(soundField.getText().length());
 					}
-					else {
-						SSJava.prefs.putInteger("soundVolume", newVolume);
-						SSJava.prefs.flush();
-						Gdx.app.log(SSJava.LOG, "Sound volume saved");
-					}
+					AudioPlayer.pointsPickedUp();
 				}
 			}
 		});
@@ -236,6 +222,26 @@ public class OptionsMenu implements Screen {
 		stage.addActor(backButton);
 	}
 
+	/**
+	 * Save the new volume to the preferences & activate immediately
+	 * @param newVolume the new volume to be saved
+	 * @param key the key under which to save the new volume
+	 * @return the new volume
+	 */
+	public int saveVolume(int newVolume, String key) {
+		if (newVolume > 100) {
+			SSJava.prefs.putInteger(key, 100);
+			SSJava.prefs.flush();
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, key + " saved");
+		}
+		else {
+			SSJava.prefs.putInteger(key, newVolume);
+			SSJava.prefs.flush();
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, key + " saved");
+		}
+		return SSJava.prefs.getInteger(key);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.badlogic.gdx.Screen#show()
