@@ -1408,7 +1408,7 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
+
 		position: {
 			x: 112.1,
 			y: 17.8
@@ -1416,7 +1416,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 119.45,
 			y: 21.4
@@ -1424,7 +1423,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 119.4,
 			y: 13.450001
@@ -1439,7 +1437,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 292.6,
 			y: 16.55
@@ -1447,7 +1444,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 300,
 			y: 16.6
@@ -1462,7 +1458,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 376.35,
 			y: 20.6
@@ -1470,7 +1465,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 369.5,
 			y: 14.7
@@ -1478,7 +1472,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 356.95,
 			y: 28.150002
@@ -1507,7 +1500,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 739.7,
 			y: 9.849999
@@ -1515,7 +1507,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 719.2001,
 			y: 25.5
@@ -1523,7 +1514,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 732.10004,
 			y: 17.25
@@ -1531,7 +1521,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 717.24994,
 			y: 13.700001
@@ -1539,7 +1528,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 741.8,
 			y: 28.099998
@@ -1554,7 +1542,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 888,
 			y: 11.7
@@ -1562,7 +1549,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 880.05,
 			y: 11.5
@@ -1570,7 +1556,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 872.9,
 			y: 11.75
@@ -1578,7 +1563,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 879.9,
 			y: 6.8999996
@@ -1586,7 +1570,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 879.9,
 			y: 16.4
@@ -1594,7 +1577,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 796.65,
 			y: 5.5999994
@@ -1602,7 +1584,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 806.4,
 			y: 5.8
@@ -1610,7 +1591,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 816.65,
 			y: 5.8499994
@@ -1632,7 +1612,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 986.99994,
 			y: 28.5
@@ -1640,7 +1619,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 986.94995,
 			y: 21.35
@@ -1648,7 +1626,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 986.7999,
 			y: 13.65
@@ -1656,7 +1633,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 986.94995,
 			y: 6.950001
@@ -1664,7 +1640,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1007.6,
 			y: 7.3999996
@@ -1672,7 +1647,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1007.55,
 			y: 13.9
@@ -1680,7 +1654,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1007.65,
 			y: 21.35
@@ -1688,7 +1661,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1007.65,
 			y: 28.099998
@@ -1696,7 +1668,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1026.6499,
 			y: 14.049999
@@ -1704,7 +1675,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1026.5499,
 			y: 20.800001
@@ -1712,7 +1682,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1026.2999,
 			y: 27.95
@@ -1720,7 +1689,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1026.95,
 			y: 7.6500006
@@ -1742,7 +1710,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1059.3,
 			y: 13.5
@@ -1750,7 +1717,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1059.5,
 			y: 26.15
@@ -1772,7 +1738,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1318.8499,
 			y: 26.05
@@ -1780,7 +1745,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1324.7999,
 			y: 21.45
@@ -1788,7 +1752,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1331,
 			y: 16.65
@@ -1796,7 +1759,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1337.95,
 			y: 12.45
@@ -1804,7 +1766,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1344.35,
 			y: 8.400001
@@ -1812,7 +1773,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1351.85,
 			y: 6.1500006
@@ -1820,7 +1780,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1359.05,
 			y: 8.5
@@ -1828,7 +1787,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1365.35,
 			y: 12.25
@@ -1836,7 +1794,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1371.15,
 			y: 16.3
@@ -1844,7 +1801,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1377.1,
 			y: 20.45
@@ -1852,7 +1808,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1384,
 			y: 24.1
@@ -1860,7 +1815,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1389.0001,
 			y: 20.95
@@ -1868,7 +1822,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1394.4501,
 			y: 16.85
@@ -1876,7 +1829,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1399.4501,
 			y: 12.25
@@ -1884,7 +1836,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1405.45,
 			y: 8.2
@@ -1892,7 +1843,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1411.1,
 			y: 12.400001
@@ -1900,7 +1850,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1414.35,
 			y: 17.1
@@ -1908,7 +1857,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1417.95,
 			y: 21.05
@@ -1916,7 +1864,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1421.8,
 			y: 25.150002
@@ -1924,7 +1871,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1427.85,
 			y: 21.3
@@ -1932,7 +1878,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1444.6,
 			y: 9.75
@@ -1940,7 +1885,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1439.5,
 			y: 13.6
@@ -1948,7 +1892,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1451.45,
 			y: 9.65
@@ -1956,7 +1899,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1435,
 			y: 18
@@ -1964,7 +1906,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1457.8,
 			y: 13.299999
@@ -1972,7 +1913,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1463.3,
 			y: 17
@@ -1980,7 +1920,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1468.6,
 			y: 20.75
@@ -1988,7 +1927,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1475.4,
 			y: 24.349998
@@ -1996,7 +1934,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1481.4,
 			y: 27.35
@@ -2004,7 +1941,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1487.7,
 			y: 24.4
@@ -2012,7 +1948,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1492.95,
 			y: 20.300001
@@ -2020,7 +1955,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1498.05,
 			y: 15.549999
@@ -2028,7 +1962,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1503.2,
 			y: 11.299999
@@ -2043,7 +1976,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1509.15,
 			y: 15.15
@@ -2051,7 +1983,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1515.45,
 			y: 17.4
@@ -2059,7 +1990,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1536.45,
 			y: 17.9
@@ -2067,7 +1997,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1528.65,
 			y: 17.85
@@ -2075,7 +2004,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1522.05,
 			y: 17.7
@@ -2083,7 +2011,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1543.1499,
 			y: 17.85
@@ -2091,7 +2018,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1550,
 			y: 18
@@ -2099,7 +2025,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1556.8499,
 			y: 17.95
@@ -2107,7 +2032,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1563.75,
 			y: 17.9
@@ -2115,7 +2039,6 @@ powerups: [
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
-		width: 6,
 		position: {
 			x: 1570.9,
 			y: 17.8

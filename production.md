@@ -17,7 +17,6 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 ####In Progress
 
-- Game changers (planet, sun, magnetic object)
 - Level design (levels 1-5)
 - Pass through obstacle after collision
 - Dead ship texture
@@ -44,6 +43,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 - High scores (completed 30/04)
 - Save progress of game levels (completed 01/05)
 - Menu GUI (completed 03/05)
+- Game changers (completed 05/05)
 
 ####Potential fonts
 http://tenbytwenty.com/?xxxx_posts=munro

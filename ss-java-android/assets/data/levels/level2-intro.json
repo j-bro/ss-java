@@ -1,0 +1,130 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 198.6,
+			y: 31.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 249.9,
+			y: 0.8999996
+		}
+	}
+],
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 147.14998,
+			y: 28.6
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 156.84999,
+			y: 25.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 166.79999,
+			y: 28.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 148.19998,
+			y: 4.449999
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 164.44998,
+			y: 8
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Asteroid,
+		position: {
+			x: 259.69998,
+			y: 27.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 206.04999,
+			y: 6.000001
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 226,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 213,
+			y: 18
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 163,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 176,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 256,
+			y: 18
+		}
+	}
+],
+messages: [
+	{
+		message: "Get ready to be blown away!
+ ",
+		progress: 25,
+		duration: 3
+	},
+	{
+		message: "Collect the speed of light powerup 
+and zoom past everything in your way!",
+		progress: 65,
+		duration: 3
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 130,
+			y: 18
+		}
+	}
+],
+levelEnd: 310
+}

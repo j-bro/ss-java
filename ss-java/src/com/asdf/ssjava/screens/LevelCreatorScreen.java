@@ -272,7 +272,7 @@ public class LevelCreatorScreen implements Screen {
 			updateLevelEnd(s);
 		}
 		else if (e instanceof Points) {
-			Points p = new Points(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), PowerupSpeedOfLight.DEFAULT_WIDTH, PowerupSpeedOfLight.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
+			Points p = new Points(new Vector2(renderer.getCamera().position.x, renderer.getCamera().position.y), Points.DEFAULT_WIDTH, Points.DEFAULT_HEIGHT, PowerupSpeedOfLight.DEFAULT_ROTATION);
 			setSelectedEntity(p);
 			gameWorld.getPowerups().add(p);
 			updateLevelEnd(p);

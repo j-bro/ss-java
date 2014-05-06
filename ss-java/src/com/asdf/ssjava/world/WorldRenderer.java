@@ -159,7 +159,7 @@ public class WorldRenderer {
 		powerupSpeedOfLightTexture = SSJava.assetManager.get("data/textures/speed_of_light.png", Texture.class);
 		powerupHealthUpTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		pointsTexture = SSJava.assetManager.get("data/textures/points.png", Texture.class);
+		pointsTexture = SSJava.assetManager.get("data/textures/coin.png", Texture.class);
 		pointsTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		planetTexture = SSJava.assetManager.get("data/textures/planet.png", Texture.class);
@@ -168,7 +168,7 @@ public class WorldRenderer {
 		sunTexture = SSJava.assetManager.get("data/textures/sun.png", Texture.class);
 		sunTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		magneticObjectTexture = SSJava.assetManager.get("data/textures/magnetic_object.png", Texture.class);
+		magneticObjectTexture = SSJava.assetManager.get("data/textures/space_junk.png", Texture.class);
 		magneticObjectTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// TODO extra textures
