@@ -131,7 +131,7 @@ public class LevelSelectMenu implements Screen {
 			level1Button.setEnabled(true);
 		}
 		
-		level2Button = new LevelSelectButton("Level 2", 280, 65, game, null);
+		level2Button = new LevelSelectButton("Level 2", 280, 65, game, Gdx.files.internal("data/levels/level2-intro.json"));
 		level2Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level2Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 100);
 		if (!SSJava.checkLevelCompletion(2 - 1)) {
