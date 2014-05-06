@@ -7,15 +7,7 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.entities.AbstractEntity;
-import com.asdf.ssjava.entities.Bullet;
-import com.asdf.ssjava.entities.Enemy;
-import com.asdf.ssjava.entities.MagneticObject;
-import com.asdf.ssjava.entities.Obstacle;
-import com.asdf.ssjava.entities.Planet;
-import com.asdf.ssjava.entities.Powerup;
-import com.asdf.ssjava.entities.Ship;
-import com.asdf.ssjava.entities.Sun;
+import com.asdf.ssjava.entities.*;
 import com.asdf.ssjava.screens.GameScreen;
 import com.asdf.ssjava.screens.LevelCompletedMenu;
 import com.asdf.ssjava.screens.LevelCreatorScreen;
@@ -38,7 +30,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 

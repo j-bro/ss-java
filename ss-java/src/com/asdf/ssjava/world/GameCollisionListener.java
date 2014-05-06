@@ -78,12 +78,13 @@ public class GameCollisionListener implements ContactListener {
 					notCollide = true;
 					if (!(e instanceof Sun || e instanceof Planet)){
 						e.setHealth(0);
+						AudioPlayer.shipImpact();
 					}
 				}
 				else {
 					long currentTime = TimeUtils.millis();
 					if (currentTime - e.lastContactTime >= 500) {
-						ship.healthChange(-1);						
+						ship.healthChange(-1);	
 						e.lastContactTime = currentTime;
 						AudioPlayer.shipImpact();
 					}
@@ -118,9 +119,6 @@ public class GameCollisionListener implements ContactListener {
 			else if (body2.getUserData() instanceof MagneticObject && !notCollide) {
 				if (contact.getFixtureB().isSensor()) {
 					magnetActivate((MagneticObject) body2.getUserData(), ship);
-				}
-				else {
-					ship.healthChange(-1);
 				}	
 			}
 		}
@@ -134,6 +132,7 @@ public class GameCollisionListener implements ContactListener {
 				if (ship.isSpeedOfLightEnabled()) {	
 					if (!(e instanceof Sun || e instanceof Planet)){
 						e.setHealth(0);
+						AudioPlayer.shipImpact();
 					}
 				}
 				else {
@@ -173,9 +172,6 @@ public class GameCollisionListener implements ContactListener {
 			else if (body1.getUserData() instanceof MagneticObject) {
 				if (contact.getFixtureA().isSensor()) {
 					magnetActivate((MagneticObject) body1.getUserData(), ship);
-				}
-				else {
-					ship.healthChange(-1);
 				}	
 			}
 		}			

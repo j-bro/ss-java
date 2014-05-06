@@ -16,11 +16,11 @@ public class MenuButton extends TextButton {
 	public MenuButton(String text, float width, float height, final SSJava game) {
 		super(text, new TextButtonStyle() {{
 			Skin skin = new Skin() {{
-				addRegions(game.assetManager.get("data/menu/button.pack", TextureAtlas.class));
+				addRegions(SSJava.assetManager.get("data/menu/button.pack", TextureAtlas.class));
 			}};
 			up = skin.getDrawable("buttonnormal");
 			down = skin.getDrawable("buttonpressed");
-			font = game.assetManager.get("data/fonts/font.fnt", BitmapFont.class);		
+			font = SSJava.assetManager.get("data/fonts/font.fnt", BitmapFont.class);		
 
 		}});
 		
