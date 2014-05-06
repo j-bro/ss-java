@@ -1,0 +1,13 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 161.55,
+			y: 46.75
+		}
+	}
+],
+levelCode: 3,
+levelEnd: 202
+}

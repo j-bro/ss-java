@@ -75,6 +75,7 @@ public class GameCollisionListener implements ContactListener {
 			if (!contact.getFixtureB().isSensor()) {
 				AbstractEntity e = (AbstractEntity) body2.getUserData();
 				if (ship.isSpeedOfLightEnabled()) {	
+					notCollide = true;
 					if (!(e instanceof Sun || e instanceof Planet)){
 						e.setHealth(0);
 					}
