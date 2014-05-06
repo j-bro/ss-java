@@ -126,7 +126,7 @@ public class GameWorld {
 	/**
 	 * The ship's heat indicator
 	 */
-	private double shipHeatIndicator;
+	public double shipHeatIndicator;
 	
 	/**
 	 * The time in seconds
