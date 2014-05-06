@@ -299,7 +299,7 @@ public class Ship extends MoveableEntity {
 	 * Enables the speed of light of the ship
 	 */
 	public void enableSpeedOfLight() {
-		if (!isSpeedOfLightEnabled()) {			
+		if (!isSpeedOfLightEnabled() && !isDead()) {			
 			getBody().setLinearVelocity(Ship.SPEED_OF_LIGHT_VELOCITY);
 			Fixture f = getBody().getFixtureList().get(0);
 			if (f != null) { 					
@@ -314,13 +314,15 @@ public class Ship extends MoveableEntity {
 	 * Disables the speed of light of the ship
 	 */
 	public void disableSpeedOfLight() {
-		getBody().setLinearVelocity(Ship.DEFAULT_VELOCITY.x, 0);
-		Fixture f = getBody().getFixtureList().get(0);
-		if (f != null) { 					
-			f.setSensor(false);
+		if (!isDead()) {
+			getBody().setLinearVelocity(Ship.DEFAULT_VELOCITY.x, 0);
+			Fixture f = getBody().getFixtureList().get(0);
+			if (f != null) { 					
+				f.setSensor(false);
+			}
+			setSpeedOfLightEnabled(false);
+			AudioPlayer.speedOfLightOff();
 		}
-		setSpeedOfLightEnabled(false);
-		AudioPlayer.speedOfLightOff();
 	}
 
 	/*

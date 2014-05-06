@@ -120,7 +120,7 @@ public class LevelSelectMenu implements Screen {
 		tutorialButton.setY(Gdx.graphics.getHeight() / 2 - tutorialButton.getHeight() / 2 + 200);
 		
 		// Level buttons
-		level1Button = new LevelSelectButton("Level 1", 280, 65, game, Gdx.files.internal("data/levels/level1.json"));
+		level1Button = new LevelSelectButton("Level 1", 280, 65, game, Gdx.files.internal("data/levels/level1-intro.json"));
 		level1Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level1Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 150);
 		

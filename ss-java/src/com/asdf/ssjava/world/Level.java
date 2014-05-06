@@ -57,6 +57,11 @@ public class Level {
 	public Array<ToastMessage> messages;
 	
 	/**
+	 * The path of the level, if this level is an "intro" level
+	 */
+	public String nextLevelPath;
+	
+	/**
 	 * 
 	 */
 	public Level() {
@@ -69,6 +74,7 @@ public class Level {
 		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
 		levelCode = -1;
 		messages = new Array<ToastMessage>();
+		nextLevelPath = null;
 	}
 
 	/**

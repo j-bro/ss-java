@@ -1,0 +1,110 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 235.7,
+			y: 38.4
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 274.49997,
+			y: -2.75
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 119.65,
+			y: 30.05
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 119.75,
+			y: 4.3999996
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 119.95,
+			y: 17.5
+		}
+	}
+],
+messages: [
+	{
+		message: "You will now begin coming
+across enemy spaceships",
+		progress: 25,
+		duration: 3
+	},
+	{
+		message: "Beware, for they will
+show you no mercy!",
+		progress: 65,
+		duration: 3
+	},
+	{
+		message: "You will also begin to see planets
+ ",
+		progress: 150,
+		duration: 3
+	},
+	{
+		message: "They will attract you towards them
+ and hurt you when you collide",
+		progress: 190,
+		duration: 3
+	},
+	{
+		message: "Thankfully, from time to time
+you will also come across health power ups",
+		progress: 320,
+		duration: 3
+	},
+	{
+		message: "These will be invaluable later on
+",
+		progress: 360,
+		duration: 3
+	},
+	{
+		message: "Good luck!
+",
+		progress: 400,
+		duration: 3
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 373,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 373,
+			y: 25
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 373,
+			y: 11
+		}
+	}
+],
+nextLevelPath: data/levels/level1.json,
+levelEnd: 440
+}
