@@ -2045,5 +2045,12 @@ powerups: [
 		}
 	}
 ],
+messages: [
+	{
+		message: "This is it! Good luck and have fun",
+		progress: 25,
+		duration: 5
+	},
+],
 levelEnd: 1579
 }

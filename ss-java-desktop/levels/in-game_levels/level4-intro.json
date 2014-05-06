@@ -1,0 +1,67 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 86,
+			y: 18
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 164.59998,
+			y: 29.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 165.84998,
+			y: 5.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.MagneticObject,
+		position: {
+			x: 165.15,
+			y: 18.550001
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 165.19998,
+			y: 12.15
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Points,
+		position: {
+			x: 165.19998,
+			y: 23.95
+		}
+	}
+],
+messages: [
+	{
+		message: "Magnetic Objects will repel your ship",
+		progress: 25,
+		duration: 3
+	},
+	{
+		message: "Magnetic objects can be shot down",
+		progress: 85,
+		duration: 3
+	},
+	{
+		message: "Pro tip: you can use magnetic objects to slow down or speed up",
+		progress: 140,
+		duration: 3
+	},
+],
+nextLevelPath: data/levels/level4.json,
+levelEnd: 206
+}
