@@ -259,6 +259,7 @@ public class GameCollisionListener implements ContactListener {
 	
 	public void sunDeactivate() {
 		gameWorld.sunActivated = false;
+		gameWorld.shipHeatIndicator = 0;
 		gameWorld.renderer.shipHeatIndicatorLabel.setText("Heat: Stable");
 	}
 	
