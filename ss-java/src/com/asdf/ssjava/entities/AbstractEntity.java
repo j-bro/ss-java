@@ -71,6 +71,11 @@ public abstract class AbstractEntity {
 	protected transient Body body;
 		
 	/**
+	 * The timestamp at which the last contact w/ the ship was made
+	 */
+	public long lastContactTime = 0;
+	
+	/**
 	 * The loader instance for the body's fixtures
 	 */
 //	private transient BodyEditorLoader loader;

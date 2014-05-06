@@ -69,11 +69,6 @@ public class Planet extends Obstacle {
 	public static final long PLANET_RADIUS = 6378;
 	
 	/**
-	 * The timestamp at which the last contact w/ the ship was made
-	 */
-	public long lastContactTime = 0;
-	
-	/**
 	 * 
 	 * @param position
 	 * @param width

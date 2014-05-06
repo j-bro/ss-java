@@ -92,16 +92,9 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			else if (body2.getUserData() instanceof Planet) {
-				Planet p = (Planet) body2.getUserData();
 				if (contact.getFixtureB().isSensor()) {
-					gravityActivate((Planet) p, ship);
+					gravityActivate((Planet) body2.getUserData(), ship);
 				}
-				else {
-					if (TimeUtils.millis() - p.lastContactTime >= 500) {
-						ship.healthChange(-1);						
-						p.lastContactTime = TimeUtils.millis();
-					}
-				}	
 			}
 			else if (body2.getUserData() instanceof MagneticObject) {
 				if (contact.getFixtureB().isSensor()) {
@@ -112,14 +105,19 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (!contact.getFixtureB().isSensor()) {				
+			if (!contact.getFixtureB().isSensor()) {
+				AbstractEntity e = (AbstractEntity) body2.getUserData();
 				if (ship.isSpeedOfLightEnabled()) {
-					((AbstractEntity) body2.getUserData()).setHealth(0);
+					e.setHealth(0);
 				}
-			else {
-				ship.healthChange(-1);
-			}
-				AudioPlayer.shipImpact();
+				else {
+					long currentTime = TimeUtils.millis();
+					if (currentTime - e.lastContactTime >= 500) {
+						ship.healthChange(-1);						
+						e.lastContactTime = currentTime;
+						AudioPlayer.shipImpact();
+					}
+				}
 			}
 		}
 		
@@ -147,11 +145,16 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			else if (body1.getUserData() instanceof Planet) {
+				Planet p = (Planet) body1.getUserData();
 				if (contact.getFixtureA().isSensor()) {
 					gravityActivate((Planet) body1.getUserData(), ship);
 				}
 				else {
-					ship.healthChange(-1);
+					if (TimeUtils.millis() - p.lastContactTime >= 500) {
+						ship.healthChange(-1);	
+						p.lastContactTime = TimeUtils.millis();
+						if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "asdf");
+					}
 				}	
 			}
 			else if (body1.getUserData() instanceof MagneticObject) {
@@ -163,9 +166,19 @@ public class GameCollisionListener implements ContactListener {
 				}	
 			}
 			// Kill other entities in light speed
-			if (!contact.getFixtureA().isSensor() && ship.isSpeedOfLightEnabled()) {				
-				((AbstractEntity) body1.getUserData()).setHealth(0);
-				AudioPlayer.shipImpact();
+			if (!contact.getFixtureA().isSensor()) {
+				AbstractEntity e = (AbstractEntity) body1.getUserData();
+				if (ship.isSpeedOfLightEnabled()) {
+					e.setHealth(0);
+				}
+				else {
+					long currentTime = TimeUtils.millis();
+					if (currentTime - e.lastContactTime >= 500) {
+						ship.healthChange(-1);						
+						e.lastContactTime = currentTime;
+						AudioPlayer.shipImpact();
+					}
+				}
 			}
 		}			
 	}	
