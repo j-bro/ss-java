@@ -46,7 +46,7 @@ public class Ship extends MoveableEntity {
 	/**
 	 * The velocity of the ship when the speed of light powerup is activated
 	 */
-	public static final Vector2 SPEED_OF_LIGHT_VELOCITY = new Vector2(35, 0);
+	public static final Vector2 SPEED_OF_LIGHT_VELOCITY = new Vector2(40, 0);
 	
 	/**
 	 * The ship's default acceleration
