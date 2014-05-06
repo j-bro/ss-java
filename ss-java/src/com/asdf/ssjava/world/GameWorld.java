@@ -247,6 +247,11 @@ public class GameWorld {
 				// Get the entity corresponding to the body
 			    AbstractEntity e = (AbstractEntity) b.getUserData();
 			    
+			    // Initiate entities when they get within 30m of the ship
+			    if (b.getPosition().x - ship.getPosition().x < 60 && !e.isInitialized()) {
+			    	e.initialize();
+			    }
+			    
 			    if (e != null) {
 			    	// Check if the entity is dead and act accordingly
 			    	if (e.isDead()) {				

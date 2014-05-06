@@ -113,7 +113,7 @@ public class BulletType1 extends Bullet {
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(-DEFAULT_VELOCITY.x, -DEFAULT_VELOCITY.y);
+		initialize();
 	}
 
 	/*
@@ -132,6 +132,16 @@ public class BulletType1 extends Bullet {
 	@Override
 	public int getKillScore() {
 		return KILL_SCORE;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(-DEFAULT_VELOCITY.x, -DEFAULT_VELOCITY.y);
+		setInitialized(true);
 	}
 	
 }

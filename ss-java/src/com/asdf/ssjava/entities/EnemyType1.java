@@ -95,7 +95,6 @@ public class EnemyType1 extends Enemy {
 
 	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
-
 		setHealth(DEFAULT_HEALTH);
 		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 		createDef();
@@ -123,7 +122,6 @@ public class EnemyType1 extends Enemy {
 		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 	}
 	
-	
 	/* (non-Javadoc)
 	 * @see com.asdf.ssjava.entities.Enemy#fire()
 	 */
@@ -145,25 +143,26 @@ public class EnemyType1 extends Enemy {
 	 */
 	@Override
 	public void update() {		
-		
-		float shipAngle = (float) (getBody().getAngle() - Math.PI);
-		float mod = (float) (2 * Math.PI);
-		float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
-		
-		// TODO fix ship rotation
-		if (angleMod < Math.PI) {
-			float diff = angleMod;
-			getBody().setAngularVelocity(-0.2f * diff);
+		if (isInitialized()) {
+			float shipAngle = (float) (getBody().getAngle() - Math.PI);
+			float mod = (float) (2 * Math.PI);
+			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
+			
+			// TODO fix ship rotation
+			if (angleMod < Math.PI) {
+				float diff = angleMod;
+				getBody().setAngularVelocity(-0.2f * diff);
+			}
+			else {
+				float diff = mod - angleMod;
+				getBody().setAngularVelocity(0.2f * diff);
+			}
+			
+			fire();
+			
+			super.update();
 		}
-		else {
-			float diff = mod - angleMod;
-			getBody().setAngularVelocity(0.2f * diff);
-		}
 		
-		
-		fire();
-		
-		super.update();
 	}
 	
 	/*
@@ -201,7 +200,6 @@ public class EnemyType1 extends Enemy {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/* (non-Javadoc)
@@ -241,5 +239,15 @@ public class EnemyType1 extends Enemy {
 	@Override
 	public int getKillScore() {
 		return KILL_SCORE;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		setInitialized(true);
 	}
 }

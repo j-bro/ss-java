@@ -125,8 +125,6 @@ public class Asteroid extends Obstacle {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
-
 	}
 
 	/*
@@ -146,5 +144,14 @@ public class Asteroid extends Obstacle {
 	public int getKillScore() {
 		return KILL_SCORE;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		setInitialized(true);
+	}
 }

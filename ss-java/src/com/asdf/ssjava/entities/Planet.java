@@ -155,7 +155,6 @@ public class Planet extends Obstacle {
 		fixtureDef.restitution = 0.1f;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
 		
 		CircleShape circle2 = new CircleShape();
 		circle2.setRadius(width / 2 + 8);
@@ -168,7 +167,6 @@ public class Planet extends Obstacle {
 		fixtureDef2.isSensor = true;
 		
 		body.createFixture(fixtureDef2);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*
@@ -188,5 +186,14 @@ public class Planet extends Obstacle {
 	public int getKillScore() {
 		return KILL_SCORE;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		setInitialized(true);
+	}
 }

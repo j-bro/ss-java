@@ -51,6 +51,11 @@ public abstract class AbstractEntity {
 	protected transient boolean visible = true;
 
 	/**
+	 * Whether or not the entity was initialized (given its intial velocity)
+	 */
+	protected transient boolean initialized = false;
+	
+	/**
 	 * The game world instance
 	 */
 	protected transient GameWorld gameWorld;
@@ -224,6 +229,19 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
+	}
+	/**
+	 * @param initialized the initialized to set
+	 */
+	public void setInitialized(boolean initialized) {
+		this.initialized = initialized;
+	}
+
+	/**
 	 * Returns the Box2D body for this entity
 	 */
 	public Body getBody() {
@@ -255,6 +273,7 @@ public abstract class AbstractEntity {
 	
 	public abstract int getHitScore();
 	public abstract int getKillScore();
+	public abstract void initialize();
 	
 	/**
 	 * Called when the entity's health is 0

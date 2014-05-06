@@ -107,7 +107,6 @@ public class PowerupSpeedOfLight extends Powerup {
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*
@@ -136,5 +135,15 @@ public class PowerupSpeedOfLight extends Powerup {
 	@Override
 	public int getKillScore() {
 		return KILL_SCORE;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		setInitialized(true);
 	}
 }

@@ -96,7 +96,6 @@ public class Points extends Powerup {
 		fixtureDef.isSensor = true;
 		
 		body.createFixture(fixtureDef);
-		body.setLinearVelocity(DEFAULT_VELOCITY);
 	}
 	
 	/*
@@ -109,13 +108,21 @@ public class Points extends Powerup {
 
 	@Override
 	public int getHitScore() {
-		// TODO Auto-generated method stub
 		return HIT_SCORE;
 	}
 
 	@Override
 	public int getKillScore() {
-		// TODO Auto-generated method stub
 		return SCORE;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#initialize()
+	 */
+	@Override
+	public void initialize() {
+		body.setLinearVelocity(DEFAULT_VELOCITY);
+		setInitialized(true);
 	}
 }
