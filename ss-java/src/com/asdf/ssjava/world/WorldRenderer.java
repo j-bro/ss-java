@@ -188,130 +188,7 @@ public class WorldRenderer {
 		
 		ship = gameWorld.getShip();
 		
-		// HUD stage
-		if (stage == null) {
-			stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-		}
-		stage.clear();
-		
-		// Game HUD
-		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
-			LabelStyle ls = new LabelStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
-			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
-			scoreLabel.setX(10);
-			scoreLabel.setY(Gdx.graphics.getHeight() - 10 - scoreLabel.getHeight());
-			stage.addActor(scoreLabel);
-			
-			progressLabel = new Label(gameWorld.getProgress() + "%", ls);
-			progressLabel.setAlignment(Align.right);
-			progressLabel.setX(Gdx.graphics.getWidth() - 10 - progressLabel.getWidth());
-			progressLabel.setY(Gdx.graphics.getHeight() - 10 - progressLabel.getHeight());
-			stage.addActor(progressLabel);
-			
-			shipHeatIndicatorLabel = new Label("Heat: Stable", ls);
-			shipHeatIndicatorLabel.setAlignment(Align.right);
-			shipHeatIndicatorLabel.setX(15);
-			shipHeatIndicatorLabel.setY(15 + 50 + 10);
-			stage.addActor(shipHeatIndicatorLabel);
-			
-			fullHeartImage1 = new Image(fullHeartTexture);
-			fullHeartImage2 = new Image(fullHeartTexture);
-			fullHeartImage3 = new Image(fullHeartTexture);
-			emptyHeartImage1 = new Image(emptyHeartTexture);
-			emptyHeartImage2 = new Image(emptyHeartTexture);
-			emptyHeartImage3 = new Image(emptyHeartTexture);
-			halfHeartImage = new Image(halfHeartTexture);
-			
-			int heartScale = 50;
-			
-			fullHeartImage1.setBounds(15, 15, heartScale, heartScale);
-			fullHeartImage2.setBounds(15, 15, heartScale, heartScale);
-			fullHeartImage3.setBounds(15, 15, heartScale, heartScale);
-			emptyHeartImage1.setBounds(15, 15, heartScale, heartScale);
-			emptyHeartImage2.setBounds(15, 15, heartScale, heartScale);
-			emptyHeartImage3.setBounds(15, 15, heartScale, heartScale);
-			halfHeartImage.setBounds(15, 15, heartScale, heartScale);
-			
-			fullHeartImage2.setX(15 + fullHeartImage1.getWidth());
-			fullHeartImage3.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
-			
-			stage.addActor(fullHeartImage1);
-			stage.addActor(fullHeartImage2);
-			stage.addActor(fullHeartImage3);
-			stage.addActor(halfHeartImage);
-			
-			// Debug display
-			if (SSJava.DEBUG) {
-				// Debug text
-				LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
-				debugLabel = new Label("DEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER"
-//						+ "\nDEBUG TEXT HOLDER"
-						+ "\nDEBUG TEXT HOLDER", dbls);
-				debugLabel.setX(10);
-				debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
-				stage.addActor(debugLabel);
-			}
-		}
-		// Creator HUD
-		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
-			asteroidImage = new Image(asteroidTexture);
-			spaceRockImage = new Image(spaceRockTexture);
-			planetImage = new Image(planetTexture);
-			sunImage = new Image(sunTexture);
-			magneticObjectImage = new Image(magneticObjectTexture);
-			enemyType1Image = new Image(enemyType1Texture);
-			powerupHealthUpImage = new Image(powerupHealthUpTexture);
-			powerupSpeedOfLightImage = new Image(powerupSpeedOfLightTexture);
-			pointsImage = new Image(pointsTexture);
-			
-			int imageScale = 70;
-			
-			asteroidImage.setBounds(10, 10, imageScale * 2, imageScale);
-			spaceRockImage.setBounds(10, 10, imageScale, imageScale);
-			planetImage.setBounds(10, 10, imageScale, imageScale);
-			sunImage.setBounds(10, 10, imageScale, imageScale);
-			magneticObjectImage.setBounds(10, 10, imageScale, imageScale);
-			enemyType1Image.setBounds(10, 10, imageScale * 2, imageScale);
-			enemyType1Image.setOrigin(enemyType1Image.getWidth() / 2, enemyType1Image.getHeight() / 2);
-			enemyType1Image.setRotation(180);
-			powerupHealthUpImage.setBounds(10, 10, imageScale, imageScale);
-			powerupSpeedOfLightImage.setBounds(10, 10, imageScale * 2, imageScale);
-			pointsImage.setBounds(10, 10, imageScale, imageScale);
-			
-			stage.addActor(asteroidImage);
-			stage.addActor(spaceRockImage);
-			stage.addActor(planetImage);
-			stage.addActor(sunImage);
-			stage.addActor(magneticObjectImage);
-			stage.addActor(enemyType1Image);
-			stage.addActor(powerupHealthUpImage);
-			stage.addActor(powerupSpeedOfLightImage);
-			stage.addActor(pointsImage);
-			
-			// Debug text
-			LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
-			debugLabel = new Label("DEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER"
-//					+ "\nDEBUG TEXT HOLDER"
-					+ "\nDEBUG TEXT HOLDER", dbls);
-			debugLabel.setX(10);
-			debugLabel.setY(Gdx.graphics.getHeight() - 40 - debugLabel.getHeight());
-			stage.addActor(debugLabel);
-			
-			sr = new ShapeRenderer();
-			sr.setProjectionMatrix(cam.combined);
-		}
+		createHUD(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			
 		// Shape (hitbox) renderer
 		debugRenderer = new Box2DDebugRenderer();
@@ -405,6 +282,134 @@ public class WorldRenderer {
 		
 		// game HUD
 		updateHUD();
+	}
+	
+	public void createHUD(int width, int height) {
+		// HUD stage
+		if (stage == null) {
+			stage = new Stage(width, height, true);
+		}
+		stage.clear();
+		stage.setViewport(width, height);
+		
+		// Game HUD
+		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
+			LabelStyle ls = new LabelStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE);
+			scoreLabel = new Label("Score: " + gameWorld.scoreKeeper.getScore(), ls);
+			scoreLabel.setX(10);
+			scoreLabel.setY(height - 10 - scoreLabel.getHeight());
+			stage.addActor(scoreLabel);
+			
+			progressLabel = new Label(gameWorld.getProgress() + "%", ls);
+			progressLabel.setAlignment(Align.right);
+			progressLabel.setX(width - 10 - progressLabel.getWidth());
+			progressLabel.setY(height - 10 - progressLabel.getHeight());
+			stage.addActor(progressLabel);
+			
+			shipHeatIndicatorLabel = new Label("Heat: Stable", ls);
+			shipHeatIndicatorLabel.setAlignment(Align.right);
+			shipHeatIndicatorLabel.setX(15);
+			shipHeatIndicatorLabel.setY(15 + 50 + 10);
+			stage.addActor(shipHeatIndicatorLabel);
+			
+			fullHeartImage1 = new Image(fullHeartTexture);
+			fullHeartImage2 = new Image(fullHeartTexture);
+			fullHeartImage3 = new Image(fullHeartTexture);
+			emptyHeartImage1 = new Image(emptyHeartTexture);
+			emptyHeartImage2 = new Image(emptyHeartTexture);
+			emptyHeartImage3 = new Image(emptyHeartTexture);
+			halfHeartImage = new Image(halfHeartTexture);
+			
+			int heartScale = 50;
+			
+			fullHeartImage1.setBounds(15, 15, heartScale, heartScale);
+			fullHeartImage2.setBounds(15, 15, heartScale, heartScale);
+			fullHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage1.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage2.setBounds(15, 15, heartScale, heartScale);
+			emptyHeartImage3.setBounds(15, 15, heartScale, heartScale);
+			halfHeartImage.setBounds(15, 15, heartScale, heartScale);
+			
+			fullHeartImage2.setX(15 + fullHeartImage1.getWidth());
+			fullHeartImage3.setX(15 + fullHeartImage1.getWidth() + fullHeartImage2.getWidth());
+			
+			stage.addActor(fullHeartImage1);
+			stage.addActor(fullHeartImage2);
+			stage.addActor(fullHeartImage3);
+			stage.addActor(halfHeartImage);
+			
+			// Debug display
+			if (SSJava.DEBUG) {
+				// Debug text
+				LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+				debugLabel = new Label("DEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER"
+//						+ "\nDEBUG TEXT HOLDER"
+						+ "\nDEBUG TEXT HOLDER", dbls);
+				debugLabel.setX(10);
+				debugLabel.setY(height - 40 - debugLabel.getHeight());
+				stage.addActor(debugLabel);
+			}
+		}
+		// Creator HUD
+		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
+			asteroidImage = new Image(asteroidTexture);
+			spaceRockImage = new Image(spaceRockTexture);
+			planetImage = new Image(planetTexture);
+			sunImage = new Image(sunTexture);
+			magneticObjectImage = new Image(magneticObjectTexture);
+			enemyType1Image = new Image(enemyType1Texture);
+			powerupHealthUpImage = new Image(powerupHealthUpTexture);
+			powerupSpeedOfLightImage = new Image(powerupSpeedOfLightTexture);
+			pointsImage = new Image(pointsTexture);
+			
+			int imageScale = 70;
+			
+			asteroidImage.setBounds(10, 10, imageScale * 2, imageScale);
+			spaceRockImage.setBounds(10, 10, imageScale, imageScale);
+			planetImage.setBounds(10, 10, imageScale, imageScale);
+			sunImage.setBounds(10, 10, imageScale, imageScale);
+			magneticObjectImage.setBounds(10, 10, imageScale, imageScale);
+			enemyType1Image.setBounds(10, 10, imageScale * 2, imageScale);
+			enemyType1Image.setOrigin(enemyType1Image.getWidth() / 2, enemyType1Image.getHeight() / 2);
+			enemyType1Image.setRotation(180);
+			powerupHealthUpImage.setBounds(10, 10, imageScale, imageScale);
+			powerupSpeedOfLightImage.setBounds(10, 10, imageScale * 2, imageScale);
+			pointsImage.setBounds(10, 10, imageScale, imageScale);
+			
+			stage.addActor(asteroidImage);
+			stage.addActor(spaceRockImage);
+			stage.addActor(planetImage);
+			stage.addActor(sunImage);
+			stage.addActor(magneticObjectImage);
+			stage.addActor(enemyType1Image);
+			stage.addActor(powerupHealthUpImage);
+			stage.addActor(powerupSpeedOfLightImage);
+			stage.addActor(pointsImage);
+			
+			// Debug text
+			LabelStyle dbls = new LabelStyle(SSJava.assetManager.get("data/fonts/debugFont-14.fnt", BitmapFont.class), Color.WHITE);
+			debugLabel = new Label("DEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER"
+//					+ "\nDEBUG TEXT HOLDER"
+					+ "\nDEBUG TEXT HOLDER", dbls);
+			debugLabel.setX(10);
+			debugLabel.setY(height - 40 - debugLabel.getHeight());
+			stage.addActor(debugLabel);
+			
+			sr = new ShapeRenderer();
+			sr.setProjectionMatrix(cam.combined);
+		}
 	}
 	
 	/**
