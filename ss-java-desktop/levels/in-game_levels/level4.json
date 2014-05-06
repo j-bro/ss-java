@@ -2611,5 +2611,6 @@ powerups: [
 		}
 	}
 ],
+levelCode: 4,
 levelEnd: 1385
 }
