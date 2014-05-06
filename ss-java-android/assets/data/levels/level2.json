@@ -2513,5 +2513,6 @@ powerups: [
 		}
 	}
 ],
+levelCode: 2,
 levelEnd: 900
 }

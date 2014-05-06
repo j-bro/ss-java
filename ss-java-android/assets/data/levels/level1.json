@@ -1764,5 +1764,6 @@ powerups: [
 		}
 	}
 ],
+levelCode: 1,
 levelEnd: 1000
 }
