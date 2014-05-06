@@ -126,5 +126,6 @@ powerups: [
 		}
 	}
 ],
+nextLevelPath: data/levels/level2.json,
 levelEnd: 310
 }

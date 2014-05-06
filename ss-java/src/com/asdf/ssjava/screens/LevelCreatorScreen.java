@@ -425,6 +425,7 @@ public class LevelCreatorScreen implements Screen {
 			// Set level end point
 			case Keys.E:
 				gameWorld.getLevel().setLevelEnd(renderer.getCamera().position.x);
+				setLevelModified(true);
 				break;
 			default: break;
 		}
