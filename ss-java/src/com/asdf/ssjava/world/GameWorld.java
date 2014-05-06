@@ -192,6 +192,11 @@ public class GameWorld {
 		if (levelFile != null) {
 			loadLevel(levelFile);
 			
+			// Initialize level if invalid file
+			if (level == null) {
+				level = new Level();
+			}
+			
 			// Initialize loaded level elements 
 			for (Obstacle o: level.obstacles) {
 				o.initWorlds(this, box2DWorld);
