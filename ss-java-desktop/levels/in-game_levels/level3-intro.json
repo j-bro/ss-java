@@ -1,0 +1,48 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 91.8,
+			y: 46.75
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 176.8,
+			y: 52.5
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.Sun,
+		position: {
+			x: 180.1,
+			y: -15.900002
+		}
+	}
+],
+messages: [
+	{
+		message: "The sun is a big danger. Moving too close will cause the ship's heat level to rise",
+		progress: 25,
+		duration: 5
+	},
+	{
+		message: "When heat reaches dangerous levels, the ship will burn up",
+		progress: 90,
+		duration: 5
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupHealthUp,
+		position: {
+			x: 208.35,
+			y: 17.35
+		}
+	}
+],
+nextLevelPath: data/levels/level3.json,
+levelEnd: 219
+}

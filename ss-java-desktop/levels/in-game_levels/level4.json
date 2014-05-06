@@ -1281,22 +1281,22 @@ enemies: [
 	{
 		class: com.asdf.ssjava.entities.EnemyType1,
 		position: {
-			x: 53.399994,
-			y: 28.650002
+			x: 93.7,
+			y: 25.45
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.EnemyType1,
 		position: {
-			x: 53.999996,
-			y: 16.65
+			x: 93.75001,
+			y: 15.3
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.EnemyType1,
 		position: {
-			x: 54.049995,
-			y: 3.9499998
+			x: 95.8,
+			y: 4.25
 		}
 	},
 	{
@@ -1479,15 +1479,15 @@ powerups: [
 	{
 		class: com.asdf.ssjava.entities.Points,
 		position: {
-			x: 53.449997,
-			y: 22.5
+			x: 87.05,
+			y: 6.1000004
 		}
 	},
 	{
 		class: com.asdf.ssjava.entities.Points,
 		position: {
-			x: 54.049995,
-			y: 9.6
+			x: 86.15,
+			y: 11.049999
 		}
 	},
 	{
@@ -2611,6 +2611,5 @@ powerups: [
 		}
 	}
 ],
-levelCode: 4,
 levelEnd: 1385
 }
