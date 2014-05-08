@@ -24,12 +24,14 @@ gameChangers: [
 ],
 messages: [
 	{
-		message: "The sun is a big danger. Moving too close will cause the ship's heat level to rise",
+		message: "The sun is a big danger. Moving too close 
+will cause the ship's heat level to rise",
 		progress: 25,
 		duration: 5
 	},
 	{
-		message: "When heat reaches dangerous levels, the ship will burn up",
+		message: "When heat reaches dangerous levels, 
+the ship will burn up",
 		progress: 90,
 		duration: 5
 	}
