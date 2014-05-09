@@ -1,0 +1,59 @@
+{
+gameChangers: [
+	{
+		class: com.asdf.ssjava.entities.Planet,
+		position: {
+			x: 74.15,
+			y: 6.3500004
+		}
+	}
+],
+obstacles: [
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 23.05,
+			y: 11.85
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.SpaceRock,
+		position: {
+			x: 38.55,
+			y: 30.15
+		}
+	}
+],
+enemies: [
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 47.85,
+			y: 11.65
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 29,
+			y: 24
+		}
+	},
+	{
+		class: com.asdf.ssjava.entities.EnemyType1,
+		position: {
+			x: 49.1,
+			y: 20.45
+		}
+	}
+],
+powerups: [
+	{
+		class: com.asdf.ssjava.entities.PowerupSpeedOfLight,
+		position: {
+			x: 41.6,
+			y: 13.25
+		}
+	}
+]
+}

@@ -57,7 +57,8 @@ messages: [
 		duration: 3
 	},
 	{
-		message: "Pro tip: you can use magnetic objects to slow down or speed up",
+		message: "Pro tip: you can use magnetic objects 
+to slow down or speed up",
 		progress: 140,
 		duration: 8
 	},
