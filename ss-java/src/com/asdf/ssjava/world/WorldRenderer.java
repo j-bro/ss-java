@@ -6,7 +6,6 @@ package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
 import com.asdf.ssjava.entities.*;
-import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;

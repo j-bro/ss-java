@@ -1,7 +1,6 @@
 package com.asdf.ssjava.screens;
 
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -198,8 +197,8 @@ public class LevelCreatorOptionsMenu implements Screen {
 					JFileChooser chooser = new JFileChooser("levels");
 					FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON level files", "json");
 					chooser.setFileFilter(filter);
-					int returnVal = chooser.showOpenDialog(new JPanel());
-					if(returnVal == JFileChooser.APPROVE_OPTION) {
+					int returnVal = chooser.showOpenDialog(game.fileChooserPanel);
+					if( returnVal == JFileChooser.APPROVE_OPTION) {
 						AudioPlayer.stopCreatorMusic();
 						FileHandle levelFile = Gdx.files.local(chooser.getSelectedFile().getPath());
 						game.setScreen(new LevelCreatorScreen(game, levelFile));

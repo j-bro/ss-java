@@ -10,6 +10,7 @@ Google Doc: https://docs.google.com/document/d/1-8tMeU98IkcXykrjcskKdVFWixOS4att
 
 - Menu graphics
 - Hitbox shapes
+- Confirm save overwrite & warn on bad level loading
 - Optional
 	- Parallax backgrounds
 	- powerups: bigger bullets

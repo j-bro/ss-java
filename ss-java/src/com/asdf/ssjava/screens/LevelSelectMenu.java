@@ -4,7 +4,6 @@
 package com.asdf.ssjava.screens;
 
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.asdf.ssjava.SSJava;
@@ -197,8 +196,8 @@ public class LevelSelectMenu implements Screen {
 					JFileChooser chooser = new JFileChooser("levels");
 					FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON level files", "json");
 					chooser.setFileFilter(filter);
-					int returnVal = chooser.showOpenDialog(new JPanel());
-					if(returnVal == JFileChooser.APPROVE_OPTION) {
+					int returnVal = chooser.showOpenDialog(game.fileChooserPanel);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						String levelPath = chooser.getSelectedFile().getPath();
 						game.gameScreen = new GameScreen(game, Gdx.files.local(levelPath));
 						game.setScreen(game.gameScreen);

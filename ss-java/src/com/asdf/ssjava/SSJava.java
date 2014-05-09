@@ -3,6 +3,8 @@
  */
 package com.asdf.ssjava;
 
+import javax.swing.JPanel;
+
 import com.asdf.ssjava.screens.GameScreen;
 import com.asdf.ssjava.screens.SplashScreen;
 import com.badlogic.gdx.Game;
@@ -73,6 +75,11 @@ public class SSJava extends Game {
 	 */
 	static String highestCompletedLevelKey = "highestCompletedLevel";
 	
+	/**
+	 * File chooser JPanel instance
+	 */
+	public JPanel fileChooserPanel;
+	
 	@Override
 	public void create() {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
@@ -85,6 +92,9 @@ public class SSJava extends Game {
 		
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
+		
+		fileChooserPanel = new JPanel();
+		fileChooserPanel.setVisible(false);
 	}
 
 	/*
