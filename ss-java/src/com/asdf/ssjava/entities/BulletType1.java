@@ -1,8 +1,3 @@
-/**
- * Concrete definition of a bullet to model a certain look and behaviour.
- * Behaviour is defined here and look in the WorldRenderer class.
- * This bullet will be used by enemies (type 1).
- */
 package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.world.GameWorld;
@@ -12,7 +7,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
+ * Concrete definition of a bullet to model a certain look and behaviour. 
+ * Behaviour is defined here and look in the WorldRenderer class. 
+ * This bullet will be used by enemies (type 1). 
  * @author Jeremy Brown
+ * @author Simon Thompson
  * 
  */
 public class BulletType1 extends Bullet {
@@ -43,10 +42,14 @@ public class BulletType1 extends Bullet {
 	public static final int KILL_SCORE = 0;
 	
 	/**
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Creates a Bullet with the specified parameters
+	 * @param position the position of the bullet
+	 * @param width the width of the bullet
+	 * @param height the height of the bullet
+	 * @param rotation the rotation of the bullet in degrees
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
+	 * @param shooter the entity that shot the bullet
 	 */
 	public BulletType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld, AbstractEntity shooter) {
 		super(position, width, height, rotation, gameWorld, box2DWorld, shooter);
@@ -60,14 +63,6 @@ public class BulletType1 extends Bullet {
 	@Override
 	public int getType() {
 		return type;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.asdf.ssjava.entities.Bullet#getDEFAULT_VELOCITY()
-	 */
-	@Override
-	public Vector2 getDEFAULT_VELOCITY() {
-		return DEFAULT_VELOCITY;
 	}
 
 	/* (non-Javadoc)
@@ -101,7 +96,6 @@ public class BulletType1 extends Bullet {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
 		

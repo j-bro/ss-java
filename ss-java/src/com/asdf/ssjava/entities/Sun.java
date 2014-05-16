@@ -8,11 +8,13 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Sun extends Obstacle{
+/**
+ * The sun implementation of a game changer. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
+public class Sun extends Obstacle {
 
-	/**
-	 * @param args
-	 */
 	/**
 	 * The sun's default velocity (static)
 	 */
@@ -50,13 +52,13 @@ public class Sun extends Obstacle{
 	
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a sun with the specified parameters. 
+	 * @param position the position of the sun
+	 * @param width the width of the sun
+	 * @param height the height of the sun
+	 * @param rotation the rotation of the sun
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public Sun(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -65,7 +67,8 @@ public class Sun extends Obstacle{
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates a sun with default parameters. 
 	 */
 	public Sun() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -73,11 +76,13 @@ public class Sun extends Obstacle{
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates a sun with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the sun
+	 * @param width the width of the sun
+	 * @param height the height of the sun
+	 * @param rotation the rotation of the sun, in degrees
 	 */
 	public Sun(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -91,27 +96,26 @@ public class Sun extends Obstacle{
 	@Override
 	public void createDef() {
 		super.createDef();
+		
+		// Main fixture
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
-		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
 		fixtureDef.density = 1000000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
-		
 		body.createFixture(fixtureDef);
 		
+		// Sensor
 		CircleShape circle2 = new CircleShape();
 		circle2.setRadius(width / 2 + 13);
-		
 		FixtureDef fixtureDef2 = new FixtureDef();
 		fixtureDef2.shape = circle2;
 		fixtureDef2.density = 0.5f; 
 		fixtureDef2.friction = 1.0f;
 		fixtureDef2.restitution = 0.1f;
 		fixtureDef2.isSensor = true;
-		
 		body.createFixture(fixtureDef2);
 	}
 	
@@ -123,6 +127,10 @@ public class Sun extends Obstacle{
 		return "Sun";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
 	@Override
 	public int getHitScore() {
 		return 0;

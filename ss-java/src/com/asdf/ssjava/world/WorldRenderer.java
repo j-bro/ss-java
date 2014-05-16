@@ -1,7 +1,3 @@
-/**
- * Manages the rendering and drawing dependencies of all entities present in the World.
- * Draws the HUD comprising of the score, the player's life points and the level progress.
- */
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.SSJava;
@@ -26,17 +22,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Manages the rendering and drawing dependencies of all entities present in the associated GameWorld instance.
+ * Draws the HUD comprising of the score, the player's life points, the ship heat indicator, and the level progress.
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class WorldRenderer {
 
 	/**
-	 * The game's instance
+	 * The SSJava instance
 	 */
 	SSJava game;
 	/**
-	 * The World's instance
+	 * The GameWorld instance
 	 */
 	GameWorld gameWorld;
 	
@@ -49,6 +47,10 @@ public class WorldRenderer {
 	 * The stage for drawing the score, life hearts and level progress
 	 */
 	Stage stage;
+	
+	/**
+	 * Labels for the game HUD
+	 */
 	Label scoreLabel, progressLabel;
 	
 	/**
@@ -77,26 +79,34 @@ public class WorldRenderer {
 	Ship ship;
 	
 	/**
-	 * Textures for the various elements 
+	 * Textures for all game elements 
 	 */
-	Texture shipTexture;
-	Texture spaceRockTexture, asteroidTexture;
-	Texture enemyType1Texture, enemyType2Texture, enemyType3Texture;
-	Texture bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture;
-	Texture speedOfLightTexture, healthUpTexture;
-	Texture powerupHealthUpTexture, powerupSpeedOfLightTexture, pointsTexture;
-	Texture planetTexture, sunTexture, magneticObjectTexture;
+	Texture shipTexture, spaceRockTexture, asteroidTexture, enemyType1Texture, enemyType2Texture, enemyType3Texture, bulletType0Texture, bulletType1Texture, bulletType2Texture, bulletType3Texture, speedOfLightTexture, healthUpTexture, powerupHealthUpTexture, powerupSpeedOfLightTexture, pointsTexture, planetTexture, sunTexture, magneticObjectTexture;
 	
+	/**
+	 * Background texture
+	 */
 	Texture bgTexture;
+	
+	/**
+	 * Background sprite
+	 */
 	Sprite bgSprite;
 	
+	/**
+	 * Images for the game HUD stage
+	 */
 	Image fullHeartImage1, fullHeartImage2, fullHeartImage3, fullHeartImage4, emptyHeartImage1, emptyHeartImage2, emptyHeartImage3, emptyHeartImage4, halfHeartImage;
+	
+	/**
+	 * Texture for the game HUD stage
+	 */
 	Texture fullHeartTexture, emptyHeartTexture, halfHeartTexture;
 	
-	Image asteroidImage, spaceRockImage;
-	Image enemyType1Image;
-	Image planetImage, sunImage, magneticObjectImage;
-	Image powerupHealthUpImage, powerupSpeedOfLightImage, pointsImage;
+	/**
+	 * Images for the level creator HUD stage
+	 */
+	Image asteroidImage, spaceRockImage, enemyType1Image, planetImage, sunImage, magneticObjectImage, powerupHealthUpImage, powerupSpeedOfLightImage, pointsImage;
 	
 	/**
 	 * The entity type to add to the level
@@ -113,13 +123,14 @@ public class WorldRenderer {
 	 */
 	ShapeRenderer sr;
 
-	// TODO ...
+	/**
+	 * The display width & height
+	 */
 	float width, height;
 	
-	
 	/**
-	 * Creates the world instance
-	 * @param gameWorld
+	 * Creates a renderer for the specified GameWorld instance. 
+	 * @param gameWorld the GameWorle instance to be renderered
 	 */
 	public WorldRenderer(final GameWorld gameWorld) {
 		this.gameWorld = gameWorld;
@@ -127,7 +138,6 @@ public class WorldRenderer {
 		
 		width = 64;
 		height = 36;
-		System.out.println(width + " " + height);
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, width + " " + height);
 		
 		cam = new OrthographicCamera();
@@ -170,10 +180,8 @@ public class WorldRenderer {
 		magneticObjectTexture = SSJava.assetManager.get("data/textures/space_junk.png", Texture.class);
 		magneticObjectTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		// TODO extra textures
 		bulletType1Texture = bulletType0Texture;
 		
-//		gameWorld.setBackground(gameWorld.getLevel().getBackgroundPath()); TODO fix
 		bgTexture = SSJava.assetManager.get("data/textures/backgrounds/background_sparks.png", Texture.class);
 		bgTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		bgSprite = new Sprite(bgTexture);
@@ -195,14 +203,15 @@ public class WorldRenderer {
 	
 	
 	/**
-	 * Render loop
+	 * Render loop. 
+	 * 
 	 */
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10. GL_COLOR_BUFFER_BIT);  
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		// camera follows ship if in game
+		// Camera follows ship if in GAME_TYPE mode
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {			
 			cam.position.set(ship.getPosition().x + 20, cam.position.y, 0);
 		}
@@ -214,53 +223,34 @@ public class WorldRenderer {
 		batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		
-		/* TODO simpler rendering
-		Array<Body> bodiesArray = new Array<Body>();
-		gameWorld.box2DWorld.getBodies(bodiesArray);
-		Iterator<Body> bi = bodiesArray.iterator(); 
-		while (bi.hasNext()) {
-			Body b = bi.next();
-
-		    // Get the entity corresponding to the body
-		    AbstractEntity e = (AbstractEntity) b.getUserData();
-
-		    if (e != null) {
-		    	if (e.isVisible()) {
-		    		Texture texture = getTexture(e);
-		    		batch.draw(texture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
-		    	}
-		    }
-		}
-		*/
-		
 		// Draw background
 		if (gameWorld.getLevel().getBackgroundPath() != null) {
 			bgSprite.setBounds(cam.position.x - cam.viewportWidth / 2, cam.position.y - cam.viewportHeight / 2, cam.viewportWidth, cam.viewportHeight);
 			bgSprite.draw(batch);
 		}
 		
-		// obstacles rendering
+		// Obstacles rendering
 		for (Obstacle o: gameWorld.getLevel().obstacles) {
 			if (o.isVisible()) {
 				Texture obstacleTexture = getTexture(o);
 				batch.draw(obstacleTexture, o.getPosition().x - o.getWidth() / 2, o.getPosition().y - o.getHeight() / 2, o.getWidth() / 2, o.getHeight() / 2 , o.getWidth(), o.getHeight(), 1, 1, o.getRotation(), 0, 0, obstacleTexture.getWidth(), obstacleTexture.getHeight(), false, false);					
 			}
 		}
-		// enemies rendering
+		// Enemies rendering
 		for (Enemy e: gameWorld.getLevel().enemies) {
 			if (e.isVisible()) {					
 				Texture enemyTexture = getTexture(e);
 				batch.draw(enemyTexture, e.getPosition().x - e.getWidth() / 2, e.getPosition().y - e.getHeight() / 2, e.getWidth() / 2, e.getHeight() / 2 , e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0, 0, enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
 			}
 		}
-		// bullet rendering
+		// Bullet rendering
 		for (Bullet b: gameWorld.bullets) {
 			if (b.isVisible()) {					
 				Texture bulletTexture = getTexture(b);
 				batch.draw(bulletTexture, b.getPosition().x - b.getWidth() / 2, b.getPosition().y - b.getHeight() / 2, b.getWidth() / 2, b.getHeight() / 2 , b.getWidth(), b.getHeight(), 1, 1, b.getRotation(), 0, 0, bulletTexture.getWidth(), bulletTexture.getHeight(), false, false);
 			}
 		}
-		// game changer rendering
+		// Game changer rendering
 		for (Obstacle g: gameWorld.getLevel().gameChangers) {
 			if (g.isVisible()) {
 				Texture gameChangerTexture = getTexture(g);
@@ -273,16 +263,21 @@ public class WorldRenderer {
 				batch.draw(powerupTexture, p.getPosition().x - p.getWidth() / 2, p.getPosition().y - p.getHeight() / 2, p.getWidth() / 2, p.getHeight() / 2 , p.getWidth(), p.getHeight(), 1, 1, p.getRotation(), 0, 0, powerupTexture.getWidth(), powerupTexture.getHeight(), false, false);
 			}
 		}
-		// ship rendering
+		// Ship rendering
 		if (ship.isVisible()) {
 			batch.draw(shipTexture, ship.getPosition().x - ship.getWidth() / 2, ship.getPosition().y - ship.getHeight() / 2, ship.getWidth() / 2, ship.getHeight() / 2, ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation(), 8, 4, 48, 24, false, false);
 		}
 		batch.end();
 		
-		// game HUD
+		// Game HUD
 		updateHUD();
 	}
 	
+	/**
+	 * Creates the HUD display. 
+	 * @param width the width of the screen
+	 * @param height the height of the screen
+	 */
 	public void createHUD(int width, int height) {
 		// HUD stage
 		if (stage == null) {
@@ -362,7 +357,6 @@ public class WorldRenderer {
 						+ "\nDEBUG TEXT HOLDER"
 						+ "\nDEBUG TEXT HOLDER"
 						+ "\nDEBUG TEXT HOLDER"
-//						+ "\nDEBUG TEXT HOLDER"
 						+ "\nDEBUG TEXT HOLDER", dbls);
 				debugLabel.setX(10);
 				debugLabel.setY(height - 40 - debugLabel.getHeight());
@@ -414,7 +408,6 @@ public class WorldRenderer {
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER"
-//					+ "\nDEBUG TEXT HOLDER"
 					+ "\nDEBUG TEXT HOLDER", dbls);
 			debugLabel.setX(10);
 			debugLabel.setY(height - 40 - debugLabel.getHeight());
@@ -426,9 +419,9 @@ public class WorldRenderer {
 	}
 	
 	/**
-	 * Updates the HUD display.
-	 * Score, life and progress for the gameplay mode.
-	 * Entity list, position, and selected entity box for level creator mode. 
+	 * Updates the HUD display. 
+	 * Score, life and progress for the gameplay mode. 
+	 * Entity list, position, and selected entity box for level creator mode.  
 	 */
 	public void updateHUD() {
 		if (gameWorld.getWorldType() == GameWorld.GAME_TYPE) {
@@ -562,12 +555,11 @@ public class WorldRenderer {
 						+ "\nLight speed enabled: " + ship.isSpeedOfLightEnabled() 
 						+ "\nLevel progress: " + gameWorld.getProgress() + "%"
 						+ "\nDEBUG TEXT HOLDER"	
-//						+ "\nDEBUG TEXT HOLDER"	
 						+ "\nDEBUG TEXT HOLDER");	
 			}
 		}
 		
-		// creator HUD
+		// Creator HUD
 		else if (gameWorld.getWorldType() == GameWorld.CREATOR_TYPE) {
 			if (entityToAdd instanceof Asteroid) {
 				asteroidImage.setVisible(true);
@@ -684,7 +676,6 @@ public class WorldRenderer {
 					+ "\nMove camera: A & D "
 					+ "\nCycle entities: X & C" 
 					+ "\nAdd/remove entities: V & Z" 
-//					+ "\nSet background: B"	
 					+ "\nMove entities: arrows & mouse"
 					+ "\nOptions menu: ESC"
 					+ "\nSet Level end: E (" + gameWorld.getLevel().getLevelEnd() + ")"
@@ -696,7 +687,7 @@ public class WorldRenderer {
 	}
 
 	/**
-	 * Dispose method
+	 * Disposes the sprite batch and the debugging renderers. 
 	 */
 	public void dispose() {
 		batch.dispose();
@@ -707,7 +698,8 @@ public class WorldRenderer {
 	}
 	
 	/**
-	 * @param e the entity for which the texture is to be returned
+	 * Gets the texture for the specified entity. 
+	 * @param e the entity for which the texture is required
 	 * @return the corresponding texture
 	 */
 	public Texture getTexture(AbstractEntity e) {
@@ -751,6 +743,7 @@ public class WorldRenderer {
 	
 	
 	/**
+	 * Gets the renderer's main stage. 
 	 * @return the stage
 	 */
 	public Stage getStage() {
@@ -758,7 +751,7 @@ public class WorldRenderer {
 	}
 	
 	/**
-	 * 
+	 * Gets the renderer's camera. 
 	 * @return the renderer's camera
 	 */
 	public Camera getCamera() {
@@ -766,19 +759,22 @@ public class WorldRenderer {
 	}
 	
 	/**
-	 * @return the entityToAdd
+	 * Gets the entity to add in level creator mode. 
+	 * @return the entity to add
 	 */
 	public AbstractEntity getEntityToAdd() {
 		return entityToAdd;
 	}
 	/**
-	 * @param entityToAdd the entityToAdd to set
+	 * Sets the entity to add in level creator mode. 
+	 * @param entityToAdd the new entity to add
 	 */
 	public void setEntityToAdd(AbstractEntity entityToAdd) {
 		this.entityToAdd = entityToAdd;
 	}
 	/**
-	 * @param selectedEntity the selectedEntity to set
+	 * Sets the selected entity in level creator mode. 
+	 * @param selectedEntity the new selected entity
 	 */
 	public void setSelectedEntity(AbstractEntity selectedEntity) {
 		this.selectedEntity = selectedEntity;

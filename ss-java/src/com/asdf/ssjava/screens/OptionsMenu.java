@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -27,8 +24,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 /**
+ * An options menu allowing the player to modify the sound and music volumes. 
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class OptionsMenu implements Screen {
 
@@ -43,27 +41,27 @@ public class OptionsMenu implements Screen {
 	Stage stage;
 	
 	/**
-	 * 
+	 * The text font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
+	 * The title label
 	 */
 	Label titleLabel;
 	
 	/**
-	 * 
+	 * The text labels
 	 */
 	Label volumeLabel, musicLabel, soundLabel;
 	
 	/**
-	 * 
+	 * The text fields
 	 */
 	TextField musicField, soundField;
 	
 	/**
-	 * 
+	 * The back button
 	 */
 	MenuButton backButton;
 	
@@ -78,9 +76,9 @@ public class OptionsMenu implements Screen {
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param game The game instance of type SSJava
-	 * @param referrer The screen object that called this screen
+	 * Creates an options menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public OptionsMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -141,6 +139,10 @@ public class OptionsMenu implements Screen {
 		musicField.setMaxLength(3);
 		musicField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		musicField.setTextFieldListener(new TextField.TextFieldListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener#keyTyped(com.badlogic.gdx.scenes.scene2d.ui.TextField, char)
+			 */
 			@Override
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
@@ -169,6 +171,10 @@ public class OptionsMenu implements Screen {
 		soundField.setMaxLength(3);
 		soundField.setTextFieldFilter(new TextFieldFilter.DigitsOnlyFilter());
 		soundField.setTextFieldListener(new TextField.TextFieldListener() {
+			/*
+			 * (non-Javadoc)
+			 * @see com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener#keyTyped(com.badlogic.gdx.scenes.scene2d.ui.TextField, char)
+			 */
 			@Override
 			public void keyTyped(TextField textField, char key) {
 				if ((Gdx.app.getType() == Application.ApplicationType.Desktop && key == 13) || (Gdx.app.getType() == Application.ApplicationType.Android && key == 10)) {
@@ -186,7 +192,7 @@ public class OptionsMenu implements Screen {
 		soundField.setY(Gdx.graphics.getHeight() / 2 - 30);
 		
 		
-		// exit to main menu button
+		// Exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
@@ -223,7 +229,7 @@ public class OptionsMenu implements Screen {
 	}
 
 	/**
-	 * Save the new volume to the preferences & activate immediately
+	 * Saves the new volume to the preferences & activates it immediately.
 	 * @param newVolume the new volume to be saved
 	 * @param key the key under which to save the new volume
 	 * @return the new volume
@@ -248,7 +254,7 @@ public class OptionsMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show Options menu");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show Options menu");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);		
 	}
 
@@ -287,5 +293,4 @@ public class OptionsMenu implements Screen {
 	public void dispose() {
 
 	}
-
 }

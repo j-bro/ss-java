@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava;
 
 import javax.swing.JPanel;
@@ -16,8 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Json;
 
 /**
+ * The equivalent of the main class.
+ * Contains game loop and event responding methods.  
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 public class SSJava extends Game {
 
@@ -61,8 +60,14 @@ public class SSJava extends Game {
 	 */
 	public TextureRegion screenshot;
 	
+	/**
+	 * The window width, in pixels
+	 */
 	public int width;
 	
+	/**
+	 * The window height, in pixels
+	 */
 	public int height;
 	
 	/**
@@ -80,6 +85,10 @@ public class SSJava extends Game {
 	 */
 	public JPanel fileChooserPanel;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#create()
+	 */
 	@Override
 	public void create() {
 		prefs = Gdx.app.getPreferences("com.asdf.ssjava.preferences");
@@ -144,9 +153,9 @@ public class SSJava extends Game {
 	}
 	
 	/**
-	 * 
+	 * Checks the preferences to see if the specified level has been completed. 
 	 * @param level the specified level
-	 * @return true if the highest completed level is greater than the specified level
+	 * @return true if the highest completed level is greater than the specified level; false otherwise
 	 */
 	public static boolean checkLevelCompletion(int level) {
 		if (SSJava.prefs.getInteger(highestCompletedLevelKey, 0) >= level) {
@@ -156,7 +165,7 @@ public class SSJava extends Game {
 	}
 	
 	/**
-	 * Save the highest level completed by the player
+	 * Saves the highest level completed by the player. 
 	 * @param level the level completed
 	 */
 	public static void writeCompletedLevel(int level) {
@@ -168,7 +177,7 @@ public class SSJava extends Game {
 	}
 	
 	/**
-	 * Load the high scores
+	 * Loads the high scores. 
 	 * @param filePath the path where the high scores file is located
 	 * @return the HighScores object containing all the high scores
 	 */

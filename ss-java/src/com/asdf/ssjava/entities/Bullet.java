@@ -1,7 +1,3 @@
-/**
- * Entity model for a bullet.
- * Adds starting velocity which can be in any direction, but will most likely be in that of the ship's velocity OR only horizontal.
- */
 package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.world.GameWorld;
@@ -9,8 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
+ * Entity model for a bullet. 
+ * Adds starting velocity which can be in any direction, but in most cases will only horizontal.
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 public abstract class Bullet extends MoveableEntity {
 	
@@ -35,11 +33,12 @@ public abstract class Bullet extends MoveableEntity {
 	int damage;
 	
 	/**
-	 * The health of a bullet (1, as it disappears as soon as it collides)
+	 * The health of a bullet (1, as it dies as soon as it collides)
 	 */
 	public static final int DEFAULT_HEALTH = 1;
 	
 	/**
+	 * Creates a bullet with the specified parameters
 	 * @param position the position of the bullet
 	 * @param width the width of the bullet
 	 * @param height the height of the bullet
@@ -79,9 +78,21 @@ public abstract class Bullet extends MoveableEntity {
 		return "Abstract Bullet";
 	}
 
-	public abstract int getType();	
-	public abstract int getDamage();
-	public abstract AbstractEntity getShooter();
-	public abstract Vector2 getDEFAULT_VELOCITY();
+	/**
+	 * Gets the type of the bullet
+	 * @return the type of the bullet
+	 */
+	public abstract int getType();
 	
+	/**
+	 * Gets the damage value of the bullet. 
+	 * @return the damage value the bullet deals out to other entities
+	 */
+	public abstract int getDamage();
+	
+	/**
+	 * Gets the shooter of the bullet. 
+	 * @return the entity that fired the bullet
+	 */
+	public abstract AbstractEntity getShooter();	
 }

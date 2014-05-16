@@ -22,6 +22,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+/**
+ * Allows the user to save a level under a specified name.
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class LevelSaveMenu implements Screen {
 
 	/**
@@ -44,8 +49,14 @@ public class LevelSaveMenu implements Screen {
 	 */
 	MenuButton backButton, saveButton;
 	
+	/**
+	 * The file name text field
+	 */
 	TextField fileNameField;
 	
+	/**
+	 * The labels
+	 */
 	Label titleLabel, textLabel;
 	
 	/**
@@ -56,9 +67,9 @@ public class LevelSaveMenu implements Screen {
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
-	 * @param game
-	 * @param referrer
+	 * Creates a level save menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public LevelSaveMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -110,10 +121,10 @@ public class LevelSaveMenu implements Screen {
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 150);
 		
+		// File name 
 		SpriteDrawable cursorDrawable = new SpriteDrawable(new Sprite(SSJava.assetManager.get("data/textures/textfieldcursor.png", Texture.class)));
 		fileNameField = new TextField("LevelName", new TextField.TextFieldStyle(whiteFont, Color.WHITE, cursorDrawable, null, null));
 		fileNameField.setSelection(0, fileNameField.getText().length() - 1);
-		// TODO make drawable background grey for textfield distinction
 		fileNameField.setTextFieldListener(new TextField.TextFieldListener() {
 			@Override
 			public void keyTyped(TextField textField, char key) {
@@ -127,7 +138,7 @@ public class LevelSaveMenu implements Screen {
 		fileNameField.setX(Gdx.graphics.getWidth() / 2 - fileNameField.getWidth() / 2);
 		fileNameField.setY(Gdx.graphics.getHeight() / 2 + 20);
 		
-		
+		// Save button
 		saveButton = new MenuButton("Save", 280, 65, game);
 		saveButton.setX(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2);
 		saveButton.setY(Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 - 250);
@@ -181,15 +192,13 @@ public class LevelSaveMenu implements Screen {
 		stage.addActor(saveButton);
 		stage.addActor(titleLabel);
 		stage.addActor(textLabel);
-		
 	}
 
 	/**
-	 * Save the level with the specified name
-	 * Appends .json extension if it is not already specified
+	 * Save the level with the specified name. 
+	 * Appends the .json extension to the file if it is not already specified. 
 	 */
 	public void saveLevel(String name) {
-		// TODO format string name
 		LevelCreatorScreen creator = ((LevelCreatorScreen) ((LevelCreatorOptionsMenu) referrer).getReferrer());
 		if (name.length() <= 5) {
 			name += ".json";
@@ -208,7 +217,7 @@ public class LevelSaveMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show level save menu");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show level save menu");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 

@@ -24,6 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
+/**
+ * The options menu for the level creator.
+ * Gives the options of returnning to the creator, testing & saving the created level, and exiting to the main menu. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class LevelCreatorOptionsMenu implements Screen {
 
 	/**
@@ -62,14 +68,14 @@ public class LevelCreatorOptionsMenu implements Screen {
 	BitmapFont whiteFont;
 	
 	/**
-	 * A concrete reference to this instance
+	 * A concrete reference to this screen instance
 	 */
 	Screen thisMenu = this;
 	
 	/**
-	 * 
-	 * @param game
-	 * @param referrer
+	 * Creates a creator options menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public LevelCreatorOptionsMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -304,7 +310,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 	}
 	
 	/**
-	 * 
+	 * Gets the referring screen. 
 	 * @return the referring screen
 	 */
 	public Screen getReferrer() {

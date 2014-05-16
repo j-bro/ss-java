@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
@@ -20,14 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Credits menu containing labels for the different people who worked on the project and resources used in the game. 
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
-
 public class CreditsMenu implements Screen {
 
 	/**
-	 * The stage instance
+	 * The game instance
 	 */
 	SSJava game;
 	
@@ -37,12 +34,12 @@ public class CreditsMenu implements Screen {
 	Stage stage;
 	
 	/**
-	 * The title font
+	 * The text font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * The title label
+	 * The labels
 	 */
 	Label titleLabel, artistTitleLabel, artistLabel, coderTitleLabel, coderLabel, audioTitleLabel, audioLabel, miscTitleLabel, miscLabel;
 	
@@ -62,14 +59,19 @@ public class CreditsMenu implements Screen {
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param game The game instance of type SSJava
+	 * Creates a credits menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public CreditsMenu(SSJava game, Screen referrer) {
 		this.game = game;
 		this.referrer = referrer;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -79,6 +81,10 @@ public class CreditsMenu implements Screen {
 		stage.draw(); 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		if (stage == null) {
@@ -97,7 +103,7 @@ public class CreditsMenu implements Screen {
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
-		// exit to main menu button
+		// Exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
@@ -110,7 +116,7 @@ public class CreditsMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
-		// Coders
+		// Coders labels
 		coderTitleLabel = new Label("Coders", ls);
 		coderTitleLabel.setX(Gdx.graphics.getWidth() / 3 - coderTitleLabel.getWidth() / 2);
 		coderTitleLabel.setY(Gdx.graphics.getHeight() / 2 - coderTitleLabel.getHeight() / 2 + 120);
@@ -121,7 +127,7 @@ public class CreditsMenu implements Screen {
 		coderLabel.setY(Gdx.graphics.getHeight() / 2 - coderLabel.getHeight() / 2 + 50);
 		coderLabel.setAlignment(Align.center);
 		
-		// Artist
+		// Artist labels
 		artistTitleLabel = new Label("Artist", ls);
 		artistTitleLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - artistTitleLabel.getWidth() / 2);
 		artistTitleLabel.setY(Gdx.graphics.getHeight() / 2 - artistTitleLabel.getHeight() / 2 + 120);
@@ -132,7 +138,7 @@ public class CreditsMenu implements Screen {
 		artistLabel.setY(Gdx.graphics.getHeight() / 2 - artistLabel.getHeight() / 2 + 50);
 		artistLabel.setAlignment(Align.center);
 		
-		// Audio
+		// Audio labels
 		audioTitleLabel = new Label("Audio", ls);
 		audioTitleLabel.setX(Gdx.graphics.getWidth() / 3 - audioTitleLabel.getWidth() / 2);
 		audioTitleLabel.setY(Gdx.graphics.getHeight() / 2 - audioTitleLabel.getHeight() / 2 - 50);
@@ -143,7 +149,7 @@ public class CreditsMenu implements Screen {
 		audioLabel.setY(Gdx.graphics.getHeight() / 2 - audioLabel.getHeight() / 2 - 120);
 		audioLabel.setAlignment(Align.center);
 		
-		// Misc bits
+		// Misc labels
 		miscTitleLabel = new Label("Misc", ls);
 		miscTitleLabel.setX(Gdx.graphics.getWidth() * 2 / 3 - miscTitleLabel.getWidth() / 2);
 		miscTitleLabel.setY(Gdx.graphics.getHeight() / 2 - miscTitleLabel.getHeight() / 2 - 50);

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.entities;
 
 import java.math.BigInteger;
@@ -19,10 +16,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
+ * Entity model of the ship. 
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
-
 public class Ship extends MoveableEntity {
 		
 	/**
@@ -56,7 +53,7 @@ public class Ship extends MoveableEntity {
 	public static Vector2 DEFAULT_ACCELERATION = new Vector2(35, 500);
 	
 	/**
-	 * 
+	 * The ship's default shot cooldown, in milliseconds
 	 */
 	public static final int DEFAULT_SHOT_COOLDOWN_MS = 300;
 	
@@ -107,9 +104,13 @@ public class Ship extends MoveableEntity {
 	private boolean speedOfLightEnabled = false;
 	
 	/**
-	 * Indicates whether or not the ship is currently at its maximum speed 
+	 * Indicates whether or not the ship is currently at its maximum upwards speed 
 	 */
 	public boolean maxUpSpeedReached = false;
+	
+	/**
+	 * Indicates whether or not the ship is currently at its maximum downwards speed 
+	 */
 	public boolean maxDownSpeedReached = false;
 	
 	/**
@@ -118,14 +119,14 @@ public class Ship extends MoveableEntity {
 	public static final BigInteger SHIP_WEIGHT = new BigInteger("907185"); 
 	
 	/**
-	 * Creates a ship with a position, dimensions and rotation.
-	 * Also creates body & fixture definitions, and sets the default velocity
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a ship with a position, dimensions and rotation. 
+	 * Also creates body & fixture definitions. 
+	 * @param position the position of the ship
+	 * @param width the width of the ship
+	 * @param height the height of the ship
+	 * @param rotation the rotation of the ship
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public Ship(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -133,12 +134,11 @@ public class Ship extends MoveableEntity {
 		setHealth(DEFAULT_HEALTH);
 		shotCooldown = DEFAULT_SHOT_COOLDOWN_MS;
 		createDef();
-		
 	}
 	
 	/**
-	 * Fire a bullet from the ship
-	 * Bullet leaves in the horizontal (right-side) direction
+	 * Fires a bullet from the ship. 
+	 * Bullet leaves in the horizontal (right-side) direction. 
 	 */
 	public void fire() {
 		if (TimeUtils.millis() - lastShotTime >= shotCooldown) {
@@ -202,7 +202,6 @@ public class Ship extends MoveableEntity {
 					getBody().applyForceToCenter(DEFAULT_ACCELERATION.x, 0, true);
 				}
 				
-				
 				if (Gdx.input.isKeyPressed(Keys.W)) {
 					// Limit y velocity
 					if (getBody().getLinearVelocity().y > DEFAULT_VELOCITY.y) {
@@ -216,9 +215,8 @@ public class Ship extends MoveableEntity {
 					else {
 						getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
 					}
-					
-
 				}
+				
 				else if (Gdx.input.isKeyPressed(Keys.S)) {
 					// Limit y velocity
 					if (getBody().getLinearVelocity().y < -DEFAULT_VELOCITY.y) {
@@ -245,7 +243,7 @@ public class Ship extends MoveableEntity {
 			float mod = (float) (2 * Math.PI);
 			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
 			
-			// TODO fix ship rotation
+			// Realign ship
 			if (angleMod < Math.PI) {
 				float diff = angleMod;
 				getBody().setAngularVelocity(-0.2f * diff);
@@ -268,6 +266,7 @@ public class Ship extends MoveableEntity {
 	}
 	
 	/**
+	 * Gets the shot cooldown time
 	 * @return the shot cooldown time for the ship, in milliseconds
 	 */
 	public int getShotCooldown() {
@@ -275,6 +274,7 @@ public class Ship extends MoveableEntity {
 	}
 
 	/**
+	 * Sets the shot cooldown time
 	 * @param shotCooldown the shot cooldown time to set, in milliseconds
 	 */
 	public void setShotCooldown(int shotCooldown) {
@@ -282,21 +282,23 @@ public class Ship extends MoveableEntity {
 	}
 	
 	/**
-	 * @return true if light speed mode is enabled
+	 * Gets the speed of light flag
+	 * @return true if light speed mode flag is set
 	 */
 	public boolean isSpeedOfLightEnabled() {
 		return speedOfLightEnabled;
 	}
 
 	/**
-	 * @param lightSpeedMode the lightSpeedMode to set
+	 * Sets the speed of light flag
+	 * @param enabled true if the speed of light flag is to be enabled
 	 */
 	public void setSpeedOfLightEnabled(boolean enabled) {
 		this.speedOfLightEnabled = enabled;
 	}
 	
 	/**
-	 * Enables the speed of light of the ship
+	 * Enables the speed of light mode of the ship.
 	 */
 	public void enableSpeedOfLight() {
 		if (!isSpeedOfLightEnabled() && !isDead()) {			
@@ -311,7 +313,7 @@ public class Ship extends MoveableEntity {
 	}
 	
 	/**
-	 * Disables the speed of light of the ship
+	 * Disables the speed of light mode of the ship. 
 	 */
 	public void disableSpeedOfLight() {
 		if (!isDead()) {
@@ -344,8 +346,6 @@ public class Ship extends MoveableEntity {
 		
 		body.createFixture(fixtureDef);
 		initialize();
-//		loader.attachFixture(body, "Ship", fixtureDef, DEFAULT_WIDTH);
-
 	}
 	
 	/*

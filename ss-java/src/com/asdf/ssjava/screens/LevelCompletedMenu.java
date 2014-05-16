@@ -24,6 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+/**
+ * Shows the player's score at the end of the level and gives the options to replay, select a level, and exit. 
+ * Displayed once a level has been completed. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class LevelCompletedMenu implements Screen {
 
 	/**
@@ -59,9 +65,7 @@ public class LevelCompletedMenu implements Screen {
 	/**
 	 * Display labels
 	 */
-	Label titleLabel;
-	Label scoreLabel;
-	Label nameLabel;
+	Label titleLabel, scoreLabel, nameLabel;
 	
 	/**
 	 * The name entry field
@@ -72,7 +76,6 @@ public class LevelCompletedMenu implements Screen {
 	 * Menu text font
 	 */
 	BitmapFont whiteFont;
-	
 	
 	/**
 	 * Whether or not the new score is a high score
@@ -85,9 +88,9 @@ public class LevelCompletedMenu implements Screen {
 	Score playerScore;
 	
 	/**
-	 * 
-	 * @param game
-	 * @param referrer
+	 * Creates a new level completed menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public LevelCompletedMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -265,7 +268,7 @@ public class LevelCompletedMenu implements Screen {
 	}
 
 	/**
-	 * Save the user's score
+	 * Saves the user's score to the high scores object, which also gets saved to disk.
 	 */
 	public void saveScore(Score s) {
 		s.setName(nameField.getText());

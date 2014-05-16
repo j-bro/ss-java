@@ -1,13 +1,10 @@
-/**
- * 
- */
 package com.asdf.ssjava.world;
 
 /**
+ * Manages the score for the current level. 
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
-
 public class ScoreKeeper {
 
 	/**
@@ -21,11 +18,7 @@ public class ScoreKeeper {
 	private int score;
 	
 	/**
-	 * The current multiplier;
-	 */
-	private int multiplier = 1;
-	
-	/**
+	 * Gets the current score. 
 	 * @return the score
 	 */
 	public int getScore() {
@@ -33,23 +26,10 @@ public class ScoreKeeper {
 	}
 
 	/**
+	 * Adds the specified score to the current score. 
 	 * @param addedScore the points to add to the current score
 	 */
 	public synchronized void add(int addedScore) {
-		score += addedScore * multiplier;
-	}
-
-	/**
-	 * @return the score multiplier
-	 */
-	public synchronized int getMultiplier() {
-		return multiplier;
-	}
-
-	/**
-	 * @param multiplier the score multiplier to set
-	 */
-	public synchronized void setMultiplier(int multiplier) {
-		this.multiplier = multiplier;
+		score += addedScore;
 	}	
 }

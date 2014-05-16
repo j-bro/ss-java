@@ -1,16 +1,13 @@
-/**
- * 
- */
 package com.asdf.ssjava;
-
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 /**
+ * The high scores manager object. 
+ * Is exported & imported with the game. 
  * @author Jeremy Brown
- * 
  */
 public class HighScores {
 
@@ -27,7 +24,7 @@ public class HighScores {
 	}
 
 	/**
-	 * Adds a score to the list
+	 * Adds a score to the list. 
 	 * @return true if the score was added
 	 */
 	public boolean add(Score s) {
@@ -42,7 +39,7 @@ public class HighScores {
 	}
 	
 	/**
-	 * 
+	 * Gets the score at the specified index. 
 	 * @param index the index of the desired score
 	 * @return the score at the designated index
 	 */
@@ -51,7 +48,7 @@ public class HighScores {
 	}
 	
 	/**
-	 * 
+	 * Gets the scores list. 
 	 * @return the base score array
 	 */
 	public Array<Score> getScoreArray() {
@@ -59,7 +56,7 @@ public class HighScores {
 	}
 	
 	/**
-	 * 
+	 * Gets the size of the high scores list. 
 	 * @return the size of the scores array
 	 */
 	public int size() {
@@ -67,9 +64,9 @@ public class HighScores {
 	}
 	
 	/**
-	 * 
+	 * Verifies that the given score makes the high scores list. 
 	 * @param s the score to be checked
-	 * @return whether or not the score will go into the high scores list
+	 * @return true if the score will go into the high scores list; false otherwise. 
 	 */
 	public boolean isHighScore(Score s) {
 		if (scores.size < 10) {
@@ -79,11 +76,10 @@ public class HighScores {
 			return true;
 		}
 		return false;
-		// TODO if all scores 0 (new)
 	}
 	
 	/**
-	 * Removes a score from the list
+	 * Removes a score from the list. 
 	 */
 	public void remove(Score s) {
 		scores.removeValue(s, true);
@@ -91,8 +87,8 @@ public class HighScores {
 	}
 	
 	/**
-	 * Saves the high scores entries to disk
-	 * Important: must be called every time a score is added. Scores are not saved to disk automatically.
+	 * Saves the high scores entries to disk. 
+	 * Important: must be called every time a score is added. Scores are not saved to disk automatically. 
 	 * @return true if the scores were saved
 	 */
 	public boolean exportScores() {

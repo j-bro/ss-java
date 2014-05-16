@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -17,9 +14,9 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /**
- * 
+ * Implements what to do in the event of collisions between fixtures in the game. 
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class GameCollisionListener implements ContactListener {
 
@@ -29,8 +26,8 @@ public class GameCollisionListener implements ContactListener {
 	GameWorld gameWorld;
 	
 	/**
-	 * 
-	 * @param gameWorld
+	 * Creates a new instance. 
+	 * @param gameWorld the GameWorld instance
 	 */
 	public GameCollisionListener(GameWorld gameWorld) {
 		this.gameWorld = gameWorld;
@@ -178,8 +175,8 @@ public class GameCollisionListener implements ContactListener {
 	}	
 
 	/**
-	 * Called when a bullet collides with an entity
-	 * Removes the bullet and deals damage to the entity
+	 * Removes the bullet and deals damage to the entity. 
+	 * Called when a bullet collides with an entity. 
 	 * @param b the bullet that collided
 	 * @param e the entity that collided
 	 */
@@ -190,14 +187,13 @@ public class GameCollisionListener implements ContactListener {
 			b.setHealth(0);
 			AudioPlayer.bulletImpact();
 			
-			// Hit score
 			gameWorld.getScoreKeeper().add(e.getHitScore());
 		}
 	}
 	
 	/**
-	 * Called when the "points" object is picked up
-	 * Removes the object and adds score to the ScoreKeeper
+	 * Called when the "points" object is picked up. 
+	 * Removes the object and adds score to the ScoreKeeper. 
 	 * @param p the object picked up
 	 * @param s the ship
 	 */
@@ -209,9 +205,9 @@ public class GameCollisionListener implements ContactListener {
 	}
 	
 	/**
-	 * Called when the "health up" powerup is picked up
-	 * Removes the powerup and gives health to the ship
-	 * @param p the powerup picked up
+	 * Called when the "health up" powerup is picked up. 
+	 * Removes the powerup and gives health to the ship. 
+	 * @param p the powerup collected
 	 * @param s the ship
 	 */
 	public void healthUpActivate(PowerupHealthUp p, Ship s) {
@@ -222,9 +218,9 @@ public class GameCollisionListener implements ContactListener {
 	}
 	
 	/**
-	 * Called when the "speed of light" powerup is picked up
-	 * Removes the powerup and sends the ship into light speed mode
-	 * Sets timer to disable speed of light mode after a given interval
+	 * Called when the "speed of light" powerup is collected. 
+	 * Removes the powerup and sends the ship into light speed mode. 
+	 * Sets timer to disable speed of light mode after a given interval. 
 	 * @param p the powerup picked up
 	 * @param s the ship
 	 */
@@ -241,11 +237,12 @@ public class GameCollisionListener implements ContactListener {
 	}
 	
 	/**
-	 * Called when the ship enters the sun's zone of heat
-	 * Sets the sunActivated boolean variable in GameWorld to "true"
-	 * Sends the instance of Sun over to GameWorld
-	 * @param b
-	 * @param e
+	 * Activates the sun's heat effect on the ship. 
+	 * Called when the ship enters the sun's zone of heat.  
+	 * Sets the sunActivated boolean variable in GameWorld to "true".  
+	 * Sends the instance of Sun over to GameWorld. 
+	 * @param b the sun instance
+	 * @param e the other entity
 	 */
 	public void sunActivate(Sun b, Ship e) {
 		gameWorld.setSun(b);
@@ -254,6 +251,9 @@ public class GameCollisionListener implements ContactListener {
 		gameWorld.renderer.shipHeatIndicatorLabel.setText("Heat: Rising!");
 	}
 	
+	/**
+	 * Called when the ship exits the sun's zone of heat. 
+	 */
 	public void sunDeactivate() {
 		gameWorld.sunActivated = false;
 		gameWorld.shipHeatIndicator = 0;

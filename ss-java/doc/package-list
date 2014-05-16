@@ -1,9 +1,6 @@
 com.asdf.ssjava
 com.asdf.ssjava.entities
 com.asdf.ssjava.screens
-<<<<<<< .merge_file_a06296
-=======
 com.asdf.ssjava.screens.screenelements
->>>>>>> .merge_file_a07632
 com.asdf.ssjava.tweenaccessors
 com.asdf.ssjava.world

@@ -6,6 +6,11 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Health up implementation of a powerup. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class PowerupHealthUp extends Powerup {
 	
 	/**
@@ -47,13 +52,13 @@ public class PowerupHealthUp extends Powerup {
 	public static final int KILL_SCORE = 100;
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a health up powerup with the specified parameters. 
+	 * @param position the position of the health up powerup
+	 * @param width the width of the health up powerup
+	 * @param height the height of the health up powerup
+	 * @param rotation the rotation of the health up powerup
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public PowerupHealthUp(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -62,7 +67,8 @@ public class PowerupHealthUp extends Powerup {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates a health up powerup with default parameters. 
 	 **/
 	public PowerupHealthUp() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -70,11 +76,13 @@ public class PowerupHealthUp extends Powerup {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates a health up powerup with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the health up powerup
+	 * @param width the width of the health up powerup
+	 * @param height the height of the health up powerup
+	 * @param rotation the rotation of the health up powerup, in degrees
 	 */
 	public PowerupHealthUp(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -96,7 +104,6 @@ public class PowerupHealthUp extends Powerup {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
 		

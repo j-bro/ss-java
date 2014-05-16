@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -21,28 +18,30 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Main menu of the game.  
+ * Allows the player to play the game, change the options, start the level creator, view the high scores, view the credits, and exit to the desktop. 
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class MainMenu implements Screen {
 	
 	/**
-	 * 
+	 * The game instance
 	 */
 	SSJava game;
 	
 	/**
-	 * 
+	 * The stage instance
 	 */
 	Stage stage;
 	
 	/**
-	 * 
+	 * The text font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
+	 * The text labels
 	 */
 	Label titleLabel, creditsLabel;
 	
@@ -56,10 +55,13 @@ public class MainMenu implements Screen {
 	 */
 	Image bgImage;
 	
+	/**
+	 * Concrete reference to this menu
+	 */
 	Screen thisMainMenu = this;
 	
 	/**
-	 * 
+	 * Creates a main menu with the specified parameters. 
 	 * @param game The game instance of type SSJava
 	 */
 	public MainMenu(SSJava game) {
@@ -94,7 +96,7 @@ public class MainMenu implements Screen {
 		 
 		Gdx.input.setInputProcessor(stage);
 				
-		// play button
+		// Play button
 		playButton = new MenuButton("Play", 280, 65, game);		
 		playButton.setX(Gdx.graphics.getWidth() / 2 - playButton.getWidth() / 2);
 		playButton.setY(Gdx.graphics.getHeight() / 2 - playButton.getHeight() / 2 + 140);
@@ -115,11 +117,10 @@ public class MainMenu implements Screen {
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
 				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Play button up");
 				game.setScreen(new LevelSelectMenu(game, thisMainMenu));
-//				TODO dispose();
 			}
 		});
 		
-		// options button
+		// Options button
 		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 + 60);
@@ -143,7 +144,7 @@ public class MainMenu implements Screen {
 			}
 		});
 		
-		// high scores button
+		// High scores button
 		highScoresButton = new MenuButton("High Scores", 280, 65, game);
 		highScoresButton.setX(Gdx.graphics.getWidth() / 2 - highScoresButton.getWidth() / 2);
 		highScoresButton.setY(Gdx.graphics.getHeight() / 2 - highScoresButton.getHeight() / 2 - 20);
@@ -191,7 +192,7 @@ public class MainMenu implements Screen {
 			}
 		});
 		
-		// credits button
+		// Credits button
 		creditsButton = new MenuButton("Credits", 280, 65, game);
 		creditsButton.setX(Gdx.graphics.getWidth() / 2 - creditsButton.getWidth() / 2);
 		creditsButton.setY(Gdx.graphics.getHeight() / 2 - creditsButton.getHeight() / 2 - 180);
@@ -215,7 +216,7 @@ public class MainMenu implements Screen {
 			}
 		});
 		
-		// exit button
+		// Exit button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 260);
@@ -248,7 +249,7 @@ public class MainMenu implements Screen {
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		
-		// bottom right credits text
+		// Bottom right credits text
 		creditsLabel = new Label("(C) 2014 ASDF", ls);
 		creditsLabel.setX(width - creditsLabel.getWidth() - 10);
 		creditsLabel.setY(10);
@@ -274,7 +275,7 @@ public class MainMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show main menu");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show main menu");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		
 		if (AudioPlayer.gameMusic.isPlaying()) {			
@@ -282,7 +283,6 @@ public class MainMenu implements Screen {
 		}
 		
 		if (!AudioPlayer.menuMusic.isPlaying()) {
-			// TODO delay (screen waits for audio to start before showing)
 			AudioPlayer.playMenuMusic(true);
 		}
 	}
@@ -322,5 +322,4 @@ public class MainMenu implements Screen {
 	public void dispose() {
 		
 	}
-
 }

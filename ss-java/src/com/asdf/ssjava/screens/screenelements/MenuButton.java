@@ -6,12 +6,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+/**
+ * Definition for a menu button. 
+ * Skin is the default b&w skin for all the menu buttons. 
+ * @author Jeremy Brown
+ */
 public class MenuButton extends TextButton {
 
 	/**
-	 * @param text
-	 * @param width
-	 * @param height
+	 * Creates a menu button with the pre-defined skin. 
+	 * @param text the text of the button
+	 * @param width the width of the button
+	 * @param height the height of the button
 	 */
 	public MenuButton(String text, float width, float height, final SSJava game) {
 		super(text, new TextButtonStyle() {{

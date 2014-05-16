@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -23,10 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Pause menu allowing the player to temporarily stop playing the current level. 
+ * Allows to continue playing the level, go to the options menu, and exit to the main menu.  
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
-
 public class PauseMenu implements Screen {
 
 	/**
@@ -40,17 +38,17 @@ public class PauseMenu implements Screen {
 	Stage stage;	
 	
 	/**
-	 * 
+	 * The text font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
+	 * The buttons
 	 */
 	MenuButton backButton, optionsButton, exitButton;
 	
 	/**
-	 * 
+	 * The title label
 	 */
 	Label titleLabel;
 	
@@ -64,16 +62,15 @@ public class PauseMenu implements Screen {
 	 */
 	Screen thisMenu = this;
 
-	
 	/**
 	 * The screen which to switch to when the back button is clicked
 	 */
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param game The game instance of type SSJava
-	 * @param referrer The screen object that called this screen
+	 * Creates a pause menu with the specified parameters
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public PauseMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -119,12 +116,12 @@ public class PauseMenu implements Screen {
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
 		
-		// return to game button
+		// Return to game button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 + 50);
 		
-		// options button
+		// Options button
 		optionsButton = new MenuButton("Options", 280, 65, game);
 		optionsButton.setX(Gdx.graphics.getWidth() / 2 - optionsButton.getWidth() / 2);
 		optionsButton.setY(Gdx.graphics.getHeight() / 2 - optionsButton.getHeight() / 2 - 50);
@@ -140,7 +137,7 @@ public class PauseMenu implements Screen {
 			}
 		});
 		
-		// exit to main menu button
+		// Exit to main menu button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 150);
@@ -164,6 +161,7 @@ public class PauseMenu implements Screen {
 			}
 		});
 		
+		// Title
 		LabelStyle ls = new LabelStyle(whiteFont, Color.WHITE);
 		titleLabel = new Label("Paused", ls);
 		titleLabel.setX(0);
@@ -192,7 +190,7 @@ public class PauseMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show pause menu");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show pause menu");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);				
 	}
 
@@ -229,6 +227,6 @@ public class PauseMenu implements Screen {
 	 */
 	@Override
 	public void dispose() {
+		
 	}
-
 }

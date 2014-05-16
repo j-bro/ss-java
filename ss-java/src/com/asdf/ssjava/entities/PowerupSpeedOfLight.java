@@ -6,6 +6,11 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Speed of Light implementation of a powerup. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class PowerupSpeedOfLight extends Powerup {
 
 	/**
@@ -47,13 +52,13 @@ public class PowerupSpeedOfLight extends Powerup {
 	public static final int KILL_SCORE = 100;
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a speed of light powerup with the specified parameters. 
+	 * @param position the position of the speed of light powerup 
+	 * @param width the width of the speed of light powerup
+	 * @param height the height of the speed of light powerup
+	 * @param rotation the rotation of the speed of light powerup
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -70,11 +75,13 @@ public class PowerupSpeedOfLight extends Powerup {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates a speed of light powerup with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the speed of light powerup
+	 * @param width the width of the speed of light powerup
+	 * @param height the height of the speed of light powerup
+	 * @param rotation the rotation of the speed of light powerup, in degrees
 	 */
 	public PowerupSpeedOfLight(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -105,7 +112,6 @@ public class PowerupSpeedOfLight extends Powerup {
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
 		fixtureDef.isSensor = true;
-		
 		body.createFixture(fixtureDef);
 	}
 	

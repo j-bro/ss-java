@@ -6,10 +6,15 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Powerup implementation of points. 
+ * @author Simon Thompson
+ * @author Jeremy Brown
+ */
 public class Points extends Powerup {
 
 	/**
-	 * The planet's default velocity (static)
+	 * The entity's default velocity (static)
 	 */
 	public static final Vector2 DEFAULT_VELOCITY = new Vector2(0, 0);
 	
@@ -29,12 +34,12 @@ public class Points extends Powerup {
 	public static final int SCORE = 100; 
 	
 	/**
-	 * The planet's default width, in game coordinates
+	 * The entity's default width, in game coordinates
 	 */
 	public static final float DEFAULT_WIDTH = 3;
 	
 	/**
-	 * The planet's default height, in game coordinates
+	 * The entity's default height, in game coordinates
 	 */
 	public static final float DEFAULT_HEIGHT = 3;
 	
@@ -44,13 +49,13 @@ public class Points extends Powerup {
 	public static final float DEFAULT_ROTATION = 0;
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a points with the specified parameters. 
+	 * @param position the position of the points
+	 * @param width the width of the points
+	 * @param height the height of the points
+	 * @param rotation the rotation of the points
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public Points(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -59,7 +64,8 @@ public class Points extends Powerup {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates a points with default parameters. 
 	 */
 	public Points() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -67,11 +73,13 @@ public class Points extends Powerup {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates a points with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the points
+	 * @param width the width of the points
+	 * @param height the height of the points
+	 * @param rotation the rotation of the points, in degrees
 	 */
 	public Points(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -106,11 +114,19 @@ public class Points extends Powerup {
 		return "Points";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getHitScore()
+	 */
 	@Override
 	public int getHitScore() {
 		return HIT_SCORE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.asdf.ssjava.entities.AbstractEntity#getKillScore()
+	 */
 	@Override
 	public int getKillScore() {
 		return SCORE;

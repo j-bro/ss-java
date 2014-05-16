@@ -1,8 +1,3 @@
-/**
- * The screen set to play the game.
- * Contains instances of the game, world and renderer.
- * Calls all render and update methods.
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -16,8 +11,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 
 /**
+ * The screen shown during gameplay.
+ * Contains instances of the game, world and renderer.
+ * Calls all render and update methods.
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class GameScreen implements Screen {
 
@@ -37,7 +35,10 @@ public class GameScreen implements Screen {
 	WorldRenderer renderer;
 	
 	/**
-	 * Constructor for testing levels
+	 * Constructor for testing levels.
+	 * @param game the SSJava instance
+	 * @param levelFile the FileHandle for the level
+	 * @param creator the level creator screen instance for reference to return to
 	 */
 	public GameScreen(SSJava game, FileHandle levelFile, LevelCreatorScreen creator) {
 		this.game = game;
@@ -51,6 +52,7 @@ public class GameScreen implements Screen {
 	/**
 	 * Constructor of the Game Screen which takes 
 	 * @param game The game instance of type SSJava
+	 * @param levelFile the FileHandle for the level
 	 */
 	public GameScreen(SSJava game, FileHandle levelFile) {
 		this.game = game;
@@ -93,7 +95,7 @@ public class GameScreen implements Screen {
 			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
 		}
 		
-		// Music
+		// Game Music
 		if (AudioPlayer.menuMusic.isPlaying()) {			
 			AudioPlayer.stopMenuMusic();
 		}
@@ -105,6 +107,7 @@ public class GameScreen implements Screen {
 	}
 	
 	/**
+	 * Gets the GameWorld instance. 
 	 * @return the gameWorld
 	 */
 	public GameWorld getGameWorld() {

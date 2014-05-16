@@ -8,6 +8,11 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Space rock implementation of an obstacle. 
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public class SpaceRock extends Obstacle {
 	
 	/**
@@ -49,12 +54,13 @@ public class SpaceRock extends Obstacle {
 	public static final BigInteger SPACEROCK_WEIGHT = new BigInteger("453542"); 
 	
 	/**
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a space rock with the specified parameters. 
+	 * @param position the position of the space rock
+	 * @param width the width of the space rock
+	 * @param height the height of the space rock
+	 * @param rotation the rotation of the space rock
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public SpaceRock(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -63,8 +69,8 @@ public class SpaceRock extends Obstacle {
 	}
 	
 	/**
-	 * Constructor for serialization
-	 * 
+	 * Constructor for serialization.
+	 * Creates a space rock with default parameters. 
 	 */
 	public SpaceRock() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -72,11 +78,13 @@ public class SpaceRock extends Obstacle {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates a space rock with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the space rock
+	 * @param width the width of the space rock
+	 * @param height the height of the space rock
+	 * @param rotation the rotation of the space rock, in degrees
 	 */
 	public SpaceRock(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -107,16 +115,14 @@ public class SpaceRock extends Obstacle {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
+		
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
-		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f; 
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.1f;
-		
 		body.createFixture(fixtureDef);
 	}
 	

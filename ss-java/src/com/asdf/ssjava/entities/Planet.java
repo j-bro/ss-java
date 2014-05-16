@@ -1,10 +1,6 @@
-/**
- * 
- */
 package com.asdf.ssjava.entities;
 
 import java.math.BigInteger;
-
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -12,9 +8,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * 
+ * Planet type implementation of a game changer. 
  * @author Simon Thompson
- *
+ * @author Jeremy Brown
  */
 public class Planet extends Obstacle {
 	
@@ -69,13 +65,13 @@ public class Planet extends Obstacle {
 	public static final long PLANET_RADIUS = 6378;
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates a planet with the specified parameters
+	 * @param position the position of the planet
+	 * @param width the width of the planet
+	 * @param height the height of the planet
+	 * @param rotation the rotation of the planet, in degrees
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public Planet(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -84,7 +80,8 @@ public class Planet extends Obstacle {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates a planet with default parameters. 
 	 */
 	public Planet() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -93,28 +90,17 @@ public class Planet extends Obstacle {
 	
 	/**
 	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Creates a plane with default parameters. 
+	 * @param position the position of the planet
+	 * @param width the width of the planet
+	 * @param height the height of the planet
+	 * @param rotation the rotation of the planet, in degrees
 	 */
 	public Planet(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
 		setHealth(DEFAULT_HEALTH);
 	}
-	
-	/**
-	 * 
-	 * @param mass
-	 * @param distance
-	 * @return
-	 */
-//	public double gravitationnalPull(long mass, long distance){
-//		double force;
-//		force = GRAVITATIONNAL_CONSTANT * PLANET_WEIGHT * mass / Math.pow(distance * 5000 + PLANET_RADIUS, 2);
-//		return force;
-//	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -139,28 +125,27 @@ public class Planet extends Obstacle {
 	@Override
 	public void createDef() {
 		super.createDef();
+		
+		// Main fixture
 		CircleShape circle = new CircleShape();
 		circle.setRadius(width / 2);
-		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f; 
 		fixtureDef.density = 1000f; 
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.1f;
-		
 		body.createFixture(fixtureDef);
 		
+		// Sensor
 		CircleShape circle2 = new CircleShape();
 		circle2.setRadius(width / 2 + 8);
-		
 		FixtureDef fixtureDef2 = new FixtureDef();
 		fixtureDef2.shape = circle2;
 		fixtureDef2.density = 0.5f; 
 		fixtureDef2.friction = 1.0f;
 		fixtureDef2.restitution = 0.1f;
 		fixtureDef2.isSensor = true;
-		
 		body.createFixture(fixtureDef2);
 	}
 	

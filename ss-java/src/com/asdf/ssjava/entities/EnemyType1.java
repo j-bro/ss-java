@@ -1,6 +1,3 @@
-/**
- * Implementation of an enemy type.
- */
 package com.asdf.ssjava.entities;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -14,8 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
+ * Implementation of a first enemy type. 
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 public class EnemyType1 extends Enemy {
 	
@@ -85,14 +83,14 @@ public class EnemyType1 extends Enemy {
 	public static final long ENEMY_TYPE_1_WEIGHT_MOD = 22800;
 	
 	/**
+	 * Creates an Enemy with the specified parameters
 	 * @param position the position of the enemy
 	 * @param width the width of the enemy
 	 * @param height the height of the enemy
 	 * @param rotation the rotation of the enemy in degrees
-	 * @param gameWorld the world instance
-	 * @param box2DWorld 
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
-
 	public EnemyType1(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
 		setHealth(DEFAULT_HEALTH);
@@ -101,7 +99,8 @@ public class EnemyType1 extends Enemy {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates an EnemyType1 with default parameters. 
 	 */
 	public EnemyType1() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -110,11 +109,12 @@ public class EnemyType1 extends Enemy {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates an EnemyType1 with default parameters. 
+	 * @param position the position of the enemy
+	 * @param width the width of the enemy
+	 * @param height the height of the enemy
+	 * @param rotation the rotation of the enemy in degrees
 	 */
 	public EnemyType1(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
@@ -148,7 +148,7 @@ public class EnemyType1 extends Enemy {
 			float mod = (float) (2 * Math.PI);
 			float angleMod = (shipAngle < 0) ? (mod - (Math.abs(shipAngle) % mod) ) % mod : (shipAngle % mod);
 			
-			// TODO fix ship rotation
+			// Realign ship
 			if (angleMod < Math.PI) {
 				float diff = angleMod;
 				getBody().setAngularVelocity(-0.2f * diff);
@@ -159,10 +159,8 @@ public class EnemyType1 extends Enemy {
 			}
 			
 			fire();
-			
 			super.update();
 		}
-		
 	}
 	
 	/*
@@ -209,7 +207,9 @@ public class EnemyType1 extends Enemy {
 	public int getType() {
 		return type;
 	}
+	
 	/**
+	 * Gets the shot cooldown time
 	 * @return the shot cooldown time for the enemy, in milliseconds
 	 */
 	public int getShotCooldown() {
@@ -217,6 +217,7 @@ public class EnemyType1 extends Enemy {
 	}
 
 	/**
+	 * Sets the shot cooldown time
 	 * @param shotCooldown the shot cooldown time to set, in milliseconds
 	 */
 	public void setShotCooldown(int shotCooldown) {

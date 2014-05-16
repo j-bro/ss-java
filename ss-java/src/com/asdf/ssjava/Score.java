@@ -1,10 +1,7 @@
-/**
- * 
- */
 package com.asdf.ssjava;
 
 /**
- * Inner class defining a score
+ * Definition of a score. 
  * @author Jeremy Brown
  *
  */
@@ -31,7 +28,9 @@ public class Score implements Comparable<Score> {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for de-serialization.
+	 * All fields are set to default values.
+	 * Serialized values can then be loaded over them. 
 	 */
 	public Score() {
 		this.name = "AAA";
@@ -46,28 +45,30 @@ public class Score implements Comparable<Score> {
 	public int compareTo(Score s) {
 		return getScore() - s.getScore();
 	}
-	
-	// equals method?
 
 	/**
+	 * Gets the name. 
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
+	 * Sets the name. 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	/**
+	 * Gets the score. 
 	 * @return the score
 	 */
 	public int getScore() {
 		return score;
 	}
 	/**
+	 * Sets the score.
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {

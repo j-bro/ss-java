@@ -1,7 +1,3 @@
-/**
- * Level selection button base class 
- */
-
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.SSJava;
@@ -15,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 /**
- * 
+ * Level selection button base class.
  * @author Jeremy Brown
  *
  */
@@ -43,12 +39,12 @@ public class LevelSelectButton extends TextButton {
 	boolean enabled = true;
 	
 	/**
-	 * 
-	 * @param text
-	 * @param width
-	 * @param height
-	 * @param game
-	 * @param levelPath
+	 * Creates a level select button with the specified parameters.  
+	 * @param text the text for the button
+	 * @param width the width of the button
+	 * @param height the height of the button
+	 * @param game the SSJava instance
+	 * @param levelFile the FileHandle of the corresponding level
 	 */
 	public LevelSelectButton(String text, float width, float height, final SSJava game, FileHandle levelFile) {
 		super(text, new TextButtonStyle() {{
@@ -68,16 +64,16 @@ public class LevelSelectButton extends TextButton {
 	
 
 	/**
-	 * TODO
-	 * @param button
-	 * @param game
+	 * Creates a level select button based on another button. 
+	 * @param button the button which to copy
+	 * @param game the SSJava instance
 	 */
 	public LevelSelectButton(LevelSelectButton button, final SSJava game) {
 		super(button.text, new TextButtonStyle() {{
 			font = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 		}});
 		
-		this.game = button.game;
+		this.game = game;
 		this.text = button.text;
 		
 		setWidth(button.getWidth());
@@ -108,16 +104,16 @@ public class LevelSelectButton extends TextButton {
 	}
 
 	/**
-	 * Button is white if enabled, gray if disabled
+	 * Sets the button's text according to the levels unlocked. 
+	 * Button is white if enabled, gray if disabled. 
 	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 		if (this.enabled) {
-//			getStyle().font.setColor(Color.WHITE);
+			setText(text);
 			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button enabled");
 		}
 		else {			
-//			getStyle().font.setColor(Color.GRAY);
 			setText("Locked");
 			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "level select button disabled");
 		}

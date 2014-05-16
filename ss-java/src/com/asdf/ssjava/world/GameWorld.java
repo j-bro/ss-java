@@ -1,8 +1,3 @@
-/**
- * Base world class that contains all entities present in the world at the current time.
- * Loads the selected level when game screen is set.
- * 
- */
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -20,9 +15,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -34,18 +26,20 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /**
+ * Base world class containing all entities present in the world at the current time.
+ * Manages updating the entities, the score, loading, beginning and ending the level.
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
 public class GameWorld {
 
 	/**
-	 * The game's instance
+	 * The SSJava instance
 	 */
 	SSJava game;
 	
 	/**
-	 * The ship's instance
+	 * The ship instance
 	 */
 	Ship ship;
 	
@@ -70,19 +64,14 @@ public class GameWorld {
 	LevelCreatorScreen creator;
 	
 	/**
-	 * World type constant definition
+	 * World game type constant definition
 	 */
 	public static final int GAME_TYPE = 0;
 	
 	/**
-	 * World type constant definition
+	 * World creator type constant definition
 	 */
 	public static final int CREATOR_TYPE = 1;
-	
-	/**
-	 * Reference to this screen
-	 */
-//	Screen thisScreen = this;
 	
 	/**
 	 * The ScoreKeeper instance
@@ -90,7 +79,7 @@ public class GameWorld {
 	ScoreKeeper scoreKeeper;
 	
 	/**
-	 * ArrayList containing all the obstacles in the current level
+	 * Array containing all the obstacles in the current level
 	 */
 	private Level level;
 	
@@ -160,19 +149,24 @@ public class GameWorld {
 	public MagneticObject magnet;
 	
 	/**
-	 * Constructor for testing a level from the level creator
-	 * @param game
-	 * @param worldType
-	 * @param levelPath
-	 * @param creator
+	 * Creates a world instance from the specified parameters. 
+	 * Constructor for testing a level from the level creator. 
+	 * Helper constructor that sets the creator and uses the main constructor. 
+	 * Allows for returning to the creator when the play is ended. 
+	 * @param game the SSJava instance
+	 * @param worldType the type of this world instance (game or creator)
+	 * @param levelFile the FileHandle for the file of this level
+	 * @param creator the level creator screen instance (if worldType is CREATOR_TYPE)
 	 */
 	public GameWorld(SSJava game, int worldType, FileHandle levelFile, LevelCreatorScreen creator) {
 		this(game, worldType, levelFile);
 		this.creator = creator;
 	}
 	/**
-	 * Creates a world for an instance of SSJava
-	 * @param game the instance of the game
+	 * Creates a world instance from the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param worldType the type of this world instance (game or creator)
+	 * @param levelFile the FileHandle for the file of this level
 	 */
 	public GameWorld(SSJava game, int worldType, FileHandle levelFile) {
 		this.game = game;
@@ -227,8 +221,8 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Update method run in every iteration of the main loop to update entity position, rotation and behaviour
-	 * Also verifies which entities/bodies are dead and removes them
+	 * Update method run in every iteration of the main loop to update entity position, rotation and behaviour. 
+	 * Also verifies which entities/bodies are dead and removes them. 
 	 */
 	public void update() {
 		if (getWorldType() == GAME_TYPE) {
@@ -293,7 +287,7 @@ public class GameWorld {
 				magnetActivate();
 			}
 			
-			//  Check toasts
+			//  Display toast messages
 			for (ToastMessage m: getLevel().messages) {
 				// Not the best way to check but will do for this purpose
 				if (m.progress <= ship.getBody().getPosition().x && m.progress + 0.3 >= ship.getBody().getPosition().x) {
@@ -301,7 +295,6 @@ public class GameWorld {
 					renderer.getStage().addActor(Toast.create(m));
 				}
 			}
-			
 		}
 		
 		else if (getWorldType() == CREATOR_TYPE) {
@@ -319,23 +312,10 @@ public class GameWorld {
 		int newProgress = (int) (Math.round(ship.getPosition().x / level.getLevelEnd() * 100) / 1);		
 		setProgress(newProgress);
 	}
-
-	/**
-	 * Sets the level background
-	 * Currently not fully implemented
-	 */
-	public void setBackground(String path) {
-		getLevel().setBackgroundPath(Gdx.files.absolute(path).path());
-		if (path != null) {
-			renderer.bgTexture = new Texture(Gdx.files.absolute(path));
-			renderer.bgTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
-			renderer.bgSprite = new Sprite(renderer.bgTexture);
-		}
-	}
 	
 	/**
-	 * Checks whether or not the ship has died
-	 * @return true if the ship has completed the level
+	 * Checks whether or not the level is complete. 
+	 * @return true if the ship has completed the level; false otherwise
 	 */
 	public boolean isLevelComplete() {
 		if (ship.getBody().getPosition().x >= level.getLevelEnd()) {
@@ -372,7 +352,9 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Ship behaviour when level completed
+	 * Changes ship behaviour when the level is completed. 
+	 * Ship slows down until its speed reaches zero and starts spinning. 
+	 * After 2 seconds the next screen is shown. 
 	 */
 	public void levelCompleted() {	
 		if (getLevel().nextLevelPath == null) {
@@ -401,7 +383,6 @@ public class GameWorld {
 				ship.getBody().applyAngularImpulse(1000, true);
 				
 				if (!isPlayEnded()) {
-					// TODO try a Thread
 					new Timer().scheduleTask(new Task() {
 						/*
 						 * (non-Javadoc)
@@ -456,7 +437,7 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Causes the ship to be attracted/repelled from the magnetic object
+	 * Causes the ship to be attracted/repelled from the magnetic object. 
 	 */
 	public void magnetActivate() {
 		if (!ship.isSpeedOfLightEnabled()) {
@@ -472,16 +453,24 @@ public class GameWorld {
 		}
 	}
 	
+	/**
+	 * Sets the magnetic object currently affecting the ship. 
+	 * @param m the magnetic object to affect the ship
+	 */
 	public void setMagneticObject(MagneticObject m) {
 		magnet = m;
 	}
 	
+	/**
+	 * Gets the magnetic object currently affecting the ship.
+	 * @return the magnetic object affecting the ship
+	 */
 	public MagneticObject getMagneticObject() {
 		return magnet;
 	}
 	
 	/**
-	 * Causes the ship to be attracted to the planet
+	 * Causes the ship to be attracted towards the planet. 
 	 */
 	public void gravityActivate() {
 		if (!ship.isSpeedOfLightEnabled()) {
@@ -498,23 +487,23 @@ public class GameWorld {
 	}
 	
 	/**
-	 * 
-	 * @param p
+	 * Sets the planet currently affecting the ship.
+	 * @param p the planet to affect the ship
 	 */
 	public void setPlanet(Planet p) {
 		planet = p;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the planet currently affecting the ship.
+	 * @return the currently activated planet
 	 */
 	public Planet getPlanet() {
 		return planet;
 	}
 	
 	/**
-	 * Causes the ship to be burned by the sun
+	 * Causes the ship to be burned by the sun. 
 	 */
 	public void sunActivate() {Gdx.app.log(SSJava.LOG, "Speed of Light: " + ship.isSpeedOfLightEnabled());
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
@@ -533,16 +522,24 @@ public class GameWorld {
 		}
 	}
 	
+	/**
+	 * Sets the Sun currently affecting the ship.
+	 * @param s the sun to affect the ship
+	 */
 	public void setSun(Sun s) {
 		sun = s;
 	}
 	
+	/**
+	 * Gets the Sun currently affecting the ship.
+	 * @return the currently activated Sun
+	 */
 	public Sun getSun() {
 		return sun;
 	}
 	
 	/**
-	 * Calls the pause screen and stops rendering the game
+	 * Calls the pause screen and stops rendering the game. 
 	 */
 	public void pauseGame() {
 		game.screenshot = ScreenUtils.getFrameBufferTexture();
@@ -552,52 +549,58 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Exports the current level to a file in JSON format
-	 * @param path the path at which to save the exported level
+	 * Exports the current level to a file in JSON format. 
+	 * @param levelFile the FileHandle path at which to save the exported level
 	 */
 	public void exportLevel(FileHandle levelFile) {
 		levelFile.writeString(new Json().prettyPrint(level), false);
 	}
 	
 	/**
-	 * Loads a level from a JSON file into the level instance
-	 * @param path the path of the JSON level file to be loaded
+	 * Loads a level from a JSON file into the level instance. 
+	 * @param levelFile the FileHandle of the JSON level file to be loaded
 	 */
 	private void loadLevel(FileHandle levelFile) {		
 		level = new Json().fromJson(Level.class, levelFile);
 	}
 	
 	/**
-	 * @return the ship
+	 * Gets the ship instance
+	 * @return the ship instance
 	 */
 	public Ship getShip() {
 		return ship;
 	}
 	/**
+	 * Gets the obstacles array
 	 * @return the obstacles array
 	 */
 	public Array<Obstacle> getObstacles() {
 		return level.obstacles;
 	}
 	/**
+	 * Gets the enemies array
 	 * @return the enemies array
 	 */
 	public Array<Enemy> getEnemies() {
 		return level.enemies;
 	}
 	/**
+	 * Gets the bullets array
 	 * @return the bullets array
 	 */
 	public Array<Bullet> getBullets() {
 		return bullets;
 	}
 	/**
+	 * Gets the powerups array
 	 * @return the powerups array
 	 */
 	public Array<Powerup> getPowerups() {
 		return level.powerups;
 	}
 	/**
+	 * Gets the game changers array
 	 * @return the gameChangers array
 	 */
 	public Array<Obstacle> getGameChangers() {
@@ -605,14 +608,15 @@ public class GameWorld {
 	}
 	
 	/**
-	 * Passes the WorldRenderer into this class
-	 * @param renderer the renderer to be set
+	 * Sets the associated renderer.  
+	 * @param renderer the world renderer to be set
 	 */
 	public void setRenderer(WorldRenderer renderer) {
 		this.renderer = renderer;
 	}
 	
 	/**
+	 * Gets the associated renderer. 
 	 * @return renderer the associated WorldRenderer instance
 	 */
 	public WorldRenderer getRenderer(){
@@ -620,35 +624,15 @@ public class GameWorld {
 	}
 	
 	/**
-	 * @return the input processor
+	 * Gets the associated input manager.
+	 * @return the associated GameInputManager instance
 	 */
 	public InputProcessor getManager() {
 		return manager;
 	}
 	
 	/**
-	 * @return the world's type (game or creator)
-	 */
-	public int getWorldType() {
-		return worldType;
-	}
-	
-	/**
-	 * @return level the game world's level instance
-	 */
-	public Level getLevel() {
-		return level;
-	}
-	
-	/**
-	 * @return the ScoreKeeper instance
-	 */
-	public ScoreKeeper getScoreKeeper() {
-		return scoreKeeper;
-	}
-
-	/**
-	 * Set the Input manager instance
+	 * Sets the InputManager instance
 	 * @param manager the manager to set
 	 */
 	public void setManager(InputProcessor manager) {
@@ -656,6 +640,31 @@ public class GameWorld {
 	}
 	
 	/**
+	 * Gets the world type. 
+	 * @return the world's type (game or creator)
+	 */
+	public int getWorldType() {
+		return worldType;
+	}
+	
+	/**
+	 * Gets the level object instance. 
+	 * @return level the game world's level instance
+	 */
+	public Level getLevel() {
+		return level;
+	}
+	
+	/**
+	 * Gets the score keeper instance. 
+	 * @return the ScoreKeeper instance
+	 */
+	public ScoreKeeper getScoreKeeper() {
+		return scoreKeeper;
+	}
+	
+	/**
+	 * Gets the associated creator instance. 
 	 * @return the LevelCreator instance
 	 */
 	public LevelCreatorScreen getCreator() {
@@ -663,24 +672,28 @@ public class GameWorld {
 	}
 	
 	/**
-	 * @return the levelFile
+	 * Gets the level file FileHandle. 
+	 * @return the level file FileHandle
 	 */
 	public FileHandle getLevelFile() {
 		return levelFile;
 	}
 	/**
+	 * Sets the level file. 
 	 * @param levelFile the levelFile to set
 	 */
 	public void setLevelFile(FileHandle levelFile) {
 		this.levelFile = levelFile;
 	}
 	/**
-	 * @return the progress
+	 * Gets the ship's progress in the level. 
+	 * @return the ship's progress
 	 */
 	public int getProgress() {
 		return progress;
 	}
 	/**
+	 * Sets the ship's progress in the level. 
 	 * @param progress the progress to set
 	 */
 	private void setProgress(int progress) {
@@ -693,20 +706,22 @@ public class GameWorld {
 	}
 	
 	/**
-	 * @return true if the play is ended
+	 * Gets the play ended flag. 
+	 * @return true if the play is ended; false otherwise
 	 */
 	public boolean isPlayEnded() {
 		return playEnded;
 	}
 	/**
-	 * @param playEnded the playEnded to set
+	 * Sets the play ended flag. 
+	 * @param playEnded true if the play has ended
 	 */
 	private void setPlayEnded(boolean playEnded) {
 		this.playEnded = playEnded;
 	}
 	
 	/**
-	 * Dispose method
+	 * Dispose method for the World. 
 	 */
 	public void dispose() {
 		box2DWorld.dispose();

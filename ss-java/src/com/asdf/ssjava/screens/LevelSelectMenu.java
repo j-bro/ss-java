@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import javax.swing.JFileChooser;
@@ -27,8 +24,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Allows the player to choose a level to play. 
+ * Displays buttons for the tutorial + the 5 in-game levels. 
+ * Allows for choosing a level from an external file and returning to the main menu.
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 
 public class LevelSelectMenu implements Screen {
@@ -57,6 +57,10 @@ public class LevelSelectMenu implements Screen {
 	 * The buttons
 	 */
 	MenuButton loadButton, backButton;
+	
+	/**
+	 * The level seleciton buttons
+	 */
 	LevelSelectButton tutorialButton, level1Button, level2Button, level3Button, level4Button, level5Button;
 	
 	/**
@@ -70,7 +74,8 @@ public class LevelSelectMenu implements Screen {
 	Screen referrer;
 	
 	/**
-	 * @param game the game instance of type SSJava
+	 * Creates a level selection menu with the specified parameters. 
+	 * @param game the SSJava instance
 	 * @param referrer the referring screen
 	 */
 	public LevelSelectMenu(SSJava game, Screen referrer) {
@@ -118,7 +123,6 @@ public class LevelSelectMenu implements Screen {
 		tutorialButton.setX(Gdx.graphics.getWidth() / 2 - tutorialButton.getWidth() / 2);
 		tutorialButton.setY(Gdx.graphics.getHeight() / 2 - tutorialButton.getHeight() / 2 + 200);
 		
-		// Level buttons
 		level1Button = new LevelSelectButton("Level 1", 280, 65, game, Gdx.files.internal("data/levels/level1-intro.json"));
 		level1Button.setX(Gdx.graphics.getWidth() / 2 - level1Button.getWidth() / 2);
 		level1Button.setY(Gdx.graphics.getHeight() / 2 - level1Button.getHeight() / 2 + 150);

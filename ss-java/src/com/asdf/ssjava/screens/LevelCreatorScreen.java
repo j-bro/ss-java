@@ -1,11 +1,4 @@
-/**
- * The screen set to create a level
- */
 package com.asdf.ssjava.screens;
-
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.asdf.ssjava.AudioPlayer;
 import com.asdf.ssjava.SSJava;
@@ -24,7 +17,6 @@ import com.asdf.ssjava.entities.SpaceRock;
 import com.asdf.ssjava.entities.Sun;
 import com.asdf.ssjava.world.GameWorld;
 import com.asdf.ssjava.world.WorldRenderer;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -37,8 +29,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
- * 
+ * The level creation screen. 
+ * Allows the placement of all game entities in the world.
+ * Camera moves to place entities throughout the world. 
  * @author Jeremy Brown
+ * @author Simon Thompson
  */
 public class LevelCreatorScreen implements Screen {
 
@@ -78,8 +73,9 @@ public class LevelCreatorScreen implements Screen {
 	private boolean levelModified;
 	
 	/**
-	 * Default constructor
-	 * @param game the game instance
+	 * Creates a level creator screen with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param levelFile the FileHandle for the level
 	 */
 	public LevelCreatorScreen(SSJava game, FileHandle levelFile) {
 		this.game = game;
@@ -139,7 +135,7 @@ public class LevelCreatorScreen implements Screen {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 		}
 		
-		// Music
+		// Menu Music
 		if (AudioPlayer.menuMusic.isPlaying()) {			
 			AudioPlayer.stopMenuMusic();
 		}
@@ -155,6 +151,7 @@ public class LevelCreatorScreen implements Screen {
 	 */
 	@Override
 	public void hide() {
+		
 	}
 
 	/*
@@ -186,16 +183,15 @@ public class LevelCreatorScreen implements Screen {
 	}
 
 	/**
-	 * Show the options screen
-	 * Allows saving/loading of a level
+	 * Shows the options screen which allows testing, saving, and loading of a level, and exiting the creator mode.   
 	 */
 	public void showCreatorOptions() {
-//		AudioPlayer.pauseCreatorMusic();
 		game.screenshot = ScreenUtils.getFrameBufferTexture();
 		game.setScreen(new LevelCreatorOptionsMenu(game, this));
 	}
 	
 	/** 
+	 * Gets the following entity in the array of entity types.
 	 * @return the entity following entityToAdd in the entityTypes array
 	 */
 	public AbstractEntity getNextEntityType() {
@@ -207,6 +203,7 @@ public class LevelCreatorScreen implements Screen {
 		}
 	}
 	/** 
+	 * Gets the previous entity in the array of entity types. 
 	 * @return the entity previous to entityToAdd in the entityTypes array
 	 */
 	public AbstractEntity getPrevEntityType() {
@@ -219,8 +216,8 @@ public class LevelCreatorScreen implements Screen {
 	}
 	
 	/**
-	 * Adds a new instance of the passed entity type to the world
-	 * @param e the entity type to be added
+	 * Adds a new instance of the passed entity type to the level. 
+	 * @param e the entity type to be added to the level
 	 */
 	protected void addEntity(AbstractEntity e) {
 		if (e instanceof Asteroid) {
@@ -283,8 +280,9 @@ public class LevelCreatorScreen implements Screen {
 	}
 	
 	/**
-	 * Moves the level end when a new entity is added
-	 * @param a
+	 * Sets the level end point.
+	 * Called adds a new entity past the previous level end point.
+	 * @param a the entity added, pushing the end point past it
 	 */
 	public void updateLevelEnd(AbstractEntity a) {
 		if (a.getPosition().x > gameWorld.getLevel().getLevelEnd()) {
@@ -293,7 +291,7 @@ public class LevelCreatorScreen implements Screen {
 	}
 	
 	/**
-	 * Sets the currently selected entity
+	 * Sets the currently selected entity. 
 	 */
 	public void setSelectedEntity(AbstractEntity e) {
 		selectedEntity = e;
@@ -302,8 +300,8 @@ public class LevelCreatorScreen implements Screen {
 	}
 	
 	/**
-	 * Remove the selected entity from the level
-	 * @param selectedEntity
+	 * Remove the selected entity from the level. 
+	 * @param selectedEntity the entity to be removed
 	 */
 	public void removeEntity(AbstractEntity selectedEntity) {
 		if (selectedEntity instanceof SpaceRock || selectedEntity instanceof Asteroid) {
@@ -326,25 +324,9 @@ public class LevelCreatorScreen implements Screen {
 		selectedEntity = null;
 		levelModified = true;
 	}
-	
+
 	/**
-	 * 
-	 */
-	public void chooseBackground() {
-		// File selection
-		if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
-			JFileChooser chooser = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG image files", "png");
-			chooser.setFileFilter(filter);
-			int returnVal = chooser.showOpenDialog(new JPanel());
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				String levelPath = chooser.getSelectedFile().getPath();
-				gameWorld.setBackground(Gdx.files.absolute(levelPath).path());
-			}
-		}
-	}
-	
-	/**
+	 * Gets the GameWorld instance. 
 	 * @return the gameWorld
 	 */
 	public GameWorld getGameWorld() {
@@ -352,23 +334,30 @@ public class LevelCreatorScreen implements Screen {
 	}
 	
 	/**
-	 * @return the levelModified
+	 * Checks if the level modified flag is set. 
+	 * @return true if the level modified flag is set; false otherwise
 	 */
 	public boolean isLevelModified() {
 		return levelModified;
 	}
 	/**
-	 * @param levelModified the levelModified to set
+	 * Sets the level modified flag. 
+	 * @param levelModified the level modified flag to set
 	 */
 	public void setLevelModified(boolean levelModified) {
 		this.levelModified = levelModified;
 	}
 
-	
+	/**
+	 * True the cursor was clicked on an entity and is still down
+	 */
 	boolean clickDown = false;
 	
 	/**
-	 * Input manager for level creator
+	 * Input manager for level creator. 
+	 * Defines behaviour for the different keys in the level creator. 
+	 * Camera movement requires continuous polling and is implemented in the GameWorld class. 
+	 * @see com.asdf.ssjava.world.GameWorld#update()
 	 * @author Jeremy Brown
 	 */
 	class LevelCreatorInput implements InputProcessor {
@@ -380,6 +369,7 @@ public class LevelCreatorScreen implements Screen {
 		@Override
 		public boolean keyDown(int keycode) {
 			switch (keycode) {
+			
 			// Selected entity movement
 			case Keys.RIGHT: 
 				if (selectedEntity != null)
@@ -416,12 +406,7 @@ public class LevelCreatorScreen implements Screen {
 			case Keys.Z:
 				removeEntity(selectedEntity);
 				break;
-				
-			// Setting the background
-			case Keys.B:
-//				chooseBackground();
-				break;
-				
+			
 			// Set level end point
 			case Keys.E:
 				gameWorld.getLevel().setLevelEnd(renderer.getCamera().position.x);
@@ -432,16 +417,28 @@ public class LevelCreatorScreen implements Screen {
 		return true;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#keyUp(int)
+		 */
 		@Override
 		public boolean keyUp(int keycode) {
 			return false;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#keyTyped(char)
+		 */
 		@Override
 		public boolean keyTyped(char character) {
 			return false;
 		}
-
+		
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#touchDown(int, int, int, int)
+		 */
 		@Override
 		public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 			// Check if click is on an entity
@@ -477,15 +474,22 @@ public class LevelCreatorScreen implements Screen {
 			return false;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#touchUp(int, int, int, int)
+		 */
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 			clickDown = false;
 			return false;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#touchDragged(int, int, int)
+		 */
 		@Override
 		public boolean touchDragged(int screenX, int screenY, int pointer) {
-			// TODO relative movement
 			if (clickDown) {
 				Vector3 v = new Vector3(screenX, screenY, 0);
 				renderer.getCamera().unproject(v);
@@ -496,21 +500,30 @@ public class LevelCreatorScreen implements Screen {
 			return false;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#mouseMoved(int, int)
+		 */
 		@Override
 		public boolean mouseMoved(int screenX, int screenY) {
 			return false;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see com.badlogic.gdx.InputProcessor#scrolled(int)
+		 */
 		@Override
 		public boolean scrolled(int amount) {
 			return false;
 		}
 		
 		/**
+		 * Checks if the mouse click is on a given entity
 		 * @param e the entity to be checked
-		 * @param screenX the x coordinate of the pointer 
-		 * @param screenY the y coordinate of the pointer
-		 * @return whether or not the click is on the selected entity
+		 * @param screenX the x coordinate of the mouse pointer 
+		 * @param screenY the y coordinate of the mouse pointer
+		 * @return true if the mouse click is on the specified entity; false otherwise
 		 */
 		public boolean isClickOnEntity(AbstractEntity e, float screenX, float screenY) {
 			if (e != null) {				

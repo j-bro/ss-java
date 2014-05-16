@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.world;
 
 import com.asdf.ssjava.entities.Enemy;
@@ -10,10 +7,9 @@ import com.asdf.ssjava.screens.screenelements.ToastMessage;
 import com.badlogic.gdx.utils.Array;
 
 /**
+ * The level object containing all data for a specific level.  
  * @author Jeremy Brown
- *
  */
-
 public class Level {
 
 	/**
@@ -62,7 +58,9 @@ public class Level {
 	public String nextLevelPath;
 	
 	/**
-	 * 
+	 * Default Constructor. 
+	 * Initializes all arrays of entities and messages. 
+	 * Sets default values for the level end point, the background and the level code. 
 	 */
 	public Level() {
 		obstacles = new Array<Obstacle>();
@@ -71,27 +69,30 @@ public class Level {
 		gameChangers = new Array<Obstacle>();
 		
 		levelEnd = 100;
-		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // TODO
-		levelCode = -1;
+		backgroundPath = "data/textures/backgrounds/background_sparks.png"; // Default level background
+		levelCode = -1; // level code for all non-in-game levels
 		messages = new Array<ToastMessage>();
 		nextLevelPath = null;
 	}
 
 	/**
-	 * @return the levelEnd
+	 * Gets the level end point. 
+	 * @return the level end point, in world coordinates
 	 */
 	public float getLevelEnd() {
 		return levelEnd;
 	}
 
 	/**
-	 * @param levelEnd the levelEnd to set
+	 * Sets the level end point. 
+	 * @param levelEnd the levelEnd to set, in world coordinates
 	 */
 	public void setLevelEnd(float levelEnd) {
 		this.levelEnd = levelEnd;
 	}
 
 	/**
+	 * Gets the background path. 
 	 * @return the backgroundPath
 	 */
 	public String getBackgroundPath() {
@@ -99,6 +100,7 @@ public class Level {
 	}
 
 	/**
+	 * Sets the background path. 
 	 * @param backgroundPath the backgroundPath to set
 	 */
 	public void setBackgroundPath(String backgroundPath) {
@@ -106,6 +108,7 @@ public class Level {
 	}
 
 	/**
+	 * Gets the level code. 
 	 * @return the levelCode
 	 */
 	public int getLevelCode() {
@@ -113,6 +116,7 @@ public class Level {
 	}
 
 	/**
+	 * Sets the level code. 
 	 * @param levelCode the levelCode to set
 	 */
 	public void setLevelCode(int levelCode) {

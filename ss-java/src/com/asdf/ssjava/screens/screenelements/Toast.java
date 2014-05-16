@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.SSJava;
@@ -17,9 +14,8 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 /**
- * 
+ * Utility class to display a toast on the screen. 
  * @author Jeremy Brown
- *
  */
 public class Toast {
 	
@@ -27,18 +23,18 @@ public class Toast {
 	
 	/**
 	 * Toasts a message from a ToastMessage object
-	 * @param tm
-	 * @return
+	 * @param tm the ToastMessage specified to be shown on the screen
+	 * @return the new window actor to be added to a stage
 	 */
 	public static Actor create(ToastMessage tm) {
 		return create(tm.message, tm.duration);
 	}
 	
 	/**
-	 * 
-	 * @param text
-	 * @param time
-	 * @return
+	 * Toasts a message from the specified text and duration. 
+	 * @param text the message text
+	 * @param time the duration to display the toast
+	 * @return the new window actor to be added to a stage
 	 */
 	public static Actor create(final String text, final float time) {
 		final Window window = new Window("", new Window.WindowStyle(SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class), Color.WHITE, null));

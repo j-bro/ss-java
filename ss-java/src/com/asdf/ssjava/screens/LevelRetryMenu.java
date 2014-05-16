@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
@@ -22,8 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * Allows the player to retry the failed level, select another level, or exit to the main menu.
+ * Shows the score obtained so far.  
+ * Is displayed when the player dies partway through the level. 
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 public class LevelRetryMenu implements Screen {
 
@@ -38,12 +38,12 @@ public class LevelRetryMenu implements Screen {
 	Stage stage;	
 	
 	/**
-	 * 
+	 * The text font
 	 */
 	BitmapFont whiteFont;
 	
 	/**
-	 * 
+	 * The buttons
 	 */
 	MenuButton exitButton, retryButton, selectLevelButton;
 	
@@ -73,7 +73,9 @@ public class LevelRetryMenu implements Screen {
 	GameWorld gameWorld;
 	
 	/**
-	 * 
+	 * Creates a level retry menu with the specified parameters. 
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public LevelRetryMenu(SSJava game, Screen referrer) {
 		this.game = game;
@@ -162,7 +164,7 @@ public class LevelRetryMenu implements Screen {
 			}
 		});
 		
-		// exit to main menu button
+		// Exit to main menu button
 		exitButton = new MenuButton("Exit", 280, 65, game);
 		exitButton.setX(Gdx.graphics.getWidth() / 2 - exitButton.getWidth() / 2);
 		exitButton.setY(Gdx.graphics.getHeight() / 2 - exitButton.getHeight() / 2 - 250);
@@ -184,6 +186,7 @@ public class LevelRetryMenu implements Screen {
 			}
 		});
 		
+		// Title
 		titleLabel = new Label("You died!", ls);
 		titleLabel.setX(0);
 		titleLabel.setY(Gdx.graphics.getHeight() / 2 + 240);

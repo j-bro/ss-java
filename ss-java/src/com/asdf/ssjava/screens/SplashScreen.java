@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import aurelienribon.tweenengine.BaseTween;
@@ -23,10 +20,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
+ * The first screen shown in the application. 
+ * Displays a big text with the title of the game. 
+ * Stays until all the game assets have finished loading. 
  * @author Jeremy Brown
- *
  */
-
 public class SplashScreen implements Screen {
 
 	Texture splashTexture;
@@ -37,24 +35,29 @@ public class SplashScreen implements Screen {
 	AssetManager assetManager;
 	
 	/**
-	 * 
+	 * Creates a splash screen. 
+	 * @param game the SSJava instance
 	 */
 	public SplashScreen(SSJava game) {
 		this.game = game;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		if (assetManager.update()) {
-			// done loading
+			// Loading complete
 		}
 		else {
 			float progress = assetManager.getProgress();
 			int percentProgress = (int) (progress * 100);
-			Gdx.app.log(SSJava.LOG, "Assets loading (" + percentProgress + "%)");			
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Assets loading (" + percentProgress + "%)");			
 		}
 		
 		tweenManager.update(delta);
@@ -64,20 +67,28 @@ public class SplashScreen implements Screen {
 		batch.end();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show splash screen"); // LOG
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show splash screen");
 		
 		assetManager = SSJava.assetManager;
 		
+		// Display splash title text
 		splashTexture = new Texture("data/SplashScreen_black.png");
 		splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
 		splashSprite = new Sprite(splashTexture);
 		splashSprite.setPosition(Gdx.graphics.getWidth() / 2 - splashSprite.getWidth() / 2, Gdx.graphics.getHeight() / 2 - splashSprite.getHeight() / 2);
 		splashSprite.setColor(1, 1, 1, 0);
@@ -99,19 +110,24 @@ public class SplashScreen implements Screen {
 			}
 		};
 		
-		// LOAD ASSETS
+		// Load assets
 		loadAssets();
 		
 		Tween.to(splashSprite, SpriteTween.ALPHA, 2f).target(1).ease(TweenEquations.easeInQuad).repeatYoyo(1, 1f ).setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE).start(tweenManager);
 	}
 
+	/**
+	 * Sets the screen to the main menu when the fade out animation of the splash screen has completed. 
+	 */
 	private void tweenCompleted() {
-		Gdx.app.log(SSJava.LOG, "Splash screen tween complete");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Splash screen tween complete");
 		game.setScreen(new MainMenu(game));
-		
 		splashTexture.dispose();
 	}
 	
+	/**
+	 * Loads all the game assets into memory asynchronously. 
+	 */
 	private void loadAssets() {
 		// Menu assets
 		assetManager.load("data/fonts/font.fnt", BitmapFont.class);
@@ -144,24 +160,39 @@ public class SplashScreen implements Screen {
 		assetManager.load("data/fonts/debugFont-14.fnt", BitmapFont.class);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide() {
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause() {
 		
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume() {
 		
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose() {
 		
 	}
-
 }

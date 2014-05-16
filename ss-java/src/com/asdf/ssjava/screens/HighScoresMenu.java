@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens;
 
 import com.asdf.ssjava.SSJava;
@@ -20,10 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 /**
+ * High scores menu to display the 10 best level scores stored on the current system.  
  * @author Jeremy Brown
- *
+ * @author Simon Thompson
  */
-
 public class HighScoresMenu implements Screen {
 
 	/**
@@ -67,6 +64,7 @@ public class HighScoresMenu implements Screen {
 	Screen referrer;
 	
 	/**
+	 * Creates a high scores menu with the specified parameters. 
 	 * @param game the game instance of type SSJava
 	 * @param referrer the referring screen
 	 */
@@ -115,7 +113,7 @@ public class HighScoresMenu implements Screen {
 		bgImage.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage.addActor(bgImage);
 		
-		// exit to main menu button
+		// Exit to main menu button
 		backButton = new BackButton(280, 65, game, referrer);
 		backButton.setX(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2);
 		backButton.setY(Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 - 250);
@@ -147,7 +145,6 @@ public class HighScoresMenu implements Screen {
 		namesLabel.setY(height / 2 - namesLabel.getHeight() / 2);
 		namesLabel.setAlignment(Align.center);
 		stage.addActor(namesLabel);
-		
 		
 		positionsLabel = new Label("Pos"
 				+ "\n"

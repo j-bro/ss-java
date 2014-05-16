@@ -1,14 +1,4 @@
-/**
- * Base class for an entity.
- * Includes fields for position, dimensions, and hitbox.
- * Includes abstract update method.
- */
 package com.asdf.ssjava.entities;
-
-/**
- * @author Jeremy Brown
- *
- */
 
 import com.asdf.ssjava.world.GameWorld;
 import com.badlogic.gdx.math.MathUtils;
@@ -18,6 +8,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
    
+/**
+ * Base class for an entity. Includes fields for position, dimensions, and hitbox.
+ * @author Jeremy Brown
+ * @author Simon Thompson
+ */
 public abstract class AbstractEntity {
 	
 	/**
@@ -41,7 +36,8 @@ public abstract class AbstractEntity {
 	protected float rotation;
 	
 	/**
-	 * The entity's health levels. One point (integer) is equivalent to half a heart in gameplay.
+	 * The entity's health level
+	 * One point (integer) is equivalent to half a heart in gameplay
 	 */
 	protected transient int health;
 	
@@ -76,18 +72,13 @@ public abstract class AbstractEntity {
 	public long lastContactTime = 0;
 	
 	/**
-	 * The loader instance for the body's fixtures
-	 */
-//	private transient BodyEditorLoader loader;
-	
-	/**
-	 * Creates an entity
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates an entity with specified parameters
+	 * @param position the entity's position
+	 * @param width the entity's width
+	 * @param height the entity's height
+	 * @param rotation the entity's rotation in degrees
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance (Box2D for collisions)
 	 */
 	protected AbstractEntity(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		this.position = position;
@@ -96,7 +87,6 @@ public abstract class AbstractEntity {
 		this.rotation = rotation;
 		this.gameWorld = gameWorld;
 		this.box2DWorld = box2DWorld;
-		
 	}
 	
 	/**
@@ -164,7 +154,7 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * Returns the entity's rotation
+	 * Gets the entity's rotation in degrees
 	 * @return the rotation of the entity in degrees
 	 */
 	public float getRotation() {
@@ -172,7 +162,7 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * 
+	 * Sets the entity's rotation in degrees
 	 * @param rotation
 	 */
 	public void setRotation(float rotation) {
@@ -180,7 +170,7 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * 
+	 * Gets the entity's health
 	 * @return the entity's health points
 	 */
 	public synchronized int getHealth() {
@@ -188,7 +178,7 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * 
+	 * Sets the entity's health
 	 * @param health the entity's health to be set
 	 */
 	public synchronized void setHealth(int health) {
@@ -196,7 +186,9 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * 
+	 * Modifies the health by the specified increment
+	 * Increment can be positive or negative
+	 * Does not allow health to go below zero
 	 * @param increment the value to add/subtract from the entity's health
 	 */
 	public synchronized void healthChange(int increment) {
@@ -207,8 +199,8 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * 
-	 * @return if the entity is dead
+	 * Checks if the entity is dead
+	 * @return true if the entity's health is zero; false otherwise
 	 */
 	public boolean isDead() {
 		if (health <= 0) {
@@ -220,13 +212,15 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return whether or not the entity is currently visible
+	 * Checks if the entity is currently visible
+	 * @return true is the entity is visible; false otherwise
 	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
 	/**
+	 * Sets the visibility of the entity
 	 * @param visible sets whether or not the entity is visible
 	 */
 	public void setVisible(boolean visible) {
@@ -234,35 +228,40 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * @return the initialized
+	 * Checks if the entity has been initialized
+	 * @return true if the initialized flag is set
 	 */
 	public boolean isInitialized() {
 		return initialized;
 	}
 	/**
-	 * @param initialized the initialized to set
+	 * Sets the entity's initialized flag
+	 * @param initialized the initialized flag to set
 	 */
 	public void setInitialized(boolean initialized) {
 		this.initialized = initialized;
 	}
 
 	/**
-	 * Returns the Box2D body for this entity
+	 * Gets the Box2D body for this entity
+	 * @return the body instance
 	 */
 	public Body getBody() {
 		return body;
 	}
 	
 	/**
-	 * 
-	 * @return gameWorld the gameWorld instance
+	 * Gets the GameWorld instance associated to this entity
+	 * @return gameWorld the associated gameWorld instance
 	 */
 	public GameWorld getGameWorld() {
 		return gameWorld;
 	}
 	
 	/**
-	 * Initialize the non-serialized worlds
+	 * Initialize the worlds
+	 * Adds references to the two game worlds to this object
+	 * Is called when loading a level to pass references of the non-serialized world objects to the entity
 	 */
 	public void initWorlds(GameWorld gameWorld, World box2DWorld) {
 		this.gameWorld = gameWorld;
@@ -270,7 +269,9 @@ public abstract class AbstractEntity {
 	}
 	
 	/**
-	 * Runs every time the game renders a frame.
+	 * Updates the entity
+	 * Does nothing unless overridden
+	 * Runs every time the game renders a frame
 	 */
 	public void update() {
 		
@@ -278,11 +279,16 @@ public abstract class AbstractEntity {
 	
 	public abstract int getHitScore();
 	public abstract int getKillScore();
+	
+	/**
+	 * Initializes the entity to make it active in the game
+	 * Should give the entity a default velocity and allow it to shoot
+	 */
 	public abstract void initialize();
 	
 	/**
 	 * Called when the entity's health is 0
-	 * Usually removes the entity and it's display instance from the world
+	 * In most implementations, removes the entity and it's display instance from the world
 	 */
 	public abstract void die();
 	

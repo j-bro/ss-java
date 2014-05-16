@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens.screenelements;
 
 import com.asdf.ssjava.AudioPlayer;
@@ -12,9 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
- * 
+ * Specification of the back button. 
  * @author Jeremy Brown
- *
  */
 public class BackButton extends MenuButton {
 
@@ -29,12 +25,11 @@ public class BackButton extends MenuButton {
 	Screen referrer;
 	
 	/**
-	 * 
-	 * @param text
-	 * @param width
-	 * @param height
-	 * @param game
-	 * @param referrer
+	 * Creates a back button with the specified parameters. 
+	 * @param width the width of the button
+	 * @param height the height of the button
+	 * @param game the SSJava instance
+	 * @param referrer the referring screen
 	 */
 	public BackButton(float width, float height, SSJava game, Screen referrer) {
 		super("Back", width, height, game);
@@ -67,6 +62,7 @@ public class BackButton extends MenuButton {
 	}
 
 	/**
+	 * Gets the referring screen. 
 	 * @return the referrer
 	 */
 	public Screen getReferrer() {
@@ -74,6 +70,7 @@ public class BackButton extends MenuButton {
 	}
 
 	/**
+	 * Sets the referring screen. 
 	 * @param referrer the referrer to set
 	 */
 	public void setReferrer(Screen referrer) {

@@ -1,12 +1,10 @@
-/**
- * 
- */
 package com.asdf.ssjava.screens.screenelements;
 
 /**
- * 
+ * Simple data structure for a toast message. 
+ * Used in level intros to guide the player.
+ * More potential uses, simple to implement.  
  * @author Jeremy Brown
- *
  */
 public class ToastMessage {
 	
@@ -26,10 +24,10 @@ public class ToastMessage {
 	public float duration;
 	
 	/**
-	 * 
-	 * @param message
-	 * @param progress
-	 * @param duration
+	 * Creates a toast message with the specified parameters. 
+	 * @param message the message string
+	 * @param progress the point in the level at which to display the message
+	 * @param duration the time for which the message should stay on screen
 	 */
 	public ToastMessage(String message, float duration, float progress) {
 		this.message = message;
@@ -38,7 +36,8 @@ public class ToastMessage {
 	}
 	
 	/**
-	 * Serialization
+	 * Constructor for de-serialization. 
+	 * All is null but gets assigned at de-serialization. 
 	 */
 	public ToastMessage() {
 		this.message = null;

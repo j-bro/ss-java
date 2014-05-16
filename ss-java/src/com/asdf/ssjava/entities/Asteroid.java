@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.asdf.ssjava.entities;
 
 import java.math.BigInteger;
@@ -12,8 +9,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
+ * Asteroid implementation of an obstacle. 
  * @author Jeremy Brown
- * 
+ * @author Simon Thompson
  */
 public class Asteroid extends Obstacle {
 
@@ -56,13 +54,13 @@ public class Asteroid extends Obstacle {
 	public static final BigInteger ASTEROID_WEIGHT = new BigInteger("453542"); 
 	
 	/**
-	 * 
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
-	 * @param gameWorld
-	 * @param box2DWorld
+	 * Creates an Asteroid with the specified parameters. 
+	 * @param position the position of the asteroid
+	 * @param width the width of the asteroid
+	 * @param height the height of the asteroid
+	 * @param rotation the rotation of the asteroid
+	 * @param gameWorld the GameWorld instance
+	 * @param box2DWorld the World instance
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation, GameWorld gameWorld, World box2DWorld) {
 		super(position, width, height, rotation, gameWorld, box2DWorld);
@@ -71,7 +69,8 @@ public class Asteroid extends Obstacle {
 	}
 	
 	/**
-	 * Constructor for serialization
+	 * Constructor for serialization. 
+	 * Creates an asteroid with default parameters.
 	 */
 	public Asteroid() {
 		super(null, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_ROTATION, null, null);
@@ -79,11 +78,13 @@ public class Asteroid extends Obstacle {
 	}
 	
 	/**
-	 * Constructor for level creator
-	 * @param position
-	 * @param width
-	 * @param height
-	 * @param rotation
+	 * Constructor for level creator. 
+	 * Creates an asteroid with the specified parameters. 
+	 * Does not initialize the world pointers.
+	 * @param position the position of the asteroid
+	 * @param width the width of the asteroid
+	 * @param height the height of the asteroid
+	 * @param rotation the rotation of the asteroid, in degrees
 	 */
 	public Asteroid(Vector2 position, float width, float height, float rotation) {
 		super(position, width, height, rotation, null, null);
