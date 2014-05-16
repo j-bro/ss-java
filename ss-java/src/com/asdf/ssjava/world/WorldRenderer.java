@@ -125,9 +125,9 @@ public class WorldRenderer {
 		this.gameWorld = gameWorld;
 		game = gameWorld.game;
 		
-		// TODO potentially fix this square/rectangle
-		width = Gdx.graphics.getWidth() / 20;
-		height = Gdx.graphics.getHeight() / 20;
+		width = 64;
+		height = 36;
+		System.out.println(width + " " + height);
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, width + " " + height);
 		
 		cam = new OrthographicCamera();
