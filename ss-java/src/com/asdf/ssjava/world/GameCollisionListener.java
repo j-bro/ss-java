@@ -242,9 +242,9 @@ public class GameCollisionListener implements ContactListener {
 	 * Sets the sunActivated boolean variable in GameWorld to "true".  
 	 * Sends the instance of Sun over to GameWorld. 
 	 * @param b the sun instance
-	 * @param e the other entity
+	 * @param s the ship
 	 */
-	public void sunActivate(Sun b, Ship e) {
+	public void sunActivate(Sun b, Ship s) {
 		gameWorld.setSun(b);
 		gameWorld.sunActivated = true;
 		if (!gameWorld.ship.isSpeedOfLightEnabled())
@@ -252,6 +252,7 @@ public class GameCollisionListener implements ContactListener {
 	}
 	
 	/**
+	 * Un-sets the sun activated flag. 
 	 * Called when the ship exits the sun's zone of heat. 
 	 */
 	public void sunDeactivate() {
@@ -264,14 +265,18 @@ public class GameCollisionListener implements ContactListener {
 	 * Called when the ship enters a planet's gravitational pull
 	 * Sets the gravityActivated boolean variable in GameWorld to "true"
 	 * Sends the instance of Planet over to GameWorld
-	 * @param b
-	 * @param e
+	 * @param b the planet instance
+	 * @param s the ship
 	 */
-	public void gravityActivate(Planet b, Ship e) {
+	public void gravityActivate(Planet b, Ship s) {
 		gameWorld.setPlanet(b);
 		gameWorld.gravityActivated = true;
 	}
 	
+	/**
+	 * Un-sets the gravity activated flag. 
+	 * Called when the ship exits the planet's attraction zone. 
+	 */
 	public void gravityDeactivate() {
 		gameWorld.gravityActivated = false;
 	}
@@ -280,14 +285,18 @@ public class GameCollisionListener implements ContactListener {
 	 * Called when the ship enters a magnetic object's magnetic field
 	 * Sets the magnetActivated boolean variable in GameWorld to "true"
 	 * Sends the instance of MagneticObject over to GameWorld
-	 * @param b
-	 * @param e
+	 * @param b the magnetic object instance
+	 * @param s the ship
 	 */
-	public void magnetActivate(MagneticObject b, Ship e) {
+	public void magnetActivate(MagneticObject b, Ship s) {
 		gameWorld.setMagneticObject(b);
 		gameWorld.magnetActivated = true;
 	}
 	
+	/**
+	 * Un-sets the magnet activated flag. 
+	 * Called when the ship exits the magnet's repulsion zone. 
+	 */
 	public void magnetDeactivate() {
 		gameWorld.magnetActivated = false;
 	}
@@ -349,7 +358,6 @@ public class GameCollisionListener implements ContactListener {
 	 */
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -359,8 +367,6 @@ public class GameCollisionListener implements ContactListener {
 	 */
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
 		
 	}
-
 }
