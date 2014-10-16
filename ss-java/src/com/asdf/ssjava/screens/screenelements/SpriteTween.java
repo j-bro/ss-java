@@ -1,4 +1,4 @@
-package com.asdf.ssjava.tweenaccessors;
+package com.asdf.ssjava.screens.screenelements;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import aurelienribon.tweenengine.TweenAccessor;

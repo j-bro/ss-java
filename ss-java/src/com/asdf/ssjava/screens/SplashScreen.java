@@ -7,7 +7,7 @@ import aurelienribon.tweenengine.TweenEquations;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.asdf.ssjava.SSJava;
-import com.asdf.ssjava.tweenaccessors.SpriteTween;
+import com.asdf.ssjava.screens.screenelements.SpriteTween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;

@@ -21,10 +21,18 @@ public class ScoreKeeper {
 	 * Gets the current score. 
 	 * @return the score
 	 */
-	public int getScore() {
+	public synchronized int getScore() {
 		return score;
 	}
 
+	/**
+	 * Sets the score to a new specified score. 
+	 * @param score the new score to be set
+	 */
+	public synchronized void setScore(int score) {
+		this.score = score;
+	}
+	
 	/**
 	 * Adds the specified score to the current score. 
 	 * @param addedScore the points to add to the current score

@@ -67,7 +67,7 @@ public abstract class AbstractEntity {
 	protected transient Body body;
 		
 	/**
-	 * The timestamp at which the last contact w/ the ship was made
+	 * The timestamp at which the last contact w/ the entity was made
 	 */
 	public long lastContactTime = 0;
 	

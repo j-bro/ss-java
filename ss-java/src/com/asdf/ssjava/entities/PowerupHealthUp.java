@@ -132,7 +132,6 @@ public class PowerupHealthUp extends Powerup {
 	@Override
 	public void die() {
 		gameWorld.getScoreKeeper().add(KILL_SCORE);
-		gameWorld.getLevel().powerups.removeValue(this, true);
 		super.die();
 	}
 	

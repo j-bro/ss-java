@@ -334,7 +334,6 @@ public class Ship extends MoveableEntity {
 	@Override
 	public void createDef() {
 		super.createDef();
-		// TODO Box2D stuff
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
 		
