@@ -183,7 +183,7 @@ public class CreditsMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show credits");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show credits");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 

@@ -479,7 +479,7 @@ public class GameWorld {
 			double distance = Math.sqrt(Math.pow(xLine, 2) 
 					+ Math.pow(yLine, 2));
 			double force = Planet.GRAVITATIONNAL_CONSTANT * 3000 * 1 / Math.pow(distance, 2);
-			Gdx.app.log(SSJava.LOG, "Force: " + force);
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Force: " + force);
 			float xForce = (float) (force / distance * xLine);
 			float yForce = (float) (force / distance * yLine);
 			ship.getBody().applyForceToCenter(-xForce, -yForce, true);
@@ -505,7 +505,8 @@ public class GameWorld {
 	/**
 	 * Causes the ship to be burned by the sun. 
 	 */
-	public void sunActivate() {Gdx.app.log(SSJava.LOG, "Speed of Light: " + ship.isSpeedOfLightEnabled());
+	public void sunActivate() {
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Speed of Light: " + ship.isSpeedOfLightEnabled());
 		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Heat: " + shipHeatIndicator);
 		if (!ship.isSpeedOfLightEnabled()) {
 			shipHeatIndicator += (double)(Gdx.graphics.getDeltaTime());

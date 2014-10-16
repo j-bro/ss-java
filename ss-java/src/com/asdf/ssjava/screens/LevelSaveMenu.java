@@ -148,7 +148,7 @@ public class LevelSaveMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Save button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Save button down");
 				return true;
 			}
 			
@@ -157,7 +157,7 @@ public class LevelSaveMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Save button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Save button up");
 				saveLevel(fileNameField.getText());
 				game.setScreen(referrer);
 			}

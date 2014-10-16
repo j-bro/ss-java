@@ -148,7 +148,7 @@ public class Ship extends MoveableEntity {
 			
 			lastShotTime = TimeUtils.millis();
 			AudioPlayer.shoot();
-			Gdx.app.log(SSJava.LOG, "Ship fired bullet " + Integer.toHexString(b.hashCode()));			
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship fired bullet " + Integer.toHexString(b.hashCode()));			
 		}
 	}
 	
@@ -179,19 +179,19 @@ public class Ship extends MoveableEntity {
 				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);	
 				getBody().getPosition().y = screenTop - getHeight()/2;
 				getBody().applyForceToCenter(0, (-1) * DEFAULT_ACCELERATION.y, true);
-				Gdx.app.log(SSJava.LOG, "TOP: " + getBody().getPosition().y);
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "TOP: " + getBody().getPosition().y);
 			}
 			//Stop the ship from going off the bottom of the screen
 			else if (getPosition().y - getHeight() / 2 <= screenBottom) {
 				getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0);
 				getBody().getPosition().y = screenBottom + getHeight()/2;
 				getBody().applyForceToCenter(0, DEFAULT_ACCELERATION.y, true);
-				Gdx.app.log(SSJava.LOG, "BOT: " + getBody().getPosition().y);
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "BOT: " + getBody().getPosition().y);
 			}
 			
 			//Stop the ship from going off the right or left sides of the screen
 			if (getPosition().x + getWidth() / 2 >= screenRight || getPosition().x - getWidth() / 2 <= screenLeft) {
-				Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Ship hit right or left of screen");
 				getBody().setLinearVelocity(0, getBody().getLinearVelocity().y);
 			}
 			

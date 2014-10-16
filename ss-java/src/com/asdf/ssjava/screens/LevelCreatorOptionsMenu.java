@@ -135,7 +135,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Test button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Test button down");
 				return true;
 			}
 			
@@ -163,7 +163,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Save button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Save button down");
 				return true;
 			}
 			
@@ -172,7 +172,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 			 * @see com.badlogic.gdx.scenes.scene2d.InputListener#touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent, float, float, int, int)
 			 */
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Save button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Save button up");
 				game.setScreen(new LevelSaveMenu(game, thisMenu));
 				}
 			});
@@ -269,7 +269,7 @@ public class LevelCreatorOptionsMenu implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show creator options");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show creator options");
 		whiteFont = SSJava.assetManager.get("data/fonts/whitefont.fnt", BitmapFont.class);
 	}
 

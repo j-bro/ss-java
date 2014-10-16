@@ -47,12 +47,12 @@ public class BackButton extends MenuButton {
 	public void addBackButtonListener() {
 		addListener(new InputListener() {
 			public boolean touchDown(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Back button down");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Back button down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent even, float x, float y, int pointer, int button) {
-				Gdx.app.log(SSJava.LOG, "Back button up");
+				if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Back button up");
 				game.setScreen(referrer);
 				if (referrer instanceof GameScreen) {					
 					AudioPlayer.gameMusic.setVolume(SSJava.prefs.getInteger("musicVolume", 100));

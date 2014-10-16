@@ -134,7 +134,7 @@ public class EnemyType1 extends Enemy {
 			gameWorld.getBullets().add(b);
 			
 			lastShotTime = TimeUtils.millis();
-			Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
+			if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Enemy fired a bullet!");	
 		}
 	}
 	

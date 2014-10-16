@@ -89,7 +89,7 @@ public class GameScreen implements Screen {
 	 */
 	@Override
 	public void show() {
-		Gdx.app.log(SSJava.LOG, "Show game");
+		if (SSJava.DEBUG) Gdx.app.log(SSJava.LOG, "Show game");
 		if (gameWorld != null) {
 			Gdx.input.setInputProcessor(gameWorld.getManager());
 			gameWorld.box2DWorld.setContactListener(new GameCollisionListener(gameWorld));
