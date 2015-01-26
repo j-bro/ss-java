@@ -45,34 +45,34 @@ This screen is shown to the user during the play-through of any level. In the le
 
 The controls in the gameplay screen mainly control the ship itself. The W & S keys are used to move the ship vertically up and down. The spacebar is used to fire a bullet from the ship. The ship itself is limited at firing one bullet per second, so there is no use in trying to shoot faster than this speed. Most levels are preceded by a short introduction that helps the player understand what new elements are present in this level. At any time during this introduction, the I key can be pressed to skip directly to the start of the actual level. Also, at any point in any level, pressing the Escape key will pause the game.
 
-### [Levels](id:levels)
+## [Levels](id:levels)
 The game comes with 5 bundled levels.
 
-#### Level 0 - Tutorial level
+### Level 0 - Tutorial level
 This level informs the player of the controls and basic mechanics of the game, including dodging obstacles, shooting, accumulating points and the health bar. This level will be simple and straightforward, with only a few space rocks and asteroids as obstacles. Gravity, speed of light, thermodynamics and magnetism will not be included here.
 
-#### Level 1 - First challenging level
+### Level 1 - First challenging level
 This level will introduce gravity as a game mechanic with the addition of planets that attract the player’s ship. Enemy spaceships that shoot randomly and health up power-ups will be introduced as well. There will be an increase in the quantity of space rocks and asteroids.
 
-#### Level 2 - Speed of light
+### Level 2 - Speed of light
 This level will introduce the speed of light power-up. This power-up will appear on every level at a set frequency (rare, no more than 3 on a single level). The quantity of enemy spaceships will be increased. The quantity of space rocks, asteroids and planets remain the same. 
 
-#### Level 3 - Thermodynamics
+### Level 3 - Thermodynamics
 This level will introduce thermodynamics by adding the Sun, which will appear at various points throughout the level. The quantity of space rocks, asteroids and planets is increased, but the quantity of enemy spaceships does not increase.  
 
-#### Level 4 - Magnetism
+### Level 4 - Magnetism
 This level introduces magnetism to the game by including magnetic objects (denoted in red). The quantity of space rocks, asteroids, planets and enemy spaceships as well as the frequency of the appearance of the Sun do not increase. 
 
-#### Level 5 - Final level
+### Level 5 - Final level
 The final level in the game (excluding bonus levels). This level will be of the highest difficulty. The quantity of magnetic objects and the frequency of the appearance of the Sun are increased.
 
 
-### [The level creator](id:creator)
+## [The level creator](id:creator)
 ![Level creator screenshot](https://dl.dropboxusercontent.com/u/1996708/level_creator.png)
 
 The level creator offers a robust yet simple way for the player to create levels. It displays a level in a way similar to the gameplay screen, but none of the entities are active and the camera is controlled by the user instead of moving automatically with the ship. The text display in the top left corner shows the user the camera’s current coordinates in the level and other useful information about on how to use the creator and the save state of the level.
 
-#### Controls
+### Controls
 - Move camera: A & D
 - Cycle entity list: X & C
 - Add/remove entities: V & Z
@@ -80,7 +80,7 @@ The level creator offers a robust yet simple way for the player to create levels
 - Options menu: ESC
 - Set level endpoint: E
 
-### Menu hierarchy
+## Menu hierarchy
 
 - Main Menu
   - Play
